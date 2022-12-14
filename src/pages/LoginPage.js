@@ -7,7 +7,7 @@ import PageLayout from "../components/style/PageLayout";
 
 export default function LoginPage() {
   return (
-    <PageLayout paddingValue={34}>
+    <PageLayout paddingValue={3.4}>
       {/* www.naver.com/ */}
       <h1 className="sr-only">로그인 페이지</h1>
       <Logo />
