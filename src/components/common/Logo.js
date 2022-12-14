@@ -1,5 +1,6 @@
 import React from "react";
+import logoImage from "../../assets/image/logo-login.png";
 
 export default function Logo() {
-  return <img alt="멍하냥" />;
+  return <img src={logoImage} alt="멍하냥" />;
 }
