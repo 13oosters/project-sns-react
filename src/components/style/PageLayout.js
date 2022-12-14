@@ -14,6 +14,7 @@ import styled from "styled-components";
 
 const LayoutSection = styled.section`
   padding: 0 ${(props) => props.paddingValue}rem;
+  height: 100vh;
 `;
 
 export default LayoutSection;
