@@ -1,24 +1,54 @@
-import React from "react";
-import Logo from "../components/common/Logo";
-import Login from "../components/login/Login";
+import React, { useState } from "react";
 import Form from "../components/login/Form";
-import ProfileSetting from "../components/common/ProfileSetting";
+
+import Welcome from "../components/login/Welcome";
 import PageLayout from "../components/style/PageLayout";
 
 export default function LoginPage() {
+  const [isLoginClicked, setIsLoginClicked] = useState(false);
+  const [isSignupClicked, setIsSignupClicked] = useState(false);
+
+  if (isLoginClicked) {
+    return (
+      <PageLayout paddingValue={3.4}>
+        <Form title="로그인" buttonText="로그인"></Form>
+      </PageLayout>
+    );
+  }
+  if (isSignupClicked) {
+    return (
+      <PageLayout paddingValue={3.4}>
+        <Form title="이메일로 회원가입" buttonText="다음" />
+      </PageLayout>
+    );
+  }
   return (
-    <PageLayout paddingValue={3.4}>
-      {/* www.naver.com/ */}
+    <PageLayout paddingValue={0}>
       <h1 className="sr-only">로그인 페이지</h1>
-      <Logo />
-      <Login />
-      {/* 이메일로 로그인인 */}
-      {/* www.naver.com/login */}
-      <Form title={"로그인"} buttonText={"로그인"} />
-      {/*  */}
-      <Form title={"이메일로 회원가입"} buttonText={"다음"} />
-      {/*  */}
-      <ProfileSetting title={"프로필 설정"} />
+      <Welcome
+        setIsLoginClicked={setIsLoginClicked}
+        setIsSignupClicked={setIsSignupClicked}
+      />
     </PageLayout>
   );
+
+  /*   return (
+    {
+      if(isLoginClicked){
+
+      }
+      else if(isSignupClicked){
+        <PageLayout paddingValue={0}>
+        <h1 className="sr-only">로그인 페이지</h1>
+        <Welcome
+          setIsLoginClicked={setIsLoginClicked}
+          setIsSignupClicked={setIsSignupClicked}/>
+      </PageLayout>
+      }
+      else{
+
+      }
+    }
+   
+  ); */
 }
