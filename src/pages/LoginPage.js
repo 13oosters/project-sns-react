@@ -1,6 +1,4 @@
-import React from "react";
 import styled from "styled-components";
-import Logo from "../components/common/Logo";
 import Login from "../components/login/Login";
 // import Form from "../components/login/Form";
 // import ProfileSetting from "../components/common/ProfileSetting";
@@ -17,7 +15,6 @@ export default function LoginPage() {
       <LayoutSection>
         {/* www.naver.com/ */}
         <h1 class="sr-only">로그인 페이지</h1>
-        <Logo name="login" />
         <Login />
         {/* 이메일로 로그인인 */}
         {/* www.naver.com/login */}
