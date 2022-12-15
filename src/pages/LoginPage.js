@@ -14,7 +14,7 @@ export default function LoginPage() {
     <BackgroundDiv>
       <LayoutSection>
         {/* www.naver.com/ */}
-        <h1 class="sr-only">로그인 페이지</h1>
+        <h1 className="sr-only">로그인 페이지</h1>
         <Login />
         {/* 이메일로 로그인인 */}
         {/* www.naver.com/login */}

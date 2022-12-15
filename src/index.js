@@ -20,13 +20,13 @@ const mainTheme = {
 
 const GlobalStyles = createGlobalStyle`
   ${reset}
-  @import url('//spoqa.github.io/spoqa-han-sans/css/SpoqaHanSans-kr.css');
+  /* @import url(//spoqa.github.io/spoqa-han-sans/css/SpoqaHanSansNeo.css); */
   html{
     font-size: 62.5%;
   }
   *{
       box-sizing: border-box;
-      font-family: 'Spoqa Han Sans', 'Spoqa Han Sans JP', 'Sans-serif';
+      font-family: 'Spoqa Han Sans Neo', 'sans-serif';
   }
   button{
     border: none;
