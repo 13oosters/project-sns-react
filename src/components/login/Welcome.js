@@ -9,13 +9,13 @@ const PrimaryColorDiv = styled.div`
   background-color: ${(props) => props.theme.primaryColor};
 `;
 
-export default function Welcome({ setIsLoginClicked, setIsSignupClicked }) {
+export default function Welcome({ setIsLoginClicked, setIsSignUpClicked }) {
   return (
     <PrimaryColorDiv>
       <Logo />
       <Login
         setIsLoginClicked={setIsLoginClicked}
-        setIsSignupClicked={setIsSignupClicked}
+        setIsSignupClicked={setIsSignUpClicked}
       />
     </PrimaryColorDiv>
   );
