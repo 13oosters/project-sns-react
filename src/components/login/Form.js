@@ -13,12 +13,34 @@ const FormH2 = styled.h2`
 const LoginForm = styled.form`
   display: flex;
   flex-direction: column;
+  gap: 1.6rem;
 `;
 
 const LoginFormP = styled.p`
   color: #767676;
   font-size: 1.2rem;
+  width: 100%;
+  text-align: left;
 `;
+
+const LoginFormInput = styled.input`
+  width: 100%;
+  padding: 0.9rem 0;
+  border-bottom: 1px solid #dbdbdb;
+  &:focus{
+    outline: none;
+    border-bottom: 1px solid ${(props) => props.theme.primaryColor};
+  }
+`
+const LoginFormButton = styled(Button)`
+  margin-top: 1.4rem;
+  margin-bottom: 2rem;
+`
+const SignUpButton = styled.button`
+  color: #767676;
+  font-size: 1.2rem;
+  font-weight: 400;
+`
 
 export default function Form({ title, buttonText }) {
   return (
@@ -28,7 +50,7 @@ export default function Form({ title, buttonText }) {
         <LoginForm method="post" action="#;">
           <label>
             <LoginFormP>이메일</LoginFormP>
-            <input
+            <LoginFormInput
               type="email"
               required
               placeholder="이메일 주소를 입력해주세요"
@@ -36,15 +58,15 @@ export default function Form({ title, buttonText }) {
           </label>
           <label>
             <LoginFormP>비밀번호</LoginFormP>
-            <input
+            <LoginFormInput
               type="password"
               required
               placeholder="비밀번호를 설정해 주세요"
             />
           </label>
-          <Button>{buttonText}</Button>
+          <LoginFormButton>{buttonText}</LoginFormButton>
         </LoginForm>
-        {title === "로그인" ? <a href="#;">이메일로 회원가입</a> : null}
+        {title === "로그인" ? <SignUpButton type="button">이메일로 회원가입</SignUpButton> : null}
       </LayoutSection>
     </>
   );
