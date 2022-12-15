@@ -2,6 +2,7 @@ import React from "react";
 import styled from "styled-components"
 import Button from "../style/Button";
 import kakaoLogo from "../../assets/image/logo-kakaotalk.png"
+import googleLogo from "../../assets/image/logo-google.png"
 
 const LoginButton = styled(Button)`
   display: block;
@@ -12,7 +13,7 @@ const LoginButton = styled(Button)`
   cursor: pointer;
   font-size: ${(props) => props.theme.baseFontSize};
   color: #000000;
-  background: url(${kakaoLogo}) no-repeat 15px center #ffffff;
+  background: url(${(props) => props.image}) no-repeat 15px center #ffffff;
   border: 1px solid ${(props) => props.theme.primaryColor};
 `;
 
@@ -21,10 +22,10 @@ export default function Login() {
     <>
       <ul>
         <li>
-          <LoginButton as="a">카카오 계정으로 로그인</LoginButton>
+          <LoginButton image={kakaoLogo} as="a">카카오 계정으로 로그인</LoginButton>
         </li>
         <li>
-          <a href="#;">구글 계정으로 로그인</a>
+          <LoginButton image={googleLogo} as="a">구글 계정으로 로그인</LoginButton>
         </li>
       </ul>
       <ul>
