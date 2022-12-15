@@ -1,34 +1,31 @@
-import { Routes, Route, Link } from "react-router-dom";
+import { Routes, Route } from "react-router-dom";
 import "./App.css";
-import HomePage from "../src/pages/HomePage";
+// import SplashPage from "../src/pages/SplashPage";
+import LoginPage from "../src/pages/LoginPage";
+// import HomePage from "../src/pages/HomePage";
 import SearchPage from "../src/pages/SearchPage";
-import HomePage from "../src/pages/HomePage";
-import HomePage from "../src/pages/HomePage";
-import HomePage from "../src/pages/HomePage";
-import HomePage from "../src/pages/HomePage";
-import HomePage from "../src/pages/HomePage";
-import HomePage from "../src/pages/HomePage";
-import HomePage from "../src/pages/HomePage";
-import HomePage from "../src/pages/HomePage";
+import ProfilePage from "../src/pages/ProfilePage";
+// import PostPage from "../src/pages/PostPage";
+import UploadPage from "../src/pages/UploadPage";
+// import FollowersPage from "../src/pages/FollowersPage";
+import ErrorPage from "../src/pages/ErrorPage";
 
 /* <Routes> <Route path="/login" element={LoginPage} </Routes> */
 
 function App() {
   return (
     <div className="App">
-      <a href="/search"></a>
-      <Link to="/search"></Link>
       <Routes>
-        <Route path="/" element={<LoginPage />}>
-        <Route path="/search" element={<SearchPage />} />
-        <Route path="/upload" element={<UploadPage />} />
-        <Route path="/:account" element={<ProfilePage />}>
-          <Route path="/followers" element={<div>하이</div>} />
-          <Route path="/settings" element={<div>하이</div>} />
-          <Route path="/post" element={<div>하이</div>} />
-          <Route path="/:id" element={<div>하이</div>} />
+        <Route path="/" element={<LoginPage></LoginPage>} />
+        <Route path="/search" element={<SearchPage></SearchPage>} />
+        <Route path="/upload" element={<UploadPage></UploadPage>} />
+        <Route path="/:account" element={<ProfilePage></ProfilePage>}>
+          <Route path="followers" element={<div>하이</div>} />
+          <Route path="settings" element={<div>하이</div>} />
+          <Route path="post" element={<div>하이</div>} />
+          <Route path=":id" element={<div>하이</div>} />
         </Route>
-        <Route path="*" element={<ErrorPage />} />
+        <Route path="*" element={<ErrorPage></ErrorPage>} />
       </Routes>
     </div>
   );
@@ -49,8 +46,7 @@ export default App;
  * www.sns.com/asdlkf
  */
 
-{
-  /* <div className="App">
+/* <div className="App">
       {state["shipping"]}
       <NavBootstrap navigate={navigate} />
       <div>
@@ -92,4 +88,3 @@ export default App;
       </Suspense>
     </div>
  */
-}
