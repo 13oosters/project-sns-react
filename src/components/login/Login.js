@@ -21,7 +21,10 @@ const LoginButton = styled(Button)`
   background-color: #ffffff;
 `;
 
-export default function Login() {
+export default function Login({ setIsLoginClicked, setIsSignUpClicked }) {
+  const handleLogin = () => {};
+  const handleSignUp = () => {};
+
   return (
     <SecondaryColorDiv>
       <ul>
@@ -38,15 +41,21 @@ export default function Login() {
       </ul>
       <ul style={{ display: "flex", justifyContent: "center" }}>
         <li style={{ marginRight: "1.2rem" }}>
-          <a style={{ display: "flex" }} href="#;">
+          <button
+            type="button"
+            style={{ display: "flex" }}
+            onClick={handleLogin}
+          >
             <span>이메일로 로그인</span>
             <span style={{ marginLeft: "1.2rem", marginTop: "-0.1rem" }}>
               |
             </span>
-          </a>
+          </button>
         </li>
         <li>
-          <a href="#;">회원가입</a>
+          <button type="button" onClick={handleSignUp}>
+            회원가입
+          </button>
         </li>
       </ul>
     </SecondaryColorDiv>
