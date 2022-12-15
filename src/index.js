@@ -1,16 +1,19 @@
 import React from "react";
 import ReactDOM from "react-dom/client";
 import { ThemeProvider, createGlobalStyle } from "styled-components";
-import { BrowserRouter } from "react-router-dom@6";
+import { BrowserRouter } from "react-router-dom";
 import reset from "styled-reset";
 
 import "./index.css";
 import App from "./App";
 import reportWebVitals from "./reportWebVitals";
 
+// 잠시만여 물좀 떠올게요!
+
 const mainTheme = {
   primaryColor: "#C5985E",
   secondaryColor: "#EBC695",
+  sideColor: "#FFFAEE",
   smallFontSize: "1rem",
   baseFontSize: "1.4rem",
   largeFontSize: "1.6rem",
