@@ -17,12 +17,7 @@ const LoginButton = styled(Button)`
 export default function Login() {
   return (
     <>
-      {/* 로그인 디자인 작업2 */}
-      {/* 로그인작업3*/}
-
-      {/* yumbun 2일차 작업 진행 (두번째 체크리스트 작업)*/}
       <ul>
-        {/* 준근 기능 추가 2 */}
         <li>
           <LoginButton image={kakaoLogo} as="a" href="#;">
             카카오 계정으로 로그인
@@ -42,11 +37,6 @@ export default function Login() {
           <a href="#;">회원가입</a>
         </li>
       </ul>
-      {/* yubmun 2일차 작업 진행 (첫번째 체크리스트 작업) */}
     </>
   );
 }
-// 소영 테스트
-// 소영 테스트 2
-// 소영 테스트 3
-// 소영 테스트 4
