@@ -11,7 +11,6 @@ import ProfilePage from "../src/pages/ProfilePage";
 function App() {
   return (
     <div className="App">
-      <a href="/search"></a>
       <Link to="/search"></Link>
       <Routes>
         <Route path="/" element={<LoginPage />}/>
