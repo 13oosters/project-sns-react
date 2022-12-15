@@ -1,20 +1,20 @@
-import { Routes, Route, Link } from "react-router-dom";
+import { Routes, Route } from "react-router-dom";
 import "./App.css";
-import ErrorPage from "../src/pages/ErrorPage";
-import SearchPage from "../src/pages/SearchPage";
+// import ErrorPage from "../src/pages/ErrorPage";
+// import SearchPage from "../src/pages/SearchPage";
 import LoginPage from "../src/pages/LoginPage";
-import UploadPage from "../src/pages/UploadPage";
-import ProfilePage from "../src/pages/ProfilePage";
+// import UploadPage from "../src/pages/UploadPage";
+// import ProfilePage from "../src/pages/ProfilePage";
 
 /* <Routes> <Route path="/login" element={LoginPage} </Routes> */
 
 function App() {
   return (
-    <div className="App">
-      <Link to="/search"></Link>
+    <div className="App" style={{ width: "390px", minHeight: "100vh" }}>
+      {/* <Link to="/search"></Link> */}
       <Routes>
-        <Route path="/" element={<LoginPage />}/>
-        <Route path="/search" element={<SearchPage />} />
+        <Route path="/" element={<LoginPage />} />
+        {/* <Route path="/search" element={<SearchPage />} />
         <Route path="/upload" element={<UploadPage />} />
         <Route path="/:account" element={<ProfilePage />}>
           <Route path="/followers" element={<div>하이</div>} />
@@ -22,7 +22,7 @@ function App() {
           <Route path="/post" element={<div>하이</div>} />
           <Route path="/:id" element={<div>하이</div>} />
         </Route>
-        <Route path="*" element={<ErrorPage />} />
+        <Route path="*" element={<ErrorPage />} /> */}
       </Routes>
     </div>
   );

@@ -1,7 +1,7 @@
 import React from "react";
 import ReactDOM from "react-dom/client";
 import { ThemeProvider, createGlobalStyle } from "styled-components";
-import { BrowserRouter } from "react-router-dom@6";
+import { BrowserRouter } from "react-router-dom";
 import reset from "styled-reset";
 
 import "./index.css";
