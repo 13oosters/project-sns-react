@@ -13,7 +13,9 @@ const mainTheme = {
   secondaryColor: "#EBC695",
   sideColor: "#FFFAEE",
   lightColor: "#DBDBDB",
-  smallFontSize: "1rem",
+  darkLightColor: "#767676",
+  xSmallFontSize: "1rem",
+  smallFontSize: "1.2rem",
   baseFontSize: "1.4rem",
   largeFontSize: "1.6rem",
   xLargeFontSize: "1.8rem",
@@ -41,10 +43,9 @@ const GlobalStyles = createGlobalStyle`
   input {
     border: none;
     padding: 0;
+    outline: inherit;
   }
-  input:focus {
-    outline: 1px solid #c5985e;
-  }
+  
   a {
     text-decoration: none;
     color: inherit;
