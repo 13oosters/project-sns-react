@@ -11,7 +11,7 @@ export default function LoginPage() {
   if (isLoginClicked) {
     return (
       <PageLayout paddingValue={3.4}>
-        <Form title="로그인" buttonText="로그인"></Form>
+        <Form title="로그인" buttonText="로그인" />
       </PageLayout>
     );
   }
