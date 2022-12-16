@@ -16,9 +16,9 @@ function App() {
     <div className="App" style={{ width: "390px", minHeight: "100vh" }}>
       {/* <Link to="/search"></Link> */}
       <Routes>
-        <Route path="/" element={<LoginPage />}> 
+        <Route path="/login" element={<LoginPage />}> 
         {/* outlet으로 처리하는게 좋을듯 */}
-          <Route path="/" element={<Login/>}/>
+          <Route path="/login" element={<Login/>}/>
           <Route path="email" element={<Form title="로그인" buttonText="로그인"/>}/>
           <Route path="sign-up" element={<Form title="이메일로 회원가입" buttonText="다음"/>}/>
           <Route path="profile-setting" element={<ProfileSetting title={"프로필 설정"}/>}/>
