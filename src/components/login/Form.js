@@ -57,6 +57,18 @@ export default function Form({ title, buttonText }) {
     e.target.value && watch("email") ? setIsValue(true) : setIsValue(false);
   };
 
+  const passPage = () => {
+    if (title === "로그인") {
+      console.log(1);
+    } else if (title === "이메일로 회원가입") {
+      if (!errors.email && !errors.password) {
+        navigate("/settings");
+      }
+    }
+  };
+
+  console.log(errors.email, errors.password);
+
   return (
     <>
       <TitleH2>{title}</TitleH2>
@@ -71,6 +83,7 @@ export default function Form({ title, buttonText }) {
             placeholder="이메일 주소를 입력해주세요"
             {...register("email", {
               required: "이메일은 필수 입력입니다.",
+              /* email 정규식 수정해야 함 */
               pattern: {
                 value: /^[A-Z0-9._%+-]+@[A-Z0-9.-]+\\.[A-Z]{2,}$/i,
                 message: "이메일 형식에 맞지 않습니다.",
@@ -104,7 +117,12 @@ export default function Form({ title, buttonText }) {
             {errors.password && errors.password.message}
           </div>
         </label>
-        <LoginButton type="submit" disabled={isSubmitting} isValue={isValue}>
+        <LoginButton
+          type="submit"
+          onClick={passPage}
+          disabled={isSubmitting}
+          isValue={isValue}
+        >
           {buttonText}
         </LoginButton>
       </LoginForm>
@@ -116,3 +134,10 @@ export default function Form({ title, buttonText }) {
     </>
   );
 }
+
+/**
+ * 이메일로 회원가입 페이지일 때.
+ * (다음) 버튼을 눌렀을 때.
+ * 유효성 검사가 성공했으면.
+ * /settings 페이지로 넘어간다.
+ */
