@@ -12,9 +12,13 @@ import ErrorPage from "../pages/ErrorPage";
 function Router() {
   return (
     <Routes>
+      {/* 로그인 */}
       <Route path="/" element={<LoginPage />} />
       <Route path="/login" element={<LoginPage login />} />
       <Route path="/signin" element={<LoginPage signin />} />
+      {/* LoginPage settings */}
+      <Route path="/settings" element={<LoginPage settings />} />
+      {/*  */}
       <Route path="/search" element={<SearchPage></SearchPage>} />
       <Route path="/upload" element={<UploadPage></UploadPage>} />
       <Route path="/account" element={<ProfilePage></ProfilePage>}>
