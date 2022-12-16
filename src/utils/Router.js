@@ -1,5 +1,4 @@
 import { Routes, Route } from "react-router-dom";
-
 // import SplashPage from "./pages/SplashPage";
 import LoginPage from "../pages/LoginPage";
 // import HomePage from "../pages/HomePage";
@@ -16,7 +15,6 @@ function Router() {
       <Route path="/" element={<LoginPage />} />
       <Route path="/login" element={<LoginPage login />} />
       <Route path="/signin" element={<LoginPage signin />} />
-
       <Route path="/search" element={<SearchPage></SearchPage>} />
       <Route path="/upload" element={<UploadPage></UploadPage>} />
       <Route path="/account" element={<ProfilePage></ProfilePage>}>
