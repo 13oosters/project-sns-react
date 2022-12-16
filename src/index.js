@@ -11,6 +11,7 @@ import reportWebVitals from "./reportWebVitals";
 const mainTheme = {
   primaryColor: "#C5985E",
   secondaryColor: "#EBC695",
+  textColor: "#767676",
   smallFontSize: "1rem",
   baseFontSize: "1.4rem",
   largeFontSize: "1.6rem",
@@ -20,7 +21,7 @@ const mainTheme = {
 
 const GlobalStyles = createGlobalStyle`
   ${reset}
-  /* @import url(//spoqa.github.io/spoqa-han-sans/css/SpoqaHanSansNeo.css); */
+  @import url(//spoqa.github.io/spoqa-han-sans/css/SpoqaHanSansNeo.css);
   html{
     font-size: 62.5%;
   }
