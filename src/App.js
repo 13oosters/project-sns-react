@@ -23,6 +23,9 @@ function App() {
           <Route path="sign-up" element={<Form title="이메일로 회원가입" buttonText="다음"/>}/>
           <Route path="profile-setting" element={<ProfileSetting title={"프로필 설정"}/>}/>
         </Route>
+        {/* <Route path="/login" element={<LoginPage/>}/>
+        <Route path="/signin" element={<LoginPage/>}/> */}
+
         {/* <Route path="/search" element={<SearchPage />} />
         <Route path="/upload" element={<UploadPage />} />
         <Route path="/:account" element={<ProfilePage />}>
