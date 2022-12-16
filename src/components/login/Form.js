@@ -60,7 +60,7 @@ export default function Form({ title, buttonText }) {
 
   const clickNext = () => {
     if (buttonText === "다음") {
-      navigate("/profile-setting");
+      navigate("/login/profile-setting");
     }
   };
 
@@ -130,7 +130,7 @@ export default function Form({ title, buttonText }) {
           <SignUpButton
             type="button"
             onClick={() => {
-              navigate("/sign-up");
+              navigate("/login/sign-up");
             }}
           >
             이메일로 회원가입

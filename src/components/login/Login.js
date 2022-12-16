@@ -68,7 +68,7 @@ export default function Login() {
           </ul>
           <LoginUl>
             <LoginLi>
-              <button type="button" onClick={()=>{navigate('email')}}>
+              <button type="button" onClick={()=>{navigate('/login/email')}}>
                 이메일로 로그인
               </button>
             </LoginLi>
@@ -76,7 +76,7 @@ export default function Login() {
               <button
                 type="button"
                 style={{ color: "#767676" }}
-                onClick={()=>{navigate('sign-up')}}
+                onClick={()=>{navigate('/login/sign-up')}}
               >
                 회원가입
               </button>
