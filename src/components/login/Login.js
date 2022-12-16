@@ -1,9 +1,8 @@
-import { useState } from "react";
+import { useNavigate } from "react-router-dom";
 import styled from "styled-components";
 import Button from "../style/Button";
 import kakaoLogo from "../../assets/image/logo-kakaotalk.png";
 import googleLogo from "../../assets/image/logo-google.png";
-import Form from "./Form";
 import Logo from "../common/Logo";
 
 const LoginButton = styled(Button)`
@@ -48,18 +47,9 @@ const LoginLi = styled.li`
 `;
 
 export default function Login() {
-  const [isEmailLogin, setIsEmailLogin] = useState(false);
-  const [isSignUp, setIsSignUp] = useState(false);
 
-  const loginButtonClick = () => {
-    setIsEmailLogin(true);
-  };
+  const navigate = useNavigate();
 
-  const signUpButtonClick = () => {
-    setIsSignUp(true);
-  };
-
-  if (!isEmailLogin && !isSignUp) {
     return (
       <>
         <Logo name="login" />
@@ -78,15 +68,15 @@ export default function Login() {
           </ul>
           <LoginUl>
             <LoginLi>
-              <button type="button" onClick={loginButtonClick}>
+              <button type="button" onClick={()=>{navigate('email')}}>
                 이메일로 로그인
               </button>
             </LoginLi>
             <li>
               <button
                 type="button"
-                onClick={signUpButtonClick}
                 style={{ color: "#767676" }}
+                onClick={()=>{navigate('sign-up')}}
               >
                 회원가입
               </button>
@@ -97,11 +87,3 @@ export default function Login() {
     );
   }
 
-  if (isEmailLogin) {
-    return <Form title="로그인" buttonText="로그인" />;
-  }
-
-  if (isSignUp) {
-    return <Form title="이메일로 회원가입" buttonText="다음" />;
-  }
-}

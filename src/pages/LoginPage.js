@@ -1,5 +1,8 @@
+import { Outlet } from "react-router-dom"
 import styled from "styled-components";
-import Login from "../components/login/Login";
+// import Email from "../components/login/Email";
+// import Form from "../components/login/Form";
+// import Login from "../components/login/Login";
 // import Form from "../components/login/Form";
 // import ProfileSetting from "../components/common/ProfileSetting";
 import LayoutSection from "../components/style/PageLayout";
@@ -10,12 +13,14 @@ const BackgroundDiv = styled.div`
 `;
 
 export default function LoginPage() {
+
   return (
     <BackgroundDiv>
       <LayoutSection>
         {/* www.naver.com/ */}
         <h1 className="sr-only">로그인 페이지</h1>
-        <Login />
+        <Outlet></Outlet>
+        {/* <Login/> */}
         {/* 이메일로 로그인인 */}
         {/* www.naver.com/login */}
         {/* <Form title={"로그인"} buttonText={"로그인"} /> */}

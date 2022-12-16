@@ -3,6 +3,9 @@ import "./App.css";
 // import ErrorPage from "../src/pages/ErrorPage";
 // import SearchPage from "../src/pages/SearchPage";
 import LoginPage from "../src/pages/LoginPage";
+import Form from "./components/login/Form";
+import Login from "./components/login/Login";
+import ProfileSetting from "./components/common/ProfileSetting";
 // import UploadPage from "../src/pages/UploadPage";
 // import ProfilePage from "../src/pages/ProfilePage";
 
@@ -13,7 +16,13 @@ function App() {
     <div className="App" style={{ width: "390px", minHeight: "100vh" }}>
       {/* <Link to="/search"></Link> */}
       <Routes>
-        <Route path="/" element={<LoginPage />} />
+        <Route path="/" element={<LoginPage />}> 
+        {/* outlet으로 처리하는게 좋을듯 */}
+          <Route path="/" element={<Login/>}/>
+          <Route path="email" element={<Form title="로그인" buttonText="로그인"/>}/>
+          <Route path="sign-up" element={<Form title="이메일로 회원가입" buttonText="다음"/>}/>
+          <Route path="profile-setting" element={<ProfileSetting title={"프로필 설정"}/>}/>
+        </Route>
         {/* <Route path="/search" element={<SearchPage />} />
         <Route path="/upload" element={<UploadPage />} />
         <Route path="/:account" element={<ProfilePage />}>
