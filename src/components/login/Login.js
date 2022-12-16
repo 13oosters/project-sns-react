@@ -21,35 +21,20 @@ const LoginButton = styled(Button)`
   background-color: #ffffff;
 `;
 
-export default function Login({ setIsLoginClicked, setIsSignupClicked }) {
-  const handleLogin = () => {
-    setIsLoginClicked(true);
-  };
-  const handleSignUp = () => {
-    setIsSignupClicked(true);
-  };
-
+export default function Login() {
   return (
     <SecondaryColorDiv>
       <ul>
         <li style={{ marginBottom: "2.5rem" }}>
-          <LoginButton image={kakaoLogo} as="a" href="#;">
-            카카오 계정으로 로그인
-          </LoginButton>
+          <LoginButton image={kakaoLogo}>카카오 계정으로 로그인</LoginButton>
         </li>
         <li style={{ marginBottom: "4.9rem" }}>
-          <LoginButton image={googleLogo} as="a" href="#;">
-            구글 계정으로 로그인
-          </LoginButton>
+          <LoginButton image={googleLogo}>구글 계정으로 로그인</LoginButton>
         </li>
       </ul>
       <ul style={{ display: "flex", justifyContent: "center" }}>
         <li style={{ marginRight: "1.2rem" }}>
-          <button
-            type="button"
-            style={{ display: "flex" }}
-            onClick={handleLogin}
-          >
+          <button type="button" style={{ display: "flex" }} onClick={() => {}}>
             <span>이메일로 로그인</span>
             <span style={{ marginLeft: "1.2rem", marginTop: "-0.1rem" }}>
               |
@@ -57,7 +42,7 @@ export default function Login({ setIsLoginClicked, setIsSignupClicked }) {
           </button>
         </li>
         <li>
-          <button type="button" onClick={handleSignUp}>
+          <button type="button" onClick={() => {}}>
             회원가입
           </button>
         </li>
