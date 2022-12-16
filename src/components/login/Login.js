@@ -21,12 +21,12 @@ const LoginButton = styled(Button)`
   background-color: #ffffff;
 `;
 
-export default function Login({ setIsLoginClicked, setIsSignUpClicked }) {
+export default function Login({ setIsLoginClicked, setIsSignupClicked }) {
   const handleLogin = () => {
     setIsLoginClicked(true);
   };
   const handleSignUp = () => {
-    setIsSignUpClicked(true);
+    setIsSignupClicked(true);
   };
 
   return (
