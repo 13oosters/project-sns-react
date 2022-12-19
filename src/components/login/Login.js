@@ -54,7 +54,7 @@ export default function Login() {
           <button
             type="button"
             onClick={() => {
-              navigate("/sign-up");
+              navigate("/signin");
             }}
           >
             회원가입
