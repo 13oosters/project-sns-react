@@ -1,6 +1,6 @@
-import React from "react";
+import { useState } from "react";
 import { useForm } from "react-hook-form";
-// import { useNavigate } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 import styled from "styled-components";
 import {
   FormH2,
@@ -53,13 +53,21 @@ export default function ProfileSetting({ title }) {
     formState: { errors },
   } = useForm();
 
-  // const navigate = useNavigate();
+  const navigate = useNavigate();
 
   const onSubmit = (data) => {
     console.log(data);
+    navigate("/");
   };
 
-  const checkUserId = /^(?!.*\.\.)(?!.*\.$)[^\W][\w.]{0,20}$/i;
+  const [isValid, setIsValid] = useState(false);
+
+  const userNameValue = (e) => {
+    e.target.value && watch("userName") && watch("userId")? setIsValid(true) : setIsValid(false);
+  }
+  const userIdValue = (e) => {
+    e.target.value && watch("userName") && watch("userId")? setIsValid(true) : setIsValid(false);
+  }
 
   return (
     <>
@@ -84,7 +92,8 @@ export default function ProfileSetting({ title }) {
           <LoginFormInput
             type="text"
             placeholder="2~10자 이내여야 합니다."
-            value={watch("userName")}
+            // value={watch("userName")}
+            onKeyUp={userNameValue}
             {...register("userName", {
               required: "필수입력 사항입니다.",
               maxLength: {
@@ -102,7 +111,8 @@ export default function ProfileSetting({ title }) {
           <LoginFormInput
             type="text"
             placeholder="영문, 숫자, 특수문자(.),(_)만 사용 가능합니다."
-            value={watch("userId")}
+            // value={watch("userId")}
+            onKeyUp={userIdValue}
             {...register("userId", {
               required: "필수입력 사항입니다.",
               maxLength: {
@@ -125,7 +135,7 @@ export default function ProfileSetting({ title }) {
           <LoginFormInput
             type="text"
             placeholder="당신과 반려동물에 대해 소개해 주세요!"
-            value={watch("introduction")}
+            // value={watch("introduction")}
             {...register("introduction", {
               maxLength: { value: 30, message: "소개는 30자 이내여야 합니다." },
             })}
@@ -135,12 +145,7 @@ export default function ProfileSetting({ title }) {
           )}
           <LoginFormButton
             type="submit"
-            disabled={
-              !(
-                checkUserId.test(watch("userId")) &&
-                watch("userName").length <= 10
-              )
-            }
+            isValid={isValid}
           >
             {title === "프로필 설정" ? "멍하냥 시작하기" : "저장"}
           </LoginFormButton>
