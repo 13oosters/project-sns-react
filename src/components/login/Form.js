@@ -1,4 +1,4 @@
-// import { useState } from "react";
+// import { useEffect, useState } from "react";
 import { useForm } from "react-hook-form";
 import { useNavigate } from "react-router-dom";
 import styled from "styled-components";
@@ -65,18 +65,21 @@ export default function Form({ title, buttonText }) {
   } = useForm();
 
   const navigate = useNavigate();
+  
+  // const [isValid, setIsValid] = useState(true);
 
-  // const clickNext = () => {
-  //   if (buttonText === "다음") {
-  //     navigate("/login/profile-setting");
-  //   }
-  // };
 
   console.log(watch("email"));
 
-  // const [isValid, setIsValid] = useState(false);
 
-  const onSubmit = (data) => console.log(data);
+  const onSubmit = (data) => {
+    console.log(data)
+    if(title === '로그인'){
+      navigate("/")
+    }
+    if(title === '이메일로 회원가입')
+      navigate("/login/profile-setting");
+  };
 
   return (
     <>
@@ -97,7 +100,6 @@ export default function Form({ title, buttonText }) {
                   message: "이메일 형식이 아닙니다",
                 },
               })}
-              // onChange={emailHandle}
             />
           ) : (
             <LoginFormInput
@@ -110,13 +112,11 @@ export default function Form({ title, buttonText }) {
                   message: "이메일 형식이 아닙니다",
                 },
               })}
-              // onChange={emailHandle}
             />
           )}
           {errors.email && (
             <ErrorMessageP>*{errors.email.message}</ErrorMessageP>
           )}
-          {/* {errors.email ? setIsValid(false) : setIsValid(true)} */}
           <label>
             <LoginFormP>비밀번호</LoginFormP>
           </label>
@@ -138,11 +138,9 @@ export default function Form({ title, buttonText }) {
           {errors.password && (
             <ErrorMessageP>*{errors.password.message}</ErrorMessageP>
           )}
-          {console.log(errors)}
           <LoginFormButton
             type="submit"
             disabled={isSubmitting}
-            // onClick={clickNext}
           >
             {buttonText}
           </LoginFormButton>
