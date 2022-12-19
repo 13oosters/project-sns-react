@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { useForm } from "react-hook-form";
-
+import axios from "axios";
 import TitleH2 from "../style/form/TitleH2";
 import LoginForm from "../style/form/LoginForm";
 import LoginInput from "../style/form/LoginInput";
@@ -12,6 +12,7 @@ import ErrorMessageP from "../style/form/ErrorMessageP";
 export default function Form({ title, buttonText, userData, setUserData }) {
   const [isValue, setIsValue] = useState(false);
   const navigate = useNavigate();
+
   const {
     register,
     handleSubmit,
@@ -20,20 +21,40 @@ export default function Form({ title, buttonText, userData, setUserData }) {
   } = useForm({ mode: "onChange" });
 
   const checkIsValue = (e) => {
-    watch("password") && watch("email") && watch("password")
+    e.target.value && watch("email") && watch("password")
       ? setIsValue(true)
       : setIsValue(false);
     console.log(isValue);
     console.log(watch("password"));
   };
 
+  const validateEmail = async () => {
+    try {
+      const res = await axios.post(
+        "https://mandarin.api.weniv.co.kr/user/emailvalid",
+        {
+          user: {
+            email: userData.email,
+          },
+        },
+      );
+      const Dataaa = await res.data;
+
+      console.log(Dataaa);
+    } catch (error) {
+      console.log(error);
+    }
+  };
+
   const handleForm = (e) => {
     //    e.preventDefault();
     if (title === "로그인") {
-      console.log(1);
+      console.log(5);
     } else if (title === "이메일로 회원가입") {
+      validateEmail();
       if (!errors.email && !errors.password) {
-        navigate("/settings");
+        console.log(3);
+        // navigate("/settings");
       }
     }
   };
