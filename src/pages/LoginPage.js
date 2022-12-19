@@ -3,6 +3,7 @@
 import PageLayout from "../components/style/PageLayout";
 import Welcome from "../components/login/Welcome";
 import Form from "../components/login/Form";
+import ProfileSetting from "../components/common/ProfileSetting";
 
 export default function LoginPage({ login, signin, settings }) {
   if (login) {
@@ -24,8 +25,7 @@ export default function LoginPage({ login, signin, settings }) {
   if (settings) {
     return (
       <PageLayout paddingValue={3.4}>
-        <h1 className="sr-only">회원가입 페이지</h1>
-        <Form title="프로필 설정" buttonText="다음" />
+        <ProfileSetting title="프로필 설정" />
       </PageLayout>
     );
   }

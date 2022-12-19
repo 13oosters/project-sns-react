@@ -1,47 +1,12 @@
 import React, { useState } from "react";
-import styled from "styled-components";
 import { useNavigate } from "react-router-dom";
 import { useForm } from "react-hook-form";
 
-import Button from "../style/Button";
-
-const TitleH2 = styled.h2`
-  margin-top: 3rem;
-  text-align: center;
-  font-size: 2.4rem;
-  font-weight: ${(props) => props.theme.mediumFontWeight};
-`;
-const LoginForm = styled.form`
-  display: flex;
-  flex-direction: column;
-  margin-top: 4rem;
-  text-align: left;
-`;
-const LoginInput = styled.input`
-  display: block;
-  width: 100%;
-  border-bottom: 0.1rem solid ${(props) => props.theme.lightColor};
-  padding: 0.8rem 0;
-  &::placeholder {
-    color: ${(props) => props.theme.lightColor};
-    font-size: ${(props) => props.theme.baseFontSize};
-  }
-`;
-
-const LoginButton = styled(Button)`
-  margin-top: 3rem;
-  background-color: ${(props) => {
-    if (props.isValue) {
-      return props.theme.primaryColor;
-    } else {
-      return props.theme.secondaryColor;
-    }
-  }};
-`;
-const SignUpButton = styled(Button)`
-  color: ${(props) => props.theme.darkLightColor};
-  font-size: ${(props) => props.theme.smallFontSize};
-`;
+import TitleH2 from "../style/form/TitleH2";
+import LoginForm from "../style/form/LoginForm";
+import LoginInput from "../style/form/LoginInput";
+import LoginButton from "../style/form/LoginButton";
+import SignUpButton from "../style/form/SignUpButton";
 
 export default function Form({ title, buttonText }) {
   const [isValue, setIsValue] = useState(false);
