@@ -1,4 +1,4 @@
-import { useState } from "react";
+// import { useState } from "react";
 import { useForm } from "react-hook-form";
 import { useNavigate } from "react-router-dom";
 import styled from "styled-components";
@@ -41,7 +41,7 @@ export const LoginFormButton = styled(Button)`
   margin-top: 1.4rem;
   margin-bottom: 2rem;
   background-color: ${(props) => props.color};
-  `;
+`;
 
 const SignUpButton = styled.button`
   color: ${(props) => props.theme.textColor};
@@ -49,82 +49,103 @@ const SignUpButton = styled.button`
   font-weight: 400;
 `;
 
+const ErrorMessageP = styled.p`
+  color: ${(props) => props.theme.primaryColor};
+  font-size: 1.2rem;
+  text-align: left;
+  margin-top: -1rem;
+`;
+
 export default function Form({ title, buttonText }) {
   const {
     register,
     watch,
+    handleSubmit,
     formState: { isSubmitting, errors },
   } = useForm();
 
   const navigate = useNavigate();
 
-  const clickNext = () => {
-    if (buttonText === "다음") {
-      navigate("/login/profile-setting");
-    }
-  };
+  // const clickNext = () => {
+  //   if (buttonText === "다음") {
+  //     navigate("/login/profile-setting");
+  //   }
+  // };
 
-  const [isValue, setIsValue] = useState(false);
+  console.log(watch("email"));
 
-  console.log(isValue);
+  // const [isValid, setIsValid] = useState(false);
 
-  const checkIsValue = (e) => {
-    e.target.value && watch(e.target.type) ? setIsValue(true) : setIsValue(false);
-  }
-
-
-
-
+  const onSubmit = (data) => console.log(data);
 
   return (
     <>
       <LayoutSection paddingValue={3.4} backgroundColor={"#ffffff"}>
         <FormH2>{title}</FormH2>
-        <LoginForm onSubmit={()=>{event.preventDefault();}}>
+        <LoginForm onSubmit={handleSubmit(onSubmit)}>
           <label>
             <LoginFormP>이메일</LoginFormP>
-            {title === "로그인" ? (
-              <LoginFormInput
-                type="email"
-                required
-                placeholder="이메일 주소를 입력해주세요"
-                {...register("email", {
-                  required: "이메일은 필수 입력입니다.",
-                  pattern: {
-                    value: /^[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,}$/i,
-                    message: "이메일 형식에 맞지 않습니다.",
-                  },
-                })}
-                onChange={checkIsValue}
-              />
-            ) : (
-              <LoginFormInput
-                type="email"
-                required
-                placeholder="이메일 주소를 입력해주세요"
-                {...register("email", {})}
-              />
-            )}
-            {errors.email && <small role="alert">{errors.email.message}</small>}
           </label>
-          <label>
-            <LoginFormP>비밀번호</LoginFormP>
+          {title === "로그인" ? (
             <LoginFormInput
-              type="password"
-              required
-              placeholder="비밀번호를 설정해 주세요"
-              {...register("password", {
-                required: "비밀번호는 필수 입력입니다.",
+              type="text"
+              placeholder="이메일 주소를 입력해주세요"
+              {...register("email", {
+                required: "필수입력 사항입니다",
                 pattern: {
-                  value: /^(?=.[A-Za-z])(?=.\d)[A-Za-z\d]{8,}$/i,
-                  message: "비밀번호 형식에 맞지 않습니다. 8자 이상이어야 합니다.",
+                  value: /^[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,}$/i,
+                  message: "이메일 형식이 아닙니다",
                 },
               })}
-              onChange={checkIsValue}
+              // onChange={emailHandle}
             />
-            {errors.password && <small role="alert">{errors.password.message}</small>}
+          ) : (
+            <LoginFormInput
+              type="text"
+              placeholder="이메일 주소를 입력해주세요"
+              {...register("email", {
+                required: "필수입력 사항입니다",
+                pattern: {
+                  value: /^[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,}$/i,
+                  message: "이메일 형식이 아닙니다",
+                },
+              })}
+              // onChange={emailHandle}
+            />
+          )}
+          {errors.email && (
+            <ErrorMessageP>*{errors.email.message}</ErrorMessageP>
+          )}
+          {/* {errors.email ? setIsValid(false) : setIsValid(true)} */}
+          <label>
+            <LoginFormP>비밀번호</LoginFormP>
           </label>
-          <LoginFormButton type="submit" disabled={isSubmitting} onClick={clickNext}>{buttonText}</LoginFormButton>
+          <LoginFormInput
+            type="password"
+            placeholder="비밀번호를 설정해 주세요"
+            {...register("password", {
+              required: "비밀번호 입력은 필수 사항입니다",
+              pattern: {
+                value: /^(?=.*[A-Za-z])(?=.*\d)[A-Za-z\d]{6,}$/i,
+                message: "비밀번호 형식이 잘못되었습니다",
+              },
+              minLength: {
+                value: 6,
+                message: "비밀번호는 최소 6자 이상이어야 합니다",
+              }
+            })}
+          />
+          {errors.password && (
+            <ErrorMessageP>*{errors.password.message}</ErrorMessageP>
+          )}
+          {console.log(errors)}
+          <LoginFormButton
+            type="submit"
+            disabled={isSubmitting}
+            // onClick={clickNext}
+          >
+            {buttonText}
+          </LoginFormButton>
         </LoginForm>
         {title === "로그인" ? (
           <SignUpButton
