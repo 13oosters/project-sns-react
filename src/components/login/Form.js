@@ -1,4 +1,5 @@
 // import { useState } from "react";
+import { useState } from "react";
 import { useForm } from "react-hook-form";
 import { useNavigate } from "react-router-dom";
 import styled from "styled-components";
@@ -40,8 +41,7 @@ export const LoginFormInput = styled.input`
 export const LoginFormButton = styled(Button)`
   margin-top: 1.4rem;
   margin-bottom: 2rem;
-  background-color: ${(props) =>
-    props.disabled ? props.theme.secondaryColor : props.theme.primaryColor};
+  background-color: ${(props) => props.isValid ? props.theme.primaryColor : props.theme.secondaryColor};
 `;
 
 const SignUpButton = styled.button`
@@ -63,7 +63,7 @@ export default function Form({ title, buttonText }) {
     watch,
     handleSubmit,
     formState: { errors },
-  } = useForm();
+  } = useForm({ mode: "onChange" });
 
   const navigate = useNavigate();
 
@@ -77,7 +77,14 @@ export default function Form({ title, buttonText }) {
     if (title === "이메일로 회원가입") navigate("/login/profile-setting");
   };
 
-  const checkEmail = /^[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,}$/i;
+  const [isValid, setIsValid] = useState(false);
+
+  const emailValue = (e) => {
+    e.target.value && watch("email") && watch("password")? setIsValid(true) : setIsValid(false);
+  }
+  const passwordValue = (e) => {
+    e.target.value && watch("email") && watch("password")? setIsValid(true) : setIsValid(false);
+  }
 
   return (
     <>
@@ -92,6 +99,7 @@ export default function Form({ title, buttonText }) {
               type="text"
               placeholder="이메일 주소를 입력해주세요."
               value={watch("email")}
+              onKeyUp={emailValue}
               {...register("email", {
                 required: "필수입력 사항입니다.",
                 pattern: {
@@ -105,6 +113,7 @@ export default function Form({ title, buttonText }) {
               type="text"
               placeholder="이메일 주소를 입력해주세요."
               value={watch("email")}
+              onKeyUp={emailValue}
               {...register("email", {
                 required: "필수입력 사항입니다.",
                 pattern: {
@@ -124,6 +133,7 @@ export default function Form({ title, buttonText }) {
             type="password"
             placeholder="비밀번호를 설정해 주세요."
             value={watch("password")}
+            onKeyUp={passwordValue}
             {...register("password", {
               required: "비밀번호 입력은 필수 사항입니다.",
               pattern: {
@@ -141,9 +151,7 @@ export default function Form({ title, buttonText }) {
           )}
           <LoginFormButton
             type="submit"
-            disabled={
-              !(checkEmail.test(watch("email")) && watch("password").length > 5)
-            }
+            isValid={isValid}
           >
             {buttonText}
           </LoginFormButton>
