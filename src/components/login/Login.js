@@ -1,5 +1,6 @@
 import React from "react";
 import styled from "styled-components";
+import { useNavigate } from "react-router-dom";
 
 import Button from "../style/Button";
 import kakaoLogo from "../../assets/image/logo-kakaotalk.png";
@@ -22,6 +23,8 @@ const LoginButton = styled(Button)`
 `;
 
 export default function Login() {
+  const navigate = useNavigate();
+
   return (
     <SecondaryColorDiv>
       <ul>
@@ -34,7 +37,13 @@ export default function Login() {
       </ul>
       <ul style={{ display: "flex", justifyContent: "center" }}>
         <li style={{ marginRight: "1.2rem" }}>
-          <button type="button" style={{ display: "flex" }} onClick={() => {}}>
+          <button
+            type="button"
+            style={{ display: "flex" }}
+            onClick={() => {
+              navigate("/login");
+            }}
+          >
             <span>이메일로 로그인</span>
             <span style={{ marginLeft: "1.2rem", marginTop: "-0.1rem" }}>
               |
@@ -42,7 +51,12 @@ export default function Login() {
           </button>
         </li>
         <li>
-          <button type="button" onClick={() => {}}>
+          <button
+            type="button"
+            onClick={() => {
+              navigate("/sign-up");
+            }}
+          >
             회원가입
           </button>
         </li>
