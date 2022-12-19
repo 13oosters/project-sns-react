@@ -1,5 +1,4 @@
 import { Routes, Route } from "react-router-dom";
-
 // import SplashPage from "./pages/SplashPage";
 import LoginPage from "../pages/LoginPage";
 // import HomePage from "../pages/HomePage";
@@ -9,20 +8,20 @@ import ProfilePage from "../pages/ProfilePage";
 import UploadPage from "../pages/UploadPage";
 // import FollowersPage from "../pages/FollowersPage";
 import ErrorPage from "../pages/ErrorPage";
-import Form from "../components/login/Form";
 
 function Router() {
   return (
     <Routes>
-      <Route path="/" element={<LoginPage />}>
-        <Route path="login" element={<Form />} />
-        <Route path="sign-up" element={<Form />} />
-      </Route>
-      <Route path="search" element={<SearchPage></SearchPage>} />
-      <Route path="/login" element={<LoginPage></LoginPage>} />
+      {/* 로그인 */}
+      <Route path="/" element={<LoginPage />} />
+      <Route path="/login" element={<LoginPage login />} />
+      <Route path="/signin" element={<LoginPage signin />} />
+      {/* LoginPage settings */}
+      <Route path="/settings" element={<LoginPage settings />} />
+      {/*  */}
       <Route path="/search" element={<SearchPage></SearchPage>} />
       <Route path="/upload" element={<UploadPage></UploadPage>} />
-      <Route path="/:account" element={<ProfilePage></ProfilePage>}>
+      <Route path="/account" element={<ProfilePage></ProfilePage>}>
         <Route path="followers" element={<div>하이</div>} />
         <Route path="settings" element={<div>하이</div>} />
         <Route path="post" element={<div>하이</div>} />
