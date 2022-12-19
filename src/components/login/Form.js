@@ -62,13 +62,10 @@ export default function Form({ title, buttonText }) {
       console.log(1);
     } else if (title === "이메일로 회원가입") {
       if (!errors.email && !errors.password) {
-        console.log(2);
         navigate("/settings");
       }
     }
   };
-
-  console.log(errors.email, errors.password);
 
   return (
     <>
