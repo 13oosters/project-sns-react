@@ -7,8 +7,9 @@ import LoginForm from "../style/form/LoginForm";
 import LoginInput from "../style/form/LoginInput";
 import LoginButton from "../style/form/LoginButton";
 import SignUpButton from "../style/form/SignUpButton";
+import ErrorMessageP from "../style/form/ErrorMessageP";
 
-export default function Form({ title, buttonText }) {
+export default function Form({ title, buttonText, userData, setUserData }) {
   const [isValue, setIsValue] = useState(false);
   const navigate = useNavigate();
   const {
@@ -16,13 +17,18 @@ export default function Form({ title, buttonText }) {
     handleSubmit,
     formState: { isSubmitting, errors },
     watch,
-  } = useForm();
+  } = useForm({ mode: "onChange" });
 
   const checkIsValue = (e) => {
-    e.target.value && watch("email") ? setIsValue(true) : setIsValue(false);
+    watch("password") && watch("email") && watch("password")
+      ? setIsValue(true)
+      : setIsValue(false);
+    console.log(isValue);
+    console.log(watch("password"));
   };
 
-  const passPage = () => {
+  const handleForm = (e) => {
+    //    e.preventDefault();
     if (title === "로그인") {
       console.log(1);
     } else if (title === "이메일로 회원가입") {
@@ -32,10 +38,15 @@ export default function Form({ title, buttonText }) {
     }
   };
 
+  const handleInput = (e) => {
+    setUserData({ ...userData, [e.target.name]: e.target.value });
+    checkIsValue(e);
+  };
+
   return (
     <>
       <TitleH2>{title}</TitleH2>
-      <LoginForm onSubmit={handleSubmit()}>
+      <LoginForm onSubmit={handleSubmit(handleForm)}>
         <label htmlFor="email">
           이메일
           <LoginInput
@@ -52,10 +63,9 @@ export default function Form({ title, buttonText }) {
                 message: "이메일 형식에 맞지 않습니다.",
               },
             })}
+            onKeyUp={handleInput}
           />
-          <div style={{ color: "red" }}>
-            {errors.email && errors.email.message}
-          </div>
+          <ErrorMessageP>{errors.email && errors.email.message}</ErrorMessageP>
         </label>
         <label htmlFor="password" style={{ marginTop: "1.6rem" }}>
           비밀번호
@@ -71,18 +81,18 @@ export default function Form({ title, buttonText }) {
               pattern: {
                 value: /^(?=.*[A-Za-z])(?=.*\d)[A-Za-z\d]{8,}$/i,
                 message:
-                  "비밀번호 형식에 맞지 않습니다.8글자 이상 입력해주세요",
+                  "비밀번호는 8글자 이상으로 하나 이상의 문자와 숫자를 포함해주세요.",
               },
             })}
-            onChange={checkIsValue}
+            onKeyUp={handleInput}
           />
-          <div style={{ color: "red" }}>
+          <ErrorMessageP>
             {errors.password && errors.password.message}
-          </div>
+          </ErrorMessageP>
         </label>
         <LoginButton
           type="submit"
-          onSubmit={passPage}
+          // onSubmit={passPage}
           disabled={isSubmitting}
           isValue={isValue}
         >
