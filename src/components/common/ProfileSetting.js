@@ -48,7 +48,7 @@ const ProfileImageInput = styled.input`
 export default function ProfileSetting({ title }) {
   const {
     register,
-    // watch,
+    watch,
     handleSubmit,
     formState: { errors },
   } = useForm();
@@ -58,6 +58,8 @@ export default function ProfileSetting({ title }) {
   const onSubmit = (data) => {
     console.log(data);
   };
+
+  const checkUserId = /^(?!.*\.\.)(?!.*\.$)[^\W][\w.]{0,20}$/i;
 
   return (
     <>
@@ -82,6 +84,7 @@ export default function ProfileSetting({ title }) {
           <LoginFormInput
             type="text"
             placeholder="2~10자 이내여야 합니다."
+            value={watch("userName")}
             {...register("userName", {
               required: "필수입력 사항입니다.",
               maxLength: {
@@ -99,6 +102,7 @@ export default function ProfileSetting({ title }) {
           <LoginFormInput
             type="text"
             placeholder="영문, 숫자, 특수문자(.),(_)만 사용 가능합니다."
+            value={watch("userId")}
             {...register("userId", {
               required: "필수입력 사항입니다.",
               maxLength: {
@@ -121,6 +125,7 @@ export default function ProfileSetting({ title }) {
           <LoginFormInput
             type="text"
             placeholder="당신과 반려동물에 대해 소개해 주세요!"
+            value={watch("introduction")}
             {...register("introduction", {
               maxLength: { value: 30, message: "소개는 30자 이내여야 합니다." },
             })}
@@ -128,7 +133,15 @@ export default function ProfileSetting({ title }) {
           {errors.introduction && (
             <ErrorMessageP>*{errors.introduction.message}</ErrorMessageP>
           )}
-          <LoginFormButton>
+          <LoginFormButton
+            type="submit"
+            disabled={
+              !(
+                checkUserId.test(watch("userId")) &&
+                watch("userName").length <= 10
+              )
+            }
+          >
             {title === "프로필 설정" ? "멍하냥 시작하기" : "저장"}
           </LoginFormButton>
         </LoginForm>
