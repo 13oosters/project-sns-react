@@ -1,11 +1,24 @@
 // import Form from "../components/login/Form";
 // import React from "react";
+import { useState } from "react";
+// import axios from "axios";
 import PageLayout from "../components/style/PageLayout";
 import Welcome from "../components/login/Welcome";
 import Form from "../components/login/Form";
 import ProfileSetting from "../components/common/ProfileSetting";
 
 export default function LoginPage({ login, signin, settings }) {
+  const [userData, setUserData] = useState({
+    username: "",
+    email: "",
+    password: "",
+    accountname: "",
+    intro: "",
+    image: "",
+  });
+
+  console.log(userData);
+
   if (login) {
     return (
       <PageLayout paddingValue={3.4}>
@@ -18,14 +31,19 @@ export default function LoginPage({ login, signin, settings }) {
     return (
       <PageLayout paddingValue={3.4}>
         <h1 className="sr-only">회원가입 페이지</h1>
-        <Form title="이메일로 회원가입" buttonText="다음" />
+        <Form
+          title="이메일로 회원가입"
+          buttonText="다음"
+          userData={userData}
+          setUserData={setUserData}
+        />
       </PageLayout>
     );
   }
   if (settings) {
     return (
       <PageLayout paddingValue={3.4}>
-        <ProfileSetting title="프로필 설정" />
+        <ProfileSetting title="프로필 설정" setUserData={setUserData} />
       </PageLayout>
     );
   }
