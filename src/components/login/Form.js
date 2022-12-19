@@ -23,6 +23,10 @@ const LoginInput = styled.input`
     font-size: ${(props) => props.theme.baseFontSize};
   }
 `;
+const LoginButton = styled(Button)`
+  margin-top: 3rem;
+  color: ${(props) => props.type === "button"};
+`;
 
 export default function Form({ title, buttonText }) {
   return (
@@ -45,14 +49,14 @@ export default function Form({ title, buttonText }) {
             placeholder="비밀번호를 설정해 주세요"
           />
         </label>
-        <Button type="submit" disable>
+        <LoginButton type="submit" disable>
           {buttonText}
-        </Button>
+        </LoginButton>
       </LoginForm>
       {title === "로그인" ? (
-        <Button type="button" cancel>
+        <LoginButton type="button" cancel>
           이메일로 회원가입
-        </Button>
+        </LoginButton>
       ) : null}
     </>
   );
