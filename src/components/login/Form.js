@@ -49,7 +49,7 @@ const SignUpButton = styled.button`
   font-weight: 400;
 `;
 
-const ErrorMessageP = styled.p`
+export const ErrorMessageP = styled.p`
   color: ${(props) => props.theme.primaryColor};
   font-size: 1.2rem;
   text-align: left;
@@ -65,20 +65,17 @@ export default function Form({ title, buttonText }) {
   } = useForm();
 
   const navigate = useNavigate();
-  
-  // const [isValid, setIsValid] = useState(true);
 
+  // const [isValid, setIsValid] = useState(true);
 
   console.log(watch("email"));
 
-
   const onSubmit = (data) => {
-    console.log(data)
-    if(title === '로그인'){
-      navigate("/")
+    console.log(data);
+    if (title === "로그인") {
+      navigate("/");
     }
-    if(title === '이메일로 회원가입')
-      navigate("/login/profile-setting");
+    if (title === "이메일로 회원가입") navigate("/login/profile-setting");
   };
 
   return (
@@ -92,9 +89,9 @@ export default function Form({ title, buttonText }) {
           {title === "로그인" ? (
             <LoginFormInput
               type="text"
-              placeholder="이메일 주소를 입력해주세요"
+              placeholder="이메일 주소를 입력해주세요."
               {...register("email", {
-                required: "필수입력 사항입니다",
+                required: "필수입력 사항입니다.",
                 pattern: {
                   value: /^[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,}$/i,
                   message: "이메일 형식이 아닙니다",
@@ -104,7 +101,7 @@ export default function Form({ title, buttonText }) {
           ) : (
             <LoginFormInput
               type="text"
-              placeholder="이메일 주소를 입력해주세요"
+              placeholder="이메일 주소를 입력해주세요."
               {...register("email", {
                 required: "필수입력 사항입니다",
                 pattern: {
@@ -132,16 +129,13 @@ export default function Form({ title, buttonText }) {
               minLength: {
                 value: 6,
                 message: "비밀번호는 최소 6자 이상이어야 합니다",
-              }
+              },
             })}
           />
           {errors.password && (
             <ErrorMessageP>*{errors.password.message}</ErrorMessageP>
           )}
-          <LoginFormButton
-            type="submit"
-            disabled={isSubmitting}
-          >
+          <LoginFormButton type="submit" disabled={isSubmitting}>
             {buttonText}
           </LoginFormButton>
         </LoginForm>
