@@ -1,13 +1,5 @@
 import styled from "styled-components";
 
-/* 
-disable 상태랑
-cancle 상태
-
-background-color: ${(props) => props.disable? "red" : props.cancle? "blue" : black}
-
-*/
-
 const Button = styled.button`
   display: block;
   width: 100%;
@@ -25,9 +17,10 @@ const Button = styled.button`
   padding-bottom: 1.3rem;
   cursor: pointer;
   text-align: center;
-  color: ${(props) => (props.cancel ? "#767676" : "#FFFFFF")};
+  color: ${(props) => (props.cancel ? props.theme.lightColor : "#FFFFFF")};
   font-size: ${(props) => props.theme.baseFontSize};
-  border: ${(props) => (props.cancel ? "1px solid #dbdbdb" : "none")};
+  border: ${(props) =>
+    props.cancel ? "1px solid props.theme.lightColor" : "none"};
 `;
 
 export default Button;
