@@ -23,7 +23,12 @@ export default function LoginPage({ login, signin, settings }) {
     return (
       <PageLayout paddingValue={3.4}>
         <h1 className="sr-only">로그인 페이지</h1>
-        <Form title="로그인" buttonText="로그인" />
+        <Form
+          title="로그인"
+          buttonText="로그인"
+          userData={userData}
+          setUserData={setUserData}
+        />
       </PageLayout>
     );
   }
@@ -43,7 +48,11 @@ export default function LoginPage({ login, signin, settings }) {
   if (settings) {
     return (
       <PageLayout paddingValue={3.4}>
-        <ProfileSetting title="프로필 설정" setUserData={setUserData} />
+        <ProfileSetting
+          title="프로필 설정"
+          userData={userData}
+          setUserData={setUserData}
+        />
       </PageLayout>
     );
   }

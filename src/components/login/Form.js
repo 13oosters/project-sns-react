@@ -1,7 +1,8 @@
 import React, { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { useForm } from "react-hook-form";
-import axios from "axios";
+
+import API from "../../utils/api";
 import TitleH2 from "../style/form/TitleH2";
 import LoginForm from "../style/form/LoginForm";
 import LoginInput from "../style/form/LoginInput";
@@ -11,6 +12,7 @@ import ErrorMessageP from "../style/form/ErrorMessageP";
 
 export default function Form({ title, buttonText, userData, setUserData }) {
   const [isValue, setIsValue] = useState(false);
+  const [responseMessage, setResponseMeassage] = useState("");
   const navigate = useNavigate();
 
   const {
@@ -30,17 +32,25 @@ export default function Form({ title, buttonText, userData, setUserData }) {
 
   const validateEmail = async () => {
     try {
-      const res = await axios.post(
-        "https://mandarin.api.weniv.co.kr/user/emailvalid",
-        {
-          user: {
-            email: userData.email,
-          },
-        },
-      );
-      const Dataaa = await res.data;
+      const res = await API.post("/user/emailvalid", {
+        user: { email: userData.email },
+      });
 
-      console.log(Dataaa);
+      const { message } = await res.data;
+
+      if (message === "이미 가입된 이메일 주소입니다.") {
+        setResponseMeassage(message);
+      } else {
+        setResponseMeassage("");
+      }
+      if (!errors.email && !errors.password) {
+        console.log(199);
+        if (message === "사용 가능한 이메일 입니다.") {
+          console.log(209);
+          navigate("/settings");
+        }
+      }
+      console.log(message);
     } catch (error) {
       console.log(error);
     }
@@ -52,10 +62,7 @@ export default function Form({ title, buttonText, userData, setUserData }) {
       console.log(5);
     } else if (title === "이메일로 회원가입") {
       validateEmail();
-      if (!errors.email && !errors.password) {
-        console.log(3);
-        // navigate("/settings");
-      }
+      console.log(responseMessage);
     }
   };
 
@@ -86,7 +93,13 @@ export default function Form({ title, buttonText, userData, setUserData }) {
             })}
             onKeyUp={handleInput}
           />
-          <ErrorMessageP>{errors.email && errors.email.message}</ErrorMessageP>
+          {responseMessage ? (
+            <ErrorMessageP>{responseMessage}</ErrorMessageP>
+          ) : (
+            <ErrorMessageP>
+              {errors.email && errors.email.message}
+            </ErrorMessageP>
+          )}
         </label>
         <label htmlFor="password" style={{ marginTop: "1.6rem" }}>
           비밀번호
