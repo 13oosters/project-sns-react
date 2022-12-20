@@ -1,8 +1,8 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
 import { useForm } from "react-hook-form";
 
-import API from "../../utils/api";
+import validate from "../../utils/validate";
 import TitleH2 from "../style/form/TitleH2";
 import LoginForm from "../style/form/LoginForm";
 import LoginInput from "../style/form/LoginInput";
@@ -11,65 +11,51 @@ import SignUpButton from "../style/form/SignUpButton";
 import ErrorMessageP from "../style/form/ErrorMessageP";
 
 export default function Form({ title, buttonText, userData, setUserData }) {
-  const [isValue, setIsValue] = useState(false);
-  const [responseMessage, setResponseMeassage] = useState("");
+  const [isValue, setIsValue] = useState(false); // 1
+  const [responseMessage, setResponseMeassage] = useState(""); // 2
   const navigate = useNavigate();
 
   const {
     register,
+    setFocus,
     handleSubmit,
     formState: { isSubmitting, errors },
     watch,
-  } = useForm({ mode: "onChange" });
+  } = useForm({ mode: "onChange" }); // 3
+
+  useEffect(() => {
+    setFocus("email");
+  }, []);
 
   const checkIsValue = (e) => {
     e.target.value && watch("email") && watch("password")
       ? setIsValue(true)
-      : setIsValue(false);
-    console.log(isValue);
-    console.log(watch("password"));
-  };
-
-  const validateEmail = async () => {
-    try {
-      const res = await API.post("/user/emailvalid", {
-        user: { email: userData.email },
-      });
-
-      const { message } = await res.data;
-
-      if (message === "이미 가입된 이메일 주소입니다.") {
-        setResponseMeassage(message);
-      } else {
-        setResponseMeassage("");
-      }
-      if (!errors.email && !errors.password) {
-        console.log(199);
-        if (message === "사용 가능한 이메일 입니다.") {
-          console.log(209);
-          navigate("/settings");
-        }
-      }
-      console.log(message);
-    } catch (error) {
-      console.log(error);
-    }
-  };
-
-  const handleForm = (e) => {
-    //    e.preventDefault();
-    if (title === "로그인") {
-      console.log(5);
-    } else if (title === "이메일로 회원가입") {
-      validateEmail();
-      console.log(responseMessage);
-    }
+      : setIsValue(false); // 4
   };
 
   const handleInput = (e) => {
     setUserData({ ...userData, [e.target.name]: e.target.value });
     checkIsValue(e);
-  };
+  }; // 6
+
+  const handleForm = (e) => {
+    if (title === "로그인") {
+      /* 로그인 페이지 기능 코드 작성 */
+    } else if (title === "이메일로 회원가입") {
+      validate(userData, "email", "/user/emailvalid").then((res) => {
+        if (res === "이미 가입된 이메일 주소 입니다.") {
+          setResponseMeassage(res);
+        } else {
+          setResponseMeassage("");
+        }
+        if (!errors.email && !errors.password) {
+          if (res === "사용 가능한 이메일 입니다.") {
+            navigate("/settings");
+          }
+        }
+      });
+    }
+  }; // 7
 
   return (
     <>
@@ -141,10 +127,3 @@ export default function Form({ title, buttonText, userData, setUserData }) {
     </>
   );
 }
-
-/**
- * 이메일로 회원가입 페이지일 때.
- * (다음) 버튼을 눌렀을 때.
- * 유효성 검사가 성공했으면.
- * /settings 페이지로 넘어간다.
- */
