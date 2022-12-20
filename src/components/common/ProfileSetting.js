@@ -1,3 +1,4 @@
+
 import React, { useState } from "react";
 import axios from "axios";
 import styled from "styled-components";
@@ -143,10 +144,12 @@ export default function ProfileSetting({ title, userData, setUserData }) {
   };
 
   // "image": String // 예시) https://mandarin.api.weniv.co.kr/1641906557953.png
+
   return (
     <>
       {title === "프로필 설정" ? (
         <>
+
           <TitleH2>{title}</TitleH2>
           <ContentP>나중에 언제든지 변경할 수 있습니다.</ContentP>
         </>
@@ -237,6 +240,7 @@ export default function ProfileSetting({ title, userData, setUserData }) {
           {title === "프로필 설정" ? "멍하냥 시작하기" : "저장"}
         </LoginButton>
       </LoginForm>
+
     </>
   );
 }
