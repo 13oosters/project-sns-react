@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import axios from "axios";
 import styled from "styled-components";
 import { useForm } from "react-hook-form";
@@ -58,10 +58,15 @@ export default function ProfileSetting({ title, userData, setUserData }) {
 
   const {
     register,
+    setFocus,
     handleSubmit,
     formState: { isSubmitting, errors },
     watch,
   } = useForm({ mode: "onChange" }); // 3
+
+  useEffect(() => {
+    setFocus("username");
+  }, []);
 
   const checkIsValue = (e) => {
     e.target.value && watch("username") && watch("accountname")
