@@ -1,6 +1,7 @@
 import React from "react";
 import ReactDOM from "react-dom/client";
 import { ThemeProvider, createGlobalStyle } from "styled-components";
+import { BrowserRouter } from "react-router-dom";
 import reset from "styled-reset";
 
 import "./index.css";
@@ -10,11 +11,18 @@ import reportWebVitals from "./reportWebVitals";
 const mainTheme = {
   primaryColor: "#C5985E",
   secondaryColor: "#EBC695",
-  smallFontSize: "1rem",
+  sideColor: "#FFFAEE",
+  lightColor: "#DBDBDB",
+  darkLightColor: "#767676",
+  xSmallFontSize: "1rem",
+  smallFontSize: "1.2rem",
   baseFontSize: "1.4rem",
   largeFontSize: "1.6rem",
   xLargeFontSize: "1.8rem",
   xxLargeFontSize: "2.4rem",
+  normalFontWeight: 400,
+  mediumFontWeight: 500,
+  boldFontWeight: 700,
 };
 
 const GlobalStyles = createGlobalStyle`
@@ -34,10 +42,10 @@ const GlobalStyles = createGlobalStyle`
   }
   input {
     border: none;
+    padding: 0;
+    outline: inherit;
   }
-  input:focus {
-    outline: 1px solid #c5985e;
-  }
+  
   a {
     text-decoration: none;
     color: inherit;
@@ -60,10 +68,12 @@ const root = ReactDOM.createRoot(document.getElementById("root"));
 
 root.render(
   <React.StrictMode>
-    <GlobalStyles />
-    <ThemeProvider theme={mainTheme}>
-      <App />
-    </ThemeProvider>
+    <BrowserRouter>
+      <GlobalStyles />
+      <ThemeProvider theme={mainTheme}>
+        <App />
+      </ThemeProvider>
+    </BrowserRouter>
   </React.StrictMode>,
 );
 
