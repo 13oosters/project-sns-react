@@ -13,6 +13,7 @@ function Router() {
   return (
     <Routes>
       {/* 로그인 */}
+      <Route path="/splash" element={<SplashScreenPage />} />
       <Route path="/" element={<LoginPage />} />
       <Route path="/login" element={<LoginPage login />} />
       <Route path="/signin" element={<LoginPage signin />} />
