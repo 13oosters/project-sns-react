@@ -1,6 +1,9 @@
 import React, { useState } from "react";
+import axios from "axios";
 import styled from "styled-components";
 import { useForm } from "react-hook-form";
+import { useNavigate } from "react-router-dom";
+import API from "../../utils/api";
 
 import TitleH2 from "../style/form/TitleH2";
 import LoginForm from "../style/form/LoginForm";
@@ -42,8 +45,18 @@ const ContentP = styled.p`
   color: ${(props) => props.theme.darkLightColor};
 `;
 
+const UploadImg = styled.img`
+  width: 11rem;
+  height: 11rem;
+  border-radius: 50%;
+`;
+
 export default function ProfileSetting({ title, userData, setUserData }) {
   const [isValue, setIsValue] = useState(false);
+  const [responseMessage, setResponseMeassage] = useState("");
+  const [profileImage, setProfileImage] = useState(DefaultProfileImage);
+
+  const navigate = useNavigate();
 
   const {
     register,
@@ -56,19 +69,80 @@ export default function ProfileSetting({ title, userData, setUserData }) {
     e.target.value && watch("name") && watch("userId")
       ? setIsValue(true)
       : setIsValue(false);
-    console.log(isValue);
+    // console.log(isValue);
   };
 
-  const handleForm = (e) => {
-    e.preventDefault();
-    if (title === "프로필 설정") {
-      if (!errors.email && !errors.password) {
-        setUserData({ ...userData, [e.target.name]: e.target.value });
-        //        navigate("/settings");
-      }
+  const handleInput = (e) => {
+    setUserData({ ...userData, [e.target.name]: e.target.value });
+    checkIsValue(e);
+  };
+
+  const validateAccountName = async () => {
+    try {
+      const res = await API.post("/user/accountnamevalid", {
+        user: { accountname: userData.accountname },
+      });
+      const { message } = await res.data;
+
+      setResponseMeassage(message);
+      console.log(message);
+    } catch (error) {
+      console.log(error);
     }
   };
 
+  const handleForm = (e) => {
+    // e.preventDefault();
+    if (title === "프로필 설정") {
+      validateAccountName();
+      if (!errors.name && !errors.userId) {
+        if (responseMessage === "사용 가능한 계정 ID 입니다.") {
+          // setUserData({ ...userData, [e.target.name]: e.target.value });
+          axios
+            .post("https://mandarin.api.weniv.co.kr/user", {
+              user: { ...userData },
+            })
+            .then((res) => {
+              console.log(res.data);
+            });
+          navigate("/settings");
+        }
+      }
+    } else {
+      console.log("프로필 수정");
+    }
+  };
+
+  const getImage = async (e) => {
+    const form = new FormData();
+
+    console.log(e.target.files[0]);
+
+    form.append("image", e.target.files[0]);
+
+    console.log(form);
+
+    const response = await axios.post(
+      "https://mandarin.api.weniv.co.kr/image/uploadfile",
+      form,
+    );
+
+    console.log(response);
+
+    const data = await response.data;
+
+    console.log(data);
+
+    setUserData({
+      ...userData,
+      [e.target.name]: `https://mandarin.api.weniv.co.kr/${data.filename}`,
+    });
+    setProfileImage(userData.image);
+
+    //    console.log(data);
+  };
+
+  // "image": String // 예시) https://mandarin.api.weniv.co.kr/1641906557953.png
   return (
     <>
       {title === "프로필 설정" ? (
@@ -77,60 +151,86 @@ export default function ProfileSetting({ title, userData, setUserData }) {
           <ContentP>나중에 언제든지 변경할 수 있습니다.</ContentP>
         </>
       ) : null}
-
-      <ProfileLabel htmlFor="profileImage">
-        <input type="file" id="profileImage" style={{ display: "none" }} />
+      <ProfileLabel htmlFor="image">
+        <input
+          type="file"
+          id="image"
+          name="image"
+          style={{ display: "none" }}
+          onChange={getImage}
+        />
         <UploadImageDiv>
-          <img src={DefaultProfileImage} alt="프로필 사진" />
+          <UploadImg
+            src={`${profileImage}`}
+            alt="프로필 사진"
+            style={{ objecFit: "cover" }}
+          />
         </UploadImageDiv>
       </ProfileLabel>
 
       <LoginForm onSubmit={handleSubmit(handleForm)}>
-        <label htmlFor="profileName">
+        <label htmlFor="username">
           사용자 이름
           <LoginInput
             type="text"
-            name="profileName"
-            id="profileName"
+            name=" username"
+            id=" username"
             required
-            placeholder="2~10자 이내여야 합니다."
+            placeholder="2~10자 이내 한글만 사용 가능합니다."
             {...register("name", {
               required: "사용자 이름은 필수 입력입니다.",
+              minLength: {
+                value: 2,
+                message: "2~10자 이내여야 합니다.",
+              },
+              maxLength: {
+                value: 10,
+                message: "2~10자 이내여야 합니다.",
+              },
               pattern: {
-                value: /[^a-z|A-Z|0-9|ㄱ-ㅎ|가-힣]/g,
+                value: /^[가-힣]*$/g,
                 message: "사용자이름 형식에 맞지 않습니다.",
               },
             })}
-            onKeyUp={checkIsValue}
+            onKeyUp={handleInput}
           />
         </label>
         <ErrorMessageP>{errors.name && errors.name.message}</ErrorMessageP>
-        <label htmlFor="profileAccountName" style={{ marginTop: "1.6rem" }}>
+        <label htmlFor="accountname" style={{ marginTop: "1.6rem" }}>
           계정 ID
           <LoginInput
             type="text"
-            name="profileAccountName"
-            id="profileAccountName"
+            name="accountname"
+            id="accountname"
             required
             placeholder="4~12자 이내 영문, 숫자, 특수문자(.),(_)만 사용 가능합니다."
             {...register("userId", {
               required: "계정ID는 필수 입력입니다.",
-              minlength: {
-                value: /^[a-zA-Z0-9._]{4,12}$/g,
+              minLength: {
+                value: 4,
+                message: "4~12자 이내여야 합니다.",
+              },
+              maxLength: {
+                value: 12,
+                message: "4~12자 이내여야 합니다.",
+              },
+              pattern: {
+                value: /^[a-zA-Z0-9._]/g,
                 message: "계정ID 형식에 맞지 않습니다.",
               },
             })}
-            onKeyUp={checkIsValue}
+            onKeyUp={handleInput}
           />
         </label>
         <ErrorMessageP>{errors.userId && errors.userId.message}</ErrorMessageP>
-        <label htmlFor="profileIntro" style={{ marginTop: "1.6rem" }}>
+        <label htmlFor="intro" style={{ marginTop: "1.6rem" }}>
           소개
           <LoginInput
             type="text"
-            name="profileIntro"
-            id="profileIntro"
+            name="intro"
+            id="intro"
             placeholder="당신과 반려동물에 대해 소개해 주세요!"
+            onKeyUp={handleInput}
           />
         </label>
         <LoginButton type="submit" disabled={isSubmitting} isValue={isValue}>
