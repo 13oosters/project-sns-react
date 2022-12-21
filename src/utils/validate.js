@@ -20,6 +20,22 @@ const validate = async (state, type, url) => {
 
       response = message;
     }
+    if (type === "signup") {
+      const res = await API.post(url, {
+        user: { ...state },
+      });
+      const { message } = await res.data;
+
+      response = message;
+    }
+    if (type === "signin") {
+      const res = await API.post(url, {
+        user: { email: state.email, password: state.password },
+      });
+      const { user } = await res.data;
+
+      response = user;
+    }
   } catch (e) {
     throw new Error(e);
   }
@@ -27,12 +43,3 @@ const validate = async (state, type, url) => {
 };
 
 export default validate;
-
-/* axios
-.post("https://mandarin.api.weniv.co.kr/user", {
-  user: { ...userData },
-})
-.then((res) => {
-  console.log(res.data);
-});
- */
