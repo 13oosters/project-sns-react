@@ -53,7 +53,10 @@ const Buttonli = styled.li`
   gap: 1rem;
 `;
 
-const NumberSpan = styled.span``;
+const NumberSpan = styled.span`
+  font-size: ${(props) => props.theme.smallFontSize};
+  color: ${(props) => props.theme.darkLightColor};
+`;
 const PostCommentP = styled.p`
   text-align: left;
   margin-top: 0.8rem;
@@ -88,7 +91,7 @@ export default function Card() {
       <PostImage src="#" alt="#" />
       <ButtonUl>
         <Buttonli>
-          <button type="button" style={{ padding: 0 }}>
+          <button type="button" style={{ padding: 0, height: "2rem" }}>
             <img src={heartImage} alt="게시글 좋아요 버튼" />
           </button>
           <NumberSpan>59</NumberSpan>
