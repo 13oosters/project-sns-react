@@ -75,6 +75,13 @@ export default function Header({ type }) {
         </button>
       </HeaderUI>
     ),
+    post: (
+      <HeaderUI>
+        <a href="#;">
+          <img src={backImage} alt="뒤로 가기" />
+        </a>
+      </HeaderUI>
+    ),
     followers: (
       <>
         <HeaderUI>
