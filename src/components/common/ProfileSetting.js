@@ -1,18 +1,16 @@
-
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import axios from "axios";
 import styled from "styled-components";
 import { useForm } from "react-hook-form";
 import { useNavigate } from "react-router-dom";
-import API from "../../utils/api";
 
+import validate from "../../utils/validate";
 import TitleH2 from "../style/form/TitleH2";
 import LoginForm from "../style/form/LoginForm";
 import LoginInput from "../style/form/LoginInput";
 import LoginButton from "../style/form/LoginButton";
 import ErrorMessageP from "../style/form/ErrorMessageP";
 import UpLoadImage from "../../../src/assets/image/profile-upload-button.png";
-import DefaultProfileImage from "../../../src/assets/image/basic-profile-img.png";
 
 const ProfileLabel = styled.label`
   display: flex;
@@ -53,103 +51,81 @@ const UploadImg = styled.img`
 `;
 
 export default function ProfileSetting({ title, userData, setUserData }) {
-  const [isValue, setIsValue] = useState(false);
-  const [responseMessage, setResponseMeassage] = useState("");
-  const [profileImage, setProfileImage] = useState(DefaultProfileImage);
+  const [isValue, setIsValue] = useState(false); // 1
+  const [responseMessage, setResponseMeassage] = useState(""); // 2
 
   const navigate = useNavigate();
 
   const {
     register,
+    setFocus,
     handleSubmit,
     formState: { isSubmitting, errors },
     watch,
-  } = useForm({ mode: "onChange" });
+  } = useForm({ mode: "onChange" }); // 3
+
+  useEffect(() => {
+    setFocus("username");
+  }, []);
 
   const checkIsValue = (e) => {
-    e.target.value && watch("name") && watch("userId")
+    e.target.value && watch("username") && watch("accountname")
       ? setIsValue(true)
-      : setIsValue(false);
-    // console.log(isValue);
+      : setIsValue(false); // 4
   };
 
   const handleInput = (e) => {
     setUserData({ ...userData, [e.target.name]: e.target.value });
     checkIsValue(e);
-  };
-
-  const validateAccountName = async () => {
-    try {
-      const res = await API.post("/user/accountnamevalid", {
-        user: { accountname: userData.accountname },
-      });
-      const { message } = await res.data;
-
-      setResponseMeassage(message);
-      console.log(message);
-    } catch (error) {
-      console.log(error);
-    }
-  };
+  }; // 7
 
   const handleForm = (e) => {
-    // e.preventDefault();
     if (title === "프로필 설정") {
-      validateAccountName();
-      if (!errors.name && !errors.userId) {
-        if (responseMessage === "사용 가능한 계정 ID 입니다.") {
-          // setUserData({ ...userData, [e.target.name]: e.target.value });
-          axios
-            .post("https://mandarin.api.weniv.co.kr/user", {
-              user: { ...userData },
-            })
-            .then((res) => {
-              console.log(res.data);
-            });
-          navigate("/settings");
-        }
-      }
+      validate(userData, "accountname", "/user/accountnamevalid").then(
+        (res) => {
+          if (!errors.username && !errors.accountname) {
+            if (res === "사용 가능한 계정ID 입니다.") {
+              /* 로그인 */
+              validate(userData, "signup", "/user")
+                .then(() => {
+                  alert("회원가입 성공");
+                })
+                .then(() => {
+                  navigate("/login");
+                });
+            }
+            if (res === "이미 가입된 계정ID 입니다.") {
+              setResponseMeassage(res);
+            }
+          }
+        },
+      );
     } else {
-      console.log("프로필 수정");
+      /* 프로필 수정 페이지 기능 코드 작성 */
     }
-  };
+  }; // 7
 
-  const getImage = async (e) => {
+  const uploadImage = async (e) => {
     const form = new FormData();
 
-    console.log(e.target.files[0]);
-
     form.append("image", e.target.files[0]);
-
-    console.log(form);
-
     const response = await axios.post(
       "https://mandarin.api.weniv.co.kr/image/uploadfile",
       form,
     );
 
-    console.log(response);
-
     const data = await response.data;
-
-    console.log(data);
 
     setUserData({
       ...userData,
       [e.target.name]: `https://mandarin.api.weniv.co.kr/${data.filename}`,
     });
-    setProfileImage(userData.image);
-
-    //    console.log(data);
   };
-
-  // "image": String // 예시) https://mandarin.api.weniv.co.kr/1641906557953.png
 
   return (
     <>
       {title === "프로필 설정" ? (
         <>
-
           <TitleH2>{title}</TitleH2>
           <ContentP>나중에 언제든지 변경할 수 있습니다.</ContentP>
         </>
@@ -160,11 +136,11 @@ export default function ProfileSetting({ title, userData, setUserData }) {
           id="image"
           name="image"
           style={{ display: "none" }}
-          onChange={getImage}
+          onChange={uploadImage}
         />
         <UploadImageDiv>
           <UploadImg
-            src={`${profileImage}`}
+            src={userData.image}
             alt="프로필 사진"
             style={{ objecFit: "cover" }}
           />
@@ -176,11 +152,11 @@ export default function ProfileSetting({ title, userData, setUserData }) {
           사용자 이름
           <LoginInput
             type="text"
-            name=" username"
-            id=" username"
+            name="username"
+            id="username"
             required
             placeholder="2~10자 이내 한글만 사용 가능합니다."
-            {...register("name", {
+            {...register("username", {
               required: "사용자 이름은 필수 입력입니다.",
               minLength: {
                 value: 2,
@@ -198,7 +174,9 @@ export default function ProfileSetting({ title, userData, setUserData }) {
             onKeyUp={handleInput}
           />
         </label>
-        <ErrorMessageP>{errors.name && errors.name.message}</ErrorMessageP>
+        <ErrorMessageP>
+          {errors.username && errors.username.message}
+        </ErrorMessageP>
         <label htmlFor="accountname" style={{ marginTop: "1.6rem" }}>
           계정 ID
           <LoginInput
@@ -207,7 +185,7 @@ export default function ProfileSetting({ title, userData, setUserData }) {
             id="accountname"
             required
             placeholder="4~12자 이내 영문, 숫자, 특수문자(.),(_)만 사용 가능합니다."
-            {...register("userId", {
+            {...register("accountname", {
               required: "계정ID는 필수 입력입니다.",
               minLength: {
                 value: 4,
@@ -225,7 +203,13 @@ export default function ProfileSetting({ title, userData, setUserData }) {
             onKeyUp={handleInput}
           />
         </label>
-        <ErrorMessageP>{errors.userId && errors.userId.message}</ErrorMessageP>
+        {responseMessage ? (
+          <ErrorMessageP>{responseMessage}</ErrorMessageP>
+        ) : (
+          <ErrorMessageP>
+            {errors.accountname && errors.accountname.message}
+          </ErrorMessageP>
+        )}
         <label htmlFor="intro" style={{ marginTop: "1.6rem" }}>
           소개
           <LoginInput
@@ -240,7 +224,6 @@ export default function ProfileSetting({ title, userData, setUserData }) {
           {title === "프로필 설정" ? "멍하냥 시작하기" : "저장"}
         </LoginButton>
       </LoginForm>
-
     </>
   );
 }

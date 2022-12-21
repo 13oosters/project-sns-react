@@ -1,7 +1,4 @@
-// import Form from "../components/login/Form";
-// import React from "react";
 import { useState } from "react";
-// import axios from "axios";
 import PageLayout from "../components/style/PageLayout";
 import Welcome from "../components/login/Welcome";
 import Form from "../components/login/Form";
@@ -14,10 +11,8 @@ export default function LoginPage({ login, signin, settings }) {
     password: "",
     accountname: "",
     intro: "",
-    image: "",
+    image: "https://mandarin.api.weniv.co.kr/Ellipse.png",
   });
-
-  console.log(userData);
 
   if (login) {
     return (
@@ -62,31 +57,4 @@ export default function LoginPage({ login, signin, settings }) {
       <Welcome />
     </PageLayout>
   );
-
-  /*   return (
-    <PageLayout paddingValue={3.4}>
-      <Form title="로그인" buttonText="로그인" />
-      <Outlet title="로그인" buttonText="로그인" />
-    </PageLayout>
-  ); */
-  /* 
-  return (
-    <PageLayout paddingValue={0}>
-      <h1 className="sr-only">로그인 페이지</h1>
-      <Welcome />
-    </PageLayout>
-  ); */
-
-  // return (
-
-  // );
-
-  /*   return (
-    {
-      if(isLoginClicked){
-      }
-      }
-    }
-   
-  ); */
 }
