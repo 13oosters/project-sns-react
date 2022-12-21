@@ -40,7 +40,10 @@ export default function Form({ title, buttonText, userData, setUserData }) {
 
   const handleForm = (e) => {
     if (title === "로그인") {
-      /* 로그인 페이지 기능 코드 작성 */
+      validate(userData, "signin", "/user/login").then((res) => {
+        console.log(res);
+        localStorage.setItem("token", res.refreshToken);
+      });
     } else if (title === "이메일로 회원가입") {
       validate(userData, "email", "/user/emailvalid").then((res) => {
         if (res === "이미 가입된 이메일 주소 입니다.") {
@@ -71,7 +74,6 @@ export default function Form({ title, buttonText, userData, setUserData }) {
             placeholder="이메일 주소를 입력해주세요"
             {...register("email", {
               required: "이메일은 필수 입력입니다.",
-              /* email 정규식 수정해야 함 */
               pattern: {
                 value: /\b[\w.-]+@[\w.-]+.\w{2,4}\b/gi,
                 message: "이메일 형식에 맞지 않습니다.",
@@ -110,17 +112,12 @@ export default function Form({ title, buttonText, userData, setUserData }) {
             {errors.password && errors.password.message}
           </ErrorMessageP>
         </label>
-        <LoginButton
-          type="submit"
-          // onSubmit={passPage}
-          disabled={isSubmitting}
-          isValue={isValue}
-        >
+        <LoginButton type="submit" disabled={isSubmitting} isValue={isValue}>
           {buttonText}
         </LoginButton>
       </LoginForm>
       {title === "로그인" ? (
-        <SignUpButton type="button" onClick={() => navigate("/signin")} cancel>
+        <SignUpButton type="button" onClick={() => navigate("/signup")} cancel>
           이메일로 회원가입
         </SignUpButton>
       ) : null}
