@@ -10,17 +10,21 @@ import profileSelectImage from "../../assets/image/icon-user-fill.png";
 
 const NavBarArticle = styled.article`
   position: fixed;
+  left: 0;
   bottom: 0;
   z-index: 1;
   width: 100%;
   background-color: #ffffff;
+  height: 6rem;
 `
 
 const TabMenuUl = styled.ul`
   display: flex;
-  justify-content: space-between;
+  justify-content: space-around;
+  align-items: center;
+  height: 6rem;
+  width: 100%;
   border-top: 1px solid #dbdbdb;
-  padding: 1.4rem 2.8rem 0.6rem;
 `
 
 const TabMenuLink = styled.a`
@@ -56,13 +60,13 @@ export default function NavBar({ type }) {
             </TabMenuLink>
           </li>
           <li>
-            <TabMenuLink onClick={()=>{navigate("/post")}}>
+            <TabMenuLink onClick={()=>{navigate("/account/post")}}>
               {type === "게시물" ? <img src={postImage} alt="게시물 작성으로 이동" /> : <img src={postImage} alt="게시물 작성으로 이동" />}
               <p>게시물 작성</p>
             </TabMenuLink>
           </li>
           <li>
-            <TabMenuLink onClick={()=>{navigate("/profile")}}>
+            <TabMenuLink onClick={()=>{navigate("/account/settings")}}>
               {type === "프로필" ? <img src={profileSelectImage} alt="프로필로 이동" /> : <img src={profileImage} alt="프로필로 이동" />}
               {type === "프로필" ? <SelectP>프로필</SelectP> : <p>프로필</p>}
             </TabMenuLink>
