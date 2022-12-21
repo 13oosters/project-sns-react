@@ -3,7 +3,7 @@ import React from "react";
 export default function NavBar() {
   return (
     <article>
-      <h3 class="sr-only">탭 메뉴</h3>
+      <h3 className="sr-only">탭 메뉴</h3>
       <nav>
         <ul>
           <li>

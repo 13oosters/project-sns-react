@@ -53,7 +53,7 @@ export default function Header({ type }) {
     ),
     search: (
       <>
-        <h2 class="sr-only">검색창</h2>
+        <h2 className="sr-only">검색창</h2>
         <HeaderUI>
           <a href="#;">
             <img src={backImage} alt="뒤로 가기" />

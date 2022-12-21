@@ -7,11 +7,12 @@ import PostPage from "../pages/PostPage";
 import UploadPage from "../pages/UploadPage";
 import FollowersPage from "../pages/FollowersPage";
 import ErrorPage from "../pages/ErrorPage";
-import HomePage from "../pages/HomePage";
+import HomePages from "../pages/HomePage";
 import SplashScreen from "../components/common/SplashScreen";
 
+const HomePage = lazy(() => import("../pages/HomePage"));
+
 function Router() {
-  // const HomePage = lazy(() => import("../pages/HomePage"));
 
   return (
     <Routes>
@@ -32,7 +33,7 @@ function Router() {
       <Route path="/signup" element={<LoginPage signin />} />
       {/* LoginPage settings */}
       {/* 홈 */}
-      <Route path="/home" element={<HomePage/>}/>
+      <Route path="/home" element={<HomePages/>}/>
       
       <Route path="/settings" element={<LoginPage settings />} />
       {/*  */}

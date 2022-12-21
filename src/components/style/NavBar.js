@@ -29,7 +29,7 @@ const SelectP = styled.p`
 export default function NavBar({ type }) {
   return (
     <article>
-      <h3 class="sr-only">탭 메뉴</h3>
+      <h3 className="sr-only">탭 메뉴</h3>
       <nav>
         <TabMenuUl>
           <li>

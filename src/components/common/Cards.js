@@ -4,7 +4,7 @@ import Card from "./Card";
 export default function Cards() {
   return (
     <section>
-      <h3 class="sr-only">게시글</h3>
+      <h3 className="sr-only">게시글</h3>
       <ol reversed>
         <Card />
         <Card />

@@ -30,7 +30,7 @@ export default function Card() {
         </li>
       </ul>
       <p>집사의 코딩을 방해하는 나, 제법 귀여울지도?</p>
-      <time datetime="2022-12-05">
+      <time dateTime="2022-12-05">
         <span>2022</span> <span>12</span> <span>5</span>
       </time>
     </li>
