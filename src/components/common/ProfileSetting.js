@@ -84,9 +84,15 @@ export default function ProfileSetting({ title, userData, setUserData }) {
       validate(userData, "accountname", "/user/accountnamevalid").then(
         (res) => {
           if (!errors.username && !errors.accountname) {
-            if (res === "사용 가능한 계정 ID 입니다.") {
+            if (res === "사용 가능한 계정ID 입니다.") {
               /* 로그인 */
-              navigate("/");
+              validate(userData, "signup", "/user")
+                .then(() => {
+                  alert("회원가입 성공");
+                })
+                .then(() => {
+                  navigate("/login");
+                });
             }
             if (res === "이미 가입된 계정ID 입니다.") {
               setResponseMeassage(res);
@@ -99,7 +105,7 @@ export default function ProfileSetting({ title, userData, setUserData }) {
     }
   }; // 7
 
-  const getImage = async (e) => {
+  const uploadImage = async (e) => {
     const form = new FormData();
 
     form.append("image", e.target.files[0]);
@@ -130,7 +136,7 @@ export default function ProfileSetting({ title, userData, setUserData }) {
           id="image"
           name="image"
           style={{ display: "none" }}
-          onChange={getImage}
+          onChange={uploadImage}
         />
         <UploadImageDiv>
           <UploadImg
