@@ -5,6 +5,7 @@ import Comment from "./Comment";
 
 const CommentsSection = styled.section`
   padding-top: 2rem;
+  border-top: 1px solid ${(props) => props.theme.lightColor};
 `;
 
 export default function Comments() {
