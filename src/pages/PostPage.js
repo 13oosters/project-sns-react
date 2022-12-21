@@ -1,5 +1,14 @@
 import React from "react";
 
+import Header from "../components/style/Header";
+import Detail from "../components/post/Detail";
+
 export default function PostPage() {
-  return <div>PostPage</div>;
+  return (
+    <section>
+      <h1 class="sr-only">게시글 상세보기</h1>
+      <Header type="post" />
+      <Detail />
+    </section>
+  );
 }
