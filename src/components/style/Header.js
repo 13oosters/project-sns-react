@@ -11,6 +11,15 @@ import cancelImage from "../../assets/image/icon-cancel-search.png";
  * justify-items: items-between;
  * padding 전부
  */
+
+const HeaderWrap = styled.header`
+  position: fixed;
+  top: 0;
+  z-index: 1;
+  width: 100%;
+  background-color: #ffffff;
+`
+
 const HeaderLayout = css`
   display: flex;
   justify-content: space-between;
@@ -89,5 +98,5 @@ export default function Header({ type }) {
     ),
   };
 
-  return <header>{UI[type]}</header>;
+  return <HeaderWrap>{UI[type]}</HeaderWrap>;
 }
