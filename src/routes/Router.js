@@ -1,22 +1,34 @@
+import { lazy, Suspense } from "react";
 import { Routes, Route } from "react-router-dom";
-import SplashScreenPage from "../pages/SplashScreenPage";
 import LoginPage from "../pages/LoginPage";
-import HomePage from "../pages/HomePage";
 import SearchPage from "../pages/SearchPage";
 import ProfilePage from "../pages/ProfilePage";
 import PostPage from "../pages/PostPage";
 import UploadPage from "../pages/UploadPage";
 import FollowersPage from "../pages/FollowersPage";
 import ErrorPage from "../pages/ErrorPage";
+import SplashScreen from "../components/common/SplashScreen";
+
+const HomePage = lazy(() => import("../pages/HomePage"));
 
 function Router() {
   return (
     <Routes>
       {/* 로그인 */}
-      <Route path="/splash" element={<SplashScreenPage />} />
-      <Route path="/" element={<LoginPage />} />
+      <Route
+        path="/"
+        element={
+          true ? (
+            <LoginPage />
+          ) : (
+            <Suspense fallback={<SplashScreen />}>
+              <HomePage />
+            </Suspense>
+          )
+        }
+      />
       <Route path="/login" element={<LoginPage login />} />
-      <Route path="/signin" element={<LoginPage signin />} />
+      <Route path="/signup" element={<LoginPage signin />} />
       {/* LoginPage settings */}
       <Route path="/settings" element={<LoginPage settings />} />
       {/*  */}
