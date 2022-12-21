@@ -9,11 +9,7 @@ const CommentLi = styled.li`
   flex-direction: column;
   gap: 1.2rem;
 `;
-const CommentDiv = styled.div`
-  display: flex;
-  flex-direction: column;
-  gap: 1.2rem;
-`;
+
 const CommentUserInfoDiv = styled.div`
   display: flex;
   align-items: center;
