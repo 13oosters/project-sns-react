@@ -5,7 +5,7 @@ const FeedsDiv = styled.div`
   height: 57rem;
   overflow: scroll;
   margin-top: 4rem;
-  margin-bottom: 6rem;
+  margin-bottom: 5.5rem;
   &::-webkit-scrollbar{
     display: none;
   }
