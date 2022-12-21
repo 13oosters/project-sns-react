@@ -128,7 +128,7 @@ export default function Card() {
         귀여울지도?
       </PostCommentP>
       <PostTime datetime="2022-12-05">
-        <span>2022</span> <span>12</span> <span>5</span>
+        <span>2022년</span> <span>12월</span> <span>5일</span>
       </PostTime>
     </li>
   );

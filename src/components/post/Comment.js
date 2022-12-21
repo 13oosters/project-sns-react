@@ -45,7 +45,15 @@ export default function Comment() {
         <UserNameStrong>앙리</UserNameStrong>
         <CommentTime>5분 전</CommentTime>
       </CommentUserInfoDiv>
-      <CommentP>너 정말 앙큼한 고양이구나~!</CommentP>
+      <CommentP>
+        너 정말 앙큼한 고양이구나~!너 정말 앙큼한 고양이구나~!너 정말 앙큼한
+        고양이구나~!너 정말 앙큼한 고양이구나~!너 정말 앙큼한 고양이구나~!너
+        정말 앙큼한 고양이구나~!너 정말 앙큼한 고양이구나~!너 정말 앙큼한
+        고양이구나~!너 정말 앙큼한 고양이구나~!너 정말 앙큼한 고양이구나~!너
+        정말 앙큼한 고양이구나~!너 정말 앙큼한 고양이구나~!너 정말 앙큼한
+        고양이구나~!너 정말 앙큼한 고양이구나~!너 정말 앙큼한 고양이구나~!너
+        정말 앙큼한 고양이구나~!
+      </CommentP>
     </CommentLi>
   );
 }
