@@ -5,6 +5,9 @@ import profileImage from "../../assets/image/basic-profile-img-post.png";
 
 const CommentLi = styled.li`
   margin-bottom: 2.2rem;
+  display: flex;
+  flex-direction: column;
+  gap: 1.2rem;
 `;
 const CommentDiv = styled.div`
   display: flex;
@@ -41,14 +44,12 @@ const CommentP = styled.p`
 export default function Comment() {
   return (
     <CommentLi>
-      <CommentDiv>
-        <CommentUserInfoDiv>
-          <UserImage src={profileImage} alt="프로필 사진" />
-          <UserNameStrong>앙리</UserNameStrong>
-          <CommentTime>5분 전</CommentTime>
-        </CommentUserInfoDiv>
-        <CommentP>너 정말 앙큼한 고양이구나~!</CommentP>
-      </CommentDiv>
+      <CommentUserInfoDiv>
+        <UserImage src={profileImage} alt="프로필 사진" />
+        <UserNameStrong>앙리</UserNameStrong>
+        <CommentTime>5분 전</CommentTime>
+      </CommentUserInfoDiv>
+      <CommentP>너 정말 앙큼한 고양이구나~!</CommentP>
     </CommentLi>
   );
 }
