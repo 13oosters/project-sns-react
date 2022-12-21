@@ -1,4 +1,5 @@
 import styled, { css } from "styled-components";
+import { Link, useNavigate } from "react-router-dom";
 import defaultImage from "../../assets/image/basic-profile-img-post.png";
 import moreImage from "../../assets/image/icon-more-post.png";
 import homeTestImage from "../../assets/image/home-test.png";
@@ -58,6 +59,9 @@ const CardBodyTime = styled.time`
 `
 
 export default function Card() {
+
+  const navigate = useNavigate();
+
   return (
     <li>
       <CardHeaderDiv>
@@ -82,9 +86,9 @@ export default function Card() {
           <CardBodySpan>59</CardBodySpan>
         </li>
         <li>
-          <a href="#;">
-            <CardBodyImage src={commentImage} alt="#" />
-          </a>
+          <Link to={"/account/post"}>
+            <CardBodyImage src={commentImage} />
+          </Link>
           <CardBodySpan style={{transform: "translateY(-5%)"}}>3</CardBodySpan>
         </li>
       </CardBodyUl>
