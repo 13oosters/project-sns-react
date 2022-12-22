@@ -7,12 +7,12 @@ import NavBar from "../components/style/NavBar";
 
 export default function ProfilePage() {
   return (
-    <>
-      <h1 className="sr-only">프로필 페이지</h1>
+    <section>
+      <h1 class="sr-only">프로필 페이지</h1>
       <Header type="profile" />
       <UserBio />
       <Cards />
-      <NavBar type="프로필" />
-    </>
+      <NavBar />
+    </section>
   );
 }
