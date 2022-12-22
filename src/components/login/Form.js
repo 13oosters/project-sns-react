@@ -42,7 +42,7 @@ export default function Form({ title, buttonText, userData, setUserData }) {
     if (title === "로그인") {
       validate(userData, "signin", "/user/login").then((res) => {
         console.log(res);
-        localStorage.setItem("token", res.refreshToken);
+        localStorage.setItem("token", res.token);
       });
     } else if (title === "이메일로 회원가입") {
       validate(userData, "email", "/user/emailvalid").then((res) => {
