@@ -5,6 +5,7 @@ import profileImage from "../../assets/image/basic-profile-img-post.png";
 import ModalButtonImage from "../../assets/image/icon-more-post.png";
 import heartImage from "../../assets/image/icon-heart.png";
 import commentsImage from "../../assets/image/icon-Comments.png";
+import PostMainImage from "../../assets/image/image-post임시.png";
 
 const CardTopDiv = styled.div`
   display: flex;
@@ -25,10 +26,10 @@ const UserNameDiv = styled.div`
 const UserNameStrong = styled.strong`
   font-weight: ${(props) => props.theme.mediumFontWeight};
   font-size: ${(props) => props.theme.baseFontSize};
-  margin-bottom: 0.2rem;
 `;
 const UserIdP = styled.p`
   display: block;
+  margin-top: 0.4rem;
   &::before {
     content: "@";
   }
@@ -43,6 +44,7 @@ const PostImage = styled.img`
 
 const ButtonUl = styled.ul`
   display: flex;
+  margin-top: 1rem;
   padding: 0 2.4rem;
   gap: 2rem;
 `;
@@ -72,7 +74,7 @@ const PostTime = styled.time`
   font-size: ${(props) => props.theme.xSmallFontSize};
 `;
 
-export default function Card() {
+export default function Card({ setIsModal }) {
   return (
     <li style={{ listStyle: "none" }}>
       <CardTopDiv>
@@ -84,11 +86,16 @@ export default function Card() {
           </UserNameDiv>
         </UserInfoDiv>
         {/* 자신의 프로필일 때만 */}
-        <button type="button">
+        <button
+          type="button"
+          onClick={() => {
+            setIsModal((prev) => !prev);
+          }}
+        >
           <img src={ModalButtonImage} alt="수정,삭제 모달창 버튼" />
         </button>
       </CardTopDiv>
-      <PostImage src="#" alt="#" />
+      <PostImage src={PostMainImage} alt="게시글 이미지" />
       <ButtonUl>
         <Buttonli>
           <button type="button" style={{ padding: 0, height: "2rem" }}>
