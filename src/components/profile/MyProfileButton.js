@@ -1,16 +1,14 @@
 import styled from "styled-components";
-import Button from "../Button";
+import Button from "../style/Button";
 
 const MyProfileButton = styled(Button)`
-  margin: 2.5rem 0rem;
   background-color: #ffffff;
   align-items: center;
-  /* justify-content: center; */
   width: 12rem;
   height: 3.4rem;
-  /* line-height: 1.8rem; */
+  padding: 0;
   border: 1px solid ${(props) => props.theme.lightColor};
-  /* box-sizing: border-box; */
+  color: ${(props) => props.theme.darkLightColor};
 `;
 
 export default MyProfileButton;
