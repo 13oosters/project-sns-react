@@ -8,7 +8,6 @@ const WriteSection = styled.section`
   justify-content: left;
   align-items: center;
   border-top: 1px solid ${(props) => props.theme.lightColor};
-  padding: 1.3rem 0;
 `;
 
 const UserImage = styled.img`
@@ -17,13 +16,14 @@ const UserImage = styled.img`
 `;
 const WritingForm = styled.form`
   display: inherit;
+  flex-wrap: nowrap;
   justify-content: space-between;
   width: 100%;
   margin-left: 1.8rem;
 `;
 
 const WritingTextarea = styled.textarea`
-  width: 90%;
+  width: 100%;
   overflow: hidden;
   margin: 1rem 0;
   border: 0;
@@ -38,6 +38,7 @@ const WritingTextarea = styled.textarea`
 `;
 
 const UpLoadButton = styled.button`
+  width: 5rem;
   font-weight: ${(props) => props.theme.mediumFontWeight};
   font-size: ${(props) => props.theme.baseFontSize};
   color: #c4c4c4;

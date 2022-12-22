@@ -79,6 +79,7 @@ export default function Card({ setIsModal }) {
     <li style={{ listStyle: "none" }}>
       <CardTopDiv>
         <UserInfoDiv>
+          {/** 이미지 슬라이드 기능 */}
           <img src={profileImage} alt="유저 프로필 사진" />
           <UserNameDiv>
             <UserNameStrong>호박이</UserNameStrong>
