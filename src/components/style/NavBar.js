@@ -34,6 +34,7 @@ const TabMenuLink = styled.a`
   gap: 0.4rem;
   line-height: 1.4;
   color: ${(props) => props.theme.darkLightColor};
+  cursor: pointer;
 `
 const SelectP = styled.p`
   color: ${(props) => props.theme.primaryColor};
