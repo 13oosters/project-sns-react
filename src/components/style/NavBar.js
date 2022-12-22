@@ -42,6 +42,10 @@ const SelectP = styled.p`
 export default function NavBar({ type }) {
   const navigate = useNavigate();
 
+  if (type === "게시물"){
+    return null
+  }
+
   return (
     <NavBarArticle>
       <h3 className="sr-only">탭 메뉴</h3>
