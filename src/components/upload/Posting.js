@@ -1,18 +1,27 @@
 import React from "react";
+import styled from "styled-components";
 
 import ImageUpload from "./ImageUpload";
 import TextUpload from "./TextUpload";
+import Button from "../style/Button";
 
 import PageLayout from "../style/PageLayout";
 
-export default function Posting() {
+const UploadButton = styled(Button)`
+  margin: 2rem 2rem 2rem auto;
+  width: 9rem;
+  font-size: ${(props) => props.theme.baseFontSize};
+  font-weight: ${(props) => props.theme.mediumFontWeight};
+`;
+
+export default function Posting({ userData, setUserData }) {
   return (
-    <PageLayout paddingValue={1.5}>
+    <PageLayout paddingValue={0}>
       <h2 className="sr-only">게시글 작성</h2>
       <form>
-        <ImageUpload />
+        <ImageUpload userData={userData} />
         <TextUpload />
-        <button type="submit">업로드</button>
+        <UploadButton type="submit">업로드</UploadButton>
       </form>
     </PageLayout>
   );
