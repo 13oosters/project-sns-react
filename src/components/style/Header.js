@@ -21,6 +21,7 @@ const HeaderLayout = css`
   border-bottom: 1px solid #dbdbdb;
   height: 4.8rem;
   padding: 0 1.6rem;
+  border-bottom: 1px solid ${(props) => props.theme.lightColor};
 `;
 const HeaderUI = styled.div`
   ${HeaderLayout}

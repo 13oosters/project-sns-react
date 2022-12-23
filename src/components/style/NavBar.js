@@ -7,7 +7,7 @@ import profileImg from "../../assets/image/icon-user.png";
 const TabMenuUl = styled.ul`
   display: flex;
   justify-content: space-between;
-  border-top: 1px solid #dbdbdb;
+  border-top: 1px solid ${(props) => props.theme.lightColor};
   padding: 1.4rem 2.8rem 0.6rem;
 `;
 
@@ -17,7 +17,7 @@ const TabMenuLink = styled.a`
   align-items: center;
   gap: 0.4rem;
   line-height: 1.4;
-  color: #767676;
+  color: ${(props) => props.theme.darkLightColor};
 `;
 
 export default function NavBar() {
