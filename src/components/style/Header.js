@@ -1,5 +1,7 @@
 import React from "react";
 import styled, { css } from "styled-components";
+import { useNavigate } from "react-router";
+
 import backImage from "../../assets/image/icon-arrow-left.png";
 import topLogoImage from "../../assets/image/top-logo-txt.png";
 import moreImage from "../../assets/image/icon-more-profile.png";
@@ -11,10 +13,12 @@ import cancelImage from "../../assets/image/icon-cancel-search.png";
   justify-itesm: items-between;
   padding 전부
  */
+
 const HeaderLayout = css`
   display: flex;
   justify-content: space-between;
   align-items: center;
+  border-bottom: 1px solid #dbdbdb;
   height: 4.8rem;
   padding: 0 1.6rem;
   border-bottom: 1px solid ${(props) => props.theme.lightColor};
@@ -42,6 +46,7 @@ const SearchDiv = styled.div`
 `;
 
 export default function Header({ type }) {
+  const navigate = useNavigate();
   const UI = {
     logo: (
       <HeaderUI>
@@ -54,9 +59,9 @@ export default function Header({ type }) {
       <>
         <h2 className="sr-only">검색창</h2>
         <HeaderUI>
-          <a href="#;">
+          <button onClick={() => navigate(-1)}>
             <img src={backImage} alt="뒤로 가기" />
-          </a>
+          </button>
           <SearchDiv>
             <HeaderInput placeholder="계정 검색" />
             <button type="button">
@@ -68,20 +73,27 @@ export default function Header({ type }) {
     ),
     profile: (
       <HeaderUI>
-        <a href="#;">
+        <button onClick={() => navigate(-1)}>
           <img src={backImage} alt="뒤로 가기" />
-        </a>
+        </button>
         <button type="button">
           <img src={moreImage} alt="" />
+        </button>
+      </HeaderUI>
+    ),
+    post: (
+      <HeaderUI>
+        <button onClick={() => navigate(-1)}>
+          <img src={backImage} alt="뒤로 가기" />
         </button>
       </HeaderUI>
     ),
     followers: (
       <>
         <HeaderUI>
-          <a href="#;">
+          <button onClick={() => navigate(-1)}>
             <img src={backImage} alt="뒤로 가기" />
-          </a>
+          </button>
           <h2 className="sr-only">Followers</h2>
         </HeaderUI>
       </>
