@@ -1,8 +1,10 @@
 import React from "react";
 import styled from "styled-components";
+import { useParams } from "react-router";
 
 import 임시홈 from "../../pages/임시홈";
 import ModalImage from "../../assets/image/icon-modal.png";
+import postData from "../../utils/postData";
 
 const ModalDiv = styled.div`
   display: ${(props) => (!props.isModal ? "none" : "block")};
@@ -24,17 +26,28 @@ const ModalLi = styled.li`
   font-size: ${(props) => props.theme.baseFontSize};
   font-weight: ${(props) => props.theme.normalFontWeight};
   text-align: left;
+  cursor: pointer;
 `;
+// url은 useparams로 불러오기
 
 export default function Modal({ isModal }) {
+  const { id } = useParams();
+
+  const deletePost = () => {
+    postData("deletepost", id, "");
+  };
+  const editPost = () => {
+    postData("editpost", id, "");
+  };
+
   return (
     <section>
       <h2 className="sr-only">게시글 삭제 수정모달창</h2>
       <ModalDiv isModal={isModal}>
         <img src={ModalImage} alt="모달창 아이콘" />
         <ul>
-          <ModalLi>삭제</ModalLi>
-          <ModalLi>수정</ModalLi>
+          <ModalLi onClick={deletePost}>삭제</ModalLi>
+          <ModalLi onClick={editPost}>수정</ModalLi>
         </ul>
       </ModalDiv>
       <임시홈 />
