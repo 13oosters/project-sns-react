@@ -8,12 +8,13 @@ const DialogSection = styled.section`
   padding: 10rem 1.6rem 0;
 `;
 
-export default function Dialog() {
+export default function Dialog({ comments, id }) {
+  console.log(comments);
   return (
     <DialogSection>
       <h3 class="sr-only">댓글 창</h3>
-      <Comments />
-      <Writing />
+      <Comments comments={comments} />
+      <Writing id={id} />
     </DialogSection>
   );
 }

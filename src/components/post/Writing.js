@@ -1,7 +1,8 @@
-import React from "react";
+import React, { useState } from "react";
 import styled from "styled-components";
 
 import profileImage from "../../assets/image/basic-profile-img-post.png";
+import getComment from "../../utils/commentData";
 
 const WriteSection = styled.section`
   display: flex;
@@ -44,14 +45,20 @@ const UpLoadButton = styled.button`
   color: #c4c4c4;
 `;
 
-export default function Writing() {
+export default function Writing({ id }) {
+  const [commentData, setCommentData] = useState("");
+  const comment = () => {
+    getComment("comment", `${id}/comments`, setCommentData);
+    console.log(commentData);
+  };
+
   return (
     <WriteSection>
       <h4 class="sr-only">댓글 입력창</h4>
       <UserImage src={profileImage} alt="사용자 프로필 사진" />
       <WritingForm method="post">
         <WritingTextarea required placeholder="댓글 입력하기.." />
-        <UpLoadButton type="submit">게시</UpLoadButton>
+        <UpLoadButton onClick={comment}>게시</UpLoadButton>
       </WritingForm>
     </WriteSection>
   );

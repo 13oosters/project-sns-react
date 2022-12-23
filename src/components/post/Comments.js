@@ -8,14 +8,21 @@ const CommentsSection = styled.section`
   border-top: 1px solid ${(props) => props.theme.lightColor};
 `;
 
-export default function Comments() {
+export default function Comments({ comments }) {
   return (
-    <CommentsSection>
-      <h4 class="sr-only">댓글 목록</h4>
-      <ol reversed>
-        <Comment />
-        <Comment />
-      </ol>
-    </CommentsSection>
+    <>
+      {comments ? (
+        <CommentsSection>
+          <h4 class="sr-only">댓글 목록</h4>
+          <ol reversed>
+            {comments.map((comment) => (
+              <Comment key={comment.updatedAt} comment={comment} />
+            ))}
+          </ol>
+        </CommentsSection>
+      ) : (
+        <></>
+      )}
+    </>
   );
 }

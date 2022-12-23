@@ -1,8 +1,6 @@
 import React from "react";
 import styled from "styled-components";
 
-import profileImage from "../../assets/image/basic-profile-img-post.png";
-
 const CommentLi = styled.li`
   margin-bottom: 2.2rem;
   display: flex;
@@ -37,23 +35,32 @@ const CommentP = styled.p`
   font-size: ${(props) => props.theme.baseFontSize};
 `;
 
-export default function Comment() {
+export default function Comment({ comment }) {
   return (
     <CommentLi>
       <CommentUserInfoDiv>
-        <UserImage src={profileImage} alt="프로필 사진" />
-        <UserNameStrong>앙리</UserNameStrong>
+        <UserImage src={comment.author.image} alt="프로필 사진" />
+        <UserNameStrong>{comment.author.username}</UserNameStrong>
         <CommentTime>5분 전</CommentTime>
       </CommentUserInfoDiv>
-      <CommentP>
-        너 정말 앙큼한 고양이구나~!너 정말 앙큼한 고양이구나~!너 정말 앙큼한
-        고양이구나~!너 정말 앙큼한 고양이구나~!너 정말 앙큼한 고양이구나~!너
-        정말 앙큼한 고양이구나~!너 정말 앙큼한 고양이구나~!너 정말 앙큼한
-        고양이구나~!너 정말 앙큼한 고양이구나~!너 정말 앙큼한 고양이구나~!너
-        정말 앙큼한 고양이구나~!너 정말 앙큼한 고양이구나~!너 정말 앙큼한
-        고양이구나~!너 정말 앙큼한 고양이구나~!너 정말 앙큼한 고양이구나~!너
-        정말 앙큼한 고양이구나~!
-      </CommentP>
+      <CommentP>{comment.content}</CommentP>
     </CommentLi>
   );
 }
+
+/* <CommentLi>
+<CommentUserInfoDiv>
+  <UserImage src={profileImage} alt="프로필 사진" />
+  <UserNameStrong>앙리</UserNameStrong>
+  <CommentTime>5분 전</CommentTime>
+</CommentUserInfoDiv>
+<CommentP>
+  너 정말 앙큼한 고양이구나~!너 정말 앙큼한 고양이구나~!너 정말 앙큼한
+  고양이구나~!너 정말 앙큼한 고양이구나~!너 정말 앙큼한 고양이구나~!너
+  정말 앙큼한 고양이구나~!너 정말 앙큼한 고양이구나~!너 정말 앙큼한
+  고양이구나~!너 정말 앙큼한 고양이구나~!너 정말 앙큼한 고양이구나~!너
+  정말 앙큼한 고양이구나~!너 정말 앙큼한 고양이구나~!너 정말 앙큼한
+  고양이구나~!너 정말 앙큼한 고양이구나~!너 정말 앙큼한 고양이구나~!너
+  정말 앙큼한 고양이구나~!
+</CommentP>
+</CommentLi> */
