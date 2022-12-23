@@ -1,17 +1,16 @@
 import React from "react";
 import Card from "./Card";
 
-export default function Cards({feed}) {
+export default function Cards({ feed }) {
+  const { posts } = { ...feed };
 
+  // console.log(posts);
 
   return (
     <section>
       <h3 className="sr-only">게시글</h3>
       <ol reversed>
-        <Card feed={feed}/>
-        {/* <Card />
-        <Card />
-        <Card /> */}
+        {posts ? posts.map((post) => <Card post={post} />) : <></>}
       </ol>
     </section>
   );
