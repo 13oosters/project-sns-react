@@ -65,13 +65,13 @@ export default function NavBar({ type }) {
             </TabMenuLink>
           </li>
           <li>
-            <TabMenuLink onClick={()=>{navigate("/account/post")}}>
+            <TabMenuLink onClick={()=>{navigate("/upload")}}>
               {type === "게시물" ? <img src={postImage} alt="게시물 작성으로 이동" /> : <img src={postImage} alt="게시물 작성으로 이동" />}
               <p>게시물 작성</p>
             </TabMenuLink>
           </li>
           <li>
-            <TabMenuLink onClick={()=>{navigate("/account/settings")}}>
+            <TabMenuLink onClick={()=>{navigate("/account")}}>
               {type === "프로필" ? <img src={profileSelectImage} alt="프로필로 이동" /> : <img src={profileImage} alt="프로필로 이동" />}
               {type === "프로필" ? <SelectP>프로필</SelectP> : <p>프로필</p>}
             </TabMenuLink>

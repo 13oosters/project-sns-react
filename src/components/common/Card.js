@@ -74,12 +74,14 @@ export default function Card({ setIsModal, post }) {
     ...post,
   };
 
+  const navigate = useNavigate();
+
   return (
     <>
     { post ?
     (
       <li>
-      <CardHeaderDiv>
+      <CardHeaderDiv onClick={()=> navigate("/account")}>
         <CardHeaderImage src={author.image} />
         <div>
           <div>
