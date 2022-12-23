@@ -2,7 +2,6 @@ import React from "react";
 import styled from "styled-components";
 import { useParams } from "react-router";
 
-import 임시홈 from "../../pages/임시홈";
 import ModalImage from "../../assets/image/icon-modal.png";
 import postData from "../../utils/postData";
 
@@ -50,7 +49,6 @@ export default function Modal({ isModal }) {
           <ModalLi onClick={editPost}>수정</ModalLi>
         </ul>
       </ModalDiv>
-      <임시홈 />
     </section>
   );
 }
