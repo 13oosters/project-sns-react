@@ -8,11 +8,19 @@ import moreImage from "../../assets/image/icon-more-profile.png";
 import cancelImage from "../../assets/image/icon-cancel-search.png";
 
 /**
- * 최상위부모요소:
-  display:Flex;
-  justify-itesm: items-between;
-  padding 전부
+ * 최상위 부모요소:
+ * display: flex;
+ * justify-items: items-between;
+ * padding 전부
  */
+
+const HeaderWrap = styled.header`
+  position: fixed;
+  top: 0;
+  z-index: 1;
+  width: 100%;
+  background-color: #ffffff;
+`;
 
 const HeaderLayout = css`
   display: flex;
@@ -26,6 +34,7 @@ const HeaderLayout = css`
 const HeaderUI = styled.div`
   ${HeaderLayout}
 `;
+
 const HeaderInput = styled.input`
   display: block;
   height: 100%;
@@ -33,6 +42,7 @@ const HeaderInput = styled.input`
   padding: 0.7rem 4.3rem 0.7rem 1.6rem;
   border-radius: 3.2rem;
 `;
+
 const SearchDiv = styled.div`
   position: relative;
   height: 100%;
@@ -50,9 +60,7 @@ export default function Header({ type }) {
   const UI = {
     logo: (
       <HeaderUI>
-        <h1>
-          <img src={topLogoImage} alt="멍하냥" />
-        </h1>
+        <img src={topLogoImage} alt="멍하냥" />
       </HeaderUI>
     ),
     search: (
@@ -65,7 +73,7 @@ export default function Header({ type }) {
           <SearchDiv>
             <HeaderInput placeholder="계정 검색" />
             <button type="button">
-              <img src={cancelImage} alt="취소버튼" />
+              <img src={cancelImage} alt="취소 버튼" />
             </button>
           </SearchDiv>
         </HeaderUI>
@@ -77,7 +85,7 @@ export default function Header({ type }) {
           <img src={backImage} alt="뒤로 가기" />
         </button>
         <button type="button">
-          <img src={moreImage} alt="" />
+          <img src={moreImage} alt="더보기" />
         </button>
       </HeaderUI>
     ),
@@ -100,5 +108,5 @@ export default function Header({ type }) {
     ),
   };
 
-  return <header>{UI[type]}</header>;
+  return <HeaderWrap>{UI[type]}</HeaderWrap>;
 }

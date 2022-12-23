@@ -1,8 +1,9 @@
 import React, { useEffect, useState } from "react";
 import { useParams } from "react-router";
+
+import Modal from "../components/common/Modal";
 import Header from "../components/style/Header";
 import Detail from "../components/post/Detail";
-import Modal from "../components/common/Modal";
 import postData from "../utils/postData";
 
 /* 처음페이지 들어왔을때 한번만 실행 */

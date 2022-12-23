@@ -13,6 +13,7 @@ const getPost = async (type, url, setPostData) => {
   let responseComent = null;
 
   console.log(url);
+
   try {
     if (type === "detailPost") {
       const response = await API.get(`/post/${url}`, {
@@ -43,6 +44,13 @@ const getPost = async (type, url, setPostData) => {
 
       responseData = await response.data;
       console.log(responseData);
+
+      responseData = await response.data;
+    }
+    if (type === "editpost") {
+      const response = await API.get("/post");
+
+      responseData = await response.data;
     }
     if (type === "deletepost") {
       const response = await API.delete(`/post/${url}`, {
@@ -55,6 +63,7 @@ const getPost = async (type, url, setPostData) => {
       // navigate("/");
       responseData = await response.data;
       console.log(responseData);
+      responseData = await response.data;
     }
   } catch (e) {
     throw new Error(e);

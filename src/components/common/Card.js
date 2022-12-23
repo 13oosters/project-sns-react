@@ -1,129 +1,140 @@
-import React from "react";
-import styled from "styled-components";
-
-import profileImage from "../../assets/image/basic-profile-img-post.png";
-import ModalButtonImage from "../../assets/image/icon-more-post.png";
+import { useEffect, useState } from "react";
+import styled, { css } from "styled-components";
+import { Link, useNavigate } from "react-router-dom";
+import defaultImage from "../../assets/image/basic-profile-img-post.png";
+import moreImage from "../../assets/image/icon-more-post.png";
+import homeTestImage from "../../assets/image/home-test.png";
 import heartImage from "../../assets/image/icon-heart.png";
-import commentsImage from "../../assets/image/icon-Comments.png";
-import PostMainImage from "../../assets/image/image-post임시.png";
+import heartClickImage from "../../assets/image/icon-heart-fill.png";
+import commentImage from "../../assets/image/icon-comment.png";
+import API from "../../utils/api";
 
-const CardTopDiv = styled.div`
-  display: flex;
-  justify-content: space-between;
-  padding: 1.5rem;
+const smallFont = css`
+  font-size: ${(props) => props.theme.smallFontSize};
+  color: ${(props) => props.theme.darkLightColor};
 `;
-const UserInfoDiv = styled.div`
+
+const CardHeaderDiv = styled.div`
   display: flex;
-  justify-content: space-between;
-`;
-const UserNameDiv = styled.div`
-  display: flex;
-  flex-direction: column;
   align-items: center;
-  justify-content: center;
-  margin-left: 3rem;
+  padding: 1.5rem;
+  gap: 1.5rem;
 `;
-const UserNameStrong = styled.strong`
-  font-weight: ${(props) => props.theme.mediumFontWeight};
-  font-size: ${(props) => props.theme.baseFontSize};
-`;
-const UserIdP = styled.p`
-  display: block;
-  margin-top: 0.4rem;
-  &::before {
-    content: "@";
-  }
-`;
-const UserImg = styled.img`
+
+const CardHeaderImage = styled.img`
   width: 4.2rem;
   height: 4.2rem;
   border-radius: 50%;
 `;
-const PostImage = styled.img`
-  width: 100%;
-  height: 23rem;
-`;
 
-const ButtonUl = styled.ul`
-  display: flex;
-  margin-top: 1rem;
-  padding: 0 2.4rem;
-  gap: 2rem;
-`;
-const Buttonli = styled.li`
-  display: inherit;
-  justify-content: center;
-  align-items: center;
-  gap: 1rem;
-`;
-
-const NumberSpan = styled.span`
-  font-size: ${(props) => props.theme.smallFontSize};
-  color: ${(props) => props.theme.darkLightColor};
-`;
-const PostCommentP = styled.p`
-  text-align: left;
-  margin-top: 0.8rem;
-  padding: 0 2.4rem;
-  font-weight: ${(props) => props.theme.mediumFontWeight};
+const CardHeaderStrong = styled.strong`
   font-size: ${(props) => props.theme.baseFontSize};
+  font-weight: 500;
 `;
-
-const PostTime = styled.time`
-  display: block;
-  margin-top: 1rem;
-  padding: 0 2.4rem;
-  font-size: ${(props) => props.theme.xSmallFontSize};
+const CardHeaderP = styled.p`
+  ${smallFont}
+  margin-top: 0.2rem;
+  &::before {
+    content: "@ ";
+  }
+`;
+const CardHeaderButton = styled.button`
+  margin-left: auto;
+  padding: 0;
+`;
+const CardBodyUl = styled.ul`
+  display: flex;
+  align-items: center;
+  gap: 2rem;
+  padding: 0.8rem;
+`;
+const CardBodySpan = styled.span`
+  ${smallFont}
+  vertical-align: middle;
+  margin-left: 0.9rem;
+`;
+const CardBodyImage = styled.img`
+  vertical-align: middle;
+`;
+const CardBodyP = styled.p`
+  font-size: ${(props) => props.theme.baseFontSize};
+  padding: 0 1.3rem;
+`;
+const CardBodyTime = styled.time`
+  ${smallFont};
+  display: flex;
+  gap: 0.5rem;
+  padding: 1.3rem;
 `;
 
 export default function Card({ setIsModal, post }) {
-  // user정보만 존재하는 객체
-  const { author, content, image, heartCount, comments, updatedAt, message } = {
+  // console.log(feed);
+
+  const {
+    author,
+    content,
+    image,
+    hearted,
+    heartCount,
+    commentCount,
+    createdAt,
+  } = {
     ...post,
   };
 
   return (
     <>
-      <li style={{ listStyle: "none" }}>
-        <CardTopDiv>
-          <UserInfoDiv>
-            {/** 이미지 슬라이드 기능 */}
-            <UserImg src={author.image} alt="유저 프로필 사진" />
-            <UserNameDiv>
-              <UserNameStrong>{author.username}</UserNameStrong>
-              <UserIdP>hobak2</UserIdP>
-            </UserNameDiv>
-          </UserInfoDiv>
-          {/* 자신의 프로필일 때만 */}
-          <button
-            type="button"
-            onClick={() => {
-              setIsModal((prev) => !prev);
-            }}
-          >
-            <img src={ModalButtonImage} alt="수정,삭제 모달창 버튼" />
-          </button>
-        </CardTopDiv>
-        <PostImage src={image} alt="게시글 이미지" />
-        <ButtonUl>
-          <Buttonli>
-            <button type="button" style={{ padding: 0, height: "2rem" }}>
-              <img src={heartImage} alt="게시글 좋아요 버튼" />
-            </button>
-            <NumberSpan>{heartCount}</NumberSpan>
-          </Buttonli>
-          <Buttonli>
-            <a href="#;">
-              <img src={commentsImage} alt="게시글 댓글 버튼" />
-            </a>
-            <NumberSpan>{comments.length}</NumberSpan>
-          </Buttonli>
-        </ButtonUl>
-        <PostCommentP>{content}</PostCommentP>
-        <PostTime datetime="2022-12-05">
-          <span>{updatedAt.split("T", 1)}</span>
-        </PostTime>
-      </li>
+      {post ? (
+        <li>
+          <CardHeaderDiv>
+            <CardHeaderImage src={author.image} />
+            <div>
+              <div>
+                <CardHeaderStrong>{author.username}</CardHeaderStrong>
+                <CardHeaderP>{author.accountname}</CardHeaderP>
+              </div>
+            </div>
+            {/* 자신의 게시글일 때만 */}
+            <CardHeaderButton
+              type="button"
+              onClick={() => {
+                setIsModal((prev) => !prev);
+              }}
+            >
+              <img src={moreImage} alt="설정" />
+            </CardHeaderButton>
+          </CardHeaderDiv>
+          <img src={image} alt="#" style={{ width: "100%", height: "23rem" }} />
+          <CardBodyUl>
+            <li>
+              <button type="button">
+                {hearted ? (
+                  <CardBodyImage src={heartClickImage} />
+                ) : (
+                  <CardBodyImage src={heartImage} />
+                )}
+              </button>
+              <CardBodySpan>{heartCount}</CardBodySpan>
+            </li>
+            <li>
+              <Link to={`/post/${author._id}`}>
+                <CardBodyImage src={commentImage} />
+              </Link>
+              <CardBodySpan style={{ transform: "translateY(-5%)" }}>
+                {commentCount}
+              </CardBodySpan>
+            </li>
+          </CardBodyUl>
+          <CardBodyP>{content}</CardBodyP>
+          <CardBodyTime dateTime={createdAt}>
+            <span>{createdAt.slice(0, 4)}년</span>
+            <span>{createdAt.slice(5, 7)}월</span>
+            <span>{createdAt.slice(8, 10)}일</span>
+          </CardBodyTime>
+        </li>
+      ) : (
+        <></>
+      )}
     </>
   );
 }
