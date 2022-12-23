@@ -66,73 +66,68 @@ const CardBodyTime = styled.time`
   padding: 1.3rem;
 `;
 
-export default function Card({ feed }) {
+export default function Card({ setIsModal, post }) {
   // console.log(feed);
 
-  const { posts } = { ...feed };
-
-  console.log(posts);
-
-  // 좋아요 기능 임시
-
-  const toggleLike = () => {
-    
+  const { author, content, image, hearted, heartCount, commentCount, createdAt } = {
+    ...post,
   };
 
   return (
     <>
-      {posts ? (
-        posts.map((item, index) => (
-          <li key={index}>
-            <CardHeaderDiv>
-              <CardHeaderImage src={item.author.image} />
-              <div>
-                <div>
-                  <CardHeaderStrong>{item.author.username}</CardHeaderStrong>
-                  <CardHeaderP>{item.author.accountname}</CardHeaderP>
-                </div>
-              </div>
-              {/* 자신의 게시글일 때만 */}
-              <CardHeaderButton type="button">
-                <img src={moreImage} alt="설정" />
-              </CardHeaderButton>
-            </CardHeaderDiv>
-            <img
-              src={item.image}
-              alt="#"
-              style={{ width: "100%", height: "23rem" }}
-            />
-            <CardBodyUl>
-              <li>
-                <button type="button" onClick={toggleLike}>
-                  {item.hearted ? (
-                    <CardBodyImage src={heartClickImage} />
-                  ) : (
-                    <CardBodyImage src={heartImage} />
-                  )}
-                </button>
-                <CardBodySpan>{item.heartCount}</CardBodySpan>
-              </li>
-              <li>
-                <Link to={`/post/${item.author._id}`}>
-                  <CardBodyImage src={commentImage} />
-                </Link>
-                <CardBodySpan style={{ transform: "translateY(-5%)" }}>
-                  {item.commentCount}
-                </CardBodySpan>
-              </li>
-            </CardBodyUl>
-            <CardBodyP>{item.content}</CardBodyP>
-            <CardBodyTime dateTime={item.createdAt}>
-              <span>{item.createdAt.slice(0,4)}년</span>
-              <span>{item.createdAt.slice(5,7)}월</span>
-              <span>{item.createdAt.slice(8,10)}일</span>
-            </CardBodyTime>
-          </li>
-        ))
-      ) : (
-        <></>
-      )}
-      </>
+    { post ?
+    (
+      <li>
+      <CardHeaderDiv>
+        <CardHeaderImage src={author.image} />
+        <div>
+          <div>
+            <CardHeaderStrong>{author.username}</CardHeaderStrong>
+            <CardHeaderP>{author.accountname}</CardHeaderP>
+          </div>
+        </div>
+        {/* 자신의 게시글일 때만 */}
+        <CardHeaderButton type="button" onClick={() => {
+                setIsModal((prev) => !prev);
+              }}>
+          <img src={moreImage} alt="설정" />
+        </CardHeaderButton>
+      </CardHeaderDiv>
+      <img
+        src={image}
+        alt="#"
+        style={{ width: "100%", height: "23rem" }}
+      />
+      <CardBodyUl>
+        <li>
+          <button type="button">
+            {hearted ? (
+              <CardBodyImage src={heartClickImage} />
+            ) : (
+              <CardBodyImage src={heartImage} />
+            )}
+          </button>
+          <CardBodySpan>{heartCount}</CardBodySpan>
+        </li>
+        <li>
+          <Link to={`/post/${author._id}`}>
+            <CardBodyImage src={commentImage} />
+          </Link>
+          <CardBodySpan style={{ transform: "translateY(-5%)" }}>
+            {commentCount}
+          </CardBodySpan>
+        </li>
+      </CardBodyUl>
+      <CardBodyP>{content}</CardBodyP>
+      <CardBodyTime dateTime={createdAt}>
+        <span>{createdAt.slice(0, 4)}년</span>
+        <span>{createdAt.slice(5, 7)}월</span>
+        <span>{createdAt.slice(8, 10)}일</span>
+      </CardBodyTime>
+    </li>
+    ) : 
+    (<></>)
+    }
+    </>
   );
 }

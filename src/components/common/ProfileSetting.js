@@ -44,7 +44,7 @@ const ContentP = styled.p`
   color: ${(props) => props.theme.darkLightColor};
 `;
 
-const UploadImg = styled.img`
+const UploadImage = styled.img`
   width: 11rem;
   height: 11rem;
   border-radius: 50%;
@@ -139,7 +139,7 @@ export default function ProfileSetting({ title, userData, setUserData }) {
           onChange={uploadImage}
         />
         <UploadImageDiv>
-          <UploadImg
+          <UploadImage
             src={userData.image}
             alt="프로필 사진"
             style={{ objecFit: "cover" }}

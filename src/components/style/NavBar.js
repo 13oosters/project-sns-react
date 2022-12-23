@@ -24,7 +24,7 @@ const TabMenuUl = styled.ul`
   align-items: center;
   height: 6rem;
   width: 100%;
-  border-top: 1px solid #dbdbdb;
+  border-top: 1px solid ${(props) => props.theme.lightColor};
 `
 
 const TabMenuLink = styled.a`

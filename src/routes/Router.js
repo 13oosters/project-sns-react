@@ -42,8 +42,8 @@ function Router() {
       <Route path="/account" element={<ProfilePage></ProfilePage>}>
         <Route path="followers" element={<div>하이</div>} />
         <Route path="settings" element={<div>하이</div>} />
-        <Route path="post" element={<div>하이</div>} />
-        <Route path=":id" element={<div>하이</div>} />
+        {/**  <Route path="post" element={<div>하이</div>} />*/}
+        <Route path="post/:id" element={<ProfilePage>하이</ProfilePage>} />
       </Route>
       <Route path="*" element={<ErrorPage></ErrorPage>} />
     </Routes>

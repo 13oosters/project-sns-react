@@ -1,5 +1,7 @@
 import React from "react";
 import styled, { css } from "styled-components";
+import { useNavigate } from "react-router";
+
 import backImage from "../../assets/image/icon-arrow-left.png";
 import topLogoImage from "../../assets/image/top-logo-txt.png";
 import moreImage from "../../assets/image/icon-more-profile.png";
@@ -26,9 +28,8 @@ const HeaderLayout = css`
   align-items: center;
   height: 4.8rem;
   padding: 0 1.6rem;
-  border-bottom: 0.5px solid ${(props) => props.theme.lightColor};
-`
-
+  border-bottom: 1px solid ${(props) => props.theme.lightColor};
+`;
 const HeaderUI = styled.div`
   ${HeaderLayout}
 `
@@ -54,6 +55,7 @@ const SearchDiv = styled.div`
 `
 
 export default function Header({ type }) {
+  const navigate = useNavigate();
   const UI = {
     logo: (
       <HeaderUI>
@@ -64,9 +66,9 @@ export default function Header({ type }) {
       <>
         <h2 className="sr-only">검색창</h2>
         <HeaderUI>
-          <a href="#;">
+          <button onClick={() => navigate(-1)}>
             <img src={backImage} alt="뒤로 가기" />
-          </a>
+          </button>
           <SearchDiv>
             <HeaderInput placeholder="계정 검색" />
             <button type="button">
@@ -78,21 +80,28 @@ export default function Header({ type }) {
     ),
     profile: (
       <HeaderUI>
-        <a href="#;">
+        <button onClick={() => navigate(-1)}>
           <img src={backImage} alt="뒤로 가기" />
-        </a>
+        </button>
         <button type="button">
           <img src={moreImage} alt="더보기" />
+        </button>
+      </HeaderUI>
+    ),
+    post: (
+      <HeaderUI>
+        <button onClick={() => navigate(-1)}>
+          <img src={backImage} alt="뒤로 가기" />
         </button>
       </HeaderUI>
     ),
     followers: (
       <>
         <HeaderUI>
-          <a href="#;">
+          <button onClick={() => navigate(-1)}>
             <img src={backImage} alt="뒤로 가기" />
-          </a>
-          <h2>Followers</h2>
+          </button>
+          <h2 className="sr-only">Followers</h2>
         </HeaderUI>
       </>
     ),

@@ -22,6 +22,16 @@ const GlobalStyles = createGlobalStyle`
   ${reset}
   @import url('//spoqa.github.io/spoqa-han-sans/css/SpoqaHanSans-kr.css');
   html{
+    width:100%;
+    height:100%;
+    overflow-y:scroll;
+    &::-webkit-scrollbar {
+    width: 0.5rem;
+  };
+  &::-webkit-scrollbar-thumb {
+    background-color: #DBDBDB;
+    border-radius: 10px;
+  };
     font-size: 62.5%;
   }
   *{
