@@ -1,5 +1,6 @@
 import React from "react";
-import Card from "./Card";
+
+import Card from "../common/Card";
 
 export default function Cards({ feed }) {
   const { posts } = { ...feed };

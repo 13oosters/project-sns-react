@@ -83,7 +83,7 @@ export default function NavBar({ type }) {
           <li>
             <TabMenuLink
               onClick={() => {
-                navigate("/account/post");
+                navigate("/upload");
               }}
             >
               {type === "게시물" ? (
@@ -97,7 +97,7 @@ export default function NavBar({ type }) {
           <li>
             <TabMenuLink
               onClick={() => {
-                navigate("/account/settings");
+                navigate("/account");
               }}
             >
               {type === "프로필" ? (
