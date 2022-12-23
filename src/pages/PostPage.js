@@ -17,6 +17,8 @@ export default function PostPage() {
   const [postStoreData, setStorePostData] = useState("");
   const [Loading, IsLoading] = useState(false);
 
+  console.log(id);
+
   useEffect(() => {
     postData("detailPost", id, setStorePostData);
     IsLoading(true);
@@ -24,17 +26,23 @@ export default function PostPage() {
 
   return (
     <>
-      {Loading ? (
+      {postStoreData ? (
         <>
           <div>
             <h1 className="sr-only">게시글 상세보기</h1>
             <Header type="post" />
-            <Detail setIsModal={setIsModal} postStoreData={postStoreData} />
+            <Detail
+              setIsModal={setIsModal}
+              postStoreData={postStoreData}
+              id={id}
+            />
           </div>
           <Modal isModal={isModal} />
         </>
       ) : (
-        <></>
+        <>
+          <div>{postStoreData.message}</div>
+        </>
       )}
     </>
   );
