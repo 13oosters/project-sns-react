@@ -34,12 +34,13 @@ const UserIdP = styled.p`
     content: "@";
   }
 `;
-
+const UserImg = styled.img`
+  width: 4.2rem;
+  height: 4.2rem;
+`;
 const PostImage = styled.img`
   width: 100%;
   height: 23rem;
-  // 임시 border
-  border: 1px solid black;
 `;
 
 const ButtonUl = styled.ul`
@@ -74,70 +75,62 @@ const PostTime = styled.time`
   font-size: ${(props) => props.theme.xSmallFontSize};
 `;
 
-export default function Card({ setIsModal }) {
+export default function Card({ setIsModal, post }) {
+  // user정보만 존재하는 객체
+  const { author, content, image, heartCount, comments, updatedAt } = {
+    ...post,
+  };
+
+  console.log(content);
+  console.log(post);
+  console.log(author);
+
   return (
-    <li style={{ listStyle: "none" }}>
-      <CardTopDiv>
-        <UserInfoDiv>
-          {/** 이미지 슬라이드 기능 */}
-          <img src={profileImage} alt="유저 프로필 사진" />
-          <UserNameDiv>
-            <UserNameStrong>호박이</UserNameStrong>
-            <UserIdP>hobak2</UserIdP>
-          </UserNameDiv>
-        </UserInfoDiv>
-        {/* 자신의 프로필일 때만 */}
-        <button
-          type="button"
-          onClick={() => {
-            setIsModal((prev) => !prev);
-          }}
-        >
-          <img src={ModalButtonImage} alt="수정,삭제 모달창 버튼" />
-        </button>
-      </CardTopDiv>
-      <PostImage src={PostMainImage} alt="게시글 이미지" />
-      <ButtonUl>
-        <Buttonli>
-          <button type="button" style={{ padding: 0, height: "2rem" }}>
-            <img src={heartImage} alt="게시글 좋아요 버튼" />
-          </button>
-          <NumberSpan>59</NumberSpan>
-        </Buttonli>
-        <Buttonli>
-          <a href="#;">
-            <img src={commentsImage} alt="게시글 댓글 버튼" />
-          </a>
-          <NumberSpan>3</NumberSpan>
-        </Buttonli>
-      </ButtonUl>
-      <PostCommentP>
-        집사의 코딩을 방해하는 나, 제법 귀여울지도? 집사의 코딩을 방해하는 나,
-        제법 귀여울지도? 집사의 코딩을 방해하는 나, 제법 귀여울지도? 집사의
-        코딩을 방해하는 나, 제법 귀여울지도? 집사의 코딩을 방해하는 나, 제법
-        귀여울지도? 집사의 코딩을 방해하는 나, 제법 귀여울지도? 집사의 코딩을
-        방해하는 나, 제법 귀여울지도? 집사의 코딩을 방해하는 나, 제법
-        귀여울지도? 집사의 코딩을 방해하는 나, 제법 귀여울지도? 집사의 코딩을
-        방해하는 나, 제법 귀여울지도? 집사의 코딩을 방해하는 나, 제법
-        귀여울지도? 집사의 코딩을 방해하는 나, 제법 귀여울지도? 집사의 코딩을
-        방해하는 나, 제법 귀여울지도? 집사의 코딩을 방해하는 나, 제법
-        귀여울지도? 집사의 코딩을 방해하는 나, 제법 귀여울지도? 집사의 코딩을
-        방해하는 나, 제법 귀여울지도? 집사의 코딩을 방해하는 나, 제법
-        귀여울지도? 집사의 코딩을 방해하는 나, 제법 귀여울지도? 집사의 코딩을
-        방해하는 나, 제법 귀여울지도? 집사의 코딩을 방해하는 나, 제법
-        귀여울지도? 집사의 코딩을 방해하는 나, 제법 귀여울지도? 집사의 코딩을
-        방해하는 나, 제법 귀여울지도? 집사의 코딩을 방해하는 나, 제법
-        귀여울지도? 집사의 코딩을 방해하는 나, 제법 귀여울지도? 집사의 코딩을
-        방해하는 나, 제법 귀여울지도? 집사의 코딩을 방해하는 나, 제법
-        귀여울지도? 집사의 코딩을 방해하는 나, 제법 귀여울지도? 집사의 코딩을
-        방해하는 나, 제법 귀여울지도? 집사의 코딩을 방해하는 나, 제법
-        귀여울지도? 집사의 코딩을 방해하는 나, 제법 귀여울지도? 집사의 코딩을
-        방해하는 나, 제법 귀여울지도? 집사의 코딩을 방해하는 나, 제법
-        귀여울지도?
-      </PostCommentP>
-      <PostTime datetime="2022-12-05">
-        <span>2022년</span> <span>12월</span> <span>5일</span>
-      </PostTime>
-    </li>
+    <>
+      {author ? (
+        <li style={{ listStyle: "none" }}>
+          <CardTopDiv>
+            <UserInfoDiv>
+              {/** 이미지 슬라이드 기능 */}
+              <UserImg src={author.image} alt="유저 프로필 사진" />
+              <UserNameDiv>
+                <UserNameStrong>{author.username}</UserNameStrong>
+                <UserIdP>hobak2</UserIdP>
+              </UserNameDiv>
+            </UserInfoDiv>
+            {/* 자신의 프로필일 때만 */}
+            <button
+              type="button"
+              onClick={() => {
+                setIsModal((prev) => !prev);
+              }}
+            >
+              <img src={ModalButtonImage} alt="수정,삭제 모달창 버튼" />
+            </button>
+          </CardTopDiv>
+          <PostImage src={image} alt="게시글 이미지" />
+          <ButtonUl>
+            <Buttonli>
+              <button type="button" style={{ padding: 0, height: "2rem" }}>
+                <img src={heartImage} alt="게시글 좋아요 버튼" />
+              </button>
+              <NumberSpan>{heartCount}</NumberSpan>
+            </Buttonli>
+            <Buttonli>
+              <a href="#;">
+                <img src={commentsImage} alt="게시글 댓글 버튼" />
+              </a>
+              <NumberSpan>{comments.length}</NumberSpan>
+            </Buttonli>
+          </ButtonUl>
+          <PostCommentP>{content}</PostCommentP>
+          <PostTime datetime="2022-12-05">
+            <span>{updatedAt.split("T", 1)}</span>
+          </PostTime>
+        </li>
+      ) : (
+        <>로딩중</>
+      )}
+    </>
   );
 }

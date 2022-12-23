@@ -3,35 +3,44 @@ import API from "./api";
 /**
  * url /post_id를 전달받아 get
  * return 데이터
- * useState에 넣어야 하는지
+ * setPostData라는 useState객체에 데이터를 저장함
  *
  *
  */
-const getPost = async (type, url) => {
-  let postData = null;
+
+const getPost = async (type, url, setPostData) => {
+  let responseData = null;
 
   try {
     if (type === "detailPost") {
-      const response = await API.get(`/post/${url}`);
+      const response = await API.get(`/post/${url}`, {
+        header: {
+          Authorization: `Bearer${localStorage.getItem("token")}`,
+          "Content-type": "application/json",
+        },
+      });
 
-      console.log(response);
-
-      postData = await response.data();
+      responseData = await response.data;
     }
     if (type === "editpost") {
-      const response = await API.get("post/url");
+      const response = await API.get("/post");
 
-      postData = await response.data();
+      responseData = await response.data;
     }
     if (type === "deletepost") {
-      const response = await API.get("post/url");
+      const response = await API.delete(`/post/${url}`, {
+        header: {
+          Authorization: `Bearer${localStorage.getItem("token")}`,
+          "Content-type": "application/json",
+        },
+      });
 
-      postData = await response.data();
+      responseData = await response.data;
     }
   } catch (e) {
     throw new Error(e);
   }
-  return postData;
+  setPostData(responseData);
 };
 
 export default getPost;
