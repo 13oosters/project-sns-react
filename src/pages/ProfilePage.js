@@ -1,10 +1,11 @@
 import React from "react";
+import PostPage from "./PostPage";
 
 import Header from "../components/style/Header";
 import Cards from "../components/common/Cards";
-import NavBar from "../components/style/NavBar";
 import ProfileInformation from "../components/profile/ProfileInformation";
 import SortButtons from "../components/profile/SortButtons";
+import NavBar from "../components/style/NavBar";
 
 export default function ProfilePage() {
   return (

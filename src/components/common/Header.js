@@ -9,7 +9,7 @@ export default function Header({ type }) {
     ),
     search: (
       <>
-        <h2 class="sr-only">검색창</h2>
+        <h2 className="sr-only">검색창</h2>
         <div>
           <a href="#;">
             <img src="#" alt="뒤로 가기" />
