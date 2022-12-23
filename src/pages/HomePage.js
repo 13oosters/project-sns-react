@@ -14,7 +14,7 @@ export default function HomePage() {
   const [feed, setFeed] = useState([]);
 
   const getUserFeed = async() => {
-    await API.get("/post/feed",{
+    await API.get("/post/feed/?limit=100",{
       header: {
         "Authorization": `Bearer ${localStorage.getItem("token")}`,
         "Content-type": "application/json",

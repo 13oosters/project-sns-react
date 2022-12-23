@@ -1,12 +1,13 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import styled, { css } from "styled-components";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import defaultImage from "../../assets/image/basic-profile-img-post.png";
 import moreImage from "../../assets/image/icon-more-post.png";
 import homeTestImage from "../../assets/image/home-test.png";
 import heartImage from "../../assets/image/icon-heart.png";
 import heartClickImage from "../../assets/image/icon-heart-fill.png";
 import commentImage from "../../assets/image/icon-comment.png";
+import API from "../../utils/api";
 
 const smallFont = css`
   font-size: ${(props) => props.theme.smallFontSize};
