@@ -1,5 +1,6 @@
 import { useEffect, useState } from "react";
 import axios from "axios";
+import styled from "styled-components";
 import API from "../utils/api";
 import Header from "../components/style/Header";
 // import Notice from "../components/common/Notice"
@@ -18,8 +19,16 @@ export default function HomePage() {
         "Authorization": `Bearer ${localStorage.getItem("token")}`,
         "Content-type": "application/json",
       }
-    }).then((res) => {setFeed(res.data); console.log(feed)});
+    }).then((res) => res.data)
+    .then((res) => setFeed({...res}));
   }
+
+  // console.log(feed);
+
+
+  // const {posts} = {...feed};
+
+  // console.log(posts);
 
   useEffect(()=>{
     getUserFeed();
@@ -30,7 +39,7 @@ export default function HomePage() {
       <Header type="logo"/>
       {/* new */}
       {/* <EmptyFeed/> */}
-      <Feeds/>
+      <Feeds feed={feed}/>
       {/* feeds */}
       {/* <Cards/> */}
       <NavBar type="홈"/>
