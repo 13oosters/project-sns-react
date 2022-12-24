@@ -78,6 +78,7 @@ export default function Card({ setIsModal, post }) {
     heartCount,
     commentCount,
     createdAt,
+    id,
   } = {
     ...post,
   };
@@ -119,7 +120,7 @@ export default function Card({ setIsModal, post }) {
               <CardBodySpan>{heartCount}</CardBodySpan>
             </li>
             <li>
-              <Link to={`/post/${author._id}`}>
+              <Link to={`/post/${id}`}>
                 <CardBodyImage src={commentImage} />
               </Link>
               <CardBodySpan style={{ transform: "translateY(-5%)" }}>

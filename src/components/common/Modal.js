@@ -29,7 +29,7 @@ const ModalLi = styled.li`
 `;
 // url은 useparams로 불러오기
 
-export default function Modal({ isModal }) {
+export default function Modal({ isModal, type }) {
   const { id } = useParams();
 
   const deletePost = () => {
@@ -46,7 +46,11 @@ export default function Modal({ isModal }) {
         <img src={ModalImage} alt="모달창 아이콘" />
         <ul>
           <ModalLi onClick={deletePost}>삭제</ModalLi>
-          <ModalLi onClick={editPost}>수정</ModalLi>
+          {type === "comment" ? (
+            <></>
+          ) : (
+            <ModalLi onClick={editPost}>수정</ModalLi>
+          )}
         </ul>
       </ModalDiv>
     </section>
