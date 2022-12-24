@@ -14,8 +14,8 @@ export default function Comments({ comments }) {
       {comments ? (
         <CommentsSection>
           <h4 class="sr-only">댓글 목록</h4>
-          <ol reversed>
-            {comments.map((comment) => (
+          <ol>
+            {comments.reverse().map((comment) => (
               <Comment key={comment.updatedAt} comment={comment} />
             ))}
           </ol>

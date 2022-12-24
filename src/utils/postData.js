@@ -8,7 +8,7 @@ import API from "./api";
  *
  */
 
-const getPost = async (type, url, setPostData) => {
+const getPost = async (type, url, setPostData, comment) => {
   let responseData = null;
   let responseComent = null;
 
@@ -47,11 +47,6 @@ const getPost = async (type, url, setPostData) => {
 
       responseData = await response.data;
     }
-    if (type === "editpost") {
-      const response = await API.get("/post");
-
-      responseData = await response.data;
-    }
     if (type === "deletepost") {
       const response = await API.delete(`/post/${url}`, {
         header: {
@@ -60,10 +55,24 @@ const getPost = async (type, url, setPostData) => {
         },
       });
 
-      // navigate("/");
       responseData = await response.data;
       console.log(responseData);
       responseData = await response.data;
+    }
+
+    if (type === "comment") {
+      const response = await API.post(`/post/${url}`, {
+        comment: {
+          content: comment,
+        },
+        header: {
+          Authorization: `Bearer${localStorage.getItem("token")}`,
+          "Content-type": "application/json",
+        },
+      });
+
+      responseComent = await response.data;
+      responseData = { ...responseComent };
     }
   } catch (e) {
     throw new Error(e);
@@ -73,6 +82,7 @@ const getPost = async (type, url, setPostData) => {
   }
 
   setPostData(responseData);
+  console.log(responseData);
 };
 
 /**

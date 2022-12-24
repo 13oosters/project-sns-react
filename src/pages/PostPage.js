@@ -15,13 +15,13 @@ export default function PostPage() {
   const [isModal, setIsModal] = useState(false);
 
   const { id } = useParams();
-  const [postStoreData, setStorePostData] = useState("");
+  const [postStoreData, setPostStoreData] = useState("");
   const [Loading, IsLoading] = useState(false);
 
   console.log(id);
 
   useEffect(() => {
-    postData("detailPost", id, setStorePostData);
+    postData("detailPost", id, setPostStoreData);
     IsLoading(true);
   }, []);
 
@@ -35,6 +35,7 @@ export default function PostPage() {
             <Detail
               setIsModal={setIsModal}
               postStoreData={postStoreData}
+              setPostStoreData={setPostStoreData}
               id={id}
             />
           </div>
