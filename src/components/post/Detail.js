@@ -17,15 +17,21 @@ export default function Detail({
   const { post } = { ...postStoreData };
 
   return (
-    <DeatailSection>
-      <h2 class="sr-only">게시글</h2>
-      <Card setIsModal={setIsModal} post={post} />
-      <Dialog
-        id={id}
-        postStoreData={postStoreData}
-        post={post}
-        setPostStoreData={setPostStoreData}
-      />
-    </DeatailSection>
+    <>
+      {post ? (
+        <DeatailSection>
+          <h2 class="sr-only">게시글</h2>
+          <Card setIsModal={setIsModal} post={post} />
+          <Dialog
+            id={id}
+            postStoreData={postStoreData}
+            post={post}
+            setPostStoreData={setPostStoreData}
+          />
+        </DeatailSection>
+      ) : (
+        <></>
+      )}
+    </>
   );
 }

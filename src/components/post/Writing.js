@@ -52,8 +52,9 @@ export default function Writing({ id, comments, setPostStoreData }) {
     setInputComment(e.target.value);
   };
   const comment = () => {
-    postData("comment", `${id}/comments`, setPostStoreData, inputComment);
+    postData("comment", `${id}`, setPostStoreData, inputComment);
     console.log(comments);
+    setInputComment("");
   };
 
   return (
@@ -67,7 +68,9 @@ export default function Writing({ id, comments, setPostStoreData }) {
           placeholder="댓글 입력하기.."
           onChange={getComment}
         />
-        <UpLoadButton onClick={comment}>게시</UpLoadButton>
+        <UpLoadButton type="button" onClick={comment}>
+          게시
+        </UpLoadButton>
       </WritingForm>
     </WriteSection>
   );

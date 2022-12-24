@@ -8,32 +8,31 @@ import API from "./api";
  *
  */
 
-const getPost = async (type, url, setPostData, comment) => {
+const getPost = async (type, url, setPostData, comment, id) => {
   let responseData = null;
   let responseComent = null;
 
   console.log(url);
 
   try {
-    if (type === "detailPost") {
-      const response = await API.get(`/post/${url}`, {
-        header: {
-          Authorization: `Bearer${localStorage.getItem("token")}`,
-          "Content-type": "application/json",
-        },
-      });
-      const CommentRes = await API.get(`/post/${url}/comments`, {
-        header: {
-          Authorization: `Bearer${localStorage.getItem("token")}`,
-          "Content-type": "application/json",
-        },
-      });
+    const responsePost = await API.get(`/post/${url}`, {
+      header: {
+        Authorization: `Bearer${localStorage.getItem("token")}`,
+        "Content-type": "application/json",
+      },
+    });
+    const CommentRes = await API.get(`/post/${url}/comments`, {
+      header: {
+        Authorization: `Bearer${localStorage.getItem("token")}`,
+        "Content-type": "application/json",
+      },
+    });
 
-      responseData = await response.data;
-      responseComent = await CommentRes.data;
-      responseData = { ...responseData, ...responseComent };
-      console.log(responseData);
-    }
+    responseData = await responsePost.data;
+    responseComent = await CommentRes.data;
+    responseData = { ...responseData, ...responseComent };
+    console.log(responseData);
+
     if (type === "editpost") {
       const response = await API.get("/post/feed", {
         header: {
@@ -57,11 +56,10 @@ const getPost = async (type, url, setPostData, comment) => {
 
       responseData = await response.data;
       console.log(responseData);
-      responseData = await response.data;
     }
 
     if (type === "comment") {
-      const response = await API.post(`/post/${url}`, {
+      const response = await API.post(`/post/${url}/comments`, {
         comment: {
           content: comment,
         },
@@ -70,9 +68,32 @@ const getPost = async (type, url, setPostData, comment) => {
           "Content-type": "application/json",
         },
       });
+      const Commentres = await API.get(`/post/${url}/comments`, {
+        header: {
+          Authorization: `Bearer${localStorage.getItem("token")}`,
+          "Content-type": "application/json",
+        },
+      });
 
       responseComent = await response.data;
-      responseData = { ...responseComent };
+      const responseComments = await Commentres.data;
+
+      responseData = {
+        ...responseData,
+        ...responseComent,
+        ...responseComments,
+      };
+    }
+
+    if (type === "deletComment") {
+      // post/:post_id/comments/:comment_id
+
+      const response = await API.delete(`/post/${url}/comments/${id}`, {
+        header: {
+          Authorization: `Bearer${localStorage.getItem("token")}`,
+          "Content-type": "application/json",
+        },
+      });
     }
   } catch (e) {
     throw new Error(e);

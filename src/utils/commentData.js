@@ -1,4 +1,4 @@
-import API from "./api";
+import API from "./api"; /**
 
 /**
  * url /post_id를 전달받아 get
@@ -8,7 +8,7 @@ import API from "./api";
  *
  */
 
-const getComment = async (type, url, setCommentData, inputComment) => {
+/* const getComment = async (type, url, setPostData, inputComment) => {
   let responseComent = null;
 
   console.log(url);
@@ -16,7 +16,7 @@ const getComment = async (type, url, setCommentData, inputComment) => {
     if (type === "comment") {
       const response = await API.post(`/post/${url}`, {
         comment: {
-          content: "안녕",
+          content: "안녕2",
         },
         header: {
           Authorization: `Bearer${localStorage.getItem("token")}`,
@@ -35,7 +35,8 @@ const getComment = async (type, url, setCommentData, inputComment) => {
   setCommentData(responseComent);
 };
 
-/**
-삭제 누르면 뒤로가게 구현하기 */
+
 
 export default getComment;
+*/
+// 삭제 누르면 뒤로가게 구현하기 */

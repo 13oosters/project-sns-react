@@ -10,7 +10,18 @@ const CommentsSection = styled.section`
 
 export default function Comments({ comments }) {
   return (
-    <>
+    <CommentsSection>
+      <h4 class="sr-only">댓글 목록</h4>
+      <ol>
+        {comments.reverse().map((comment) => (
+          <Comment key={comment.updatedAt} comment={comment} />
+        ))}
+      </ol>
+    </CommentsSection>
+  );
+}
+
+/** <>
       {comments ? (
         <CommentsSection>
           <h4 class="sr-only">댓글 목록</h4>
@@ -21,8 +32,8 @@ export default function Comments({ comments }) {
           </ol>
         </CommentsSection>
       ) : (
-        <></>
+        <>
+          <div>안녕</div>
+        </>
       )}
-    </>
-  );
-}
+    </> */
