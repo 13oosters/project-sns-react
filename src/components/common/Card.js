@@ -70,11 +70,41 @@ const CardBodyTime = styled.time`
 export default function Card({ setIsModal, post }) {
   // console.log(feed);
 
-  const { author, content, image, hearted, heartCount, commentCount, createdAt } = {
+  const { author, content, image, id, hearted, heartCount, commentCount, createdAt } = {
     ...post,
   };
 
   const navigate = useNavigate();
+
+  const [heart, setHeart] = useState(hearted);
+  const [heartCounting, setHeartCounting] = useState(heartCount);
+
+  console.log(heart);
+  console.log(heartCount);
+
+
+  const heartButtonClick = async() => {
+    if(heart){
+      setHeart(false);
+      setHeartCounting(heartCounting - 1);
+      const response = await API.delete(`/post/${id}/unheart`, {
+        "Authorization": `Bearer ${localStorage.getItem("token")}`,
+        "Content-type": "application/json",
+      });
+
+      return console.log(response);
+    }
+
+    setHeart(true);
+    setHeartCounting(heartCounting + 1);
+    const response = await API.post(`post/${id}/heart`,{
+      "Authorization": `Bearer ${localStorage.getItem("token")}`,
+      "Content-type": "application/json",
+    });
+
+    return console.log(response);
+
+  }
 
   return (
     <>
@@ -103,14 +133,10 @@ export default function Card({ setIsModal, post }) {
       />
       <CardBodyUl>
         <li>
-          <button type="button">
-            {hearted ? (
-              <CardBodyImage src={heartClickImage} />
-            ) : (
-              <CardBodyImage src={heartImage} />
-            )}
+          <button type="button" onClick={heartButtonClick}>
+            <CardBodyImage src={heart ? heartClickImage : heartImage}/>
           </button>
-          <CardBodySpan>{heartCount}</CardBodySpan>
+          <CardBodySpan>{heartCounting}</CardBodySpan>
         </li>
         <li>
           <Link to={`/post/${author._id}`}>
