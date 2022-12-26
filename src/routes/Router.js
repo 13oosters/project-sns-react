@@ -6,6 +6,7 @@ import ProfilePage from "../pages/ProfilePage";
 import PostPage from "../pages/PostPage";
 import UploadPage from "../pages/UploadPage";
 import FollowersPage from "../pages/FollowersPage";
+import FollowingsPage from "../pages/FollowingsPage";
 import ErrorPage from "../pages/ErrorPage";
 import HomePages from "../pages/HomePage";
 import SplashScreen from "../components/common/SplashScreen";
@@ -13,7 +14,6 @@ import SplashScreen from "../components/common/SplashScreen";
 const HomePage = lazy(() => import("../pages/HomePage"));
 
 function Router() {
-
   return (
     <Routes>
       {/* 로그인 */}
@@ -33,14 +33,15 @@ function Router() {
       <Route path="/signup" element={<LoginPage signin />} />
       {/* LoginPage settings */}
       {/* 홈 */}
-      <Route path="/home" element={<HomePages/>}/>
-      
+      <Route path="/home" element={<HomePages />} />
+
       <Route path="/settings" element={<LoginPage settings />} />
       {/*  */}
       <Route path="/search" element={<SearchPage></SearchPage>} />
       <Route path="/upload" element={<UploadPage></UploadPage>} />
       <Route path="/account" element={<ProfilePage></ProfilePage>}>
-        <Route path="followers" element={<div>하이</div>} />
+        <Route path="followers" element={<FollowersPage></FollowersPage>} />
+        <Route path="followings" element={<FollowingsPage></FollowingsPage>} />
         <Route path="settings" element={<div>하이</div>} />
         {/**  <Route path="post" element={<div>하이</div>} />*/}
         <Route path="post/:id" element={<ProfilePage>하이</ProfilePage>} />
