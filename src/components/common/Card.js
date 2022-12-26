@@ -94,7 +94,7 @@ export default function Card({ setIsPostModal, post }) {
             {/** 모달 버튼이 작동을 안해서 이미지로 navigate이동했습니다 */}
             <CardHeaderImage
               src={author.image}
-              onClick={() => navigate("/account")}
+              onClick={() => navigate(`/${author.accountname}`)}
             />
             <div>
               <div>
@@ -137,7 +137,7 @@ export default function Card({ setIsPostModal, post }) {
               <CardBodySpan>{heartCount}</CardBodySpan>
             </li>
             <li>
-              <Link to={`/post/${id}`}>
+              <Link to={`${author.accountname}/post/${id}`}>
                 <CardBodyImage src={commentImage} />
               </Link>
               <CardBodySpan style={{ transform: "translateY(-5%)" }}>

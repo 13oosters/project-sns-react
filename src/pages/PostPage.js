@@ -14,10 +14,17 @@ import postData from "../utils/postData";
 export default function PostPage() {
   const [PostModal, setIsPostModal] = useState(false);
   const { id } = useParams();
+  const { account } = useParams();
+
+  // 커스텀 훅 고려.
   const [postStoreData, setPostStoreData] = useState("");
   const [commentData, setCommentData] = useState("");
 
   console.log(id);
+  console.log(account);
+  // /:account/post/:id
+
+  // Promise.all()함수
 
   useEffect(() => {
     postData("detailpost", id, setPostStoreData);

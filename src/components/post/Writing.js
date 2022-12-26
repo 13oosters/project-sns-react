@@ -63,6 +63,8 @@ export default function Writing({
     setInputComment("");
   };
 
+  // form의 새로고침을 막는 e.preventDefault()
+
   return (
     <WriteSection>
       <h4 class="sr-only">댓글 입력창</h4>
@@ -72,6 +74,7 @@ export default function Writing({
           value={inputComment}
           required
           placeholder="댓글 입력하기.."
+          // onChange 없어도 됨.
           onChange={getComment}
         />
         <UpLoadButton type="button" onClick={uploadcomment}>
