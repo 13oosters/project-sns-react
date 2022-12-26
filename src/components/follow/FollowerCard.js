@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import { Link } from "react-router-dom";
 import styled from "styled-components";
-// import FollowButton from "../style/follow/followButton";
+import FollowButton from "../style/follow/followButton";
 import FollowCancelButton from "../style/follow/FollowCancelButton";
 
 // import API from "../../utils/api";
@@ -28,6 +28,10 @@ const FollowerImage = styled.img`
   margin-right: 1.2rem;
 `;
 
+const FollowerInformation = styled.div`
+  display: flex;
+`;
+
 const FollowerName = styled.p`
   font-weight: 500;
   font-size: ${(props) => props.theme.baseFontSize};
@@ -44,26 +48,37 @@ const FollowerIntroduce = styled.p`
 `;
 
 export default function FollowerCard({ followerList }) {
+  const [isFollow, setIsFollow] = useState(false);
+
+  const handleFollowButton = () => {
+    setIsFollow(!isFollow);
+  };
+
   const userUrl = `/profile/${followerList.accountname}`;
 
   return (
     <FollowerWrap>
-      <FollowItem className="followItem">
+      <FollowItem>
         <FollowLink to={userUrl} className="followLink">
           <div className="followerImage">
             <FollowerImage src={followerList.image} alt="프로필 이미지" />
           </div>
-          <ProfileInformation className="followInformation">
+          <FollowerInformation className="followInformation">
             <FollowerName className="followerName">
               {followerList.username}
             </FollowerName>
             <FollowerIntroduce className="followerIntroduce">
               {followerList.intro}
             </FollowerIntroduce>
-          </ProfileInformation>
+          </FollowerInformation>
         </FollowLink>
-        {/* <FollowButton className="followButton">팔로우</FollowButton> */}
-        <FollowCancelButton>취소</FollowCancelButton>
+        {isFollow === true ? (
+          <FollowCancelButton onClick={handleFollowButton}>
+            취소
+          </FollowCancelButton>
+        ) : (
+          <FollowButton onClick={handleFollowButton}>팔로우</FollowButton>
+        )}
       </FollowItem>
     </FollowerWrap>
   );
