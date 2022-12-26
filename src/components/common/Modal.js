@@ -1,6 +1,6 @@
 import React from "react";
 import styled from "styled-components";
-import { useParams } from "react-router";
+import { useNavigate, useParams } from "react-router";
 
 import ModalImage from "../../assets/image/icon-modal.png";
 import postData from "../../utils/postData";
@@ -31,9 +31,12 @@ const ModalLi = styled.li`
 
 export default function Modal({ isModal, type }) {
   const { id } = useParams();
+  const navigate = useNavigate();
 
   const deletePost = () => {
     postData("deletepost", id, "");
+    // 삭제하면 홈으로 이동
+    navigate("/home");
   };
   const editPost = () => {
     postData("editpost", id, "");
