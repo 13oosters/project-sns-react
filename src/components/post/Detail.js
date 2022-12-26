@@ -9,10 +9,11 @@ const DeatailSection = styled.section`
 `;
 
 export default function Detail({
-  setIsModal,
+  setPostStoreData,
   postStoreData,
   id,
-  setPostStoreData,
+  setIsPostModal,
+  setCommentModal,
 }) {
   const { post } = { ...postStoreData };
 
@@ -21,12 +22,13 @@ export default function Detail({
       {post ? (
         <DeatailSection>
           <h2 class="sr-only">게시글</h2>
-          <Card setIsModal={setIsModal} post={post} />
+          <Card setIsPostModal={setIsPostModal} post={post} />
           <Dialog
             id={id}
             postStoreData={postStoreData}
             post={post}
             setPostStoreData={setPostStoreData}
+            setCommentModal={setCommentModal}
           />
         </DeatailSection>
       ) : (

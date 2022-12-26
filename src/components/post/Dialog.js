@@ -8,7 +8,7 @@ const DialogSection = styled.section`
   padding: 10rem 1.6rem 0;
 `;
 
-export default function Dialog({ id, postStoreData, setPostStoreData }) {
+export default function Dialog({ id, postStoreData, setPostStoreData,setCommentModal }) {
   const { comments } = { ...postStoreData };
 
   console.log(comments);
@@ -18,7 +18,7 @@ export default function Dialog({ id, postStoreData, setPostStoreData }) {
       {comments ? (
         <DialogSection>
           <h3 class="sr-only">댓글 창</h3>
-          <Comments comments={comments} />
+          <Comments comments={comments} setCommentModal={setCommentModal} />
           <Writing
             id={id}
             comments={comments}

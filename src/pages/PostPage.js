@@ -12,8 +12,8 @@ import postData from "../utils/postData";
  * 3.삭제 수정에도 useparams와 비교해서 보여주기
  * 4. 댓글 기능 */
 export default function PostPage() {
-  const [isModal, setIsModal] = useState(false);
-
+  const [PostModal, setIsPostModal] = useState(false);
+  const [CommentModal, setCommentModal] = useState(false);
   const { id } = useParams();
   const [postStoreData, setPostStoreData] = useState("");
   const [Loading, IsLoading] = useState(false);
@@ -33,18 +33,18 @@ export default function PostPage() {
             <h1 className="sr-only">게시글 상세보기</h1>
             <Header type="post" />
             <Detail
-              setIsModal={setIsModal}
+              setIsPostModal={setIsPostModal}
+              setCommentModal={setCommentModal}
               postStoreData={postStoreData}
               setPostStoreData={setPostStoreData}
               id={id}
             />
           </div>
-          <Modal isModal={isModal} />
+          <Modal isModal={PostModal} type="otherpost" />
+          <Modal isModal={CommentModal} type="othercomment" />
         </>
       ) : (
-        <>
-          <div>{postStoreData.message}</div>
-        </>
+        <></>
       )}
     </>
   );

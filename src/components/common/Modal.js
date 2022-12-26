@@ -41,20 +41,51 @@ export default function Modal({ isModal, type }) {
   const editPost = () => {
     postData("editpost", id, "");
   };
+  const ModalUI = {
+    myprofile: (
+      <ul>
+        <ModalLi>설정 및 개인정보</ModalLi>
+        <ModalLi>로그아웃</ModalLi>
+      </ul>
+    ),
+    myprofilepost: (
+      <ul>
+        <ModalLi>게시물 고정하기</ModalLi>
+        <ModalLi>게시글 삭제하기</ModalLi>
+        <ModalLi>게시글 수정하기</ModalLi>
+      </ul>
+    ),
+    mycomment: (
+      <ul>
+        <ModalLi onClick={deletePost}>삭제</ModalLi>
+      </ul>
+    ),
+    mypost: (
+      <ul>
+        <ModalLi onClick={editPost}>수정</ModalLi>
+        <ModalLi onClick={deletePost}>삭제</ModalLi>
+      </ul>
+    ),
+    otherpost: (
+      <ul>
+        <ModalLi>게시물 신고하기</ModalLi>
+      </ul>
+    ),
+    othercomment: (
+      <ul>
+        <ModalLi>댓글 신고하기</ModalLi>
+      </ul>
+    ),
+  };
+
+  console.log(type);
 
   return (
     <section>
       <h2 className="sr-only">게시글 삭제 수정모달창</h2>
       <ModalDiv isModal={isModal}>
         <img src={ModalImage} alt="모달창 아이콘" />
-        <ul>
-          <ModalLi onClick={deletePost}>삭제</ModalLi>
-          {type === "comment" ? (
-            <></>
-          ) : (
-            <ModalLi onClick={editPost}>수정</ModalLi>
-          )}
-        </ul>
+        <>{ModalUI[type]}</>
       </ModalDiv>
     </section>
   );

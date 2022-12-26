@@ -1,6 +1,7 @@
-import React from "react";
+import React, { useState } from "react";
 import styled from "styled-components";
 import modalButtonImage from "../../assets/image/icon-more-post.png";
+import Modal from "../common/Modal";
 
 const CommentLi = styled.li`
   margin-bottom: 2.2rem;
@@ -43,14 +44,22 @@ const ModalImage = styled.img`
   height: 1.6rem;
 `;
 
-export default function Comment({ comment }) {
+export default function Comment({ comment, setCommentModal }) {
+  const setModal = () => {
+    setCommentModal((prev) => !prev);
+  };
+
   return (
     <CommentLi>
       <CommentUserInfoDiv>
         <UserImage src={comment.author.image} alt="프로필 사진" />
         <UserNameStrong>{comment.author.accountname}</UserNameStrong>
         <CommentTime>5분 전</CommentTime>
-        <ModalImage src={modalButtonImage} alt="댓글 수정 삭제 모달 버튼" />
+        <ModalImage
+          src={modalButtonImage}
+          alt="댓글 수정 삭제 모달 버튼"
+          onClick={setModal}
+        />
       </CommentUserInfoDiv>
       <CommentP>{comment.content}</CommentP>
     </CommentLi>
