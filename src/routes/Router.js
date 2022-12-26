@@ -7,7 +7,6 @@ import PostPage from "../pages/PostPage";
 import UploadPage from "../pages/UploadPage";
 // import FollowersPage from "../pages/FollowersPage";
 import ErrorPage from "../pages/ErrorPage";
-import HomePages from "../pages/HomePage";
 import SplashScreen from "../components/common/SplashScreen";
 import API from "../utils/api";
 
@@ -54,7 +53,7 @@ function Router() {
       <Route path="/signup" element={<LoginPage signin />} />
       {/* LoginPage settings */}
       {/* 홈 */}
-      <Route path="/home" element={<HomePages />} />
+      <Route path="/home" element={<HomePage />} />
 
       <Route path="/settings" element={<LoginPage settings />} />
       {/*  */}

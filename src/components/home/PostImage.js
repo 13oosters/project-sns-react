@@ -43,8 +43,8 @@ export default function PostImage({image}) {
   return (
     <>
     <MultiImageWrapper>
-      {image && imageResult ? image.split(",").map((item)=> 
-      <li>
+      {image && imageResult ? image.split(",").map((item,index)=> 
+      <li key={index}>
         <MultiImage src={item} alt="#"/>
         </li>) : null}
       {image && !imageResult ? <img src={image}

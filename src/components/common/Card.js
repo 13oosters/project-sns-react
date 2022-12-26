@@ -1,6 +1,6 @@
 import { useEffect, useState } from "react";
 import styled, { css } from "styled-components";
-import { Link, useNavigate } from "react-router-dom";
+import { Link, useNavigate, useParams } from "react-router-dom";
 import defaultImage from "../../assets/image/basic-profile-img-post.png";
 import moreImage from "../../assets/image/icon-more-post.png";
 import homeTestImage from "../../assets/image/home-test.png";
@@ -71,7 +71,7 @@ const CardBodyTime = styled.time`
   padding: 1.3rem;
 `;
 
-export default function Card({ setIsPostModal, post }) {
+export default function Card({ setIsPostModal, setIsHomeModal, post }) {
   // console.log(feed);
 
   const {
@@ -88,6 +88,8 @@ export default function Card({ setIsPostModal, post }) {
   };
 
   const navigate = useNavigate();
+
+  const { account } = useParams();
 
   const [heart, setHeart] = useState(hearted);
   const [heartCounting, setHeartCounting] = useState(heartCount);
@@ -135,7 +137,8 @@ export default function Card({ setIsPostModal, post }) {
             <CardHeaderButton
               type="button"
               onClick={() => {
-                setIsPostModal((prev) => !prev);
+                account ? setIsPostModal((prev) => !prev) : setIsHomeModal((prev) => !prev);
+                
               }}
             >
               <img src={moreImage} alt="설정" />

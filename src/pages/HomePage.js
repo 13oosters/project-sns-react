@@ -8,9 +8,11 @@ import NavBar from "../components/style/NavBar";
 // import Cards from "../components/common/Cards";
 import EmptyFeed from "../components/home/EmptyFeed";
 import Feeds from "../components/home/Feeds";
+import Modal from "../components/common/Modal";
 
 export default function HomePage() {
   const [feed, setFeed] = useState([]); // 팔로우한 사람들 + 나의 게시물 데이터
+  const [homeModal, setIsHomeModal] = useState(false);
 
   const getUserFeed = async () => {
     const response = await API.get("/post/feed/?limit=100", {
@@ -56,10 +58,12 @@ export default function HomePage() {
           feed={feed.sort(
             (a, b) => Date.parse(b.createdAt) - Date.parse(a.createdAt),
           )}
+          setIsHomeModal={setIsHomeModal}
         />
       ) : (
         <EmptyFeed />
       )}
+      <Modal isModal={homeModal} type="otherpost" />
       <NavBar type="홈" />
     </section>
   );
