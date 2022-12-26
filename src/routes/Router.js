@@ -1,4 +1,4 @@
-import { lazy, Suspense } from "react";
+import { lazy, Suspense, useState, useEffect } from "react";
 import { Routes, Route } from "react-router-dom";
 import LoginPage from "../pages/LoginPage";
 import SearchPage from "../pages/SearchPage";
@@ -9,10 +9,31 @@ import FollowersPage from "../pages/FollowersPage";
 import ErrorPage from "../pages/ErrorPage";
 import HomePages from "../pages/HomePage";
 import SplashScreen from "../components/common/SplashScreen";
+import API from "../utils/api";
 
 const HomePage = lazy(() => import("../pages/HomePage"));
 
 function Router() {
+  const [hasToken, SetHasToken] = useState(false);
+  const checkHasToken = async () => {
+    try {
+      const response = await API("/user/checktoken", {
+        headers: {
+          Authorization: `Bearer ${localStorage.getItem("token")}`,
+          "Content-type": "application/json",
+        },
+      });
+      const { isValid } = response.data;
+
+      SetHasToken(isValid);
+    } catch (error) {
+      throw new Error(error);
+    }
+  };
+
+  useEffect(() => {
+    checkHasToken();
+  }, []);
 
   return (
     <Routes>
@@ -20,7 +41,7 @@ function Router() {
       <Route
         path="/"
         element={
-          true ? (
+          !hasToken ? (
             <LoginPage />
           ) : (
             <Suspense fallback={<SplashScreen />}>
@@ -33,8 +54,8 @@ function Router() {
       <Route path="/signup" element={<LoginPage signin />} />
       {/* LoginPage settings */}
       {/* 홈 */}
-      <Route path="/home" element={<HomePages/>}/>
-      
+      <Route path="/home" element={<HomePages />} />
+
       <Route path="/settings" element={<LoginPage settings />} />
       {/*  */}
       <Route path="/search" element={<SearchPage></SearchPage>} />
