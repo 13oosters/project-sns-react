@@ -1,21 +1,28 @@
 import React from "react";
-import PostPage from "./PostPage";
-
 import Header from "../components/style/Header";
-import Cards from "../components/common/Cards";
-import ProfileInformation from "../components/profile/ProfileInformation";
-import SortButtons from "../components/profile/SortButtons";
+import BasicImage from "../assets/image/basic-profile-image-post.png";
 import NavBar from "../components/style/NavBar";
 
 export default function ProfilePage() {
   return (
-    <section>
-      <h1 class="sr-only">프로필 페이지</h1>
+    <div className="profileWrap">
       <Header type="profile" />
-      <ProfileInformation />
-      <SortButtons />
-      <Cards />
-      <NavBar />
-    </section>
+      <div className="profileInformationWrap">
+        <a href="/followerlist">
+          <p className="followCount">2950</p>
+          <p className="followName followers">followers</p>
+        </a>
+        <img className="userImage" src={BasicImage} alt="프로필 이미지" />
+        <a href="/followinglist">
+          <p className="followCount following">128</p>
+          <p className="followName following">followings</p>
+        </a>
+      </div>
+      <p className="userName">앙리</p>
+      <p className="userID">imthecutestdog</p>
+      <p className="userIntroduce">까만 초코볼</p>
+      <button className="profileFollowButton">팔로우</button>
+      <NavBar type="프로필" />
+    </div>
   );
 }
