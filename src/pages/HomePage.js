@@ -11,28 +11,66 @@ import Feeds from "../components/home/Feeds";
 
 export default function HomePage() {
 
-  const [feed, setFeed] = useState([]);
+  const [feed, setFeed] = useState([]); // 팔로우한 사람들의 게시물 데이터
 
+  console.log(3, feed)
+  
   const getUserFeed = async() => {
+    console.log(1, feed)
     await API.get("/post/feed/?limit=100",{
       header: {
         "Authorization": `Bearer ${localStorage.getItem("token")}`,
         "Content-type": "application/json",
       }
-    }).then((res) => res.data)
-    .then((res) => setFeed({...res}));
+    }).then((res) => res.data.posts).then((res) => setFeed(res))
+
+    return feed;
+  }
+
+  const getMyPost = async() => {
+    console.log(2, feed)
+    // await getUserFeed();
+    const response = await API.get("/user/myinfo", {
+      "Authorization": `Bearer ${localStorage.getItem("token")}`,
+    });
+    const result = await response.data;
+    const myId = result.user.accountname;
+
+    const myPosting = await API.get(`/post/${myId}/userpost/?limit=100`,{
+      "Authorization": `Bearer ${localStorage.getItem("token")}`,
+      "Content-type": "application/json",
+    });
+    const myPostingResult = await myPosting.data;
+
+    console.log(myPostingResult.post)
+
+    // console.log(myPostingResult.post);
+//    console.log(feed);
+
+    const temp = [...feed, ...myPostingResult.post];
+    
+    console.log(temp);
+
+//    temp.push(...myPostingResult.post);
+  
+    setFeed(temp);
+    return temp
+    
   }
 
   // console.log(feed);
-
 
   // const {posts} = {...feed};
 
   // console.log(posts);
 
   useEffect(()=>{
-    getUserFeed();
+    getUserFeed().then((res) => getMyPost())
+    // Promise.allSettled()
   },[])
+/*   useEffect(()=>{
+    getMyPost()
+  },[feed]) */
 
   return (
     <section>

@@ -79,10 +79,6 @@ export default function Card({ setIsModal, post }) {
   const [heart, setHeart] = useState(hearted);
   const [heartCounting, setHeartCounting] = useState(heartCount);
 
-  console.log(heart);
-  console.log(heartCount);
-
-
   const heartButtonClick = async() => {
     if(heart){
       setHeart(false);
