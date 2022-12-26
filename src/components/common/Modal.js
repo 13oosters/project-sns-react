@@ -6,8 +6,9 @@ import ModalImage from "../../assets/image/icon-modal.png";
 import postData from "../../utils/postData";
 
 const ModalDiv = styled.div`
-  display: ${(props) => (!props.isModal ? "none" : "block")};
+  display: block;
   width: 100%;
+  z-index: 10;
   position: fixed;
   bottom: 0;
   right: 0%;
@@ -17,8 +18,8 @@ const ModalDiv = styled.div`
   border-top-right-radius: 1rem;
   padding: 1.6rem 0 1rem 2.6rem;
   text-align: center;
-  transform: translateY(0);
-  transition: all 1s;
+  transform: ${(props) => (!props.isModal ? "translateY(100%)" : "translateY(0)")};
+  transition: 0.5s;
 `;
 
 const ModalLi = styled.li`

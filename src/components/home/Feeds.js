@@ -13,12 +13,12 @@ const FeedsDiv = styled.div`
   }
 `
 
-export default function Feeds({feed}) {
+export default function Feeds({feed, setIsHomeModal}) {
 
 
   return (
     <FeedsDiv>
-      <Cards feed={feed}/>
+      <Cards setIsHomeModal={setIsHomeModal} feed={feed}/>
     </FeedsDiv>
   )
 }

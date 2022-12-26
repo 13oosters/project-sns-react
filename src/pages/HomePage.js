@@ -8,10 +8,12 @@ import NavBar from "../components/style/NavBar";
 // import Cards from "../components/common/Cards";
 import EmptyFeed from "../components/home/EmptyFeed";
 import Feeds from "../components/home/Feeds";
+import Modal from "../components/common/Modal";
 
 export default function HomePage() {
 
   const [feed, setFeed] = useState([]); // 팔로우한 사람들 + 나의 게시물 데이터
+  const [homeModal, setIsHomeModal] = useState(false);
 
   
   const getUserFeed = async() => {
@@ -57,7 +59,8 @@ export default function HomePage() {
       <Header type="logo" />
       {/* new */}
       {/* feed 날짜가 최신일수록 가장 상단에 위치하도록 sort 코드 작성 */}
-      {feed ? <Feeds feed={feed.sort((a,b) => Date.parse(b.createdAt) - Date.parse(a.createdAt))}/> : <EmptyFeed/>}
+      {feed ? <Feeds feed={feed.sort((a,b) => Date.parse(b.createdAt) - Date.parse(a.createdAt))} setIsHomeModal={setIsHomeModal}/> : <EmptyFeed/>}
+      <Modal isModal={homeModal} type="otherpost" />
       <NavBar type="홈"/>
     </section>
   );
