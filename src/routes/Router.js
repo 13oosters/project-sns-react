@@ -14,7 +14,7 @@ import API from "../utils/api";
 const HomePage = lazy(() => import("../pages/HomePage"));
 
 function Router() {
-  const [hasToken, SetHasToken] = useState(false);
+  const [hasToken, setHasToken] = useState(false);
   const checkHasToken = async () => {
     try {
       const response = await API("/user/checktoken", {
@@ -25,7 +25,7 @@ function Router() {
       });
       const { isValid } = response.data;
 
-      SetHasToken(isValid);
+      setHasToken(isValid);
     } catch (error) {
       throw new Error(error);
     }
@@ -33,7 +33,7 @@ function Router() {
 
   useEffect(() => {
     checkHasToken();
-  }, []);
+  }, [hasToken]);
 
   return (
     <Routes>
@@ -42,7 +42,7 @@ function Router() {
         path="/"
         element={
           !hasToken ? (
-            <LoginPage />
+            <LoginPage setHasToken={setHasToken} />
           ) : (
             <Suspense fallback={<SplashScreen />}>
               <HomePage />
