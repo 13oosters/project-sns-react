@@ -1,8 +1,10 @@
-import React from "react";
+import React, { useState, useRef } from "react";
 import styled from "styled-components";
 
 import uploadImage from "../../../src/assets/image/profile-upload-button.png";
 import cancelImage from "../../../src/assets/image/icon-cancel.png";
+
+import API from "../../utils/api";
 
 const ProfileLabel = styled.label`
   display: flex;
@@ -72,8 +74,33 @@ const CancelButton = styled.button`
 `;
 const CancelImage = styled.img``;
 
-export default function ImageUpload({ userData }) {
-  console.log(userData);
+export default function ImageUpload({ userData, imageData, setImageData }) {
+  const uploadCounter = useRef(0);
+
+  const registerImage = async (e) => {
+    uploadCounter.current += 1;
+    if (uploadCounter.current > 3) {
+      alert("3개 이하의 파일을 업로드 하세요.");
+      return;
+    }
+
+    const formData = new FormData();
+
+    formData.append("image", e.target.files[0]);
+    const response = await API.post("/image/uploadfile", formData, {
+      headers: {
+        "Content-Type": "multipart/form-data",
+      },
+    });
+
+    const data = await response.data;
+
+    setImageData([
+      ...imageData,
+      `https://mandarin.api.weniv.co.kr/${data.filename}`,
+    ]);
+  };
+
   return (
     <ImageUploadDiv>
       <Container>
@@ -90,39 +117,20 @@ export default function ImageUpload({ userData }) {
             id="image"
             name="image"
             style={{ display: "none" }}
-            // onChange={uploadImage}
+            onChange={registerImage}
           />
         </ProfileLabel>
       </Container>
 
       <ImageUl>
-        <ImageLi>
-          <Image
-            src="https://cdn.pixabay.com/photo/2016/03/28/12/35/cat-1285634_960_720.png"
-            alt=""
-          />
-          <CancelButton type="button">
-            <CancelImage src={cancelImage} alt="취소버튼" />
-          </CancelButton>
-        </ImageLi>
-        <ImageLi>
-          <Image
-            src="https://cdn.pixabay.com/photo/2016/03/28/12/35/cat-1285634_960_720.png"
-            alt=""
-          />
-          <CancelButton type="button">
-            <CancelImage src={cancelImage} alt="취소버튼" />
-          </CancelButton>
-        </ImageLi>
-        <ImageLi>
-          <Image
-            src="https://cdn.pixabay.com/photo/2016/03/28/12/35/cat-1285634_960_720.png"
-            alt=""
-          />
-          <CancelButton type="button">
-            <CancelImage src={cancelImage} alt="취소버튼" />
-          </CancelButton>
-        </ImageLi>
+        {imageData.map((url, i) => (
+          <ImageLi key={i}>
+            <Image src={url} alt="게시글 사진" />
+            <CancelButton type="button">
+              <CancelImage src={cancelImage} alt="취소버튼" />
+            </CancelButton>
+          </ImageLi>
+        ))}
       </ImageUl>
     </ImageUploadDiv>
   );
