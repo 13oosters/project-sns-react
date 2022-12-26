@@ -10,37 +10,56 @@ import EmptyFeed from "../components/home/EmptyFeed";
 import Feeds from "../components/home/Feeds";
 
 export default function HomePage() {
-  const [feed, setFeed] = useState([]);
+  const [feed, setFeed] = useState([]); // 팔로우한 사람들 + 나의 게시물 데이터
 
   const getUserFeed = async () => {
-    await API.get("/post/feed/?limit=100", {
+    const response = await API.get("/post/feed/?limit=100", {
       header: {
         Authorization: `Bearer ${localStorage.getItem("token")}`,
         "Content-type": "application/json",
       },
-    })
-      .then((res) => res.data)
-      .then((res) => setFeed({ ...res }));
+    });
+    const result = await response.data.posts;
+
+    return result;
   };
 
-  // console.log(feed);
+  const getMyPost = async (data) => {
+    const response = await API.get("/user/myinfo", {
+      Authorization: `Bearer ${localStorage.getItem("token")}`,
+    });
+    const result = await response.data;
+    const myId = result.user.accountname;
 
-  // const {posts} = {...feed};
+    const myPosting = await API.get(`/post/${myId}/userpost/?limit=100`, {
+      Authorization: `Bearer ${localStorage.getItem("token")}`,
+      "Content-type": "application/json",
+    });
+    const myPostingResult = await myPosting.data;
 
-  // console.log(posts);
+    const temp = [...data, ...myPostingResult.post];
+
+    setFeed(temp);
+  };
 
   useEffect(() => {
-    getUserFeed();
+    getUserFeed().then((data) => getMyPost(data));
   }, []);
 
   return (
     <section>
       <Header type="logo" />
       {/* new */}
-      {/* <EmptyFeed/> */}
-      <Feeds feed={feed} />
-      {/* feeds */}
-      {/* <Cards/> */}
+      {/* feed 날짜가 최신일수록 가장 상단에 위치하도록 sort 코드 작성 */}
+      {feed ? (
+        <Feeds
+          feed={feed.sort(
+            (a, b) => Date.parse(b.createdAt) - Date.parse(a.createdAt),
+          )}
+        />
+      ) : (
+        <EmptyFeed />
+      )}
       <NavBar type="홈" />
     </section>
   );

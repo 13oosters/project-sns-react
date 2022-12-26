@@ -42,6 +42,7 @@ const GlobalStyles = createGlobalStyle`
     border: none;
     background-color: inherit;
     cursor: pointer;
+    padding: 0;
   }
   input {
     border: none;
