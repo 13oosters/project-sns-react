@@ -1,9 +1,10 @@
-import React from "react";
+import React, { useState } from "react";
 import styled from "styled-components";
-
-import profileImage from "../../assets/image/basic-profile-img-post.png";
+import modalButtonImage from "../../assets/image/icon-more-post.png";
+import Modal from "../common/Modal";
 
 const CommentLi = styled.li`
+  padding: 2rem 1.6rem 0rem 1.6rem;
   margin-bottom: 2.2rem;
   display: flex;
   flex-direction: column;
@@ -19,6 +20,7 @@ const CommentUserInfoDiv = styled.div`
 const UserImage = styled.img`
   width: 3.6rem;
   height: 3.6rem;
+  border-radius: 50%;
 `;
 
 const UserNameStrong = styled.strong`
@@ -30,6 +32,7 @@ const UserNameStrong = styled.strong`
 const CommentTime = styled.span`
   font-size: ${(props) => props.theme.xSmallFontSize};
   color: ${(props) => props.theme.darkLightColor};
+  flex-grow: 2;
 `;
 
 const CommentP = styled.p`
@@ -37,23 +40,55 @@ const CommentP = styled.p`
   font-size: ${(props) => props.theme.baseFontSize};
 `;
 
-export default function Comment() {
+const ModalImage = styled.img`
+  width: 1.6rem;
+  height: 1.6rem;
+`;
+
+export default function Comment({ comment }) {
+  const [modal, isModal] = useState(false);
+  const setModal = (e) => {
+    isModal((prev) => !prev);
+  };
+
+  const commentTime = Math.round(
+    (new Date().getTime() - Date.parse(comment.createdAt)) / 1000,
+  );
+
+  const getTime = () => {
+    let time = "";
+
+    if (commentTime < 60) {
+      time = `몇초 전`;
+    }
+    if (commentTime > 60) {
+      time = `${Math.round(commentTime / 60)}분 전`;
+    }
+    if (commentTime > 60 * 60) {
+      time = `${Math.round(commentTime / (60 * 60))}시간 전`;
+    }
+    if (commentTime > 60 * 60 * 24) {
+      time = `${Math.round(commentTime / (60 * 60 * 24))}일 전`;
+    }
+
+    return time;
+  };
+
   return (
     <CommentLi>
       <CommentUserInfoDiv>
-        <UserImage src={profileImage} alt="프로필 사진" />
-        <UserNameStrong>앙리</UserNameStrong>
-        <CommentTime>5분 전</CommentTime>
+        <UserImage src={comment.author.image} alt="프로필 사진" />
+        <UserNameStrong>{comment.author.accountname}</UserNameStrong>
+        <CommentTime>{getTime()}</CommentTime>
+        <ModalImage
+          name={comment.id}
+          src={modalButtonImage}
+          alt="댓글 삭제 모달 버튼"
+          onClick={setModal}
+        />
       </CommentUserInfoDiv>
-      <CommentP>
-        너 정말 앙큼한 고양이구나~!너 정말 앙큼한 고양이구나~!너 정말 앙큼한
-        고양이구나~!너 정말 앙큼한 고양이구나~!너 정말 앙큼한 고양이구나~!너
-        정말 앙큼한 고양이구나~!너 정말 앙큼한 고양이구나~!너 정말 앙큼한
-        고양이구나~!너 정말 앙큼한 고양이구나~!너 정말 앙큼한 고양이구나~!너
-        정말 앙큼한 고양이구나~!너 정말 앙큼한 고양이구나~!너 정말 앙큼한
-        고양이구나~!너 정말 앙큼한 고양이구나~!너 정말 앙큼한 고양이구나~!너
-        정말 앙큼한 고양이구나~!
-      </CommentP>
+      <CommentP>{comment.content}</CommentP>
+      <Modal isModal={modal} type="othercomment" commentId={comment.id} />
     </CommentLi>
   );
 }

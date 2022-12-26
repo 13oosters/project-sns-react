@@ -1,8 +1,9 @@
 import React, { useEffect, useState } from "react";
 import { useParams } from "react-router";
+
+import Modal from "../components/common/Modal";
 import Header from "../components/style/Header";
 import Detail from "../components/post/Detail";
-import Modal from "../components/common/Modal";
 import postData from "../utils/postData";
 
 /* 처음페이지 들어왔을때 한번만 실행 */
@@ -11,27 +12,43 @@ import postData from "../utils/postData";
  * 3.삭제 수정에도 useparams와 비교해서 보여주기
  * 4. 댓글 기능 */
 export default function PostPage() {
-  const [isModal, setIsModal] = useState(false);
-
+  const [PostModal, setIsPostModal] = useState(false);
   const { id } = useParams();
-  const [postStoreData, setStorePostData] = useState("");
-  const [Loading, IsLoading] = useState(false);
+  const { account } = useParams();
+
+  // 커스텀 훅 고려.
+  const [postStoreData, setPostStoreData] = useState("");
+  const [commentData, setCommentData] = useState("");
+
+  console.log(id);
+  console.log(account);
+  // /:account/post/:id
+
+  // Promise.all()함수
 
   useEffect(() => {
-    postData("detailPost", id, setStorePostData);
-    IsLoading(true);
+    postData("detailpost", id, setPostStoreData);
+    postData("detailComment", id, setCommentData);
   }, []);
 
   return (
     <>
-      {Loading ? (
+      {postStoreData ? (
         <>
           <div>
             <h1 className="sr-only">게시글 상세보기</h1>
             <Header type="post" />
-            <Detail setIsModal={setIsModal} postStoreData={postStoreData} />
+            {/** props id 사용하는지 확인필요 */}
+            <Detail
+              setIsPostModal={setIsPostModal}
+              postStoreData={postStoreData}
+              setPostStoreData={setPostStoreData}
+              commentData={commentData}
+              setCommentData={setCommentData}
+              id={id}
+            />
           </div>
-          <Modal isModal={isModal} />
+          <Modal isModal={PostModal} type="otherpost" />
         </>
       ) : (
         <></>

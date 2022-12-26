@@ -10,39 +10,38 @@ import EmptyFeed from "../components/home/EmptyFeed";
 import Feeds from "../components/home/Feeds";
 
 export default function HomePage() {
-
   const [feed, setFeed] = useState([]);
 
-  const getUserFeed = async() => {
-    await API.get("/post/feed/?limit=100",{
+  const getUserFeed = async () => {
+    await API.get("/post/feed/?limit=100", {
       header: {
-        "Authorization": `Bearer ${localStorage.getItem("token")}`,
+        Authorization: `Bearer ${localStorage.getItem("token")}`,
         "Content-type": "application/json",
-      }
-    }).then((res) => res.data)
-    .then((res) => setFeed({...res}));
-  }
+      },
+    })
+      .then((res) => res.data)
+      .then((res) => setFeed({ ...res }));
+  };
 
   // console.log(feed);
-
 
   // const {posts} = {...feed};
 
   // console.log(posts);
 
-  useEffect(()=>{
+  useEffect(() => {
     getUserFeed();
-  },[])
+  }, []);
 
   return (
     <section>
-      <Header type="logo"/>
+      <Header type="logo" />
       {/* new */}
       {/* <EmptyFeed/> */}
-      <Feeds feed={feed}/>
+      <Feeds feed={feed} />
       {/* feeds */}
       {/* <Cards/> */}
-      <NavBar type="홈"/>
+      <NavBar type="홈" />
     </section>
   );
 }
