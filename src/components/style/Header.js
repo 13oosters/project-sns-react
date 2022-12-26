@@ -20,7 +20,7 @@ const HeaderWrap = styled.header`
   z-index: 1;
   width: 100%;
   background-color: #ffffff;
-`
+`;
 
 const HeaderLayout = css`
   display: flex;
@@ -32,7 +32,7 @@ const HeaderLayout = css`
 `;
 const HeaderUI = styled.div`
   ${HeaderLayout}
-`
+`;
 
 const HeaderInput = styled.input`
   display: block;
@@ -40,7 +40,7 @@ const HeaderInput = styled.input`
   background-color: #f2f2f2;
   padding: 0.7rem 4.3rem 0.7rem 1.6rem;
   border-radius: 3.2rem;
-`
+`;
 
 const SearchDiv = styled.div`
   position: relative;
@@ -52,9 +52,9 @@ const SearchDiv = styled.div`
     transform: translateY(-45%);
     right: 1.3rem;
   }
-`
+`;
 
-export default function Header({ type }) {
+export default function Header({ type, setKeyword, startTransition }) {
   const navigate = useNavigate();
   const UI = {
     logo: (
@@ -70,9 +70,23 @@ export default function Header({ type }) {
             <img src={backImage} alt="뒤로 가기" />
           </button>
           <SearchDiv>
-            <HeaderInput placeholder="계정 검색" />
-            <button type="button">
-              <img src={cancelImage} alt="취소 버튼"/>
+            <HeaderInput
+              onKeyUp={(e) => {
+                startTransition(() => {
+                  setKeyword(e.target.value);
+                });
+              }}
+              placeholder="계정 검색"
+            />
+            <button
+              onClick={(e) => {
+                e.target.closest("div").childNodes[0].value = "";
+                setKeyword("");
+                //
+              }}
+              type="button"
+            >
+              <img src={cancelImage} alt="취소 버튼" />
             </button>
           </SearchDiv>
         </HeaderUI>
