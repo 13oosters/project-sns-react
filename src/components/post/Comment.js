@@ -52,13 +52,34 @@ export default function Comment({ comment }) {
     // setCommentModal((prev) => !prev);
     isModal((prev) => !prev);
   };
+  const commentTime = Math.round(
+    (new Date().getTime() - Date.parse(comment.createdAt)) / 1000,
+  );
+  let time = "";
+
+  const getTime = () => {
+    if (commentTime < 60) {
+      time = `${commentTime}초 전`;
+    }
+    if (commentTime > 60) {
+      time = `${Math.round(commentTime / 60)}분 전`;
+    }
+    if (commentTime > 60 * 60) {
+      time = `${Math.round(commentTime / (60 * 60))}시간 전`;
+    }
+    if (commentTime > 60 * 60 * 24) {
+      time = `${Math.round(commentTime / (60 * 60 * 24))}일 전`;
+    }
+
+    return time;
+  };
 
   return (
     <CommentLi>
       <CommentUserInfoDiv>
         <UserImage src={comment.author.image} alt="프로필 사진" />
         <UserNameStrong>{comment.author.accountname}</UserNameStrong>
-        <CommentTime>5분 전</CommentTime>
+        <CommentTime>{getTime()}</CommentTime>
         <ModalImage
           name={comment.id}
           src={modalButtonImage}
