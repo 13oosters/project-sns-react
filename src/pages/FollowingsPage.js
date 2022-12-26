@@ -33,6 +33,7 @@ export default function FollowingsPage() {
     <div className="followerWrap">
       <Header type="followings" />
       <FollowingCards followingList={followingList} />
+      <NavBar />
     </div>
   );
 }

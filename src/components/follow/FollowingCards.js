@@ -8,15 +8,13 @@ export default function FollowingCards({ followingList }) {
     <main className="followerMain">
       <section className="followCards">
         <ul className="followList">
-          {followingList && followingList.length > 0 ? (
-            followingList.map((followingList, id) => (
-              <div key={id}>
-                <FollowingCard followingList={followingList} />
-              </div>
-            ))
-          ) : (
-            <div>팔로잉하는 유저가 없습니다.</div>
-          )}
+          {followingList && followingList.length > 0
+            ? followingList.map((followingList, id) => (
+                <div key={id}>
+                  <FollowingCard followingList={followingList} />
+                </div>
+              ))
+            : null}
         </ul>
       </section>
     </main>

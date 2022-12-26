@@ -14,7 +14,7 @@ export default function FollowingCard({ followingList }) {
 
         <div className="followInformation">
           <p className="followerName">{followingList.userName}</p>
-          <p className="followerIntroduce">{followingList.intro}</p>
+          <p className="followerIntroduce">{followingList.introduce}</p>
         </div>
       </Link>
       {/* 팔로우 중인 유저 프로필에서는 취소 버튼, 팔로루 하고 있지 않은 유저 프로필에서는 팔로우 버튼 */}
