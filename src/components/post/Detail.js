@@ -1,17 +1,44 @@
 import React from "react";
+import styled from "styled-components";
 
 import Card from "../common/Card";
 import Dialog from "../post/Dialog";
 
-export default function Detail({ setIsModal, postStoreData }) {
-  /** 유저정보는 공통 card에서 가져오기..? */
+const DeatailSection = styled.section`
+  margin-top: 4rem;
+`;
+
+// setPostStoreData 사용안하면 지우기
+export default function Detail({
+  setPostStoreData,
+  postStoreData,
+  id,
+  setIsPostModal,
+  commentData,
+  setCommentData,
+}) {
   const { post } = { ...postStoreData };
 
+  const { comments } = { ...commentData };
+
   return (
-    <section>
-      <h2 class="sr-only">게시글</h2>
-      <Card setIsModal={setIsModal} post={post} />
-      <Dialog />
-    </section>
+    <>
+      {post ? (
+        <DeatailSection>
+          <h2 class="sr-only">게시글</h2>
+          <Card setIsPostModal={setIsPostModal} post={post} />
+          <Dialog
+            id={id}
+            postStoreData={postStoreData}
+            post={post}
+            setPostStoreData={setPostStoreData}
+            comments={comments}
+            setCommentData={setCommentData}
+          />
+        </DeatailSection>
+      ) : (
+        <></>
+      )}
+    </>
   );
 }

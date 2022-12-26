@@ -17,7 +17,7 @@ export default function HomePage() {
   const getUserFeed = async() => {
     const response = await API.get("/post/feed/?limit=100",{
       header: {
-        "Authorization": `Bearer ${localStorage.getItem("token")}`,
+        Authorization: `Bearer ${localStorage.getItem("token")}`,
         "Content-type": "application/json",
       }
     });
@@ -54,7 +54,7 @@ export default function HomePage() {
 
   return (
     <section>
-      <Header type="logo"/>
+      <Header type="logo" />
       {/* new */}
       {/* feed 날짜가 최신일수록 가장 상단에 위치하도록 sort 코드 작성 */}
       {feed ? <Feeds feed={feed.sort((a,b) => Date.parse(b.createdAt) - Date.parse(a.createdAt))}/> : <EmptyFeed/>}

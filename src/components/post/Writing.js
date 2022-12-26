@@ -1,13 +1,15 @@
-import React from "react";
+import React, { useState } from "react";
 import styled from "styled-components";
 
 import profileImage from "../../assets/image/basic-profile-img-post.png";
+import postData from "../../utils/postData";
 
 const WriteSection = styled.section`
   display: flex;
   justify-content: left;
   align-items: center;
   border-top: 1px solid ${(props) => props.theme.lightColor};
+  padding: 1rem 1.2rem 0 1.2rem;
 `;
 
 const UserImage = styled.img`
@@ -44,14 +46,40 @@ const UpLoadButton = styled.button`
   color: #c4c4c4;
 `;
 
-export default function Writing() {
+export default function Writing({
+  id,
+  comments,
+  setPostStoreData,
+  setCommentData,
+}) {
+  const [inputComment, setInputComment] = useState("");
+
+  const getComment = (e) => {
+    setInputComment(e.target.value);
+  };
+  const uploadcomment = () => {
+    postData("comment", `${id}`, setCommentData, inputComment);
+    console.log(comments);
+    setInputComment("");
+  };
+
+  // form의 새로고침을 막는 e.preventDefault()
+
   return (
     <WriteSection>
       <h4 class="sr-only">댓글 입력창</h4>
       <UserImage src={profileImage} alt="사용자 프로필 사진" />
-      <WritingForm method="post">
-        <WritingTextarea required placeholder="댓글 입력하기.." />
-        <UpLoadButton type="submit">게시</UpLoadButton>
+      <WritingForm>
+        <WritingTextarea
+          value={inputComment}
+          required
+          placeholder="댓글 입력하기.."
+          // onChange 없어도 됨.
+          onChange={getComment}
+        />
+        <UpLoadButton type="button" onClick={uploadcomment}>
+          게시
+        </UpLoadButton>
       </WritingForm>
     </WriteSection>
   );
