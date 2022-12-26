@@ -20,7 +20,7 @@ const HeaderWrap = styled.header`
   z-index: 1;
   width: 100%;
   background-color: #ffffff;
-`
+`;
 
 const HeaderLayout = css`
   display: flex;
@@ -32,7 +32,7 @@ const HeaderLayout = css`
 `;
 const HeaderUI = styled.div`
   ${HeaderLayout}
-`
+`;
 
 const HeaderInput = styled.input`
   display: block;
@@ -40,7 +40,7 @@ const HeaderInput = styled.input`
   background-color: #f2f2f2;
   padding: 0.7rem 4.3rem 0.7rem 1.6rem;
   border-radius: 3.2rem;
-`
+`;
 
 const SearchDiv = styled.div`
   position: relative;
@@ -52,7 +52,7 @@ const SearchDiv = styled.div`
     transform: translateY(-45%);
     right: 1.3rem;
   }
-`
+`;
 
 export default function Header({ type }) {
   const navigate = useNavigate();
@@ -72,7 +72,7 @@ export default function Header({ type }) {
           <SearchDiv>
             <HeaderInput placeholder="계정 검색" />
             <button type="button">
-              <img src={cancelImage} alt="취소 버튼"/>
+              <img src={cancelImage} alt="취소 버튼" />
             </button>
           </SearchDiv>
         </HeaderUI>
