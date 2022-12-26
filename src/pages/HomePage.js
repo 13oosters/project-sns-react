@@ -11,25 +11,26 @@ import Feeds from "../components/home/Feeds";
 
 export default function HomePage() {
 
-  const [feed, setFeed] = useState([]); // 팔로우한 사람들의 게시물 데이터
+  const [feed, setFeed] = useState([]); // 팔로우한 사람들+ 나의 게시물 데이터
 
   console.log(3, feed)
   
   const getUserFeed = async() => {
     console.log(1, feed)
-    await API.get("/post/feed/?limit=100",{
+    const response = await API.get("/post/feed/?limit=100",{
       header: {
         "Authorization": `Bearer ${localStorage.getItem("token")}`,
         "Content-type": "application/json",
       }
-    }).then((res) => res.data.posts).then((res) => setFeed(res))
+    });
+    const result = await response.data.posts;
 
-    return feed;
+    return result;
+
   }
 
-  const getMyPost = async() => {
-    console.log(2, feed)
-    // await getUserFeed();
+  const getMyPost = async(data) => {
+
     const response = await API.get("/user/myinfo", {
       "Authorization": `Bearer ${localStorage.getItem("token")}`,
     });
@@ -42,20 +43,10 @@ export default function HomePage() {
     });
     const myPostingResult = await myPosting.data;
 
-    console.log(myPostingResult.post)
-
-    // console.log(myPostingResult.post);
-//    console.log(feed);
-
-    const temp = [...feed, ...myPostingResult.post];
-    
-    console.log(temp);
-
-//    temp.push(...myPostingResult.post);
+    const temp = [...data, ...myPostingResult.post];
   
     setFeed(temp);
-    return temp
-    
+
   }
 
   // console.log(feed);
@@ -64,8 +55,11 @@ export default function HomePage() {
 
   // console.log(posts);
 
+  // automatic batching
+
   useEffect(()=>{
-    getUserFeed().then((res) => getMyPost())
+    getUserFeed().then((data) => getMyPost(data));
+    
     // Promise.allSettled()
   },[])
 /*   useEffect(()=>{

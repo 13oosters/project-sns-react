@@ -68,7 +68,6 @@ const CardBodyTime = styled.time`
 `;
 
 export default function Card({ setIsModal, post }) {
-  // console.log(feed);
 
   const { author, content, image, id, hearted, heartCount, commentCount, createdAt } = {
     ...post,
