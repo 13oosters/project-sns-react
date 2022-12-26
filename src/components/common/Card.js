@@ -8,7 +8,7 @@ import heartImage from "../../assets/image/icon-heart.png";
 import heartClickImage from "../../assets/image/icon-heart-fill.png";
 import commentImage from "../../assets/image/icon-comment.png";
 import API from "../../utils/api";
-import Modal from "./Modal";
+import PostImage from "../home/PostImage";
 
 const smallFont = css`
   font-size: ${(props) => props.theme.smallFontSize};
@@ -86,6 +86,32 @@ export default function Card({ setIsPostModal, post }) {
 
   const navigate = useNavigate();
 
+  const [heart, setHeart] = useState(hearted);
+  const [heartCounting, setHeartCounting] = useState(heartCount);
+
+  const heartButtonClick = async() => {
+    if(heart){
+      setHeart(false);
+      setHeartCounting(heartCounting - 1);
+      const response = await API.delete(`/post/${id}/unheart`, {
+        "Authorization": `Bearer ${localStorage.getItem("token")}`,
+        "Content-type": "application/json",
+      });
+
+      return response;
+    }
+
+    setHeart(true);
+    setHeartCounting(heartCounting + 1);
+    const response = await API.post(`post/${id}/heart`,{
+      "Authorization": `Bearer ${localStorage.getItem("token")}`,
+      "Content-type": "application/json",
+    });
+
+    return response;
+  }
+
+
   return (
     <>
       {post ? (
@@ -113,18 +139,7 @@ export default function Card({ setIsPostModal, post }) {
               <img src={moreImage} alt="설정" />
             </CardHeaderButton>
           </CardHeaderDiv>
-          {/** 이미지가 존재하지 않을 경우 처리했습니다.  */}
-          {/** 이미지 2개이상일때 여러개 사진 불러우기 */}
-          {image ? (
-            <img
-              src={image}
-              alt="#"
-              style={{ width: "100%", height: "23rem" }}
-            />
-          ) : (
-            <></>
-          )}
-
+          <PostImage image={image}/>
           <CardBodyUl>
             <li>
               <button type="button">
