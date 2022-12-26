@@ -43,6 +43,8 @@ const SelectP = styled.p`
 export default function NavBar({ type }) {
   const navigate = useNavigate();
 
+  const accountName = localStorage.getItem("accountname");
+
   if (type === "게시물") {
     return null;
   }
@@ -97,7 +99,7 @@ export default function NavBar({ type }) {
           <li>
             <TabMenuLink
               onClick={() => {
-                navigate("/account/settings");
+                navigate(`/account/${accountName}`);
               }}
             >
               {type === "프로필" ? (
