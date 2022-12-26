@@ -1,79 +1,31 @@
-import React from "react";
-import styled from "styled-components";
-import FollowerCount from "./FollowerCount";
-import FollowingCount from "./FollowingCount";
-import ProfileImage from "../../assets/image/basic-profile-img.png";
-import MyProfileButton from "./MyProfileButton";
+import React, { Link } from "react";
+import ProfileButton from "./ProfileButton";
 
-const InformationWrapDiv = styled.div`
-  display: flex;
-  flex-direction: column;
-  padding: 3rem 0 2.6rem;
-  box-sizing: border-box;
-  border-bottom: 2px solid ${(props) => props.theme.lightColor};
-  height: 31.4rem;
-`;
+export default function ProfileInformation({ profileInformation }) {
+  const username = localStorage.getItem("username");
+  const followLink = `/${username}/follower`;
+  const followingLink = `/${username}/following`;
+  const user = profileInformation.user;
 
-const InformationTopDiv = styled.div`
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  gap: 3.7rem;
-  margin-bottom: 1.5rem;
-`;
-
-const InformationDiv = styled.div`
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-  align-items: center;
-  gap: 0.7rem;
-`;
-
-const ImformationP = styled.p`
-  font-size: ${(props) => props.theme.largeFontSize};
-  font-weight: 700;
-`;
-
-const InformationSpan = styled.span`
-  font-size: ${(props) => props.theme.smallFontSize};
-  color: ${(props) => props.theme.darkLightColor};
-
-  &::before {
-    content: "@ ";
-  }
-`;
-
-const UploadImage = styled.img`
-  width: 11rem;
-  height: 11rem;
-  border-radius: 50%;
-`;
-
-const IntroduceP = styled.p`
-  margin: 0.9rem 0 2.4rem;
-  font-size: ${(props) => props.theme.baseFontSize};
-  color: ${(props) => props.theme.darkLightColor};
-`;
-
-export default function ProfileInformation() {
   return (
-    <InformationWrapDiv>
-      <InformationTopDiv>
-        <FollowerCount />
-        <UploadImage
-          src={ProfileImage}
-          alt="프로필 사진"
-          style={{ objecFit: "cover" }}
-        />
-        <FollowingCount />
-      </InformationTopDiv>
-      <InformationDiv>
-        <ImformationP>호박이</ImformationP>
-        <InformationSpan>hobak2</InformationSpan>
-        <IntroduceP>안녕하세요 :&#41; 턱시도 젠틀냥 호박이입니다.</IntroduceP>
-        <MyProfileButton>프로필 수정</MyProfileButton>
-      </InformationDiv>
-    </InformationWrapDiv>
+    <div className="imformationWrap">
+      <div className="tempWrap">
+        <Link to={followLink}>
+          <p className="followCount followers">{user.followerCount}</p>
+          <p className="followName followers">followers</p>
+        </Link>
+        <img src={user.image} alt="프로필 이미지" />
+        <Link to={followingLink}>
+          <p className="followCount following">{user.followingCount}</p>
+          <p className="followName following">followings</p>
+        </Link>
+      </div>
+      <div>
+        <p className="userName">{user.username}</p>
+        <p className="userID">{user.accountname}</p>
+        <p className="userIntroduce">{user.introduce}</p>
+      </div>
+      <ProfileButton />
+    </div>
   );
 }
