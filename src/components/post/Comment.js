@@ -4,6 +4,7 @@ import modalButtonImage from "../../assets/image/icon-more-post.png";
 import Modal from "../common/Modal";
 
 const CommentLi = styled.li`
+  padding: 2rem 1.6rem 0rem 1.6rem;
   margin-bottom: 2.2rem;
   display: flex;
   flex-direction: column;
@@ -44,9 +45,12 @@ const ModalImage = styled.img`
   height: 1.6rem;
 `;
 
-export default function Comment({ comment, setCommentModal }) {
-  const setModal = () => {
-    setCommentModal((prev) => !prev);
+export default function Comment({ comment }) {
+  const [modal, isModal] = useState(false);
+  const setModal = (e) => {
+    console.log(e.target.name);
+    // setCommentModal((prev) => !prev);
+    isModal((prev) => !prev);
   };
 
   return (
@@ -56,12 +60,14 @@ export default function Comment({ comment, setCommentModal }) {
         <UserNameStrong>{comment.author.accountname}</UserNameStrong>
         <CommentTime>5분 전</CommentTime>
         <ModalImage
+          name={comment.id}
           src={modalButtonImage}
-          alt="댓글 수정 삭제 모달 버튼"
+          alt="댓글 삭제 모달 버튼"
           onClick={setModal}
         />
       </CommentUserInfoDiv>
       <CommentP>{comment.content}</CommentP>
+      <Modal isModal={modal} type="othercomment" commentId={comment.id} />
     </CommentLi>
   );
 }

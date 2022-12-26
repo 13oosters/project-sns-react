@@ -13,7 +13,6 @@ export default function Detail({
   postStoreData,
   id,
   setIsPostModal,
-  setCommentModal,
 }) {
   const { post } = { ...postStoreData };
 
@@ -28,7 +27,6 @@ export default function Detail({
             postStoreData={postStoreData}
             post={post}
             setPostStoreData={setPostStoreData}
-            setCommentModal={setCommentModal}
           />
         </DeatailSection>
       ) : (

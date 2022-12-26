@@ -10,6 +10,7 @@ const ModalDiv = styled.div`
   width: 100%;
   position: fixed;
   bottom: 0;
+  right: 0%;
   background-color: #ffffff;
   border: 1px solid #dbdbdb;
   border-top-left-radius: 1rem;
@@ -29,27 +30,34 @@ const ModalLi = styled.li`
 `;
 // url은 useparams로 불러오기
 
-export default function Modal({ isModal, type }) {
+export default function Modal({ isModal, type, commentId }) {
   const [message, setMessage] = useState("");
   const { id } = useParams();
   const navigate = useNavigate();
-  const commentId = 0;
   const deletePost = () => {
     postData("deletepost", id, "");
     // 삭제하면 홈으로 이동
     navigate("/home");
   };
+
   const editPost = () => {
     postData("editpost", id, "");
   };
+
   // type, url, setPostData, comment, id, commentId
   const postReport = () => {
     postData("postReport", id, setMessage);
     const { report } = { ...message };
 
-    alert("게시물 신고가 완료 되었습니다.");
+    alert(` ${report.post} 게시물 신고가 완료 되었습니다.`);
   };
 
+  const commentReport = (e) => {
+    console.log(e.target);
+    console.log(commentId);
+    postData("commentReport", id, setMessage, "", "", commentId);
+    alert(`${commentId} 댓글 신고가 완료 되었습니다.`);
+  };
   const ModalUI = {
     myprofile: (
       <ul>
@@ -82,12 +90,10 @@ export default function Modal({ isModal, type }) {
     ),
     othercomment: (
       <ul>
-        <ModalLi>댓글 신고하기</ModalLi>
+        <ModalLi onClick={commentReport}>댓글 신고하기</ModalLi>
       </ul>
     ),
   };
-
-  console.log(type);
 
   return (
     <section>

@@ -9,6 +9,7 @@ const WriteSection = styled.section`
   justify-content: left;
   align-items: center;
   border-top: 1px solid ${(props) => props.theme.lightColor};
+  padding: 1rem 1.2rem 0 1.2rem;
 `;
 
 const UserImage = styled.img`
@@ -51,7 +52,7 @@ export default function Writing({ id, comments, setPostStoreData }) {
   const getComment = (e) => {
     setInputComment(e.target.value);
   };
-  const comment = () => {
+  const uploadcomment = () => {
     postData("comment", `${id}`, setPostStoreData, inputComment);
     console.log(comments);
     setInputComment("");
@@ -68,7 +69,7 @@ export default function Writing({ id, comments, setPostStoreData }) {
           placeholder="댓글 입력하기.."
           onChange={getComment}
         />
-        <UpLoadButton type="button" onClick={comment}>
+        <UpLoadButton type="button" onClick={uploadcomment}>
           게시
         </UpLoadButton>
       </WritingForm>

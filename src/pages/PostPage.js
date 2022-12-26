@@ -13,16 +13,13 @@ import postData from "../utils/postData";
  * 4. 댓글 기능 */
 export default function PostPage() {
   const [PostModal, setIsPostModal] = useState(false);
-  const [CommentModal, setCommentModal] = useState(false);
   const { id } = useParams();
   const [postStoreData, setPostStoreData] = useState("");
-  const [Loading, IsLoading] = useState(false);
 
   console.log(id);
 
   useEffect(() => {
     postData("detailPost", id, setPostStoreData);
-    IsLoading(true);
   }, []);
 
   return (
@@ -32,16 +29,15 @@ export default function PostPage() {
           <div>
             <h1 className="sr-only">게시글 상세보기</h1>
             <Header type="post" />
+            {/** props id 사용하는지 확인필요 */}
             <Detail
               setIsPostModal={setIsPostModal}
-              setCommentModal={setCommentModal}
               postStoreData={postStoreData}
               setPostStoreData={setPostStoreData}
               id={id}
             />
           </div>
           <Modal isModal={PostModal} type="otherpost" />
-          <Modal isModal={CommentModal} type="othercomment" />
         </>
       ) : (
         <></>

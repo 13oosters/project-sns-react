@@ -7,7 +7,6 @@ import API from "./api";
  *
  *
  */
-
 const getPost = async (type, url, setPostData, comment, id, commentId) => {
   let responseData = null;
   let responseComent = null;
@@ -92,6 +91,19 @@ const getPost = async (type, url, setPostData, comment, id, commentId) => {
         ...responseComent,
         ...responseComments,
       };
+    }
+    if (type === "commentReport") {
+      const response = await API.post(
+        `/post/${url}/comments/${commentId}/report`,
+        {
+          header: {
+            Authorization: `Bearer${localStorage.getItem("token")}`,
+            "Content-type": "application/json",
+          },
+        },
+      );
+
+      responseData = await response.data;
     }
   } catch (e) {
     throw new Error(e);
