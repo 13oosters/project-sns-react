@@ -7,6 +7,7 @@ const mainTheme = {
   sideColor: "#FFFAEE",
   lightColor: "#DBDBDB",
   darkLightColor: "#767676",
+  darkColor: "#000000",
   xSmallFontSize: "1rem",
   smallFontSize: "1.2rem",
   baseFontSize: "1.4rem",
