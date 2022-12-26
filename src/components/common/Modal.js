@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState } from "react";
 import styled from "styled-components";
 import { useNavigate, useParams } from "react-router";
 
@@ -30,9 +30,10 @@ const ModalLi = styled.li`
 // url은 useparams로 불러오기
 
 export default function Modal({ isModal, type }) {
+  const [message, setMessage] = useState("");
   const { id } = useParams();
   const navigate = useNavigate();
-
+  const commentId = 0;
   const deletePost = () => {
     postData("deletepost", id, "");
     // 삭제하면 홈으로 이동
@@ -41,6 +42,14 @@ export default function Modal({ isModal, type }) {
   const editPost = () => {
     postData("editpost", id, "");
   };
+  // type, url, setPostData, comment, id, commentId
+  const postReport = () => {
+    postData("postReport", id, setMessage);
+    const { report } = { ...message };
+
+    alert("게시물 신고가 완료 되었습니다.");
+  };
+
   const ModalUI = {
     myprofile: (
       <ul>
@@ -68,7 +77,7 @@ export default function Modal({ isModal, type }) {
     ),
     otherpost: (
       <ul>
-        <ModalLi>게시물 신고하기</ModalLi>
+        <ModalLi onClick={postReport}>게시물 신고하기</ModalLi>
       </ul>
     ),
     othercomment: (

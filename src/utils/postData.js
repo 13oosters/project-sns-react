@@ -8,7 +8,7 @@ import API from "./api";
  *
  */
 
-const getPost = async (type, url, setPostData, comment, id) => {
+const getPost = async (type, url, setPostData, comment, id, commentId) => {
   let responseData = null;
   let responseComent = null;
 
@@ -33,6 +33,8 @@ const getPost = async (type, url, setPostData, comment, id) => {
     responseData = { ...responseData, ...responseComent };
     console.log(responseData);
 
+    /* edit 구현 진행중 */
+
     if (type === "editpost") {
       const response = await API.get("/post/feed", {
         header: {
@@ -43,8 +45,6 @@ const getPost = async (type, url, setPostData, comment, id) => {
 
       responseData = await response.data;
       console.log(responseData);
-
-      responseData = await response.data;
     }
     if (type === "deletepost") {
       const response = await API.delete(`/post/${url}`, {
@@ -57,7 +57,16 @@ const getPost = async (type, url, setPostData, comment, id) => {
       responseData = await response.data;
       console.log(responseData);
     }
+    if (type === "postReport") {
+      const response = await API.post(`/post/${url}/report`, {
+        header: {
+          Authorization: `Bearer${localStorage.getItem("token")}`,
+          "Content-type": "application/json",
+        },
+      });
 
+      responseData = await response.data;
+    }
     if (type === "comment") {
       const response = await API.post(`/post/${url}/comments`, {
         comment: {
@@ -84,22 +93,8 @@ const getPost = async (type, url, setPostData, comment, id) => {
         ...responseComments,
       };
     }
-
-    if (type === "deletComment") {
-      // post/:post_id/comments/:comment_id
-
-      const response = await API.delete(`/post/${url}/comments/${id}`, {
-        header: {
-          Authorization: `Bearer${localStorage.getItem("token")}`,
-          "Content-type": "application/json",
-        },
-      });
-    }
   } catch (e) {
     throw new Error(e);
-  }
-  if (responseData === null) {
-    responseData = "삭제되었습니다";
   }
 
   setPostData(responseData);
