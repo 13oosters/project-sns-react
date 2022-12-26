@@ -15,11 +15,13 @@ export default function PostPage() {
   const [PostModal, setIsPostModal] = useState(false);
   const { id } = useParams();
   const [postStoreData, setPostStoreData] = useState("");
+  const [commentData, setCommentData] = useState("");
 
   console.log(id);
 
   useEffect(() => {
-    postData("detailPost", id, setPostStoreData);
+    postData("detailpost", id, setPostStoreData);
+    postData("detailComment", id, setCommentData);
   }, []);
 
   return (
@@ -34,6 +36,8 @@ export default function PostPage() {
               setIsPostModal={setIsPostModal}
               postStoreData={postStoreData}
               setPostStoreData={setPostStoreData}
+              commentData={commentData}
+              setCommentData={setCommentData}
               id={id}
             />
           </div>

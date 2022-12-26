@@ -31,28 +31,32 @@ const getPost = async (
   console.log(url);
 
   try {
-    const responsePost = await API.get(`/post/${url}`, {
-      header: {
-        Authorization: `Bearer${localStorage.getItem("token")}`,
-        "Content-type": "application/json",
-      },
-    });
-    const CommentRes = await API.get(`/post/${url}/comments`, {
-      header: {
-        Authorization: `Bearer${localStorage.getItem("token")}`,
-        "Content-type": "application/json",
-      },
-    });
+    if (type === "detailpost") {
+      const responsePost = await API.get(`/post/${url}`, {
+        header: {
+          Authorization: `Bearer${localStorage.getItem("token")}`,
+          "Content-type": "application/json",
+        },
+      });
 
-    responseData = await responsePost.data;
-    responseComment = await CommentRes.data;
+      responseData = await responsePost.data;
+      console.log(responseData);
+      responseData = { ...responseData };
+    }
+    if (type === "detailComment") {
+      const CommentRes = await API.get(`/post/${url}/comments`, {
+        header: {
+          Authorization: `Bearer${localStorage.getItem("token")}`,
+          "Content-type": "application/json",
+        },
+      });
 
-    const reverseComment = { ...responseComment };
+      responseComment = await CommentRes.data;
+      const reverseComment = { ...responseComment };
 
-    reverseComment.comments.reverse();
-
-    responseData = { ...responseData, ...responseComment };
-    console.log(responseData);
+      reverseComment.comments.reverse();
+      responseData = { ...responseComment };
+    }
 
     /* edit 구현 진행중 */
 
@@ -113,7 +117,6 @@ const getPost = async (
       reverseResponse.comments.reverse();
 
       responseData = {
-        ...responseData,
         ...responseComment,
         ...responseComments,
       };

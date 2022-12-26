@@ -46,14 +46,19 @@ const UpLoadButton = styled.button`
   color: #c4c4c4;
 `;
 
-export default function Writing({ id, comments, setPostStoreData }) {
+export default function Writing({
+  id,
+  comments,
+  setPostStoreData,
+  setCommentData,
+}) {
   const [inputComment, setInputComment] = useState("");
 
   const getComment = (e) => {
     setInputComment(e.target.value);
   };
   const uploadcomment = () => {
-    postData("comment", `${id}`, setPostStoreData, inputComment);
+    postData("comment", `${id}`, setCommentData, inputComment);
     console.log(comments);
     setInputComment("");
   };

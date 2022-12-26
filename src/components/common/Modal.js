@@ -53,10 +53,10 @@ export default function Modal({ isModal, type, commentId }) {
   };
 
   const commentReport = (e) => {
-    console.log(e.target);
-    console.log(commentId);
     postData("commentReport", id, setMessage, "", "", commentId);
-    alert(`${commentId} 댓글 신고가 완료 되었습니다.`);
+    const { report } = { ...message };
+
+    alert(`${report.post} 댓글 신고가 완료 되었습니다.`);
   };
   const ModalUI = {
     myprofile: (

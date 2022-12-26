@@ -8,13 +8,18 @@ const DeatailSection = styled.section`
   margin-top: 4rem;
 `;
 
+// setPostStoreData 사용안하면 지우기
 export default function Detail({
   setPostStoreData,
   postStoreData,
   id,
   setIsPostModal,
+  commentData,
+  setCommentData,
 }) {
   const { post } = { ...postStoreData };
+
+  const { comments } = { ...commentData };
 
   return (
     <>
@@ -27,6 +32,8 @@ export default function Detail({
             postStoreData={postStoreData}
             post={post}
             setPostStoreData={setPostStoreData}
+            comments={comments}
+            setCommentData={setCommentData}
           />
         </DeatailSection>
       ) : (

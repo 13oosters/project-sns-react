@@ -3,11 +3,7 @@ import React from "react";
 import Comments from "./Comments";
 import Writing from "./Writing";
 
-export default function Dialog({ id, postStoreData, setPostStoreData }) {
-  const { comments } = { ...postStoreData };
-
-  console.log(comments);
-
+export default function Dialog({ id, comments, setCommentData }) {
   return (
     <>
       {comments ? (
@@ -17,8 +13,7 @@ export default function Dialog({ id, postStoreData, setPostStoreData }) {
           <Writing
             id={id}
             comments={comments}
-            postStoreData={postStoreData}
-            setPostStoreData={setPostStoreData}
+            setCommentData={setCommentData}
           />
         </section>
       ) : (

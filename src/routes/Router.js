@@ -38,10 +38,10 @@ function Router() {
       {/*  */}
       <Route path="/search" element={<SearchPage></SearchPage>} />
       <Route path="/upload" element={<UploadPage></UploadPage>} />
-      <Route path="/account" element={<ProfilePage>하이</ProfilePage>} />
-      <Route path="/account/followers" element={<div>하이</div>} />
-      <Route path="/account/settings" element={<div>하이</div>} />
-      <Route path="/post/:id" element={<PostPage>하이</PostPage>} />
+      <Route path="/:account" element={<ProfilePage>하이</ProfilePage>} />
+      <Route path="/:account/followers" element={<div>하이</div>} />
+      <Route path="/:account/settings" element={<div>하이</div>} />
+      <Route path="/:account/post/:id" element={<PostPage>하이</PostPage>} />
       {/**  <Route path="post" element={<div>하이</div>} />*/}
       <Route path="*" element={<ErrorPage></ErrorPage>} />
     </Routes>

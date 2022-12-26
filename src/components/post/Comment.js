@@ -48,18 +48,18 @@ const ModalImage = styled.img`
 export default function Comment({ comment }) {
   const [modal, isModal] = useState(false);
   const setModal = (e) => {
-    console.log(e.target.name);
-    // setCommentModal((prev) => !prev);
     isModal((prev) => !prev);
   };
+
   const commentTime = Math.round(
     (new Date().getTime() - Date.parse(comment.createdAt)) / 1000,
   );
-  let time = "";
 
   const getTime = () => {
+    let time = "";
+
     if (commentTime < 60) {
-      time = `${commentTime}초 전`;
+      time = `몇초 전`;
     }
     if (commentTime > 60) {
       time = `${Math.round(commentTime / 60)}분 전`;
@@ -92,20 +92,3 @@ export default function Comment({ comment }) {
     </CommentLi>
   );
 }
-
-/* <CommentLi>
-<CommentUserInfoDiv>
-  <UserImage src={profileImage} alt="프로필 사진" />
-  <UserNameStrong>앙리</UserNameStrong>
-  <CommentTime>5분 전</CommentTime>
-</CommentUserInfoDiv>
-<CommentP>
-  너 정말 앙큼한 고양이구나~!너 정말 앙큼한 고양이구나~!너 정말 앙큼한
-  고양이구나~!너 정말 앙큼한 고양이구나~!너 정말 앙큼한 고양이구나~!너
-  정말 앙큼한 고양이구나~!너 정말 앙큼한 고양이구나~!너 정말 앙큼한
-  고양이구나~!너 정말 앙큼한 고양이구나~!너 정말 앙큼한 고양이구나~!너
-  정말 앙큼한 고양이구나~!너 정말 앙큼한 고양이구나~!너 정말 앙큼한
-  고양이구나~!너 정말 앙큼한 고양이구나~!너 정말 앙큼한 고양이구나~!너
-  정말 앙큼한 고양이구나~!
-</CommentP>
-</CommentLi> */
