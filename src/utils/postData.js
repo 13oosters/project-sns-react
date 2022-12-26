@@ -7,9 +7,26 @@ import API from "./api";
  *
  *
  */
-const getPost = async (type, url, setPostData, comment, id, commentId) => {
+/**
+ *
+ * @param {string} type : 어떤 요청인지
+ * @param {string} url : path
+ * @param {} setPostData : 데이터 useState
+ * @param {string} comment : 댓글 내용
+ * @param {string} accountname : 사용자이름
+ * @param {string} commentId : 댓글 아이디 (삭제,신고)
+ */
+
+const getPost = async (
+  type,
+  url,
+  setPostData,
+  comment,
+  accountname,
+  commentId,
+) => {
   let responseData = null;
-  let responseComent = null;
+  let responseComment = null;
 
   console.log(url);
 
@@ -28,8 +45,13 @@ const getPost = async (type, url, setPostData, comment, id, commentId) => {
     });
 
     responseData = await responsePost.data;
-    responseComent = await CommentRes.data;
-    responseData = { ...responseData, ...responseComent };
+    responseComment = await CommentRes.data;
+
+    const reverseComment = { ...responseComment };
+
+    reverseComment.comments.reverse();
+
+    responseData = { ...responseData, ...responseComment };
     console.log(responseData);
 
     /* edit 구현 진행중 */
@@ -83,14 +105,19 @@ const getPost = async (type, url, setPostData, comment, id, commentId) => {
         },
       });
 
-      responseComent = await response.data;
+      responseComment = await response.data;
+
       const responseComments = await Commentres.data;
+      const reverseResponse = { ...responseComments };
+
+      reverseResponse.comments.reverse();
 
       responseData = {
         ...responseData,
-        ...responseComent,
+        ...responseComment,
         ...responseComments,
       };
+      console.log(responseData);
     }
     if (type === "commentReport") {
       const response = await API.post(
@@ -112,8 +139,5 @@ const getPost = async (type, url, setPostData, comment, id, commentId) => {
   setPostData(responseData);
   console.log(responseData);
 };
-
-/**
-삭제 누르면 뒤로가게 구현하기 */
 
 export default getPost;
