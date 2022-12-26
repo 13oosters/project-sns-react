@@ -1,18 +1,70 @@
-import React from "react";
-import BasicImage from "../../assets/image/basic-profile-img-post.png";
+import React, { useState } from "react";
+import { Link } from "react-router-dom";
+import styled from "styled-components";
+// import FollowButton from "../style/follow/followButton";
+import FollowCancelButton from "../style/follow/FollowCancelButton";
 
-export default function FollowerCard() {
+// import API from "../../utils/api";
+
+const FollowerWrap = styled.div`
+  width: 100%;
+`;
+
+const FollowItem = styled.li`
+  display: flex;
+  justify-content: space-between;
+  padding: 0 1.6rem 1.6rem 1.6rem;
+`;
+
+const FollowLink = styled.a`
+  display: flex;
+`;
+
+const FollowerImage = styled.img`
+  width: 5rem;
+  height: 5rem;
+  object-fit: cover;
+  border-radius: 50%;
+  margin-right: 1.2rem;
+`;
+
+const FollowerName = styled.p`
+  font-weight: 500;
+  font-size: ${(props) => props.theme.baseFontSize};
+  line-height: 1.8rem;
+  margin-top: 0.5rem;
+  margin-bottom: 0.6rem;
+`;
+
+const FollowerIntroduce = styled.p`
+  font-weight: 400;
+  line-height: 1.5rem;
+  font-size: ${(props) => props.theme.smallFontSize};
+  color: ${(props) => props.theme.darkLightColor};
+`;
+
+export default function FollowerCard({ followerList }) {
+  const userUrl = `/profile/${followerList.accountname}`;
+
   return (
-    <li className="followItem">
-      <a href="#" className="followLink">
-        <img src={BasicImage} alt="" />
-        <div className="followInformation">
-          <p className="followerName">앙리</p>
-          <p className="followerIntroduce">까만 초코볼</p>
-        </div>
-      </a>
-      <button className="followButton">팔로우</button>
-      {/* <button className="cancelButton">취소</button> */}
-    </li>
+    <FollowerWrap>
+      <FollowItem className="followItem">
+        <FollowLink to={userUrl} className="followLink">
+          <div className="followerImage">
+            <FollowerImage src={followerList.image} alt="프로필 이미지" />
+          </div>
+          <ProfileInformation className="followInformation">
+            <FollowerName className="followerName">
+              {followerList.username}
+            </FollowerName>
+            <FollowerIntroduce className="followerIntroduce">
+              {followerList.intro}
+            </FollowerIntroduce>
+          </ProfileInformation>
+        </FollowLink>
+        {/* <FollowButton className="followButton">팔로우</FollowButton> */}
+        <FollowCancelButton>취소</FollowCancelButton>
+      </FollowItem>
+    </FollowerWrap>
   );
 }
