@@ -1,8 +1,8 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 
 import Posting from "../components/upload/Posting";
-
 import PageLayout from "../components/style/PageLayout";
+import API from "../utils/api";
 
 export default function UploadPage() {
   const [userData, setUserData] = useState({
@@ -13,6 +13,23 @@ export default function UploadPage() {
     intro: "",
     image: "https://mandarin.api.weniv.co.kr/Ellipse.png",
   });
+  const getUserData = async () => {
+    const response = await API("/user/myinfo", {
+      headers: { Authorization: `Bearer ${localStorage.getItem("token")}` },
+    });
+
+    return response.data.user;
+  };
+
+  useEffect(() => {
+    getUserData().then((user) => {
+      setUserData({
+        ...userData,
+        accountname: user.accountname,
+        image: user.image,
+      });
+    });
+  }, []);
 
   return (
     <PageLayout paddingValue={0}>
