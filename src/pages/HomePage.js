@@ -11,12 +11,10 @@ import Feeds from "../components/home/Feeds";
 
 export default function HomePage() {
 
-  const [feed, setFeed] = useState([]); // 팔로우한 사람들+ 나의 게시물 데이터
+  const [feed, setFeed] = useState([]); // 팔로우한 사람들 + 나의 게시물 데이터
 
-  console.log(3, feed)
   
   const getUserFeed = async() => {
-    console.log(1, feed)
     const response = await API.get("/post/feed/?limit=100",{
       header: {
         "Authorization": `Bearer ${localStorage.getItem("token")}`,
@@ -49,31 +47,17 @@ export default function HomePage() {
 
   }
 
-  // console.log(feed);
-
-  // const {posts} = {...feed};
-
-  // console.log(posts);
-
-  // automatic batching
-
   useEffect(()=>{
     getUserFeed().then((data) => getMyPost(data));
     
-    // Promise.allSettled()
   },[])
-/*   useEffect(()=>{
-    getMyPost()
-  },[feed]) */
 
   return (
     <section>
       <Header type="logo"/>
       {/* new */}
-      {/* <EmptyFeed/> */}
-      <Feeds feed={feed}/>
-      {/* feeds */}
-      {/* <Cards/> */}
+      {/* feed 날짜가 최신일수록 가장 상단에 위치하도록 sort 코드 작성 */}
+      {feed ? <Feeds feed={feed.sort((a,b) => Date.parse(b.createdAt) - Date.parse(a.createdAt))}/> : <EmptyFeed/>}
       <NavBar type="홈"/>
     </section>
   );

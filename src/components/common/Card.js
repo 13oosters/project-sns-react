@@ -8,6 +8,7 @@ import heartImage from "../../assets/image/icon-heart.png";
 import heartClickImage from "../../assets/image/icon-heart-fill.png";
 import commentImage from "../../assets/image/icon-comment.png";
 import API from "../../utils/api";
+import PostImage from "../home/PostImage";
 
 const smallFont = css`
   font-size: ${(props) => props.theme.smallFontSize};
@@ -87,7 +88,7 @@ export default function Card({ setIsModal, post }) {
         "Content-type": "application/json",
       });
 
-      return console.log(response);
+      return response;
     }
 
     setHeart(true);
@@ -97,9 +98,9 @@ export default function Card({ setIsModal, post }) {
       "Content-type": "application/json",
     });
 
-    return console.log(response);
-
+    return response;
   }
+
 
   return (
     <>
@@ -121,11 +122,7 @@ export default function Card({ setIsModal, post }) {
           <img src={moreImage} alt="설정" />
         </CardHeaderButton>
       </CardHeaderDiv>
-      <img
-        src={image}
-        alt="#"
-        style={{ width: "100%", height: "23rem" }}
-      />
+      <PostImage image={image}/>
       <CardBodyUl>
         <li>
           <button type="button" onClick={heartButtonClick}>
