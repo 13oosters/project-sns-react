@@ -48,6 +48,7 @@ const CardBodyUl = styled.ul`
   align-items: center;
   gap: 2rem;
   padding: 0.8rem;
+  margin-left: 0.5rem;
 `;
 const CardBodySpan = styled.span`
   ${smallFont}
@@ -56,6 +57,8 @@ const CardBodySpan = styled.span`
 `;
 const CardBodyImage = styled.img`
   vertical-align: middle;
+  width: 2rem;
+  height: 2rem;
 `;
 const CardBodyP = styled.p`
   font-size: ${(props) => props.theme.baseFontSize};
@@ -141,15 +144,11 @@ export default function Card({ setIsPostModal, post }) {
           </CardHeaderDiv>
           <PostImage image={image}/>
           <CardBodyUl>
-            <li>
-              <button type="button">
-                {hearted ? (
-                  <CardBodyImage src={heartClickImage} />
-                ) : (
-                  <CardBodyImage src={heartImage} />
-                )}
+            <li style={{width: "4rem"}}>
+              <button type="button" onClick={heartButtonClick}>
+                  <CardBodyImage src={heart ? heartClickImage : heartImage} />
               </button>
-              <CardBodySpan>{heartCount}</CardBodySpan>
+              <CardBodySpan>{heartCounting}</CardBodySpan>
             </li>
             <li>
               <Link to={`${author.accountname}/post/${id}`}>
