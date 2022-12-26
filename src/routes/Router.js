@@ -33,7 +33,7 @@ function Router() {
 
   useEffect(() => {
     checkHasToken();
-  });
+  }, []);
 
   return (
     <Routes>
@@ -41,7 +41,7 @@ function Router() {
       <Route
         path="/"
         element={
-          hasToken ? (
+          !hasToken ? (
             <LoginPage />
           ) : (
             <Suspense fallback={<SplashScreen />}>
