@@ -101,6 +101,16 @@ export default function ImageUpload({ userData, imageData, setImageData }) {
     ]);
   };
 
+  const deleteImage = async (e) => {
+    uploadCounter.current -= 1;
+    const idx = e.target.closest("li").dataset.index;
+
+    const copy = [...imageData];
+
+    copy.splice(idx, 1);
+    setImageData(copy);
+  };
+
   return (
     <ImageUploadDiv>
       <Container>
@@ -124,9 +134,9 @@ export default function ImageUpload({ userData, imageData, setImageData }) {
 
       <ImageUl>
         {imageData.map((url, i) => (
-          <ImageLi key={i}>
+          <ImageLi key={i} data-index={i}>
             <Image src={url} alt="게시글 사진" />
-            <CancelButton type="button">
+            <CancelButton onClick={deleteImage} type="button">
               <CancelImage src={cancelImage} alt="취소버튼" />
             </CancelButton>
           </ImageLi>
