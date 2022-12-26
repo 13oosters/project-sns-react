@@ -55,7 +55,7 @@ const SearchDiv = styled.div`
   }
 `;
 
-export default function Header({ type }) {
+export default function Header({ type, setKeyword, startTransition }) {
   const navigate = useNavigate();
   const UI = {
     logo: (
@@ -71,8 +71,22 @@ export default function Header({ type }) {
             <img src={backImage} alt="뒤로 가기" />
           </button>
           <SearchDiv>
-            <HeaderInput placeholder="계정 검색" />
-            <button type="button">
+            <HeaderInput
+              onKeyUp={(e) => {
+                startTransition(() => {
+                  setKeyword(e.target.value);
+                });
+              }}
+              placeholder="계정 검색"
+            />
+            <button
+              onClick={(e) => {
+                e.target.closest("div").childNodes[0].value = "";
+                setKeyword("");
+                //
+              }}
+              type="button"
+            >
               <img src={cancelImage} alt="취소 버튼" />
             </button>
           </SearchDiv>

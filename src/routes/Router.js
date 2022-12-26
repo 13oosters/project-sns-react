@@ -1,4 +1,4 @@
-import { lazy, Suspense } from "react";
+import { lazy, Suspense, useState, useEffect } from "react";
 import { Routes, Route } from "react-router-dom";
 import LoginPage from "../pages/LoginPage";
 import SearchPage from "../pages/SearchPage";
@@ -9,18 +9,40 @@ import UploadPage from "../pages/UploadPage";
 import ErrorPage from "../pages/ErrorPage";
 import HomePages from "../pages/HomePage";
 import SplashScreen from "../components/common/SplashScreen";
+import API from "../utils/api";
 
 const HomePage = lazy(() => import("../pages/HomePage"));
 
 function Router() {
+  const [hasToken, setHasToken] = useState(false);
+  const checkHasToken = async () => {
+    try {
+      const response = await API("/user/checktoken", {
+        headers: {
+          Authorization: `Bearer ${localStorage.getItem("token")}`,
+          "Content-type": "application/json",
+        },
+      });
+      const { isValid } = response.data;
+
+      setHasToken(isValid);
+    } catch (error) {
+      throw new Error(error);
+    }
+  };
+
+  useEffect(() => {
+    checkHasToken();
+  }, [hasToken]);
+
   return (
     <Routes>
       {/* 로그인 */}
       <Route
         path="/"
         element={
-          true ? (
-            <LoginPage />
+          !hasToken ? (
+            <LoginPage setHasToken={setHasToken} />
           ) : (
             <Suspense fallback={<SplashScreen />}>
               <HomePage />
