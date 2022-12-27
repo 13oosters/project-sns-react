@@ -189,8 +189,18 @@ export default function Card({ post }) {
           </CardBodyTime>
           {myAccountname === author.accountname ? (
             <>
-              <Modal isModal={homeModal} type="mypost" postId={id} />
-              <Modal isModal={postModal} type="mypost" postId={id} />
+              <Modal
+                isModal={setIsHomeModal}
+                modal={homeModal}
+                type="mypost"
+                postId={id}
+              />
+              <Modal
+                isModal={setIsPostModal}
+                modal={postModal}
+                type="mypost"
+                postId={id}
+              />
             </>
           ) : (
             <>

@@ -17,14 +17,7 @@ import API from "./api";
  * @param {string} commentId : 댓글 아이디 (삭제,신고)
  */
 
-const getPost = async (
-  type,
-  url,
-  setPostData,
-  comment,
-  accountname,
-  commentId,
-) => {
+const getPost = async (type, url, setPostData, comment, commentId) => {
   let responseData = null;
   let responseComment = null;
 
@@ -83,14 +76,6 @@ const getPost = async (
       console.log(responseData);
     }
     if (type === "postReport") {
-      // const response = await API.post(`/post/${url}/report`, {
-      //   header: {
-      //     Authorization: `Bearer${localStorage.getItem("token")}`,
-      //     "Content-type": "application/json",
-      //   },
-      // });
-
-      // responseData = await response.data;
       alert("게시물 신고가 완료되었습니다.");
     }
     if (type === "comment") {
@@ -123,18 +108,42 @@ const getPost = async (
       };
       console.log(responseData);
     }
-    if (type === "commentReport") {
-      const response = await API.post(
-        `/post/${url}/comments/${commentId}/report`,
-        {
-          header: {
-            Authorization: `Bearer${localStorage.getItem("token")}`,
-            "Content-type": "application/json",
-          },
+    if (type === "deletComment") {
+      const response = await API.delete(`/post/${url}/comments/${commentId}`, {
+        header: {
+          Authorization: `Bearer${localStorage.getItem("token")}`,
+          "Content-type": "application/json",
         },
-      );
+      });
+      const CommentRes = await API.get(`/post/${url}/comments`, {
+        header: {
+          Authorization: `Bearer${localStorage.getItem("token")}`,
+          "Content-type": "application/json",
+        },
+      });
+
+      responseComment = await CommentRes.data;
+
+      // const reverseComment = { ...responseComment };
+
+      // reverseComment.comments.reverse();
+
+      responseData = { ...responseComment };
+
+      console.log(responseData);
+    }
+
+    if (type === "commentReport") {
+      alert("댓글 신고가 완료되었습니다.");
+    }
+
+    if (type === "myInfo") {
+      const response = await API.get("/user/myinfo", {
+        Authorization: `Bearer ${localStorage.getItem("token")}`,
+      });
 
       responseData = await response.data;
+      console.log(responseData);
     }
   } catch (e) {
     throw new Error(e);
