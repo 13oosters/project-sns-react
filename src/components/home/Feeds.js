@@ -2,7 +2,7 @@ import styled from "styled-components";
 import Cards from '../common/Cards';
 
 const FeedsDiv = styled.div`
-  height: calc(100% - 10.8rem);
+  /* height: calc(100% - 10.8rem); */
   overflow: scroll;
   padding: 0 ;
   margin-top: 4rem;
@@ -13,12 +13,12 @@ const FeedsDiv = styled.div`
   }
 `
 
-export default function Feeds({feed, setIsHomeModal}) {
+export default function Feeds({feed}) {
 
 
   return (
     <FeedsDiv>
-      <Cards setIsHomeModal={setIsHomeModal} feed={feed}/>
+      <Cards feed={feed}/>
     </FeedsDiv>
   )
 }

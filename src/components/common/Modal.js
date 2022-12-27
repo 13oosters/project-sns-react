@@ -30,31 +30,32 @@ const ModalLi = styled.li`
   cursor: pointer;
 `;
 // url은 useparams로 불러오기
+// postId 추가하였습니다
 
-export default function Modal({ isModal, type, commentId }) {
+export default function Modal({ isModal, type, commentId, postId }) {
   const [message, setMessage] = useState("");
   const { id } = useParams();
   const navigate = useNavigate();
   const deletePost = () => {
-    postData("deletepost", id, "");
+    postData("deletepost", postId, "");
     // 삭제하면 홈으로 이동
-    navigate("/home");
+    navigate("/");
   };
 
   const editPost = () => {
-    postData("editpost", id, "");
+    postData("editpost", postId, "");
   };
 
   // type, url, setPostData, comment, id, commentId
   const postReport = () => {
-    postData("postReport", id, setMessage);
+    postData("postReport", postId, setMessage);
     const { report } = { ...message };
 
-    alert(` ${report.post} 게시물 신고가 완료 되었습니다.`);
+    // alert(` ${report.post} 게시물 신고가 완료 되었습니다.`);
   };
 
   const commentReport = (e) => {
-    postData("commentReport", id, setMessage, "", "", commentId);
+    postData("commentReport", postId, setMessage, "", "", commentId);
     const { report } = { ...message };
 
     alert(`${report.post} 댓글 신고가 완료 되었습니다.`);
