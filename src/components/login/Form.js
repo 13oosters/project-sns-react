@@ -49,6 +49,7 @@ export default function Form({
       validate(userData, "signin", "/user/login").then((res) => {
         console.log(res);
         localStorage.setItem("token", res.token);
+        localStorage.setItem("accountname", res.accountname);
         setHasToken(true);
         navigate("/");
       });

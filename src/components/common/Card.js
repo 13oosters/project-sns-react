@@ -110,7 +110,6 @@ export default function Card({ setIsPostModal, post }) {
 
   useEffect(()=>{
     getMyAccountname();
-    console.log(myAccountname);
     
   },[])
 
