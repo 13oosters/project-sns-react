@@ -1,4 +1,5 @@
 import React, { useState } from "react";
+import { useParams } from "react-router-dom";
 import styled from "styled-components";
 import modalButtonImage from "../../assets/image/icon-more-post.png";
 import Modal from "../common/Modal";
@@ -45,9 +46,16 @@ const ModalImage = styled.img`
   height: 1.6rem;
 `;
 
-export default function Comment({ comment }) {
+export default function Comment({ comment, myInfo }) {
   const [modal, isModal] = useState(false);
-  const setModal = (e) => {
+  const { id } = useParams();
+  const { user } = { ...myInfo };
+
+  let postId = "";
+
+  console.log(user);
+
+  const setModal = () => {
     isModal((prev) => !prev);
   };
 
@@ -74,6 +82,9 @@ export default function Comment({ comment }) {
     return time;
   };
 
+  if (user.accountname === comment.author.accountname) {
+    postId = user.accountname;
+  }
   return (
     <CommentLi>
       <CommentUserInfoDiv>
@@ -88,7 +99,21 @@ export default function Comment({ comment }) {
         />
       </CommentUserInfoDiv>
       <CommentP>{comment.content}</CommentP>
-      <Modal isModal={modal} type="othercomment" commentId={comment.id} />
+      {postId ? (
+        <Modal
+          isModal={modal}
+          type="mycomment"
+          commentId={comment.id}
+          postId={id}
+        />
+      ) : (
+        <Modal
+          isModal={modal}
+          type="othercomment"
+          commentId={comment.id}
+          postId={id}
+        />
+      )}
     </CommentLi>
   );
 }

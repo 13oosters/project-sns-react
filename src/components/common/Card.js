@@ -72,7 +72,7 @@ const CardBodyTime = styled.time`
   padding: 1.3rem;
 `;
 
-export default function Card({ setIsPostModal, post }) {
+export default function Card({ post }) {
   // console.log(feed);
 
   const {
@@ -95,24 +95,23 @@ export default function Card({ setIsPostModal, post }) {
   const [heart, setHeart] = useState(hearted);
   const [heartCounting, setHeartCounting] = useState(heartCount);
   const [homeModal, setIsHomeModal] = useState(false);
+  const [postModal, setIsPostModal] = useState(false);
   const [modalType, setModalType] = useState();
   const [myAccountname, setMyAccountname] = useState();
 
-  const getMyAccountname = async() => {
+  const getMyAccountname = async () => {
     const response = await API.get("/user/myinfo", {
-      "Authorization": `Bearer ${localStorage.getItem("token")}`,
+      Authorization: `Bearer ${localStorage.getItem("token")}`,
     });
     const result = await response.data;
     const myId = await result.user.accountname;
 
     setMyAccountname(myId);
-  }
+  };
 
-  useEffect(()=>{
+  useEffect(() => {
     getMyAccountname();
-    console.log(myAccountname);
-    
-  },[])
+  }, []);
 
   const heartButtonClick = async () => {
     if (heart) {
@@ -157,8 +156,9 @@ export default function Card({ setIsPostModal, post }) {
             <CardHeaderButton
               type="button"
               onClick={() => {
-                account ? setIsPostModal((prev) => !prev) : setIsHomeModal((prev) => !prev);
-                
+                account
+                  ? setIsPostModal((prev) => !prev)
+                  : setIsHomeModal((prev) => !prev);
               }}
             >
               <img src={moreImage} alt="설정" />
@@ -187,8 +187,17 @@ export default function Card({ setIsPostModal, post }) {
             <span>{createdAt.slice(5, 7)}월</span>
             <span>{createdAt.slice(8, 10)}일</span>
           </CardBodyTime>
-          {myAccountname === author.accountname ? <Modal isModal={homeModal} type="mypost" postId={id}/> : <Modal isModal={homeModal} type="otherpost" postId={id} />}
-          
+          {myAccountname === author.accountname ? (
+            <>
+              <Modal isModal={homeModal} type="mypost" postId={id} />
+              <Modal isModal={postModal} type="mypost" postId={id} />
+            </>
+          ) : (
+            <>
+              <Modal isModal={homeModal} type="otherpost" postId={id} />
+              <Modal isModal={postModal} type="mypost" postId={id} />
+            </>
+          )}
         </li>
       ) : (
         <></>

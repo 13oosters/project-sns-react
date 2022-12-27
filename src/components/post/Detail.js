@@ -25,7 +25,7 @@ export default function Detail({
       {post ? (
         <DeatailSection>
           <h2 class="sr-only">게시글</h2>
-          <Card setIsPostModal={setIsPostModal} post={post} />
+          <Card post={post} />
           <Dialog
             id={id}
             postStoreData={postStoreData}
