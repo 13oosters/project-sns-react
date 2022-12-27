@@ -38,6 +38,7 @@ const CommentTime = styled.span`
 
 const CommentP = styled.p`
   padding-left: 4.8rem;
+  padding-right: 1rem;
   font-size: ${(props) => props.theme.baseFontSize};
 `;
 
@@ -46,7 +47,7 @@ const ModalImage = styled.img`
   height: 1.6rem;
 `;
 
-export default function Comment({ comment, myInfo }) {
+export default function Comment({ comment, myInfo, setCommentData }) {
   const [modal, isModal] = useState(false);
   const { id } = useParams();
   const { user } = { ...myInfo };
@@ -101,14 +102,17 @@ export default function Comment({ comment, myInfo }) {
       <CommentP>{comment.content}</CommentP>
       {postId ? (
         <Modal
-          isModal={modal}
+          modal={modal}
+          isModal={isModal}
           type="mycomment"
           commentId={comment.id}
           postId={id}
+          setCommentData={setCommentData}
         />
       ) : (
         <Modal
-          isModal={modal}
+          modal={modal}
+          isModal={isModal}
           type="othercomment"
           commentId={comment.id}
           postId={id}

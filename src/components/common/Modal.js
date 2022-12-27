@@ -33,7 +33,14 @@ const ModalLi = styled.li`
 // url은 useparams로 불러오기
 // postId 추가하였습니다
 
-export default function Modal({ modal, isModal, type, commentId, postId }) {
+export default function Modal({
+  modal,
+  isModal,
+  type,
+  commentId,
+  postId,
+  setCommentData,
+}) {
   const [message, setMessage] = useState("");
   const { id } = useParams();
   const navigate = useNavigate();
@@ -60,9 +67,11 @@ export default function Modal({ modal, isModal, type, commentId, postId }) {
 
   const deleteComment = () => {
     postData("deletComment", postId, setMessage, "", commentId);
+
     isModal((prev) => !prev);
-    console.log(postId, commentId);
-    console.log(setMessage);
+
+    console.log(message);
+    // navigate(0);
   };
 
   const commentReport = () => {

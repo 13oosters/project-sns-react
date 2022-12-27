@@ -49,6 +49,7 @@ const getPost = async (type, url, setPostData, comment, commentId) => {
 
       reverseComment.comments.reverse();
       responseData = { ...responseComment };
+      console.log(responseData);
     }
 
     /* edit 구현 진행중 */
@@ -79,6 +80,12 @@ const getPost = async (type, url, setPostData, comment, commentId) => {
       alert("게시물 신고가 완료되었습니다.");
     }
     if (type === "comment") {
+      const responsePost = await API.get(`/post/${url}`, {
+        header: {
+          Authorization: `Bearer${localStorage.getItem("token")}`,
+          "Content-type": "application/json",
+        },
+      });
       const response = await API.post(`/post/${url}/comments`, {
         comment: {
           content: comment,
@@ -95,6 +102,8 @@ const getPost = async (type, url, setPostData, comment, commentId) => {
         },
       });
 
+      responseData = await responsePost.data;
+
       responseComment = await response.data;
 
       const responseComments = await Commentres.data;
@@ -103,6 +112,7 @@ const getPost = async (type, url, setPostData, comment, commentId) => {
       reverseResponse.comments.reverse();
 
       responseData = {
+        ...responseData,
         ...responseComment,
         ...responseComments,
       };
@@ -115,21 +125,32 @@ const getPost = async (type, url, setPostData, comment, commentId) => {
           "Content-type": "application/json",
         },
       });
+
       const CommentRes = await API.get(`/post/${url}/comments`, {
         header: {
           Authorization: `Bearer${localStorage.getItem("token")}`,
           "Content-type": "application/json",
         },
       });
+      const responsePost = await API.get(`/post/${url}`, {
+        header: {
+          Authorization: `Bearer${localStorage.getItem("token")}`,
+          "Content-type": "application/json",
+        },
+      });
 
+      const response2 = await responsePost.data;
+
+      responseData = await responsePost.data;
+      console.log(responseData);
+      responseData = { ...responseData };
+
+      responseData = await response.data;
       responseComment = await CommentRes.data;
+      const reverseComment = { ...responseComment };
 
-      // const reverseComment = { ...responseComment };
-
-      // reverseComment.comments.reverse();
-
-      responseData = { ...responseComment };
-
+      reverseComment.comments.reverse();
+      responseData = { ...responseComment, ...responseData, ...response2 };
       console.log(responseData);
     }
 

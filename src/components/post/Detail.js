@@ -12,7 +12,6 @@ export default function Detail({
   setPostStoreData,
   postStoreData,
   id,
-  setIsPostModal,
   commentData,
   setCommentData,
 }) {
