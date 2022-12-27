@@ -9,6 +9,7 @@ import heartClickImage from "../../assets/image/icon-heart-fill.png";
 import commentImage from "../../assets/image/icon-comment.png";
 import API from "../../utils/api";
 import PostImage from "../home/PostImage";
+import Modal from "./Modal";
 
 const smallFont = css`
   font-size: ${(props) => props.theme.smallFontSize};
@@ -71,7 +72,7 @@ const CardBodyTime = styled.time`
   padding: 1.3rem;
 `;
 
-export default function Card({ setIsPostModal, setIsHomeModal, post }) {
+export default function Card({ setIsPostModal, post }) {
   // console.log(feed);
 
   const {
@@ -93,6 +94,25 @@ export default function Card({ setIsPostModal, setIsHomeModal, post }) {
 
   const [heart, setHeart] = useState(hearted);
   const [heartCounting, setHeartCounting] = useState(heartCount);
+  const [homeModal, setIsHomeModal] = useState(false);
+  const [modalType, setModalType] = useState();
+  const [myAccountname, setMyAccountname] = useState();
+
+  const getMyAccountname = async() => {
+    const response = await API.get("/user/myinfo", {
+      "Authorization": `Bearer ${localStorage.getItem("token")}`,
+    });
+    const result = await response.data;
+    const myId = await result.user.accountname;
+
+    setMyAccountname(myId);
+  }
+
+  useEffect(()=>{
+    getMyAccountname();
+    console.log(myAccountname);
+    
+  },[])
 
   const heartButtonClick = async () => {
     if (heart) {
@@ -118,7 +138,7 @@ export default function Card({ setIsPostModal, setIsHomeModal, post }) {
 
   return (
     <>
-      {post ? (
+      {post && myAccountname ? (
         <li>
           <CardHeaderDiv>
             {/** 모달 버튼이 작동을 안해서 이미지로 navigate이동했습니다 */}
@@ -167,6 +187,8 @@ export default function Card({ setIsPostModal, setIsHomeModal, post }) {
             <span>{createdAt.slice(5, 7)}월</span>
             <span>{createdAt.slice(8, 10)}일</span>
           </CardBodyTime>
+          {myAccountname === author.accountname ? <Modal isModal={homeModal} type="mypost" postId={id}/> : <Modal isModal={homeModal} type="otherpost" postId={id} />}
+          
         </li>
       ) : (
         <></>
@@ -174,3 +196,11 @@ export default function Card({ setIsPostModal, setIsHomeModal, post }) {
     </>
   );
 }
+
+/**
+ *     if(myAccountname === author.accountname){
+      setModalType("mypost")
+    } else {
+      setModalType("otherpost")
+    }
+ */

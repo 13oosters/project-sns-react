@@ -7,9 +7,7 @@ export default function Cards({ feed, setIsHomeModal }) {
       <h3 className="sr-only">게시글</h3>
       <ol reversed>
         {feed ? (
-          feed.map((post, index) => (
-            <Card key={index} post={post} setIsHomeModal={setIsHomeModal} />
-          ))
+          feed.map((post, index) => <Card key={index} post={post} />)
         ) : (
           <></>
         )}
