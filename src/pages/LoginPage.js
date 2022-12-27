@@ -4,7 +4,7 @@ import Welcome from "../components/login/Welcome";
 import Form from "../components/login/Form";
 import ProfileSetting from "../components/common/ProfileSetting";
 
-export default function LoginPage({ login, signin, settings }) {
+export default function LoginPage({ login, signin, settings, setHasToken }) {
   const [userData, setUserData] = useState({
     username: "",
     email: "",
@@ -36,6 +36,7 @@ export default function LoginPage({ login, signin, settings }) {
           buttonText="다음"
           userData={userData}
           setUserData={setUserData}
+          setHasToken={setHasToken}
         />
       </PageLayout>
     );

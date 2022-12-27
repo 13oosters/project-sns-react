@@ -10,7 +10,13 @@ import LoginButton from "../style/form/LoginButton";
 import SignUpButton from "../style/form/SignUpButton";
 import ErrorMessageP from "../style/form/ErrorMessageP";
 
-export default function Form({ title, buttonText, userData, setUserData }) {
+export default function Form({
+  title,
+  buttonText,
+  userData,
+  setUserData,
+  setHasToken,
+}) {
   const [isValue, setIsValue] = useState(false); // 1
   const [responseMessage, setResponseMeassage] = useState(""); // 2
   const navigate = useNavigate();
@@ -43,6 +49,8 @@ export default function Form({ title, buttonText, userData, setUserData }) {
       validate(userData, "signin", "/user/login").then((res) => {
         console.log(res);
         localStorage.setItem("token", res.token);
+        setHasToken(true);
+        navigate("/");
       });
     } else if (title === "이메일로 회원가입") {
       validate(userData, "email", "/user/emailvalid").then((res) => {

@@ -26,6 +26,7 @@ const HeaderLayout = css`
   display: flex;
   justify-content: space-between;
   align-items: center;
+  border-bottom: 1px solid #dbdbdb;
   height: 4.8rem;
   padding: 0 1.6rem;
   border-bottom: 1px solid ${(props) => props.theme.lightColor};
@@ -54,7 +55,7 @@ const SearchDiv = styled.div`
   }
 `;
 
-export default function Header({ type }) {
+export default function Header({ type, setKeyword, startTransition }) {
   const navigate = useNavigate();
   const UI = {
     logo: (
@@ -70,8 +71,22 @@ export default function Header({ type }) {
             <img src={backImage} alt="뒤로 가기" />
           </button>
           <SearchDiv>
-            <HeaderInput placeholder="계정 검색" />
-            <button type="button">
+            <HeaderInput
+              onKeyUp={(e) => {
+                startTransition(() => {
+                  setKeyword(e.target.value);
+                });
+              }}
+              placeholder="계정 검색"
+            />
+            <button
+              onClick={(e) => {
+                e.target.closest("div").childNodes[0].value = "";
+                setKeyword("");
+                //
+              }}
+              type="button"
+            >
               <img src={cancelImage} alt="취소 버튼" />
             </button>
           </SearchDiv>

@@ -1,19 +1,24 @@
 import React from "react";
-import styled from "styled-components";
 
 import Comments from "./Comments";
 import Writing from "./Writing";
 
-const DialogSection = styled.section`
-  padding: 10rem 1.6rem 0;
-`;
-
-export default function Dialog() {
+export default function Dialog({ id, comments, setCommentData }) {
   return (
-    <DialogSection>
-      <h3 class="sr-only">댓글 창</h3>
-      <Comments />
-      <Writing />
-    </DialogSection>
+    <>
+      {comments ? (
+        <section>
+          <h3 class="sr-only">댓글 창</h3>
+          <Comments comments={comments} />
+          <Writing
+            id={id}
+            comments={comments}
+            setCommentData={setCommentData}
+          />
+        </section>
+      ) : (
+        <></>
+      )}
+    </>
   );
 }
