@@ -16,14 +16,15 @@ const ModalDiv = styled.div`
   border: 1px solid #dbdbdb;
   border-top-left-radius: 1rem;
   border-top-right-radius: 1rem;
-  padding: 1.6rem 0 1rem 2.6rem;
+  padding: 1.6rem 2.6rem 1rem 2.6rem;
   text-align: center;
-  transform: ${(props) => (!props.isModal ? "translateY(100%)" : "translateY(0)")};
+  transform: ${(props) =>
+    !props.modal ? "translateY(100%)" : "translateY(0)"};
   transition: 0.5s;
 `;
 
 const ModalLi = styled.li`
-  padding: 1.4rem 2.6rem;
+  padding: 2rem 2.6rem;
   font-size: ${(props) => props.theme.baseFontSize};
   font-weight: ${(props) => props.theme.normalFontWeight};
   text-align: left;
@@ -32,33 +33,45 @@ const ModalLi = styled.li`
 // url은 useparams로 불러오기
 // postId 추가하였습니다
 
-export default function Modal({ isModal, type, commentId, postId }) {
+export default function Modal({ modal, isModal, type, commentId, postId }) {
   const [message, setMessage] = useState("");
   const { id } = useParams();
   const navigate = useNavigate();
   const deletePost = () => {
     postData("deletepost", postId, "");
+    isModal((prev) => !prev);
     // 삭제하면 홈으로 이동
     navigate("/");
   };
 
   const editPost = () => {
     postData("editpost", postId, "");
+    isModal((prev) => !prev);
   };
 
   // type, url, setPostData, comment, id, commentId
   const postReport = () => {
     postData("postReport", postId, setMessage);
+    isModal((prev) => !prev);
     const { report } = { ...message };
 
     // alert(` ${report.post} 게시물 신고가 완료 되었습니다.`);
   };
 
-  const commentReport = (e) => {
-    postData("commentReport", postId, setMessage, "", "", commentId);
+  const deleteComment = () => {
+    postData("deletComment", postId, setMessage, "", commentId);
+    isModal((prev) => !prev);
+    console.log(postId, commentId);
+    console.log(setMessage);
+  };
+
+  const commentReport = () => {
+    postData("commentReport", postId, setMessage, "", commentId);
     const { report } = { ...message };
 
-    alert(`${report.post} 댓글 신고가 완료 되었습니다.`);
+    isModal((prev) => !prev);
+
+    // alert(`${report.post} 댓글 신고가 완료 되었습니다.`);
   };
   const ModalUI = {
     myprofile: (
@@ -76,7 +89,7 @@ export default function Modal({ isModal, type, commentId, postId }) {
     ),
     mycomment: (
       <ul>
-        <ModalLi onClick={deletePost}>삭제</ModalLi>
+        <ModalLi onClick={deleteComment}>삭제</ModalLi>
       </ul>
     ),
     mypost: (
@@ -100,7 +113,7 @@ export default function Modal({ isModal, type, commentId, postId }) {
   return (
     <section>
       <h2 className="sr-only">게시글 삭제 수정모달창</h2>
-      <ModalDiv isModal={isModal}>
+      <ModalDiv modal={modal}>
         <img src={ModalImage} alt="모달창 아이콘" />
         <>{ModalUI[type]}</>
       </ModalDiv>
