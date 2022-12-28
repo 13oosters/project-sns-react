@@ -83,14 +83,15 @@ const getPost = async (
       console.log(responseData);
     }
     if (type === "postReport") {
-      const response = await API.post(`/post/${url}/report`, {
-        header: {
-          Authorization: `Bearer${localStorage.getItem("token")}`,
-          "Content-type": "application/json",
-        },
-      });
+      // const response = await API.post(`/post/${url}/report`, {
+      //   header: {
+      //     Authorization: `Bearer${localStorage.getItem("token")}`,
+      //     "Content-type": "application/json",
+      //   },
+      // });
 
-      responseData = await response.data;
+      // responseData = await response.data;
+      alert("게시물 신고가 완료되었습니다.");
     }
     if (type === "comment") {
       const response = await API.post(`/post/${url}/comments`, {

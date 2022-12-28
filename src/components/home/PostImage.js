@@ -9,13 +9,13 @@ const MultiImageWrapper = styled.ul`
 const MultiImage = styled.img`
   width: 39rem;
   height: 23rem;
-  &::after{
+  /* &::after{
     content: "${(props) => props.imageNumber}";
     position: absolute;
     width: 3rem;
     height: 3rem;
     background-color: black;
-}
+} */
 `
 
 export default function PostImage({image}) {
