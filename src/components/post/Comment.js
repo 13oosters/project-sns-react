@@ -47,14 +47,12 @@ const ModalImage = styled.img`
   height: 1.6rem;
 `;
 
-export default function Comment({ comment, myInfo, setCommentData }) {
+export default function Comment({ comment, myInfo, setPostPageData }) {
   const [modal, isModal] = useState(false);
   const { id } = useParams();
   const { user } = { ...myInfo };
 
   let postId = "";
-
-  console.log(user);
 
   const setModal = () => {
     isModal((prev) => !prev);
@@ -107,7 +105,7 @@ export default function Comment({ comment, myInfo, setCommentData }) {
           type="mycomment"
           commentId={comment.id}
           postId={id}
-          setCommentData={setCommentData}
+          setPostPageData={setPostPageData}
         />
       ) : (
         <Modal

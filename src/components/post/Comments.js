@@ -8,13 +8,18 @@ const CommentsSection = styled.section`
   border-top: 1px solid ${(props) => props.theme.lightColor};
 `;
 
-export default function Comments({ comments, myInfo }) {
+export default function Comments({ comments, myInfo, setPostPageData }) {
   return (
     <CommentsSection>
       <h4 class="sr-only">댓글 목록</h4>
       <ol>
-        {comments.map((comment) => (
-          <Comment key={comment.updatedAt} comment={comment} myInfo={myInfo} />
+        {comments.map((comment, index) => (
+          <Comment
+            key={index}
+            comment={comment}
+            myInfo={myInfo}
+            setPostPageData={setPostPageData}
+          />
         ))}
       </ol>
     </CommentsSection>

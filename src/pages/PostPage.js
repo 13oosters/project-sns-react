@@ -16,8 +16,7 @@ export default function PostPage() {
   const { account } = useParams();
 
   // 커스텀 훅 고려.
-  const [postStoreData, setPostStoreData] = useState("");
-  const [commentData, setCommentData] = useState("");
+  const [postPageData, setPostPageData] = useState("");
 
   console.log(id);
   console.log(account);
@@ -26,24 +25,19 @@ export default function PostPage() {
   // Promise.all()함수
 
   useEffect(() => {
-    postData("detailpost", id, setPostStoreData);
-    postData("detailComment", id, setCommentData);
+    postData("detailpost", id, setPostPageData);
   }, []);
 
   return (
     <>
-      {postStoreData ? (
+      {postData ? (
         <>
           <div>
             <h1 className="sr-only">게시글 상세보기</h1>
             <Header type="post" />
-            {/** props id 사용하는지 확인필요 */}
             <Detail
-              postStoreData={postStoreData}
-              setPostStoreData={setPostStoreData}
-              commentData={commentData}
-              setCommentData={setCommentData}
-              id={id}
+              postPageData={postPageData}
+              setPostPageData={setPostPageData}
             />
           </div>
         </>

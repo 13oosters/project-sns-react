@@ -8,16 +8,10 @@ const DeatailSection = styled.section`
 `;
 
 // setPostStoreData 사용안하면 지우기
-export default function Detail({
-  setPostStoreData,
-  postStoreData,
-  id,
-  commentData,
-  setCommentData,
-}) {
-  const { post } = { ...postStoreData };
+export default function Detail({ setPostPageData, postPageData }) {
+  const { post } = { ...postPageData };
 
-  const { comments } = { ...commentData };
+  const { comments } = { ...postPageData };
 
   return (
     <>
@@ -26,12 +20,10 @@ export default function Detail({
           <h2 class="sr-only">게시글</h2>
           <Card post={post} />
           <Dialog
-            id={id}
-            postStoreData={postStoreData}
+            postPageData={postPageData}
             post={post}
-            setPostStoreData={setPostStoreData}
+            setPostPageData={setPostPageData}
             comments={comments}
-            setCommentData={setCommentData}
           />
         </DeatailSection>
       ) : (
