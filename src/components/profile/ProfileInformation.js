@@ -1,5 +1,5 @@
 import React from "react";
-import { Link, Navigate } from "react-router-dom";
+import { Link, useNavigate, useParams } from "react-router-dom";
 import styled from "styled-components";
 import FollowCountP from "../style/profile/FollowCountP";
 import FollowCountSpan from "../style/profile/FollowCountSpan";
@@ -86,17 +86,20 @@ export default function ProfileInformation({
   username,
   intro,
 }) {
-  console.log(image);
+  const navigate = useNavigate();
+  const { account } = useParams();
+
+  // console.log(image);
 
   return (
     <UserProfileWrapDiv>
       <UserProfileTopDiv>
-        <FollowCountLink>
+        <FollowCountLink onClick={() => navigate("/:accountname/followers")}>
           <FollowCountP type="follows">{followerCount}</FollowCountP>
-          <FollowCountSpan>follower</FollowCountSpan>
+          <FollowCountSpan>followers</FollowCountSpan>
         </FollowCountLink>
         <ProfileImg src={`https://mandarin.api.weniv.co.kr/${image}`} alt="" />
-        <FollowCountLink>
+        <FollowCountLink onClick={() => navigate("/:accountname/followings")}>
           <FollowCountP>{followingCount}</FollowCountP>
           <FollowCountSpan>followings</FollowCountSpan>
         </FollowCountLink>
@@ -105,60 +108,34 @@ export default function ProfileInformation({
         <UserNameP>{username}</UserNameP>
         <AccountNameP>{accountname}</AccountNameP>
         <UserIntroduceP>{intro}</UserIntroduceP>
-        <ProfileButton>팔로우</ProfileButton>
+        {account === accountname ? (
+          <ProfileButton onClick={() => navigate("/:accountname/settings")}>
+            프로필 수정
+          </ProfileButton>
+        ) : (
+          <ProfileButton>팔로우</ProfileButton>
+        )}
       </UserProfileTextDiv>
     </UserProfileWrapDiv>
   );
 }
 
-// import React, { Link } from "react";
-// import styled from "styled-components";
-// import ProfileButton from "./ProfileButton";
+/** 프로필 수정을 누르면
+ * /:account/settings 로 이동 - 완료
+ */
 
-// const ProfileHeader = styled.div`
-//   display: flex;
-//   align-items: center;
-//   justify-content: center;
-//   width: 100%;
-//   padding: 3rem 0 1.5rem 0;
-// `;
+/** 팔로우를 누르면
+ * 팔로우 API , 언팔로우로 바뀜
+ */
 
-// const FollowerCount = styled.p`
-//   font-weight: 700;
-//   font-size: ${(props) => props.theme.xLargeFontSize};
-// `;
+/** 언팔로우를 누르면
+ * 언팔로우 API, 팔로우로 바뀜
+ */
 
-// export default function ProfileInformation({ profileInformation }) {
-//   const username = localStorage.getItem("username");
-//   const followLink = `/${username}/follower`;
-//   const followingLink = `/${username}/following`;
-//   const user = profileInformation.user;
+/** followers를 누르면
+ * followers 페이지로 갑니다. - 완
+ */
 
-//   const profile = profileInformation.profile;
-
-//   return (
-//     <div className="imformationWrap">
-//       {profile ? (
-//         <>
-//           <ProfileHeader>
-//             <FolloweCountDiv>
-//               <>{user.followerCount}</>
-//               <p className="followName followers">followers</p>
-//             </FolloweCountDiv>
-//             <img src={user.image} alt="프로필 이미지" />
-//             <Link to={followingLink}>
-//               <p className="followCount following">{user.followingCount}</p>
-//               <p className="followName following">followings</p>
-//             </Link>
-//           </ProfileHeader>
-//           <div>
-//             <p className="userName">{user.username}</p>
-//             <p className="userID">{user.accountname}</p>
-//             <p className="userIntroduce">{user.introduce}</p>
-//           </div>
-//         </>
-//       ) : null}
-//       <ProfileButton />
-//     </div>
-//   );
-// }
+/** followings를 누르면
+ * followings 페이지로 갑니다 - 완
+ */
