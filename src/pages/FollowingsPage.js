@@ -1,17 +1,21 @@
-import React, { useEffect, useState } from "react";
-import axios from "axios";
-import API from "../utils/api";
+import React from "react";
+import styled from "styled-components";
+// import axios from "axios";
+// import API from "../utils/api";
 
 import Header from "../components/style/Header";
 import FollowingCards from "../components/follow/FollowingCards";
 import NavBar from "../components/style/NavBar";
 
+const FollowingWrap = styled.div`
+  width: 100%;
+`;
+
 export default function FollowingsPage() {
-  const [followingList, setFollowingList] = useState([]);
-  const token = localStorage.getItem("token");
-  const accountname = localStorage.getItem("accountname");
-  const url = `${API}/profile/${accountname}/following`;
-  const getFollowingList = () => {
+  //   const [followingList, setFollowingList] = useState([]);
+  //   const token = localStorage.getItem("token");
+  //   const accountname = localStorage.getItem("accountname");
+  /*  const getFollowingList = () => {
     axios
       .get(url, {
         headers: {
@@ -24,16 +28,16 @@ export default function FollowingsPage() {
       })
       .catch((err) => console.log(err));
   };
-
-  useEffect(() => {
+ */
+  /*   useEffect(() => {
     getFollowingList();
-  }, []);
+  }, []); */
 
   return (
-    <div className="followerWrap">
+    <FollowingWrap>
       <Header type="followings" />
-      <FollowingCards followingList={followingList} />
+      <FollowingCards />
       <NavBar />
-    </div>
+    </FollowingWrap>
   );
 }
