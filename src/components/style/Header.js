@@ -120,6 +120,16 @@ export default function Header({ type, setKeyword, startTransition }) {
         </HeaderUI>
       </>
     ),
+    followings: (
+      <>
+        <HeaderUI>
+          <button onClick={() => navigate(-1)}>
+            <img src={backImage} alt="뒤로 가기" />
+          </button>
+          <h2 className="sr-only">Followings</h2>
+        </HeaderUI>
+      </>
+    ),
   };
 
   return <HeaderWrap>{UI[type]}</HeaderWrap>;

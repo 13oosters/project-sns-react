@@ -1,5 +1,7 @@
+import { useState, useEffect } from "react";
 import styled from "styled-components";
 import { useNavigate } from "react-router-dom";
+import API from "../../utils/api";
 import homeImage from "../../assets/image/icon-home.png";
 import homeSelectImage from "../../assets/image/icon-home-fill.png";
 import searchImage from "../../assets/image/icon-search.png";
@@ -41,11 +43,31 @@ const SelectP = styled.p`
 `;
 
 export default function NavBar({ type }) {
+  const [accountname, setAccountname] = useState("");
   const navigate = useNavigate();
+
+  useEffect(() => {
+    getProfile();
+  }, []);
 
   if (type === "게시물") {
     return null;
   }
+
+  const getProfile = async () => {
+    try {
+      const res = await API.get("/user/myinfo", {
+        headers: {
+          Authorization: `Bearer ${localStorage.getItem("token")}`,
+        },
+      });
+      const user = res.data.user;
+
+      setAccountname(user.accountname);
+    } catch (err) {
+      throw new Error(err);
+    }
+  };
 
   return (
     <NavBarArticle>
@@ -97,7 +119,7 @@ export default function NavBar({ type }) {
           <li>
             <TabMenuLink
               onClick={() => {
-                navigate("/account");
+                navigate(`/${accountname}`);
               }}
             >
               {type === "프로필" ? (

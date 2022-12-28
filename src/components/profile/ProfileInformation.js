@@ -1,20 +1,23 @@
 import React from "react";
+import { Link, useNavigate, useParams } from "react-router-dom";
 import styled from "styled-components";
-import FollowerCount from "./FollowerCount";
-import FollowingCount from "./FollowingCount";
-import ProfileImage from "../../assets/image/basic-profile-img.png";
-import MyProfileButton from "./MyProfileButton";
+import FollowCountP from "../style/profile/FollowCountP";
+import FollowCountSpan from "../style/profile/FollowCountSpan";
+import BasicProfileImage from "../../assets/image/basic-profile-img.png";
+import Button from "../style/Button";
 
-const InformationWrapDiv = styled.div`
+const UserProfileWrapDiv = styled.div`
   display: flex;
   flex-direction: column;
-  padding: 3rem 0 2.6rem;
-  box-sizing: border-box;
-  border-bottom: 2px solid ${(props) => props.theme.lightColor};
+  justify-content: center;
+  margin-top: 6rem;
+  padding: 3rem 1.6rem 2.6rem;
   height: 31.4rem;
+  border-bottom: 0.1rem solid ${(props) => props.theme.lightColor};
+  box-sizing: border-box;
 `;
 
-const InformationTopDiv = styled.div`
+const UserProfileTopDiv = styled.div`
   display: flex;
   justify-content: center;
   align-items: center;
@@ -22,58 +25,117 @@ const InformationTopDiv = styled.div`
   margin-bottom: 1.5rem;
 `;
 
-const InformationDiv = styled.div`
+const UserProfileTextDiv = styled.div`
   display: flex;
   flex-direction: column;
   justify-content: center;
   align-items: center;
-  gap: 0.7rem;
+  /* gap: 0.7rem; */
 `;
 
-const ImformationP = styled.p`
+const FollowCountLink = styled.a`
+  text-align: center;
+  cursor: pointer;
+`;
+
+const ProfileImg = styled.img`
+  width: 11rem;
+  height: 11rem;
+  border-radius: 50%;
+  /* margin-bottom: 1.6rem; */
+`;
+
+const UserNameP = styled.p`
   font-size: ${(props) => props.theme.largeFontSize};
   font-weight: 700;
+  line-height: 2rem;
+  margin-bottom: 0.6rem;
 `;
 
-const InformationSpan = styled.span`
+const AccountNameP = styled.p`
   font-size: ${(props) => props.theme.smallFontSize};
   color: ${(props) => props.theme.darkLightColor};
+  font-weight: 400;
+  line-height: 1.4rem;
+  margin-bottom: 1.6rem;
 
   &::before {
     content: "@ ";
   }
 `;
 
-const UploadImage = styled.img`
-  width: 11rem;
-  height: 11rem;
-  border-radius: 50%;
-`;
-
-const IntroduceP = styled.p`
-  margin: 0.9rem 0 2.4rem;
+const UserIntroduceP = styled.p`
+  margin-bottom: 2.4rem;
   font-size: ${(props) => props.theme.baseFontSize};
+  font-weight: 400;
+  line-height: 1.8rem;
   color: ${(props) => props.theme.darkLightColor};
 `;
 
-export default function ProfileInformation() {
+const ProfileButton = styled(Button)`
+  width: 12rem;
+  height: 3.4rem;
+  padding: 0;
+`;
+
+export default function ProfileInformation({
+  accountname,
+  followerCount,
+  followingCount,
+  image,
+  username,
+  intro,
+}) {
+  const navigate = useNavigate();
+  const { account } = useParams();
+
+  // console.log(image);
+
   return (
-    <InformationWrapDiv>
-      <InformationTopDiv>
-        <FollowerCount />
-        <UploadImage
-          src={ProfileImage}
-          alt="프로필 사진"
-          style={{ objecFit: "cover" }}
-        />
-        <FollowingCount />
-      </InformationTopDiv>
-      <InformationDiv>
-        <ImformationP>호박이</ImformationP>
-        <InformationSpan>hobak2</InformationSpan>
-        <IntroduceP>안녕하세요 :&#41; 턱시도 젠틀냥 호박이입니다.</IntroduceP>
-        <MyProfileButton>프로필 수정</MyProfileButton>
-      </InformationDiv>
-    </InformationWrapDiv>
+    <UserProfileWrapDiv>
+      <UserProfileTopDiv>
+        <FollowCountLink onClick={() => navigate("/:accountname/followers")}>
+          <FollowCountP type="follows">{followerCount}</FollowCountP>
+          <FollowCountSpan>followers</FollowCountSpan>
+        </FollowCountLink>
+        <ProfileImg src={`https://mandarin.api.weniv.co.kr/${image}`} alt="" />
+        <FollowCountLink onClick={() => navigate("/:accountname/followings")}>
+          <FollowCountP>{followingCount}</FollowCountP>
+          <FollowCountSpan>followings</FollowCountSpan>
+        </FollowCountLink>
+      </UserProfileTopDiv>
+      <UserProfileTextDiv>
+        <UserNameP>{username}</UserNameP>
+        <AccountNameP>{accountname}</AccountNameP>
+        <UserIntroduceP>{intro}</UserIntroduceP>
+        {account === accountname ? (
+          <ProfileButton onClick={() => navigate("/:accountname/settings")}>
+            프로필 수정
+          </ProfileButton>
+        ) : (
+          <ProfileButton>팔로우</ProfileButton>
+        )}
+      </UserProfileTextDiv>
+    </UserProfileWrapDiv>
   );
 }
+
+/** 프로필 수정을 누르면
+ * /:account/settings 로 이동 - 완료
+ */
+
+/** 팔로우를 누르면
+ * 팔로우 API , 언팔로우로 바뀜
+ */
+
+/** 언팔로우를 누르면
+ * 언팔로우 API, 팔로우로 바뀜
+ */
+
+/** followers를 누르면
+ * followers 페이지로 갑니다. - 완
+ */
+
+/** followings를 누르면
+ * followings 페이지로 갑니다 - 완
+ */
