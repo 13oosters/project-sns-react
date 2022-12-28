@@ -9,9 +9,11 @@ import SortListOffImage from "../../assets/image/icon-post-list-off.png";
 const SortButtonWrapDiv = styled.div`
   display: flex;
   justify-content: flex-end;
+  gap: 1.6rem;
   padding: 0.9rem 1.6rem 0.9rem 0;
   height: 4.4rem;
   border-bottom: 0.1rem solid ${(props) => props.theme.lightColor};
+  box-sizing: border-box;
 `;
 
 export default function SortButtons({
