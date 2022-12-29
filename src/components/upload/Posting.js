@@ -24,7 +24,7 @@ export default function Posting({ userData, setUserData, type }) {
   const { post } = { ...userData };
   const postImage = post.image.split(",");
 
-  const [imageData, setImageData] = useState([]);
+  const [imageData, setImageData] = useState(postImage);
 
   const [originalImage, setOriginalImage] = useState([]);
 
@@ -55,18 +55,12 @@ export default function Posting({ userData, setUserData, type }) {
       navigate(-1);
     }
   };
-  const setOrigin = () => {
-    setOriginalImage(postImage);
-    setImageData([...originalImage, ...imageData]);
-  };
 
-  useEffect(() => {
-    setOrigin();
-  }, []);
   const editPost = async (e) => {
     e.preventDefault();
-    // console.log(originalImage);
-
+    setImageData([...originalImage, ...imageData]);
+    console.log(originalImage, imageData);
+    console.log(e.target.value);
     try {
       console.log(imageData);
       await API.put(
@@ -87,7 +81,7 @@ export default function Posting({ userData, setUserData, type }) {
     } catch (error) {
       throw new Error(error);
     } finally {
-      //   navigate(-1);
+      navigate(-1);
     }
   };
 

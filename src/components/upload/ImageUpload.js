@@ -148,7 +148,7 @@ export default function ImageUpload({
       <ImageUl>
         {originalImage.map((image, i) => (
           <ImageLi key={i} data-index={i}>
-            <Image src={image} alt="게시글 사진" />
+            <Image src={image} alt="게시글 사진2" />
             <CancelButton onClick={deleteOriginalImage} type="button">
               <CancelImage src={cancelImage} alt="취소버튼" />
             </CancelButton>
