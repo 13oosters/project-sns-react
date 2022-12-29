@@ -1,7 +1,6 @@
-
 import React, { useEffect, useState, lazy } from "react";
 
-import { useParams } from "react-router-dom";
+import { useNavigate, useParams } from "react-router-dom";
 import styled from "styled-components";
 import API from "../utils/api";
 import Header from "../components/style/Header";
@@ -19,16 +18,19 @@ const ProfilePagePostDiv = styled.div`
 
 export default function ProfilePage() {
   const [myProfile, setMyProfile] = useState({});
+  const [userProfile, setUserProfile] = useState({});
+  const [isProfileExist, setIsProfileExist] = useState(false);
 
- 
+  console.log(myProfile);
+
   const [myPostData, setMyPostData] = useState({});
   const [listClick, setListClick] = useState(false);
   const [albumClick, setAlbumClick] = useState(true);
 
   const { account } = useParams();
+  const navigate = useNavigate();
 
   const getMyProfile = async () => {
-
     try {
       const res = await API.get("/user/myinfo", {
         headers: {
@@ -36,7 +38,6 @@ export default function ProfilePage() {
         },
       });
       const user = res.data.user;
-
 
       setMyProfile(user);
       return user;
@@ -55,11 +56,13 @@ export default function ProfilePage() {
       const user = res.data.profile;
 
       setUserProfile(user);
-
-      return user;
-    } catch (err) {
-      throw new Error(err);
+      setIsProfileExist(true);
+    } catch (e) {
+      setIsProfileExist(false);
+      alert("해당 프로필을 찾을 수 없습니다. 다시 확인 후 조회하여 주십시오😥");
+      navigate(-1);
     }
+    return "";
   };
 
   const getPost = async () => {
@@ -79,43 +82,48 @@ export default function ProfilePage() {
   };
 
   useEffect(() => {
-
     getMyProfile();
     getUserProfile();
 
     getPost();
   }, []);
 
+  useEffect(() => {}, [userProfile]);
+
   // console.log(myPostData.post);
 
   return (
-    <div>
-      <Header type="profile" />
+    <>
+      {isProfileExist ? (
+        <div>
+          <Header type="profile" />
 
-      <ProfileInformation
-        setUserProfile={setUserProfile}
-        followList={myProfile.following}
-        myaccount={myProfile.accountname}
-        profileData={
-          account === myPostData.accountname ? myProfile : userProfile
-        }
-      />
+          <ProfileInformation
+            setUserProfile={setUserProfile}
+            followList={myProfile.following}
+            myaccount={myProfile.accountname}
+            profileData={
+              account === myPostData.accountname ? myProfile : userProfile
+            }
+          />
 
-      <SortButtons
-        listClick={listClick}
-        setListClick={setListClick}
-        albumClick={albumClick}
-        setAlbumClick={setAlbumClick}
-      />
-      <ProfilePagePostDiv>
-        {listClick === true && albumClick === false ? (
-          <Cards feed={myPostData.post} />
-        ) : (
-          <GridCards postData={myPostData.post} />
-        )}
-      </ProfilePagePostDiv>
-      <Modal type="myprofile" />
-      <NavBar type="프로필" />
-    </div>
+          <SortButtons
+            listClick={listClick}
+            setListClick={setListClick}
+            albumClick={albumClick}
+            setAlbumClick={setAlbumClick}
+          />
+          <ProfilePagePostDiv>
+            {listClick === true && albumClick === false ? (
+              <Cards feed={myPostData.post} />
+            ) : (
+              <GridCards postData={myPostData.post} />
+            )}
+          </ProfilePagePostDiv>
+          <Modal type="myprofile" />
+          <NavBar type="프로필" />
+        </div>
+      ) : null}
+    </>
   );
 }
