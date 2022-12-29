@@ -3,7 +3,8 @@ import Button from "../Button";
 
 const FollowButton = styled(Button)`
   display: block;
-  width: 7rem;
+  padding-left: 3.5rem;
+  padding-right: 3.5rem;
   height: 2.8rem;
   margin: 1.1rem 0;
   font-size: ${(props) => props.theme.smallFontSize};

@@ -1,4 +1,14 @@
-import { forwardRef, useCallback, useDeferredValue, useEffect, useLayoutEffect, useMemo, useRef, useState, useTransition } from "react";
+import {
+  forwardRef,
+  useCallback,
+  useDeferredValue,
+  useEffect,
+  useLayoutEffect,
+  useMemo,
+  useRef,
+  useState,
+  useTransition,
+} from "react";
 import { useInView } from "react-intersection-observer";
 import styled from "styled-components";
 import API from "../utils/api";
@@ -14,81 +24,81 @@ const LoadingImage = styled.img`
   top: 50%;
   left: 50%;
   transform: translate(-50%, -50%);
-`
+`;
 
 export default function HomePage() {
   const [feed, setFeed] = useState([]); // 팔로우한 사람들 + 나의 게시물 데이터
   const [loading, setLoading] = useState(false);
   const [firstNum, setFirstNum] = useState(10);
   const [secondNum, setSecondNum] = useState(3);
-  
-  const getUserFeed = async(a,b) => {
+
+  const getUserFeed = async (a, b) => {
     setLoading(true);
-    
-    try{
-    // 내가 팔로우한 사람들의 게시글 목록 데이터 불러오기
-    {
-    const response = await API.get(`/post/feed/?limit=10&skip=${a}`,{
-      header: {
-        Authorization: `Bearer ${localStorage.getItem("token")}`,
-        "Content-type": "application/json",
-      },
-    });
-    // 로컬 스토리지에 있는 accountname 갖고오기
-    const myId = localStorage.getItem("accountname");
-    // 불러온 accountname을 통해 내가 올린 게시글 불러오기
-    const myPosting = await API.get(`/post/${myId}/userpost/?limit=3&skip=${b}`,{
-      "Authorization": `Bearer ${localStorage.getItem("token")}`,
-      "Content-type": "application/json",
-    });
-    
-    // 내가 팔로우한 사람들의 게시글과 내가올린 게시글 합치기
-    // const temp = [...result, ...myPostingResult.post];
 
-    const result = await Promise.all([response, myPosting]);
-    const addFeed = [...result[0].data.posts, ...result[1].data.post];
+    try {
+      // 내가 팔로우한 사람들의 게시글 목록 데이터 불러오기
+      {
+        const response = await API.get(`/post/feed/?limit=10&skip=${a}`, {
+          header: {
+            Authorization: `Bearer ${localStorage.getItem("token")}`,
+            "Content-type": "application/json",
+          },
+        });
+        // 로컬 스토리지에 있는 accountname 갖고오기
+        const myId = localStorage.getItem("accountname");
+        // 불러온 accountname을 통해 내가 올린 게시글 불러오기
+        const myPosting = await API.get(
+          `/post/${myId}/userpost/?limit=3&skip=${b}`,
+          {
+            Authorization: `Bearer ${localStorage.getItem("token")}`,
+            "Content-type": "application/json",
+          },
+        );
 
-    
-    setFeed(addFeed);
-    
-  }
+        // 내가 팔로우한 사람들의 게시글과 내가올린 게시글 합치기
+        // const temp = [...result, ...myPostingResult.post];
 
-    setLoading(false);
-  } catch (error) {
-    console.log(error);
-  }
-}
+        const result = await Promise.all([response, myPosting]);
+        const addFeed = [...result[0].data.posts, ...result[1].data.post];
 
-  useMemo(()=>{
+        setFeed(addFeed);
+      }
+
+      setLoading(false);
+    } catch (error) {
+      console.log(error);
+    }
+  };
+
+  useMemo(() => {
     getUserFeed();
-  },[])
+  }, []);
 
-// 무한스크롤
+  // 무한스크롤
   const [ref, inView] = useInView();
 
-  useEffect(()=>{
-    if(inView && !loading){
+  useEffect(() => {
+    if (inView && !loading) {
       setFirstNum(firstNum + 10);
       setSecondNum(secondNum + 3);
       getUserFeed(firstNum, secondNum);
     }
-  },[inView, loading])
+  }, [inView, loading]);
 
-  useEffect(()=>{
-    if(inView){
-      window.scrollTo(0,0);
+  useEffect(() => {
+    if (inView) {
+      window.scrollTo(0, 0);
     }
-  },[inView])
-  
+  }, [inView]);
 
-  if(loading){
+  if (loading) {
     return (
       <>
-        <Header type="logo"/>
-        <LoadingImage src={LoadingGIF} alt="#"/>
-        <NavBar type="홈"/>
+        <Header type="logo" />
+        <LoadingImage src={LoadingGIF} alt="#" />
+        <NavBar type="홈" />
       </>
-    )
+    );
   }
 
   return (
@@ -96,13 +106,21 @@ export default function HomePage() {
       <Header type="logo" />
       {/* new */}
       {/* feed 날짜가 최신일수록 가장 상단에 위치하도록 sort 코드 작성 */}
-      {feed.length > 0 ? 
-      <>
-        <Feeds feed={feed.sort((a,b) => Date.parse(b.createdAt) - Date.parse(a.createdAt))}/>
-        <Loading ref1={ref} wait={3000}>로딩</Loading>
-      </>
-      : <EmptyFeed/>}
-      <NavBar type="홈"/>
+      {feed.length > 0 ? (
+        <>
+          <Feeds
+            feed={feed.sort(
+              (a, b) => Date.parse(b.createdAt) - Date.parse(a.createdAt),
+            )}
+          />
+          <Loading ref1={ref} wait={3000}>
+            로딩
+          </Loading>
+        </>
+      ) : (
+        <EmptyFeed />
+      )}
+      <NavBar type="홈" />
     </section>
   );
 }

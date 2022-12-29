@@ -1,10 +1,10 @@
-import React from "react";
+import React, { useState, useEffect } from "react";
+import { useParams } from "react-router-dom";
 import styled from "styled-components";
-// import axios from "axios";
-// import API from "../utils/api";
 
+import API from "../utils/api";
 import Header from "../components/style/Header";
-import FollowingCards from "../components/follow/FollowingCards";
+import FollowingsCards from "../components/follow/FollowingsCards";
 import NavBar from "../components/style/NavBar";
 
 const FollowingWrap = styled.div`
@@ -12,31 +12,39 @@ const FollowingWrap = styled.div`
 `;
 
 export default function FollowingsPage() {
-  //   const [followingList, setFollowingList] = useState([]);
-  //   const token = localStorage.getItem("token");
-  //   const accountname = localStorage.getItem("accountname");
-  /*  const getFollowingList = () => {
-    axios
-      .get(url, {
-        headers: {
-          Authorization: `Bearer ${token}`,
-          "Content-type": "application/json",
-        },
-      })
+  const [followingList, setFollowingList] = useState([]);
+  const [isUnfollowed, setIsUnfollowed] = useState([]);
+  const token = localStorage.getItem("token");
+  const { account } = useParams();
+
+  const getFollowingList = async () => {
+    const res = await API.get(`/profile/${account}/following`, {
+      headers: {
+        Authorization: `Bearer ${token}`,
+        "Content-type": "application/json",
+      },
+    })
       .then((response) => {
         setFollowingList(response.data);
       })
       .catch((err) => console.log(err));
   };
- */
-  /*   useEffect(() => {
+
+  useEffect(() => {
     getFollowingList();
-  }, []); */
+  }, []);
+  useEffect(() => {
+    setIsUnfollowed(followingList.map((_) => false));
+  }, [followingList]);
 
   return (
     <FollowingWrap>
       <Header type="followings" />
-      <FollowingCards />
+      <FollowingsCards
+        followingList={followingList}
+        isUnfollowed={isUnfollowed}
+        setIsUnfollowed={setIsUnfollowed}
+      />
       <NavBar />
     </FollowingWrap>
   );
