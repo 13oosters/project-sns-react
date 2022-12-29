@@ -1,11 +1,20 @@
 import { forwardRef, useCallback, useDeferredValue, useEffect, useLayoutEffect, useMemo, useRef, useState, useTransition } from "react";
 import { useInView } from "react-intersection-observer";
+import styled from "styled-components";
 import API from "../utils/api";
 import Header from "../components/style/Header";
 import NavBar from "../components/style/NavBar";
 import EmptyFeed from "../components/home/EmptyFeed";
 import Feeds from "../components/home/Feeds";
 import Loading from "../components/home/Loading.js";
+import LoadingGIF from "../assets/image/loading.gif";
+
+const LoadingImage = styled.img`
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+`
 
 export default function HomePage() {
 
@@ -17,7 +26,6 @@ export default function HomePage() {
   const getUserFeed = async(a,b) => {
     setLoading(true);
     
-
     try{
     // 내가 팔로우한 사람들의 게시글 목록 데이터 불러오기
     {
@@ -59,9 +67,6 @@ export default function HomePage() {
 // 무한스크롤
   const [ref, inView] = useInView();
 
-  console.log(feed);
-  console.log(inView);
-  
   useEffect(()=>{
     if(inView && !loading){
       setFirstNum(firstNum + 10);
@@ -76,7 +81,16 @@ export default function HomePage() {
     }
   },[inView])
   
-  console.log(firstNum);
+
+  if(loading){
+    return (
+      <>
+        <Header type="logo"/>
+        <LoadingImage src={LoadingGIF} alt="#"/>
+        <NavBar type="홈"/>
+      </>
+    )
+  }
 
   return (
     <section>
