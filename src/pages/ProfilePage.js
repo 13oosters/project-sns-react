@@ -1,4 +1,6 @@
+
 import React, { useEffect, useState, lazy } from "react";
+
 import { useParams } from "react-router-dom";
 import styled from "styled-components";
 import API from "../utils/api";
@@ -17,13 +19,16 @@ const ProfilePagePostDiv = styled.div`
 
 export default function ProfilePage() {
   const [myProfile, setMyProfile] = useState({});
-  const [userProfile, setUserProfile] = useState({});
+
+ 
   const [myPostData, setMyPostData] = useState({});
   const [listClick, setListClick] = useState(false);
   const [albumClick, setAlbumClick] = useState(true);
 
   const { account } = useParams();
+
   const getMyProfile = async () => {
+
     try {
       const res = await API.get("/user/myinfo", {
         headers: {
@@ -31,6 +36,7 @@ export default function ProfilePage() {
         },
       });
       const user = res.data.user;
+
 
       setMyProfile(user);
       return user;
@@ -49,6 +55,7 @@ export default function ProfilePage() {
       const user = res.data.profile;
 
       setUserProfile(user);
+
       return user;
     } catch (err) {
       throw new Error(err);
@@ -72,8 +79,10 @@ export default function ProfilePage() {
   };
 
   useEffect(() => {
+
     getMyProfile();
     getUserProfile();
+
     getPost();
   }, []);
 
@@ -82,6 +91,7 @@ export default function ProfilePage() {
   return (
     <div>
       <Header type="profile" />
+
       <ProfileInformation
         setUserProfile={setUserProfile}
         followList={myProfile.following}
@@ -90,6 +100,7 @@ export default function ProfilePage() {
           account === myPostData.accountname ? myProfile : userProfile
         }
       />
+
       <SortButtons
         listClick={listClick}
         setListClick={setListClick}

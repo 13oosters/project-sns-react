@@ -14,8 +14,10 @@ const GridCardUl = styled.ul`
   gap: 0.8rem;
 `;
 
+
 export default function GridCards({ postData = [] }) {
   // console.log(postData);
+
   return (
     <GridCardUl>
       {postData.map((data, i) => (

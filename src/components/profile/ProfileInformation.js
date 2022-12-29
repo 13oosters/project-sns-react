@@ -1,11 +1,15 @@
+
 import React, { useEffect, useState } from "react";
+
 import { Link, useNavigate, useParams } from "react-router-dom";
 import styled from "styled-components";
 import FollowCountP from "../style/profile/FollowCountP";
 import FollowCountSpan from "../style/profile/FollowCountSpan";
 import BasicProfileImage from "../../assets/image/basic-profile-img.png";
 import Button from "../style/Button";
+
 import API from "../../utils/api";
+
 
 const UserProfileWrapDiv = styled.div`
   display: flex;
@@ -80,6 +84,7 @@ const ProfileButton = styled(Button)`
 `;
 
 export default function ProfileInformation({
+
   profileData: {
     _id,
     accountname,
@@ -138,15 +143,20 @@ export default function ProfileInformation({
     }
   };
 
+
   return (
     <UserProfileWrapDiv>
       <UserProfileTopDiv>
+
         <FollowCountLink onClick={() => navigate(`/${accountname}/followers`)}>
+
           <FollowCountP type="follows">{followerCount}</FollowCountP>
           <FollowCountSpan>followers</FollowCountSpan>
         </FollowCountLink>
         <ProfileImg src={`https://mandarin.api.weniv.co.kr/${image}`} alt="" />
+
         <FollowCountLink onClick={() => navigate(`/${accountname}/followings`)}>
+
           <FollowCountP>{followingCount}</FollowCountP>
           <FollowCountSpan>followings</FollowCountSpan>
         </FollowCountLink>
@@ -155,6 +165,7 @@ export default function ProfileInformation({
         <UserNameP>{username}</UserNameP>
         <AccountNameP>{accountname}</AccountNameP>
         <UserIntroduceP>{intro}</UserIntroduceP>
+
         {account === myaccount ? (
           <ProfileButton onClick={() => navigate(`/${accountname}/settings`)}>
             프로필 수정
@@ -163,6 +174,7 @@ export default function ProfileInformation({
           <ProfileButton onClick={handleFollow}>
             {isFollow ? "팔로우 취소" : "팔로우"}
           </ProfileButton>
+
         )}
       </UserProfileTextDiv>
     </UserProfileWrapDiv>

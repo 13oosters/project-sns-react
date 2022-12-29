@@ -10,7 +10,10 @@ const FollowListUl = styled.ul`
 `;
 
 export default function FollowerCards({ followerList }) {
+
   // console.log(followerList);
+
+
 
   return (
     <main className="followerMain">
