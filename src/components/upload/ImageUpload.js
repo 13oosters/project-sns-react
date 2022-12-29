@@ -1,4 +1,5 @@
 import React, { useState, useRef } from "react";
+import { useLocation } from "react-router-dom";
 import styled from "styled-components";
 
 import uploadImage from "../../../src/assets/image/profile-upload-button.png";
@@ -74,7 +75,13 @@ const CancelButton = styled.button`
 `;
 const CancelImage = styled.img``;
 
-export default function ImageUpload({ userData, imageData, setImageData }) {
+export default function ImageUpload({
+  userData,
+  imageData,
+  setImageData,
+  setOriginalImage,
+  originalImage,
+}) {
   const uploadCounter = useRef(0);
 
   const registerImage = async (e) => {
@@ -110,6 +117,12 @@ export default function ImageUpload({ userData, imageData, setImageData }) {
     copy.splice(idx, 1);
     setImageData(copy);
   };
+  const deleteOriginalImage = (e) => {
+    const idx = e.target.closest("li").dataset.index;
+
+    originalImage.splice(idx, 1);
+    setOriginalImage([...originalImage]);
+  };
 
   return (
     <ImageUploadDiv>
@@ -133,6 +146,15 @@ export default function ImageUpload({ userData, imageData, setImageData }) {
       </Container>
 
       <ImageUl>
+        {originalImage.map((image, i) => (
+          <ImageLi key={i} data-index={i}>
+            <Image src={image} alt="게시글 사진" />
+            <CancelButton onClick={deleteOriginalImage} type="button">
+              <CancelImage src={cancelImage} alt="취소버튼" />
+            </CancelButton>
+          </ImageLi>
+        ))}
+
         {imageData.map((url, i) => (
           <ImageLi key={i} data-index={i}>
             <Image src={url} alt="게시글 사진" />
