@@ -51,7 +51,7 @@ export default function Form({
         localStorage.setItem("token", res.token);
         localStorage.setItem("accountname", res.accountname);
         setHasToken(true);
-        navigate("/");
+        // navigate("/");
       });
     } else if (title === "이메일로 회원가입") {
       validate(userData, "email", "/user/emailvalid").then((res) => {
@@ -68,6 +68,13 @@ export default function Form({
       });
     }
   }; // 7
+
+  const goHome = () => {
+    setTimeout(()=> {
+      navigate("/")
+      location.reload();
+    }, 2000)
+  }
 
   return (
     <>
@@ -121,7 +128,7 @@ export default function Form({
             {errors.password && errors.password.message}
           </ErrorMessageP>
         </label>
-        <LoginButton type="submit" disabled={isSubmitting} isValue={isValue}>
+        <LoginButton type="submit" disabled={isSubmitting} isValue={isValue} onClick={goHome}>
           {buttonText}
         </LoginButton>
       </LoginForm>

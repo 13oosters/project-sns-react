@@ -43,7 +43,10 @@ function Router() {
         path="/"
         element={
           !hasToken ? (
+            <>
             <LoginPage setHasToken={setHasToken} />
+            <div>안녕</div>
+            </>
           ) : (
             <Suspense fallback={<SplashScreen />}>
               <HomePage />
