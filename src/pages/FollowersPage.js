@@ -1,10 +1,10 @@
-import React from "react";
-// import axios from "axios";
+import React, { useState, useEffect } from "react";
+import { useParams } from "react-router-dom";
 import styled from "styled-components";
-// import API from "../utils/api";
 
+import API from "../utils/api";
 import Header from "../components/style/Header";
-import FollowerCards from "../components/follow/FollowerCards";
+import FollowersCards from "../components/follow/FollowersCards";
 import NavBar from "../components/style/NavBar";
 
 const FollowerWrap = styled.div`
@@ -12,36 +12,41 @@ const FollowerWrap = styled.div`
 `;
 
 export default function FollowersPage() {
-  //   const [followerList, setFollowerList] = useState([]);
+  const [followersList, setFollowersList] = useState([]);
+  const [isUnfollowed, setIsUnfollowed] = useState([]);
+  const token = localStorage.getItem("token");
+  const { account } = useParams();
 
-  //   const token = localStorage.getItem("token");
+  console.log(followersList);
 
-  //   const accountname = localStorage.getItem("accountname");
+  const getFollowersList = async () => {
+    const res = await API.get(`/profile/${account}/follower`, {
+      headers: {
+        Authorization: `Bearer ${token}`,
+        "Content-type": "application/json",
+      },
+    })
+      .then((response) => {
+        setFollowersList(response.data);
+      })
+      .catch((err) => console.log(err));
+  };
 
-  //   const url = `${API}profile/${accountname}/follower`;
-
-  //   const getFollowerList = () => {
-  //     axios
-  //       .get(url, {
-  //         headers: {
-  //           Authorization: `Bearer ${token}`,
-  //           "Content-type": "application/json",
-  //         },
-  //       })
-  //       .then((response) => {
-  //         setFollowerList(response.data);
-  //       })
-  //       .catch((err) => console.log(err));
-  //   };
-
-  //   useEffect(() => {
-  //     getFollowerList();
-  //   }, []);
+  useEffect(() => {
+    getFollowersList();
+  }, []);
+  useEffect(() => {
+    setIsUnfollowed(followersList.map((_) => false));
+  }, [followersList]);
 
   return (
     <FollowerWrap>
       <Header type="followers" />
-      <FollowerCards />
+      <FollowersCards
+        followersList={followersList}
+        isUnfollowed={isUnfollowed}
+        setIsUnfollowed={setIsUnfollowed}
+      />
       <NavBar />
     </FollowerWrap>
   );
