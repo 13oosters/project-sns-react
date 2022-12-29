@@ -1,4 +1,3 @@
-
 import React, { useEffect, useState, lazy } from "react";
 
 import { useParams } from "react-router-dom";
@@ -27,7 +26,6 @@ export default function ProfilePage() {
   const { account } = useParams();
 
   const getMyProfile = async () => {
-
     try {
       const res = await API.get("/user/myinfo", {
         headers: {
@@ -35,7 +33,6 @@ export default function ProfilePage() {
         },
       });
       const user = res.data.user;
-
 
       setMyProfile(user);
       return user;
@@ -78,7 +75,6 @@ export default function ProfilePage() {
   };
 
   useEffect(() => {
-
     getMyProfile();
     getUserProfile();
 

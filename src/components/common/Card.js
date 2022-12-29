@@ -110,8 +110,7 @@ export default function Card({ post }) {
 
   useEffect(() => {
     getMyAccountname();
-    
-  },[])
+  }, []);
 
   const heartButtonClick = async () => {
     if (heart) {
@@ -192,8 +191,9 @@ export default function Card({ post }) {
               <Modal
                 isModal={setIsHomeModal}
                 modal={homeModal}
-                type="mypost"
+                type="myhome"
                 postId={id}
+                accountname={author.accountname}
               />
               <Modal
                 isModal={setIsPostModal}

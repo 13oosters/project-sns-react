@@ -81,6 +81,7 @@ export default function ImageUpload({
   setImageData,
   setOriginalImage,
   originalImage,
+  type,
 }) {
   const uploadCounter = useRef(0);
 
@@ -146,14 +147,18 @@ export default function ImageUpload({
       </Container>
 
       <ImageUl>
-        {originalImage.map((image, i) => (
-          <ImageLi key={i} data-index={i}>
-            <Image src={image} alt="게시글 사진2" />
-            <CancelButton onClick={deleteOriginalImage} type="button">
-              <CancelImage src={cancelImage} alt="취소버튼" />
-            </CancelButton>
-          </ImageLi>
-        ))}
+        {type === "edit" ? (
+          originalImage.map((image, i) => (
+            <ImageLi key={i} data-index={i}>
+              <Image src={image} alt="게시글 사진2" />
+              <CancelButton onClick={deleteOriginalImage} type="button">
+                <CancelImage src={cancelImage} alt="취소버튼" />
+              </CancelButton>
+            </ImageLi>
+          ))
+        ) : (
+          <></>
+        )}
 
         {imageData.map((url, i) => (
           <ImageLi key={i} data-index={i}>

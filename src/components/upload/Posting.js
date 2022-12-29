@@ -21,8 +21,9 @@ const UploadButton = styled(Button)`
 // useState에 프롭스값 넣고싶으면 useEffect를 사용하자
 
 export default function Posting({ userData, setUserData, type }) {
-  const { post } = { ...userData };
-  const postImage = post.image.split(",");
+  const { post } = type === "edit" ? { ...userData } : [];
+
+  const postImage = type === "edit" ? post.image.split(",") : [];
 
   const [imageData, setImageData] = useState(postImage);
 
@@ -113,6 +114,7 @@ export default function Posting({ userData, setUserData, type }) {
             setImageData={setImageData}
             originalImage={originalImage}
             setOriginalImage={setOriginalImage}
+            type="edit"
           />
           <TextUpload userData={userData} type="edit" />
           <UploadButton type="submit">수정하기</UploadButton>
