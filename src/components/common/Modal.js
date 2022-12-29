@@ -39,7 +39,7 @@ export default function Modal({
   type,
   commentId,
   postId,
-  setCommentData,
+  setPostPageData,
 }) {
   const [message, setMessage] = useState("");
   const { id } = useParams();
@@ -52,7 +52,8 @@ export default function Modal({
   };
 
   const editPost = () => {
-    postData("editpost", postId, "");
+    navigate("edit");
+
     isModal((prev) => !prev);
   };
 
@@ -66,7 +67,7 @@ export default function Modal({
   };
 
   const deleteComment = () => {
-    postData("deletComment", postId, setMessage, "", commentId);
+    postData("deletComment", postId, setPostPageData, "", commentId);
 
     isModal((prev) => !prev);
 

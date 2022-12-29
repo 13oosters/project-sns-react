@@ -96,7 +96,6 @@ export default function Card({ post }) {
   const [heartCounting, setHeartCounting] = useState(heartCount);
   const [homeModal, setIsHomeModal] = useState(false);
   const [postModal, setIsPostModal] = useState(false);
-  const [modalType, setModalType] = useState();
   const [myAccountname, setMyAccountname] = useState();
 
   const getMyAccountname = async () => {
@@ -204,8 +203,18 @@ export default function Card({ post }) {
             </>
           ) : (
             <>
-              <Modal isModal={homeModal} type="otherpost" postId={id} />
-              <Modal isModal={postModal} type="mypost" postId={id} />
+              <Modal
+                isModal={setIsHomeModal}
+                modal={homeModal}
+                type="otherpost"
+                postId={id}
+              />
+              <Modal
+                isModal={setIsPostModal}
+                modal={postModal}
+                type="otherpost"
+                postId={id}
+              />
             </>
           )}
         </li>

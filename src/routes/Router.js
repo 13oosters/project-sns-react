@@ -63,6 +63,10 @@ function Router() {
       <Route path="/:account/followers" element={<div>하이</div>} />
       <Route path="/:account/settings" element={<div>하이</div>} />
       <Route path="/:account/post/:id" element={<PostPage>하이</PostPage>} />
+      <Route
+        path="/:account/post/:id/edit"
+        element={<UploadPage>하이</UploadPage>}
+      />
       {/**  <Route path="post" element={<div>하이</div>} />*/}
       <Route path="*" element={<ErrorPage></ErrorPage>} />
     </Routes>

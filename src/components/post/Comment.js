@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import { useParams } from "react-router-dom";
+import { useNavigate, useParams } from "react-router-dom";
 import styled from "styled-components";
 import modalButtonImage from "../../assets/image/icon-more-post.png";
 import Modal from "../common/Modal";
@@ -49,7 +49,9 @@ const ModalImage = styled.img`
 
 export default function Comment({ comment, myInfo, setPostPageData }) {
   const [modal, isModal] = useState(false);
+  const navigate = useNavigate();
   const { id } = useParams();
+  const { account } = useParams();
   const { user } = { ...myInfo };
 
   let postId = "";
@@ -87,7 +89,13 @@ export default function Comment({ comment, myInfo, setPostPageData }) {
   return (
     <CommentLi>
       <CommentUserInfoDiv>
-        <UserImage src={comment.author.image} alt="프로필 사진" />
+        <UserImage
+          src={comment.author.image}
+          alt="프로필 사진"
+          onClick={() => {
+            navigate(`/${comment.author.accountname}`);
+          }}
+        />
         <UserNameStrong>{comment.author.accountname}</UserNameStrong>
         <CommentTime>{getTime()}</CommentTime>
         <ModalImage

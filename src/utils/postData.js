@@ -18,7 +18,8 @@ import API from "./api";
  */
 
 const getPost = async (type, url, setPostData, comment, commentId) => {
-  console.log(url);
+  //  console.log(url);
+  console.log(setPostData);
   let responseData = null;
   let responseComment = null;
 
@@ -48,7 +49,14 @@ const getPost = async (type, url, setPostData, comment, commentId) => {
     /* edit 구현 진행중 */
 
     if (type === "editpost") {
-      console.log("edit 구현 진행중");
+      const responsePost = await API.get(`/post/${url}`, {
+        headers: {
+          Authorization: `Bearer${localStorage.getItem("token")}`,
+          "Content-type": "application/json",
+        },
+      });
+
+      responseData = await responsePost.data;
     }
     if (type === "deletepost") {
       const response = await API.delete(`/post/${url}`, {
@@ -134,8 +142,6 @@ const getPost = async (type, url, setPostData, comment, commentId) => {
         ...responseComment,
         ...responseComments,
       };
-
-      console.log(responseData);
     }
 
     if (type === "commentReport") {
@@ -146,7 +152,6 @@ const getPost = async (type, url, setPostData, comment, commentId) => {
   }
 
   setPostData(responseData);
-  console.log(responseData);
 };
 
 export default getPost;
