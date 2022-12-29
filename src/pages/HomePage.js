@@ -1,24 +1,27 @@
-import { useCallback, useDeferredValue, useEffect, useLayoutEffect, useMemo, useRef, useState, useTransition } from "react";
+import { forwardRef, useCallback, useDeferredValue, useEffect, useLayoutEffect, useMemo, useRef, useState, useTransition } from "react";
 import { useInView } from "react-intersection-observer";
 import API from "../utils/api";
 import Header from "../components/style/Header";
 import NavBar from "../components/style/NavBar";
 import EmptyFeed from "../components/home/EmptyFeed";
 import Feeds from "../components/home/Feeds";
+import Loading from "../components/home/Loading.js";
 
 export default function HomePage() {
 
   const [feed, setFeed] = useState([]); // 팔로우한 사람들 + 나의 게시물 데이터
   const [loading, setLoading] = useState(false);
+  const [firstNum, setFirstNum] = useState(10);
+  const [secondNum, setSecondNum] = useState(3);
   
-  const getUserFeed = async() => {
+  const getUserFeed = async(a,b) => {
     setLoading(true);
     
 
     try{
     // 내가 팔로우한 사람들의 게시글 목록 데이터 불러오기
     {
-    const response = await API.get(`/post/feed/?limit=50`,{
+    const response = await API.get(`/post/feed/?limit=10&skip=${a}`,{
       header: {
         Authorization: `Bearer ${localStorage.getItem("token")}`,
         "Content-type": "application/json",
@@ -27,7 +30,7 @@ export default function HomePage() {
     // 로컬 스토리지에 있는 accountname 갖고오기
     const myId = localStorage.getItem("accountname");
     // 불러온 accountname을 통해 내가 올린 게시글 불러오기
-    const myPosting = await API.get(`/post/${myId}/userpost/?limit=10`,{
+    const myPosting = await API.get(`/post/${myId}/userpost/?limit=3&skip=${b}`,{
       "Authorization": `Bearer ${localStorage.getItem("token")}`,
       "Content-type": "application/json",
     });
@@ -41,12 +44,7 @@ export default function HomePage() {
     
     setFeed(addFeed);
     
-    // 똑같은 게시글이 중복되어 feed state에 저장되는 안타까운 현실..
-    console.log(feed);
-
   }
-
-
 
     setLoading(false);
   } catch (error) {
@@ -54,25 +52,31 @@ export default function HomePage() {
   }
 }
 
-
   useMemo(()=>{
     getUserFeed();
   },[])
 
 // 무한스크롤
-  // console.log(feed);
-  
   const [ref, inView] = useInView();
-  
-  // console.log(inView);
-  // console.log(feedNumber);
+
+  console.log(feed);
+  console.log(inView);
   
   useEffect(()=>{
     if(inView && !loading){
-      getUserFeed();
+      setFirstNum(firstNum + 10);
+      setSecondNum(secondNum + 3);
+      getUserFeed(firstNum, secondNum);
     }
   },[inView, loading])
+
+  useEffect(()=>{
+    if(inView){
+      window.scrollTo(0,0);
+    }
+  },[inView])
   
+  console.log(firstNum);
 
   return (
     <section>
@@ -82,7 +86,7 @@ export default function HomePage() {
       {feed.length > 0 ? 
       <>
         <Feeds feed={feed.sort((a,b) => Date.parse(b.createdAt) - Date.parse(a.createdAt))}/>
-        <div ref={ref}>로딩</div>
+        <Loading ref1={ref} wait={3000}>로딩</Loading>
       </>
       : <EmptyFeed/>}
       <NavBar type="홈"/>
