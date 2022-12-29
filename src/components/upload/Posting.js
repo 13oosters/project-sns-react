@@ -58,16 +58,16 @@ export default function Posting({ userData, setUserData, type }) {
 
   const editPost = async (e) => {
     e.preventDefault();
+    console.log(e.target[4].value);
     setImageData([...originalImage, ...imageData]);
     console.log(originalImage, imageData);
-    console.log(e.target.value);
     try {
       console.log(imageData);
       await API.put(
         `/post/${userData.post.id}`,
         {
           post: {
-            content: e.target[2].value,
+            content: e.target[4].value,
             image: imageData.join(", "),
           },
         },

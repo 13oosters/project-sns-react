@@ -3,7 +3,8 @@ import styled from "styled-components";
 
 const MultiImageWrapper = styled.ul`
   display: flex;
-  overflow: scroll;
+  overflow-x: scroll;
+  padding: 0;
 `
 
 const MultiImage = styled.img`
@@ -39,18 +40,18 @@ export default function PostImage({image}) {
     
   },[])
   
+  if(image && imageResult){
+    return(
+      <MultiImageWrapper>
+        {image.split(",").map((item,index) => 
+        <li key={index}>
+          <MultiImage src={item} alt="#"/>
+        </li>)}
+      </MultiImageWrapper>
+    )
+  }
+  if(image && !imageResult){
 
-  return (
-    <>
-    <MultiImageWrapper>
-      {image && imageResult ? image.split(",").map((item,index)=> 
-      <li key={index}>
-        <MultiImage src={item} alt="#"/>
-        </li>) : null}
-      {image && !imageResult ? <img src={image}
-        alt="#"
-        style={{ width: "100%", height: "23rem" }} /> : null}
-    </MultiImageWrapper>
-    </>
-  )
+    return <img src={image} alt="#" style={{width: "100%", height: "23rem"}}/>
+  }
 }

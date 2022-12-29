@@ -110,7 +110,8 @@ export default function Card({ post }) {
 
   useEffect(() => {
     getMyAccountname();
-  }, []);
+    
+  },[])
 
   const heartButtonClick = async () => {
     if (heart) {
