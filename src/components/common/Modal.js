@@ -40,6 +40,7 @@ export default function Modal({
   commentId,
   postId,
   setPostPageData,
+  accountname,
 }) {
   const [message, setMessage] = useState("");
   const { id } = useParams();
@@ -51,8 +52,13 @@ export default function Modal({
     navigate("/");
   };
 
-  const editPost = () => {
-    navigate("edit");
+  const editPost = (e) => {
+    console.log(e);
+    if (type === "myhome") {
+      navigate(`${accountname}/post/${postId}/edit`);
+    } else {
+      navigate("edit");
+    }
 
     isModal((prev) => !prev);
   };
@@ -100,6 +106,12 @@ export default function Modal({
     mycomment: (
       <ul>
         <ModalLi onClick={deleteComment}>삭제</ModalLi>
+      </ul>
+    ),
+    myhome: (
+      <ul>
+        <ModalLi onClick={editPost}>수정</ModalLi>
+        <ModalLi onClick={deletePost}>삭제</ModalLi>
       </ul>
     ),
     mypost: (
