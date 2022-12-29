@@ -1,69 +1,125 @@
-import { useEffect, useState } from "react";
-import axios from "axios";
+import {
+  forwardRef,
+  useCallback,
+  useDeferredValue,
+  useEffect,
+  useLayoutEffect,
+  useMemo,
+  useRef,
+  useState,
+  useTransition,
+} from "react";
+import { useInView } from "react-intersection-observer";
 import styled from "styled-components";
 import API from "../utils/api";
 import Header from "../components/style/Header";
-// import Notice from "../components/common/Notice"
 import NavBar from "../components/style/NavBar";
-// import Cards from "../components/common/Cards";
 import EmptyFeed from "../components/home/EmptyFeed";
 import Feeds from "../components/home/Feeds";
-import Modal from "../components/common/Modal";
+import Loading from "../components/home/Loading.js";
+import LoadingGIF from "../assets/image/loading.gif";
+
+const LoadingImage = styled.img`
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+`;
 
 export default function HomePage() {
   const [feed, setFeed] = useState([]); // 팔로우한 사람들 + 나의 게시물 데이터
-  const [homeModal, setIsHomeModal] = useState(false);
+  const [loading, setLoading] = useState(false);
+  const [firstNum, setFirstNum] = useState(10);
+  const [secondNum, setSecondNum] = useState(3);
 
-  const getUserFeed = async () => {
-    const response = await API.get("/post/feed/?limit=100", {
-      header: {
-        Authorization: `Bearer ${localStorage.getItem("token")}`,
-        "Content-type": "application/json",
-      },
-    });
-    const result = await response.data.posts;
+  const getUserFeed = async (a, b) => {
+    setLoading(true);
 
-    return result;
+    try {
+      // 내가 팔로우한 사람들의 게시글 목록 데이터 불러오기
+      {
+        const response = await API.get(`/post/feed/?limit=10&skip=${a}`, {
+          header: {
+            Authorization: `Bearer ${localStorage.getItem("token")}`,
+            "Content-type": "application/json",
+          },
+        });
+        // 로컬 스토리지에 있는 accountname 갖고오기
+        const myId = localStorage.getItem("accountname");
+        // 불러온 accountname을 통해 내가 올린 게시글 불러오기
+        const myPosting = await API.get(
+          `/post/${myId}/userpost/?limit=3&skip=${b}`,
+          {
+            Authorization: `Bearer ${localStorage.getItem("token")}`,
+            "Content-type": "application/json",
+          },
+        );
+
+        // 내가 팔로우한 사람들의 게시글과 내가올린 게시글 합치기
+        // const temp = [...result, ...myPostingResult.post];
+
+        const result = await Promise.all([response, myPosting]);
+        const addFeed = [...result[0].data.posts, ...result[1].data.post];
+
+        setFeed(addFeed);
+      }
+
+      setLoading(false);
+    } catch (error) {
+      console.log(error);
+    }
   };
 
-  const getMyPost = async (data) => {
-    const response = await API.get("/user/myinfo", {
-      Authorization: `Bearer ${localStorage.getItem("token")}`,
-    });
-    const result = await response.data;
-    const myId = result.user.accountname;
+  useMemo(() => {
+    getUserFeed();
+  }, []);
 
-    const myPosting = await API.get(`/post/${myId}/userpost/?limit=100`, {
-      Authorization: `Bearer ${localStorage.getItem("token")}`,
-      "Content-type": "application/json",
-    });
-    const myPostingResult = await myPosting.data;
-
-    const temp = [...data, ...myPostingResult.post];
-
-    setFeed(temp);
-  };
+  // 무한스크롤
+  const [ref, inView] = useInView();
 
   useEffect(() => {
-    getUserFeed().then((data) => getMyPost(data));
-  }, []);
+    if (inView && !loading) {
+      setFirstNum(firstNum + 10);
+      setSecondNum(secondNum + 3);
+      getUserFeed(firstNum, secondNum);
+    }
+  }, [inView, loading]);
+
+  useEffect(() => {
+    if (inView) {
+      window.scrollTo(0, 0);
+    }
+  }, [inView]);
+
+  if (loading) {
+    return (
+      <>
+        <Header type="logo" />
+        <LoadingImage src={LoadingGIF} alt="#" />
+        <NavBar type="홈" />
+      </>
+    );
+  }
 
   return (
     <section>
       <Header type="logo" />
       {/* new */}
       {/* feed 날짜가 최신일수록 가장 상단에 위치하도록 sort 코드 작성 */}
-      {feed ? (
-        <Feeds
-          feed={feed.sort(
-            (a, b) => Date.parse(b.createdAt) - Date.parse(a.createdAt),
-          )}
-          setIsHomeModal={setIsHomeModal}
-        />
+      {feed.length > 0 ? (
+        <>
+          <Feeds
+            feed={feed.sort(
+              (a, b) => Date.parse(b.createdAt) - Date.parse(a.createdAt),
+            )}
+          />
+          <Loading ref1={ref} wait={3000}>
+            로딩
+          </Loading>
+        </>
       ) : (
         <EmptyFeed />
       )}
-      <Modal isModal={homeModal} type="otherpost" />
       <NavBar type="홈" />
     </section>
   );
