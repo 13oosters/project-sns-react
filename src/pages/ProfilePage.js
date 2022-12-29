@@ -19,8 +19,7 @@ const ProfilePagePostDiv = styled.div`
 
 export default function ProfilePage() {
   const [myProfile, setMyProfile] = useState({});
-
- 
+  const [userProfile, setUserProfile] = useState({});
   const [myPostData, setMyPostData] = useState({});
   const [listClick, setListClick] = useState(false);
   const [albumClick, setAlbumClick] = useState(true);
