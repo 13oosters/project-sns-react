@@ -111,7 +111,7 @@ export default function HomePage() {
           <Feeds
             feed={feed.sort(
               (a, b) => Date.parse(b.createdAt) - Date.parse(a.createdAt),
-            )}
+            )} setFeed={setFeed}
           />
           <Loading ref1={ref} wait={3000}>
             로딩

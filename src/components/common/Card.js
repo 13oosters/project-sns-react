@@ -72,7 +72,7 @@ const CardBodyTime = styled.time`
   padding: 1.3rem;
 `;
 
-export default function Card({ post }) {
+export default function Card({ post, setFeed, fullArray }) {
   // console.log(feed);
 
   const {
@@ -194,6 +194,8 @@ export default function Card({ post }) {
                 type="myhome"
                 postId={id}
                 accountname={author.accountname}
+                setFeed={setFeed}
+                fullArray={fullArray}
               />
               <Modal
                 isModal={setIsPostModal}
