@@ -16,7 +16,7 @@ const ModalDiv = styled.div`
   border: 1px solid #dbdbdb;
   border-top-left-radius: 1rem;
   border-top-right-radius: 1rem;
-  padding: 1.6rem 2.6rem 1rem 2.6rem;
+  padding: 3rem 2.6rem 3rem 2.6rem;
   text-align: center;
   transform: ${(props) =>
     !props.modal ? "translateY(100%)" : "translateY(0)"};
@@ -24,7 +24,7 @@ const ModalDiv = styled.div`
 `;
 
 const ModalLi = styled.li`
-  padding: 2rem 2.6rem;
+  padding: 1rem 1.6rem;
   font-size: ${(props) => props.theme.baseFontSize};
   font-weight: ${(props) => props.theme.normalFontWeight};
   text-align: left;
