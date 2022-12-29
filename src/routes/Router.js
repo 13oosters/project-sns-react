@@ -9,8 +9,8 @@ import FollowersPage from "../pages/FollowersPage";
 import FollowingsPage from "../pages/FollowingsPage";
 import ErrorPage from "../pages/ErrorPage";
 import SplashScreen from "../components/common/SplashScreen";
+import ProfileEditPage from "../pages/ProfileEditPage";
 import API from "../utils/api";
-import ProfileSettingPage from "../pages/ProfileSettingPage";
 
 const HomePage = lazy(() => import("../pages/HomePage"));
 
@@ -64,7 +64,7 @@ function Router() {
       <Route path="/:account" element={<ProfilePage></ProfilePage>} />
       <Route path="/:account/followers" element={<FollowersPage />} />
       <Route path="/:account/followings" element={<FollowingsPage />} />
-      <Route path="/:account/settings" element={<ProfileSettingPage />} />
+      <Route path="/:account/settings" element={<ProfileEditPage />} />
       <Route path="/:account/post/:id" element={<PostPage>하이</PostPage>} />
       <Route
         path="/:account/post/:id/edit"
