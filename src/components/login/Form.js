@@ -17,8 +17,8 @@ export default function Form({
   setUserData,
   setHasToken,
 }) {
-  const [isValue, setIsValue] = useState(false); // 1
-  const [responseMessage, setResponseMeassage] = useState(""); // 2
+  const [isValue, setIsValue] = useState(false);
+  const [responseMessage, setResponseMeassage] = useState("");
   const navigate = useNavigate();
 
   const {
@@ -27,7 +27,7 @@ export default function Form({
     handleSubmit,
     formState: { isSubmitting, errors },
     watch,
-  } = useForm({ mode: "onChange" }); // 3
+  } = useForm({ mode: "onChange" });
 
   useEffect(() => {
     setFocus("email");
@@ -36,22 +36,20 @@ export default function Form({
   const checkIsValue = (e) => {
     e.target.value && watch("email") && watch("password")
       ? setIsValue(true)
-      : setIsValue(false); // 4
+      : setIsValue(false);
   };
 
   const handleInput = (e) => {
     setUserData({ ...userData, [e.target.name]: e.target.value });
     checkIsValue(e);
-  }; // 6
+  };
 
   const handleForm = (e) => {
     if (title === "로그인") {
       validate(userData, "signin", "/user/login").then((res) => {
-        console.log(res);
         localStorage.setItem("token", res.token);
         localStorage.setItem("accountname", res.accountname);
         setHasToken(true);
-        // navigate("/");
       });
     } else if (title === "이메일로 회원가입") {
       validate(userData, "email", "/user/emailvalid").then((res) => {
@@ -67,14 +65,14 @@ export default function Form({
         }
       });
     }
-  }; // 7
+  };
 
   const goHome = () => {
-    setTimeout(()=> {
-      navigate("/")
+    setTimeout(() => {
+      navigate("/");
       location.reload();
-    }, 2000)
-  }
+    }, 2000);
+  };
 
   return (
     <>
@@ -115,7 +113,6 @@ export default function Form({
             placeholder="비밀번호를 설정해 주세요"
             {...register("password", {
               required: "비밀번호는 필수 입력입니다.",
-              // 최소 8 자, 하나 이상의 문자와 하나의 숫자 정규식
               pattern: {
                 value: /^(?=.*[A-Za-z])(?=.*\d)[A-Za-z\d]{8,}$/i,
                 message:
@@ -128,7 +125,12 @@ export default function Form({
             {errors.password && errors.password.message}
           </ErrorMessageP>
         </label>
-        <LoginButton type="submit" disabled={isSubmitting} isValue={isValue} onClick={goHome}>
+        <LoginButton
+          type="submit"
+          disabled={isSubmitting}
+          isValue={isValue}
+          onClick={goHome}
+        >
           {buttonText}
         </LoginButton>
       </LoginForm>

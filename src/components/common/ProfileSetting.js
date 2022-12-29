@@ -51,8 +51,8 @@ const UploadImage = styled.img`
 `;
 
 export default function ProfileSetting({ title, userData, setUserData }) {
-  const [isValue, setIsValue] = useState(false); // 1
-  const [responseMessage, setResponseMeassage] = useState(""); // 2
+  const [isValue, setIsValue] = useState(false);
+  const [responseMessage, setResponseMeassage] = useState("");
 
   const navigate = useNavigate();
 
@@ -62,7 +62,7 @@ export default function ProfileSetting({ title, userData, setUserData }) {
     handleSubmit,
     formState: { isSubmitting, errors },
     watch,
-  } = useForm({ mode: "onChange" }); // 3
+  } = useForm({ mode: "onChange" });
 
   useEffect(() => {
     setFocus("username");
@@ -71,13 +71,13 @@ export default function ProfileSetting({ title, userData, setUserData }) {
   const checkIsValue = (e) => {
     e.target.value && watch("username") && watch("accountname")
       ? setIsValue(true)
-      : setIsValue(false); // 4
+      : setIsValue(false);
   };
 
   const handleInput = (e) => {
     setUserData({ ...userData, [e.target.name]: e.target.value });
     checkIsValue(e);
-  }; // 7
+  };
 
   const handleForm = (e) => {
     if (title === "프로필 설정") {
@@ -103,7 +103,7 @@ export default function ProfileSetting({ title, userData, setUserData }) {
     } else {
       /* 프로필 수정 페이지 기능 코드 작성 */
     }
-  }; // 7
+  };
 
   const uploadImage = async (e) => {
     const form = new FormData();
