@@ -1,4 +1,5 @@
 import React, { useState } from "react";
+import { useNavigate, useParams } from "react-router-dom";
 import styled from "styled-components";
 import modalButtonImage from "../../assets/image/icon-more-post.png";
 import Modal from "../common/Modal";
@@ -37,6 +38,7 @@ const CommentTime = styled.span`
 
 const CommentP = styled.p`
   padding-left: 4.8rem;
+  padding-right: 1rem;
   font-size: ${(props) => props.theme.baseFontSize};
 `;
 
@@ -45,9 +47,16 @@ const ModalImage = styled.img`
   height: 1.6rem;
 `;
 
-export default function Comment({ comment }) {
+export default function Comment({ comment, myInfo, setPostPageData }) {
   const [modal, isModal] = useState(false);
-  const setModal = (e) => {
+  const navigate = useNavigate();
+  const { id } = useParams();
+  const { account } = useParams();
+  const { user } = { ...myInfo };
+
+  let postId = "";
+
+  const setModal = () => {
     isModal((prev) => !prev);
   };
 
@@ -74,10 +83,19 @@ export default function Comment({ comment }) {
     return time;
   };
 
+  if (user.accountname === comment.author.accountname) {
+    postId = user.accountname;
+  }
   return (
     <CommentLi>
       <CommentUserInfoDiv>
-        <UserImage src={comment.author.image} alt="프로필 사진" />
+        <UserImage
+          src={comment.author.image}
+          alt="프로필 사진"
+          onClick={() => {
+            navigate(`/${comment.author.accountname}`);
+          }}
+        />
         <UserNameStrong>{comment.author.accountname}</UserNameStrong>
         <CommentTime>{getTime()}</CommentTime>
         <ModalImage
@@ -88,7 +106,24 @@ export default function Comment({ comment }) {
         />
       </CommentUserInfoDiv>
       <CommentP>{comment.content}</CommentP>
-      <Modal isModal={modal} type="othercomment" commentId={comment.id} />
+      {postId ? (
+        <Modal
+          modal={modal}
+          isModal={isModal}
+          type="mycomment"
+          commentId={comment.id}
+          postId={id}
+          setPostPageData={setPostPageData}
+        />
+      ) : (
+        <Modal
+          modal={modal}
+          isModal={isModal}
+          type="othercomment"
+          commentId={comment.id}
+          postId={id}
+        />
+      )}
     </CommentLi>
   );
 }

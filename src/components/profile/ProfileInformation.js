@@ -1,10 +1,15 @@
-import React from "react";
+
+import React, { useEffect, useState } from "react";
+
 import { Link, useNavigate, useParams } from "react-router-dom";
 import styled from "styled-components";
 import FollowCountP from "../style/profile/FollowCountP";
 import FollowCountSpan from "../style/profile/FollowCountSpan";
 import BasicProfileImage from "../../assets/image/basic-profile-img.png";
 import Button from "../style/Button";
+
+import API from "../../utils/api";
+
 
 const UserProfileWrapDiv = styled.div`
   display: flex;
@@ -79,27 +84,79 @@ const ProfileButton = styled(Button)`
 `;
 
 export default function ProfileInformation({
-  accountname,
-  followerCount,
-  followingCount,
-  image,
-  username,
-  intro,
+
+  profileData: {
+    _id,
+    accountname,
+    following,
+    followerCount,
+    followingCount,
+    image,
+    username,
+    intro,
+  },
+  myaccount,
+  followList,
+  setUserProfile,
 }) {
+  const [isFollow, setIsFollow] = useState(null);
+  const [isPending, setIsPending] = useState(true);
   const navigate = useNavigate();
   const { account } = useParams();
 
-  // console.log(image);
+  console.log(isFollow);
+
+  useEffect(() => {
+    if (followList) {
+      const check = followList.includes(_id);
+
+      console.log(check);
+
+      setIsFollow(check);
+      setIsPending(false);
+    }
+  }, []);
+
+  const handleFollow = async () => {
+    setIsFollow(!isFollow);
+
+    if (isFollow) {
+      // 언팔로우
+      const res = await API.delete(`profile/${accountname}/unfollow`, {
+        headers: {
+          Authorization: `Bearer ${localStorage.getItem("token")}`,
+          "Content-type": "application/json",
+        },
+      });
+      const user = res.data.profile;
+
+      setUserProfile({ ...user });
+    } else {
+      const res = await API.post(`/profile/${accountname}/follow`, {
+        headers: {
+          Authorization: `Bearer ${localStorage.getItem("token")}`,
+        },
+      });
+      const user = res.data.profile;
+
+      setUserProfile({ ...user });
+    }
+  };
+
 
   return (
     <UserProfileWrapDiv>
       <UserProfileTopDiv>
-        <FollowCountLink onClick={() => navigate("/:accountname/followers")}>
+
+        <FollowCountLink onClick={() => navigate(`/${accountname}/followers`)}>
+
           <FollowCountP type="follows">{followerCount}</FollowCountP>
           <FollowCountSpan>followers</FollowCountSpan>
         </FollowCountLink>
         <ProfileImg src={`https://mandarin.api.weniv.co.kr/${image}`} alt="" />
-        <FollowCountLink onClick={() => navigate("/:accountname/followings")}>
+
+        <FollowCountLink onClick={() => navigate(`/${accountname}/followings`)}>
+
           <FollowCountP>{followingCount}</FollowCountP>
           <FollowCountSpan>followings</FollowCountSpan>
         </FollowCountLink>
@@ -108,12 +165,16 @@ export default function ProfileInformation({
         <UserNameP>{username}</UserNameP>
         <AccountNameP>{accountname}</AccountNameP>
         <UserIntroduceP>{intro}</UserIntroduceP>
-        {account === accountname ? (
-          <ProfileButton onClick={() => navigate("/:accountname/settings")}>
+
+        {account === myaccount ? (
+          <ProfileButton onClick={() => navigate(`/${accountname}/settings`)}>
             프로필 수정
           </ProfileButton>
         ) : (
-          <ProfileButton>팔로우</ProfileButton>
+          <ProfileButton onClick={handleFollow}>
+            {isFollow ? "팔로우 취소" : "팔로우"}
+          </ProfileButton>
+
         )}
       </UserProfileTextDiv>
     </UserProfileWrapDiv>

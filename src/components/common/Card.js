@@ -72,7 +72,7 @@ const CardBodyTime = styled.time`
   padding: 1.3rem;
 `;
 
-export default function Card({ setIsPostModal, post }) {
+export default function Card({ post }) {
   // console.log(feed);
 
   const {
@@ -95,30 +95,30 @@ export default function Card({ setIsPostModal, post }) {
   const [heart, setHeart] = useState(hearted);
   const [heartCounting, setHeartCounting] = useState(heartCount);
   const [homeModal, setIsHomeModal] = useState(false);
-  const [modalType, setModalType] = useState();
+  const [postModal, setIsPostModal] = useState(false);
   const [myAccountname, setMyAccountname] = useState();
 
-  const getMyAccountname = async() => {
+  const getMyAccountname = async () => {
     const response = await API.get("/user/myinfo", {
-      "Authorization": `Bearer ${localStorage.getItem("token")}`,
+      Authorization: `Bearer ${localStorage.getItem("token")}`,
     });
     const result = await response.data;
     const myId = await result.user.accountname;
 
     setMyAccountname(myId);
-  }
+  };
 
-  useEffect(()=>{
+  useEffect(() => {
     getMyAccountname();
     
   },[])
 
-  const heartButtonClick = async() => {
-    if(heart){
+  const heartButtonClick = async () => {
+    if (heart) {
       setHeart(false);
       setHeartCounting(heartCounting - 1);
       const response = await API.delete(`/post/${id}/unheart`, {
-        "Authorization": `Bearer ${localStorage.getItem("token")}`,
+        Authorization: `Bearer ${localStorage.getItem("token")}`,
         "Content-type": "application/json",
       });
 
@@ -127,14 +127,13 @@ export default function Card({ setIsPostModal, post }) {
 
     setHeart(true);
     setHeartCounting(heartCounting + 1);
-    const response = await API.post(`post/${id}/heart`,{
-      "Authorization": `Bearer ${localStorage.getItem("token")}`,
+    const response = await API.post(`post/${id}/heart`, {
+      Authorization: `Bearer ${localStorage.getItem("token")}`,
       "Content-type": "application/json",
     });
 
     return response;
-  }
-
+  };
 
   return (
     <>
@@ -157,18 +156,19 @@ export default function Card({ setIsPostModal, post }) {
             <CardHeaderButton
               type="button"
               onClick={() => {
-                account ? setIsPostModal((prev) => !prev) : setIsHomeModal((prev) => !prev);
-                
+                account
+                  ? setIsPostModal((prev) => !prev)
+                  : setIsHomeModal((prev) => !prev);
               }}
             >
               <img src={moreImage} alt="설정" />
             </CardHeaderButton>
           </CardHeaderDiv>
-          <PostImage image={image}/>
+          <PostImage image={image} />
           <CardBodyUl>
-            <li style={{width: "4rem"}}>
+            <li style={{ width: "4rem" }}>
               <button type="button" onClick={heartButtonClick}>
-                  <CardBodyImage src={heart ? heartClickImage : heartImage} />
+                <CardBodyImage src={heart ? heartClickImage : heartImage} />
               </button>
               <CardBodySpan>{heartCounting}</CardBodySpan>
             </li>
@@ -187,8 +187,37 @@ export default function Card({ setIsPostModal, post }) {
             <span>{createdAt.slice(5, 7)}월</span>
             <span>{createdAt.slice(8, 10)}일</span>
           </CardBodyTime>
-          {myAccountname === author.accountname ? <Modal isModal={homeModal} type="mypost" postId={id}/> : <Modal isModal={homeModal} type="otherpost" postId={id} />}
-          
+          {myAccountname === author.accountname ? (
+            <>
+              <Modal
+                isModal={setIsHomeModal}
+                modal={homeModal}
+                type="mypost"
+                postId={id}
+              />
+              <Modal
+                isModal={setIsPostModal}
+                modal={postModal}
+                type="mypost"
+                postId={id}
+              />
+            </>
+          ) : (
+            <>
+              <Modal
+                isModal={setIsHomeModal}
+                modal={homeModal}
+                type="otherpost"
+                postId={id}
+              />
+              <Modal
+                isModal={setIsPostModal}
+                modal={postModal}
+                type="otherpost"
+                postId={id}
+              />
+            </>
+          )}
         </li>
       ) : (
         <></>

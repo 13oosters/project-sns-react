@@ -17,7 +17,6 @@ const LoadingImage = styled.img`
 `
 
 export default function HomePage() {
-
   const [feed, setFeed] = useState([]); // 팔로우한 사람들 + 나의 게시물 데이터
   const [loading, setLoading] = useState(false);
   const [firstNum, setFirstNum] = useState(10);
@@ -33,7 +32,7 @@ export default function HomePage() {
       header: {
         Authorization: `Bearer ${localStorage.getItem("token")}`,
         "Content-type": "application/json",
-      }
+      },
     });
     // 로컬 스토리지에 있는 accountname 갖고오기
     const myId = localStorage.getItem("accountname");

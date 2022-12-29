@@ -1,4 +1,5 @@
 import React, { useState } from "react";
+import { useParams } from "react-router-dom";
 import styled from "styled-components";
 
 import profileImage from "../../assets/image/basic-profile-img-post.png";
@@ -46,19 +47,14 @@ const UpLoadButton = styled.button`
   color: #c4c4c4;
 `;
 
-export default function Writing({
-  id,
-  comments,
-  setPostStoreData,
-  setCommentData,
-}) {
+export default function Writing({ comments, setPostPageData }) {
   const [inputComment, setInputComment] = useState("");
-
+  const { id } = useParams();
   const getComment = (e) => {
     setInputComment(e.target.value);
   };
   const uploadcomment = () => {
-    postData("comment", `${id}`, setCommentData, inputComment);
+    postData("comment", `${id}`, setPostPageData, inputComment);
     console.log(comments);
     setInputComment("");
   };

@@ -17,80 +17,58 @@ import API from "./api";
  * @param {string} commentId : 댓글 아이디 (삭제,신고)
  */
 
-const getPost = async (
-  type,
-  url,
-  setPostData,
-  comment,
-  accountname,
-  commentId,
-) => {
+const getPost = async (type, url, setPostData, comment, commentId) => {
+  //  console.log(url);
+  console.log(setPostData);
   let responseData = null;
   let responseComment = null;
-
-  console.log(url);
 
   try {
     if (type === "detailpost") {
       const responsePost = await API.get(`/post/${url}`, {
-        header: {
+        headers: {
+          Authorization: `Bearer${localStorage.getItem("token")}`,
+          "Content-type": "application/json",
+        },
+      });
+      const CommentRes = await API.get(`/post/${url}/comments`, {
+        headers: {
           Authorization: `Bearer${localStorage.getItem("token")}`,
           "Content-type": "application/json",
         },
       });
 
       responseData = await responsePost.data;
-      console.log(responseData);
-      responseData = { ...responseData };
-    }
-    if (type === "detailComment") {
-      const CommentRes = await API.get(`/post/${url}/comments`, {
-        header: {
-          Authorization: `Bearer${localStorage.getItem("token")}`,
-          "Content-type": "application/json",
-        },
-      });
-
       responseComment = await CommentRes.data;
       const reverseComment = { ...responseComment };
 
       reverseComment.comments.reverse();
-      responseData = { ...responseComment };
+      responseData = { ...responseData, ...responseComment };
     }
 
     /* edit 구현 진행중 */
 
     if (type === "editpost") {
-      const response = await API.get("/post/feed", {
-        header: {
+      const responsePost = await API.get(`/post/${url}`, {
+        headers: {
           Authorization: `Bearer${localStorage.getItem("token")}`,
           "Content-type": "application/json",
         },
       });
 
-      responseData = await response.data;
-      console.log(responseData);
+      responseData = await responsePost.data;
     }
     if (type === "deletepost") {
       const response = await API.delete(`/post/${url}`, {
-        header: {
+        headers: {
           Authorization: `Bearer${localStorage.getItem("token")}`,
           "Content-type": "application/json",
         },
       });
 
       responseData = await response.data;
-      console.log(responseData);
     }
     if (type === "postReport") {
-      // const response = await API.post(`/post/${url}/report`, {
-      //   header: {
-      //     Authorization: `Bearer${localStorage.getItem("token")}`,
-      //     "Content-type": "application/json",
-      //   },
-      // });
-
-      // responseData = await response.data;
       alert("게시물 신고가 완료되었습니다.");
     }
     if (type === "comment") {
@@ -98,17 +76,25 @@ const getPost = async (
         comment: {
           content: comment,
         },
-        header: {
+        headers: {
           Authorization: `Bearer${localStorage.getItem("token")}`,
           "Content-type": "application/json",
         },
       });
       const Commentres = await API.get(`/post/${url}/comments`, {
-        header: {
+        headers: {
           Authorization: `Bearer${localStorage.getItem("token")}`,
           "Content-type": "application/json",
         },
       });
+      const CommentPost = await API.get(`/post/${url}`, {
+        headers: {
+          Authorization: `Bearer${localStorage.getItem("token")}`,
+          "Content-type": "application/json",
+        },
+      });
+
+      responseData = await CommentPost.data;
 
       responseComment = await response.data;
 
@@ -118,30 +104,54 @@ const getPost = async (
       reverseResponse.comments.reverse();
 
       responseData = {
+        ...responseData,
         ...responseComment,
         ...responseComments,
       };
-      console.log(responseData);
     }
-    if (type === "commentReport") {
-      const response = await API.post(
-        `/post/${url}/comments/${commentId}/report`,
-        {
-          header: {
-            Authorization: `Bearer${localStorage.getItem("token")}`,
-            "Content-type": "application/json",
-          },
-        },
-      );
+    if (type === "deletComment") {
+      const response = await API.delete(`/post/${url}/comments/${commentId}`, {
+        Authorization: `Bearer ${localStorage.getItem("token")}`,
+      });
 
-      responseData = await response.data;
+      const Commentres = await API.get(`/post/${url}/comments`, {
+        headers: {
+          Authorization: `Bearer${localStorage.getItem("token")}`,
+          "Content-type": "application/json",
+        },
+      });
+
+      const CommentPost = await API.get(`/post/${url}`, {
+        headers: {
+          Authorization: `Bearer${localStorage.getItem("token")}`,
+          "Content-type": "application/json",
+        },
+      });
+
+      responseComment = await CommentPost.data;
+
+      const responseComments = await Commentres.data;
+
+      console.log(responseComments);
+      const reverseResponse = { ...responseComments };
+
+      reverseResponse.comments.reverse();
+
+      responseData = {
+        ...responseData,
+        ...responseComment,
+        ...responseComments,
+      };
+    }
+
+    if (type === "commentReport") {
+      alert("댓글 신고가 완료되었습니다.");
     }
   } catch (e) {
     throw new Error(e);
   }
 
   setPostData(responseData);
-  console.log(responseData);
 };
 
 export default getPost;

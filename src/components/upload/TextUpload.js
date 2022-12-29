@@ -26,13 +26,27 @@ const UploadTextarea = styled.textarea`
   }
 `;
 
-export default function TextUpload() {
-  return (
-    <UploadTextarea
-      required
-      rows="5"
-      cols="33"
-      placeholder="게시글 입력하기.."
-    ></UploadTextarea>
-  );
+export default function TextUpload({ userData, type }) {
+  const { post } = { ...userData };
+
+  if (type === "upload") {
+    return (
+      <UploadTextarea
+        required
+        rows="5"
+        cols="33"
+        placeholder="게시글 입력하기.."
+      ></UploadTextarea>
+    );
+  } else if (type === "edit") {
+    return (
+      <UploadTextarea
+        defaultValue={post.content}
+        required
+        rows="5"
+        cols="33"
+        placeholder="게시글 입력하기.."
+      ></UploadTextarea>
+    );
+  }
 }
