@@ -133,6 +133,19 @@ export default function Card({ post, setFeed, fullArray }) {
 
     return response;
   };
+  const refineImageData = (filename) => {
+    const url = filename.split(",");
+
+    if (!filename) {
+      return defaultImage;
+    }
+
+    if (url[0].includes("https://mandarin.api.weniv.co.kr")) {
+      return url[0];
+    } else {
+      return `https://mandarin.api.weniv.co.kr/${url[0]}`;
+    }
+  };
 
   return (
     <>
@@ -141,7 +154,7 @@ export default function Card({ post, setFeed, fullArray }) {
           <CardHeaderDiv>
             {/** 모달 버튼이 작동을 안해서 이미지로 navigate이동했습니다 */}
             <CardHeaderImage
-              src={author.image}
+              src={refineImageData(author.image)}
               onClick={() => navigate(`/${author.accountname}`)}
             />
             <div>

@@ -3,6 +3,7 @@ import { useNavigate, useParams } from "react-router-dom";
 import styled from "styled-components";
 import modalButtonImage from "../../assets/image/icon-more-post.png";
 import Modal from "../common/Modal";
+import defaultImage from "../../assets/image/basic-profile-img-post.png";
 
 const CommentLi = styled.li`
   padding: 2rem 1.6rem 0rem 1.6rem;
@@ -63,6 +64,19 @@ export default function Comment({ comment, myInfo, setPostPageData }) {
   const commentTime = Math.round(
     (new Date().getTime() - Date.parse(comment.createdAt)) / 1000,
   );
+  const refineImageData = (filename) => {
+    const url = filename.split(",");
+
+    if (!filename) {
+      return defaultImage;
+    }
+
+    if (url[0].includes("https://mandarin.api.weniv.co.kr")) {
+      return url[0];
+    } else {
+      return `https://mandarin.api.weniv.co.kr/${url[0]}`;
+    }
+  };
 
   const getTime = () => {
     let time = "";
@@ -90,7 +104,7 @@ export default function Comment({ comment, myInfo, setPostPageData }) {
     <CommentLi>
       <CommentUserInfoDiv>
         <UserImage
-          src={comment.author.image}
+          src={refineImageData(comment.author.image)}
           alt="프로필 사진"
           onClick={() => {
             navigate(`/${comment.author.accountname}`);
