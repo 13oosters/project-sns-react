@@ -41,13 +41,19 @@ export default function Modal({
   postId,
   setPostPageData,
   accountname,
+  setFeed,
+  fullArray,
 }) {
   const [message, setMessage] = useState("");
   const { id } = useParams();
   const navigate = useNavigate();
-  const deletePost = () => {
+  
+  console.log(setFeed);
+
+  const deletePost = (idPost) => {
     postData("deletepost", postId, "");
     isModal((prev) => !prev);
+    setFeed([... fullArray].filter((v) => v.id !== postId));
     // 삭제하면 홈으로 이동
     navigate("/");
   };
@@ -92,8 +98,12 @@ export default function Modal({
   const ModalUI = {
     myprofile: (
       <ul>
-        <ModalLi>설정 및 개인정보</ModalLi>
         <ModalLi>로그아웃</ModalLi>
+      </ul>
+    ),
+    otherprofile : (
+      <ul>
+        <ModalLi>공유하기</ModalLi>
       </ul>
     ),
     myprofilepost: (
