@@ -6,8 +6,17 @@ const FollowListUl = styled.ul`
   display: flex;
   flex-direction: column;
   gap: 1.6rem;
-  padding: 7.2rem 1.6rem 8.4rem;
+  margin: 1rem 0;
+  padding: 0rem 1.6rem 0rem 1.6rem;
 `;
+
+const FollowListDiv = styled.div`
+  height: calc(100% - 108px);
+  overflow-y: scroll;
+  &::-webkit-scrollbar{
+    display: none;
+  }
+`
 
 export default function FollowersCards({
   followersList = [],
@@ -15,8 +24,7 @@ export default function FollowersCards({
   setIsUnfollowed,
 }) {
   return (
-    <main className="followerMain">
-      <section className="followCards">
+      <FollowListDiv>
         <FollowListUl>
           {followersList.map((data, i) => (
             <FollowersCard
@@ -28,7 +36,6 @@ export default function FollowersCards({
             />
           ))}
         </FollowListUl>
-      </section>
-    </main>
+      </FollowListDiv>
   );
 }
