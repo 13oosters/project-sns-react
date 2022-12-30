@@ -6,7 +6,17 @@ const FollowingListUl = styled.ul`
   display: flex;
   flex-direction: column;
   gap: 1.6rem;
-  padding: 7.2rem 1.6rem 8.4rem;
+  margin-top: 1rem;
+  margin-bottom:1rem;
+  padding: 0rem 1.6rem 0rem 1.6rem;
+`;
+
+const FollowListDiv = styled.div`
+  height: calc(100% - 108px);
+  overflow-y: scroll;
+  &::-webkit-scrollbar {
+    display: none;
+  }
 `;
 
 export default function FollowingsCards({
@@ -17,20 +27,18 @@ export default function FollowingsCards({
   console.log(isUnfollowed);
 
   return (
-    <main className="followerMain">
-      <section className="followCards">
-        <FollowingListUl>
-          {followingList.map((data, i) => (
-            <FollowingsCard
-              key={i}
-              {...data}
-              idx={i}
-              isUnfollowed={isUnfollowed}
-              setIsUnfollowed={setIsUnfollowed}
-            />
-          ))}
-        </FollowingListUl>
-      </section>
-    </main>
+    <FollowListDiv>
+      <FollowingListUl>
+        {followingList.map((data, i) => (
+          <FollowingsCard
+            key={i}
+            {...data}
+            idx={i}
+            isUnfollowed={isUnfollowed}
+            setIsUnfollowed={setIsUnfollowed}
+          />
+        ))}
+      </FollowingListUl>
+    </FollowListDiv>
   );
 }
