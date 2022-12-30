@@ -68,7 +68,7 @@ export default function Posting({ userData, setUserData, type }) {
         `/post/${userData.post.id}`,
         {
           post: {
-            content: e.target[4].value,
+            content: e.target[imageData.length + 1].value,
             image: imageData.join(", "),
           },
         },
