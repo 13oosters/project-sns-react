@@ -7,7 +7,6 @@ import postData from "../../utils/postData";
 
 const WriteSection = styled.section`
   display: flex;
-  background-color: #ffffff;
   justify-content: left;
   align-items: center;
   border-top: 1px solid ${(props) => props.theme.lightColor};
@@ -64,8 +63,7 @@ export default function Writing({ comments, setPostPageData }) {
 
   return (
     <WriteSection>
-      <h4 className="sr-only">댓글 입력창</h4>
-
+      <h4 class="sr-only">댓글 입력창</h4>
       <UserImage src={profileImage} alt="사용자 프로필 사진" />
       <WritingForm>
         <WritingTextarea

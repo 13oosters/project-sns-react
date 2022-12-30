@@ -23,7 +23,6 @@ export default function LoginPage({ login, signin, settings, setHasToken }) {
           buttonText="로그인"
           userData={userData}
           setUserData={setUserData}
-          setHasToken={setHasToken}
         />
       </PageLayout>
     );

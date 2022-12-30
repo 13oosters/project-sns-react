@@ -9,7 +9,7 @@ import Button from "../style/Button";
 import API from "../../utils/api";
 
 const DeatailSection = styled.section`
-  margin-top: 0;
+  margin-top: 4rem;
 `;
 
 const UploadButton = styled(Button)`
@@ -39,7 +39,7 @@ export default function Posting({ userData, setUserData, type }) {
         "/post",
         {
           post: {
-            content: e.target[imageData.length+1].value,
+            content: e.target[2].value,
             image: imageData.join(", "),
           },
         },
@@ -59,7 +59,7 @@ export default function Posting({ userData, setUserData, type }) {
 
   const editPost = async (e) => {
     e.preventDefault();
-    console.log(e.target[imageData.length+1].value);
+    console.log(e.target[4].value);
     setImageData([...originalImage, ...imageData]);
     console.log(originalImage, imageData);
     try {

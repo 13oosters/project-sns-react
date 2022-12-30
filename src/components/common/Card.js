@@ -20,26 +20,22 @@ const CardHeaderDiv = styled.div`
   display: flex;
   align-items: center;
   padding: 1.5rem;
+  gap: 1.5rem;
 `;
 
 const CardHeaderImage = styled.img`
   width: 4.2rem;
   height: 4.2rem;
   border-radius: 50%;
-  cursor: pointer;
 `;
 
 const CardHeaderStrong = styled.strong`
   font-size: ${(props) => props.theme.baseFontSize};
   font-weight: 500;
-  padding-left: 1.5rem;
-  cursor: pointer;
 `;
 const CardHeaderP = styled.p`
   ${smallFont}
   margin-top: 0.2rem;
-  padding-left: 1.5rem;
-  cursor: pointer;
   &::before {
     content: "@ ";
   }
@@ -93,7 +89,6 @@ export default function Card({ post, setFeed, fullArray }) {
   };
 
   const navigate = useNavigate();
-  const param = useParams();
 
   const { account } = useParams();
 
@@ -152,8 +147,6 @@ export default function Card({ post, setFeed, fullArray }) {
     }
   };
 
-
-
   return (
     <>
       {post && myAccountname ? (
@@ -166,8 +159,8 @@ export default function Card({ post, setFeed, fullArray }) {
             />
             <div>
               <div>
-                <CardHeaderStrong onClick={() => navigate(`/${author.accountname}`)}>{author.username}</CardHeaderStrong>
-                <CardHeaderP onClick={() => navigate(`/${author.accountname}`)}>{author.accountname}</CardHeaderP>
+                <CardHeaderStrong>{author.username}</CardHeaderStrong>
+                <CardHeaderP>{author.accountname}</CardHeaderP>
               </div>
             </div>
             {/* 자신의 게시글 => 삭제 수정모달 , 다른사람게시글 => 신고하기 */}
@@ -192,15 +185,9 @@ export default function Card({ post, setFeed, fullArray }) {
               <CardBodySpan>{heartCounting}</CardBodySpan>
             </li>
             <li>
-              <button
-                onClick={() => {
-                  param.id
-                    ? <></>
-                    : navigate(`${author.accountname}/post/${id}`);
-                }}
-              >
-                <CardBodyImage src={commentImage} style={param.id ? {cursor: "default"} : {cursor: "pointer"}} />
-              </button>
+              <Link to={`${author.accountname}/post/${id}`}>
+                <CardBodyImage src={commentImage} />
+              </Link>
               <CardBodySpan style={{ transform: "translateY(-5%)" }}>
                 {commentCount}
               </CardBodySpan>

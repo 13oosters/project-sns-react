@@ -6,7 +6,6 @@ import backImage from "../../assets/image/icon-arrow-left.png";
 import topLogoImage from "../../assets/image/top-logo-txt.png";
 import moreImage from "../../assets/image/icon-more-profile.png";
 import cancelImage from "../../assets/image/icon-cancel-search.png";
-import Modal from "../common/Modal";
 
 /**
  * 최상위 부모요소:
@@ -16,12 +15,11 @@ import Modal from "../common/Modal";
  */
 
 const HeaderWrap = styled.header`
-  /* position: fixed; */
-  /* top: 0; */
-  /* z-index: 1; */
+  position: fixed;
+  top: 0;
+  z-index: 1;
   width: 100%;
   background-color: #ffffff;
-  /* box-shadow: rgba(100, 100, 111, 0.2) 0px 0px 29px 0px; */
 `;
 
 const HeaderLayout = css`
@@ -55,14 +53,6 @@ const SearchDiv = styled.div`
     transform: translateY(-45%);
     right: 1.3rem;
   }
-`;
-
-const HeaderH2 = styled.h2`
-  display: inline-block;
-  position: absolute;
-  margin-left: 3.8rem;
-  font-weight: 500;
-  font-size: ${(props) => props.theme.baseFontSize};
 `;
 
 export default function Header({ type, setKeyword, startTransition }) {
@@ -111,7 +101,6 @@ export default function Header({ type, setKeyword, startTransition }) {
         <button type="button">
           <img src={moreImage} alt="더보기" />
         </button>
-        <Modal/>
       </HeaderUI>
     ),
     post: (
@@ -125,9 +114,9 @@ export default function Header({ type, setKeyword, startTransition }) {
       <>
         <HeaderUI>
           <button onClick={() => navigate(-1)}>
-            <img src={backImage} style={{display:"block"}} alt="뒤로 가기" />
+            <img src={backImage} alt="뒤로 가기" />
           </button>
-          <HeaderH2>Followers</HeaderH2>
+          <h2 className="sr-only">Followers</h2>
         </HeaderUI>
       </>
     ),
@@ -135,9 +124,9 @@ export default function Header({ type, setKeyword, startTransition }) {
       <>
         <HeaderUI>
           <button onClick={() => navigate(-1)}>
-            <img src={backImage} style={{display:"block"}} alt="뒤로 가기" />
+            <img src={backImage} alt="뒤로 가기" />
           </button>
-          <HeaderH2>Followings</HeaderH2>
+          <h2 className="sr-only">Followings</h2>
         </HeaderUI>
       </>
     ),

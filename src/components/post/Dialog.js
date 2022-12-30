@@ -1,14 +1,8 @@
 import { useEffect, useState } from "react";
-import styled from "styled-components";
 import API from "../../utils/api";
 import Comments from "./Comments";
 import Writing from "./Writing";
 import postData from "../../utils/postData";
-
-const DialogSection = styled.section`
-  height: calc(100% - 406.58px);
-  
-`;
 
 /** 댓글 삭제 할때 필요할 것 같아서 setCommentData 프롭스 추가 사용안하면 지우기*/
 export default function Dialog({ comments, setPostPageData }) {
@@ -30,15 +24,15 @@ export default function Dialog({ comments, setPostPageData }) {
   return (
     <>
       {comments && myInfo ? (
-        <DialogSection>
-          <h3 className="sr-only">댓글 창</h3>
+        <section>
+          <h3 class="sr-only">댓글 창</h3>
           <Comments
             comments={comments}
             myInfo={myInfo}
             setPostPageData={setPostPageData}
           />
           <Writing comments={comments} setPostPageData={setPostPageData} />
-        </DialogSection>
+        </section>
       ) : (
         <></>
       )}

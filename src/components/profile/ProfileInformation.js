@@ -13,6 +13,7 @@ const UserProfileWrapDiv = styled.div`
   display: flex;
   flex-direction: column;
   justify-content: center;
+  margin-top: 6rem;
   padding: 3rem 1.6rem 2.6rem;
   height: 31.4rem;
   border-bottom: 0.1rem solid ${(props) => props.theme.lightColor};

@@ -5,7 +5,6 @@ import Modal from "../components/common/Modal";
 import Header from "../components/style/Header";
 import Detail from "../components/post/Detail";
 import postData from "../utils/postData";
-import LayoutSection from "../components/style/PageLayout";
 
 /* 처음페이지 들어왔을때 한번만 실행 */
 /** 1.useparam으로 얻은 id와 get해서 받은 id가 같으면 출력
@@ -33,14 +32,14 @@ export default function PostPage() {
     <>
       {postData ? (
         <>
-          <LayoutSection>
+          <div>
             <h1 className="sr-only">게시글 상세보기</h1>
             <Header type="post" />
             <Detail
               postPageData={postPageData}
               setPostPageData={setPostPageData}
             />
-          </LayoutSection>
+          </div>
         </>
       ) : (
         <></>
