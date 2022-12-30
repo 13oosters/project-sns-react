@@ -1,27 +1,37 @@
 import React, { useState } from "react";
 import styled from "styled-components";
 import { useNavigate, useParams } from "react-router";
-
 import ModalImage from "../../assets/image/icon-modal.png";
 import postData from "../../utils/postData";
 
+
+const ModalSection = styled.section`
+  position: fixed;
+  left: 0;
+  right: 0;
+  bottom: -30rem;
+`;
+
 const ModalDiv = styled.div`
   display: block;
-  width: 100%;
+  max-width: 50.1rem;
   z-index: 10;
-  position: fixed;
-  bottom: 0;
-  right: 0%;
+  margin: 0 auto;
   background-color: #ffffff;
   border: 1px solid #dbdbdb;
   border-top-left-radius: 1rem;
   border-top-right-radius: 1rem;
-  padding: 3rem 2.6rem 3rem 2.6rem;
   text-align: center;
   transform: ${(props) =>
-    !props.modal ? "translateY(100%)" : "translateY(0)"};
+    !props.modal ? "translateY(130%)" : "translateY(-210%)"};
   transition: 0.5s;
 `;
+
+const ModalUl = styled.ul`
+  width: 50.7rem;
+  height: 13rem;
+  padding: 3rem 2.6rem 3rem 2.6rem;
+`
 
 const ModalLi = styled.li`
   padding: 1rem 1.6rem;
@@ -47,13 +57,13 @@ export default function Modal({
   const [message, setMessage] = useState("");
   const { id } = useParams();
   const navigate = useNavigate();
-  
+
   console.log(setFeed);
 
   const deletePost = (idPost) => {
-    postData("deletepost", postId, "");
+    postData("deletepost", postId, setPostPageData);
     isModal((prev) => !prev);
-    setFeed([... fullArray].filter((v) => v.id !== postId));
+    setFeed([...fullArray].filter((v) => v.id !== postId));
     // 삭제하면 홈으로 이동
     navigate("/");
   };
@@ -62,7 +72,10 @@ export default function Modal({
     console.log(e);
     if (type === "myhome") {
       navigate(`${accountname}/post/${postId}/edit`);
-    } else {
+    } else if (type === "mypost") {
+      navigate(`post/${postId}/edit`)
+    }
+    else {
       navigate("edit");
     }
 
@@ -73,7 +86,7 @@ export default function Modal({
   const postReport = () => {
     postData("postReport", postId, setMessage);
     isModal((prev) => !prev);
-    const { report } = { ...message };
+    // const { report } = { ...message };
 
     // alert(` ${report.post} 게시물 신고가 완료 되었습니다.`);
   };
@@ -97,58 +110,57 @@ export default function Modal({
   };
   const ModalUI = {
     myprofile: (
-      <ul>
+      <ModalUl>
         <ModalLi>로그아웃</ModalLi>
-      </ul>
+      </ModalUl>
     ),
-    otherprofile : (
-      <ul>
+    otherprofile: (
+      <ModalUl>
         <ModalLi>공유하기</ModalLi>
-      </ul>
+      </ModalUl>
     ),
     myprofilepost: (
-      <ul>
-        <ModalLi>게시물 고정하기</ModalLi>
-        <ModalLi>게시글 삭제하기</ModalLi>
-        <ModalLi>게시글 수정하기</ModalLi>
-      </ul>
-    ),
-    mycomment: (
-      <ul>
-        <ModalLi onClick={deleteComment}>삭제</ModalLi>
-      </ul>
+      <ModalUl>
+        <ModalLi onClick={deletePost}> 삭제하기</ModalLi>
+        <ModalLi onClick={editPost}> 수정하기</ModalLi>
+      </ModalUl>
     ),
     myhome: (
-      <ul>
+      <ModalUl>
         <ModalLi onClick={editPost}>수정</ModalLi>
         <ModalLi onClick={deletePost}>삭제</ModalLi>
-      </ul>
+      </ModalUl>
     ),
     mypost: (
-      <ul>
+      <ModalUl>
         <ModalLi onClick={editPost}>수정</ModalLi>
         <ModalLi onClick={deletePost}>삭제</ModalLi>
-      </ul>
+      </ModalUl>
+    ),
+    mycomment: (
+      <ModalUl>
+        <ModalLi onClick={deleteComment}>삭제</ModalLi>
+      </ModalUl>
     ),
     otherpost: (
-      <ul>
+      <ModalUl>
         <ModalLi onClick={postReport}>게시물 신고하기</ModalLi>
-      </ul>
+      </ModalUl>
     ),
     othercomment: (
-      <ul>
+      <ModalUl>
         <ModalLi onClick={commentReport}>댓글 신고하기</ModalLi>
-      </ul>
+      </ModalUl>
     ),
   };
 
   return (
-    <section>
-      <h2 className="sr-only">게시글 삭제 수정모달창</h2>
+    <ModalSection>
+      <h2 className="sr-only">모달창</h2>
       <ModalDiv modal={modal}>
         <img src={ModalImage} alt="모달창 아이콘" />
         <>{ModalUI[type]}</>
       </ModalDiv>
-    </section>
+    </ModalSection>
   );
 }
