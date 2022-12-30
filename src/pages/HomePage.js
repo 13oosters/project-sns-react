@@ -18,12 +18,12 @@ import EmptyFeed from "../components/home/EmptyFeed";
 import Feeds from "../components/home/Feeds";
 import Loading from "../components/home/Loading.js";
 import LoadingGIF from "../assets/image/loading.gif";
+import LayoutSection from "../components/style/PageLayout";
 
 const LoadingImage = styled.img`
-  position: absolute;
-  top: 50%;
-  left: 50%;
-  transform: translate(-50%, -50%);
+  display: block;
+  margin: 0 auto;
+
 `;
 
 export default function HomePage() {
@@ -93,16 +93,18 @@ export default function HomePage() {
 
   if (loading) {
     return (
-      <>
+      <LayoutSection>
         <Header type="logo" />
-        <LoadingImage src={LoadingGIF} alt="#" />
+          <div style={{display:"flex", alignItems:"center",height: "calc(100% - 112.8px)"}}>
+            <LoadingImage src={LoadingGIF} alt="#" />
+          </div>
         <NavBar type="홈" />
-      </>
+      </LayoutSection>
     );
   }
 
   return (
-    <section>
+    <LayoutSection>
       <Header type="logo" />
       {/* new */}
       {/* feed 날짜가 최신일수록 가장 상단에 위치하도록 sort 코드 작성 */}
@@ -113,14 +115,14 @@ export default function HomePage() {
               (a, b) => Date.parse(b.createdAt) - Date.parse(a.createdAt),
             )} setFeed={setFeed}
           />
-          <Loading ref1={ref} wait={3000}>
+          {/* <Loading ref1={ref} wait={3000}>
             로딩
-          </Loading>
+          </Loading> */}
         </>
       ) : (
         <EmptyFeed />
       )}
       <NavBar type="홈" />
-    </section>
+    </LayoutSection>
   );
 }

@@ -3,18 +3,20 @@ import styled from "styled-components";
 import { useNavigate } from "react-router-dom";
 
 import Button from "../style/Button";
-import kakaoLogo from "../../assets/image/logo-kakaotalk.png";
-import googleLogo from "../../assets/image/logo-google.png";
 
 const SecondaryColorDiv = styled.div`
-  border-top-left-radius: 4rem;
-  border-top-right-radius: 4rem;
-  padding: 6rem 3.4rem 8.2rem;
+  border-top-left-radius: 2rem;
+  border-top-right-radius: 2rem;
+  /* padding: 6rem 3.4rem 8.2rem; */
+  /* height: 10rem; */
   background-color: ${(props) => props.theme.sideColor};
 `;
 
 const LoginButton = styled(Button)`
   display: block;
+  height: 3.5rem;
+  padding:0;
+  //  padding: 2rem 0;
   font-size: ${(props) => props.theme.baseFontSize};
   color: #000000;
   background: ${(props) => `url(${props.image})`} no-repeat 15px center;
@@ -22,47 +24,41 @@ const LoginButton = styled(Button)`
   background-color: #ffffff;
 `;
 
+const LoginUl = styled.ul`
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 1rem;
+`
+
 export default function Login() {
   const navigate = useNavigate();
 
   console.log("테스트 계정 -> 이메일 test1111@test.com , 비밀번호 test1111");
 
-  return (
-    <SecondaryColorDiv>
-      <ul>
-        <li style={{ marginBottom: "2.5rem" }}>
-          <LoginButton image={kakaoLogo}>카카오 계정으로 로그인</LoginButton>
-        </li>
-        <li style={{ marginBottom: "4.9rem" }}>
-          <LoginButton image={googleLogo}>구글 계정으로 로그인</LoginButton>
-        </li>
-      </ul>
-      <ul style={{ display: "flex", justifyContent: "center" }}>
-        <li style={{ marginRight: "1.2rem" }}>
-          <button
-            type="button"
-            style={{ display: "flex" }}
-            onClick={() => {
-              navigate("/login");
-            }}
-          >
-            <span>이메일로 로그인</span>
-            <span style={{ marginLeft: "1.2rem", marginTop: "-0.1rem" }}>
-              |
-            </span>
-          </button>
-        </li>
-        <li>
-          <button
-            type="button"
-            onClick={() => {
-              navigate("/signup");
-            }}
-          >
-            회원가입
-          </button>
-        </li>
-      </ul>
-    </SecondaryColorDiv>
-  );
+  return <SecondaryColorDiv> 
+  <LoginUl>
+  <li style={{width: "90%"}}>
+    <LoginButton
+      type="button"
+      onClick={() => {
+        navigate("/login");
+      }}
+    >
+      이메일로 로그인
+    </LoginButton>
+  </li>
+  <li style={{width: "90%"}}>
+    <LoginButton
+      type="button"
+      onClick={() => {
+        navigate("/signup");
+      }}
+    >
+      회원가입
+    </LoginButton>
+  </li>
+</LoginUl></SecondaryColorDiv>;
 }

@@ -6,10 +6,9 @@ import API from "../utils/api";
 import Header from "../components/style/Header";
 import FollowingsCards from "../components/follow/FollowingsCards";
 import NavBar from "../components/style/NavBar";
+import LayoutSection from "../components/style/PageLayout";
 
-const FollowingWrap = styled.div`
-  width: 100%;
-`;
+
 
 export default function FollowingsPage() {
   const [followingList, setFollowingList] = useState([]);
@@ -38,7 +37,7 @@ export default function FollowingsPage() {
   }, [followingList]);
 
   return (
-    <FollowingWrap>
+    <LayoutSection>
       <Header type="followings" />
       <FollowingsCards
         followingList={followingList}
@@ -46,6 +45,6 @@ export default function FollowingsPage() {
         setIsUnfollowed={setIsUnfollowed}
       />
       <NavBar />
-    </FollowingWrap>
+    </LayoutSection>
   );
 }

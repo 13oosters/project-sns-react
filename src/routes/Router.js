@@ -1,6 +1,6 @@
 import { lazy, Suspense, useState, useEffect } from "react";
 import { Routes, Route } from "react-router-dom";
-import LoginPage from "../pages/LoginPage";
+// import LoginPage from "../pages/LoginPage";
 import SearchPage from "../pages/SearchPage";
 import ProfilePage from "../pages/ProfilePage";
 import PostPage from "../pages/PostPage";
@@ -13,9 +13,11 @@ import ProfileEditPage from "../pages/ProfileEditPage";
 import API from "../utils/api";
 
 const HomePage = lazy(() => import("../pages/HomePage"));
+const LoginPage = lazy(() => import("../pages/LoginPage"));
 
 function Router() {
   const [hasToken, setHasToken] = useState(false);
+
   const checkHasToken = async () => {
     try {
       const response = await API("/user/checktoken", {
@@ -44,8 +46,7 @@ function Router() {
         element={
           !hasToken ? (
             <>
-            <LoginPage setHasToken={setHasToken} />
-            <div>안녕</div>
+              <LoginPage />
             </>
           ) : (
             <Suspense fallback={<SplashScreen />}>
@@ -54,7 +55,10 @@ function Router() {
           )
         }
       />
-      <Route path="/login" element={<LoginPage login />} />
+      <Route
+        path="/login"
+        element={<LoginPage login setHasToken={setHasToken} />}
+      />
       <Route path="/signup" element={<LoginPage signin />} />
       {/* LoginPage settings */}
       {/* 홈 */}

@@ -5,8 +5,10 @@ import Logo from "../common/Logo";
 import Login from "./Login";
 
 const PrimaryColorDiv = styled.div`
-  padding: 7.3rem 0rem 0 0;
-  text-align: center;
+  display: grid;
+  grid-template-rows: 3fr 2fr;
+
+  height: 100%;
   background-color: ${(props) => props.theme.primaryColor};
 `;
 
