@@ -7,28 +7,19 @@ import Header from "../components/style/Header";
 import NavBar from "../components/style/NavBar";
 import ProfileInformation from "../components/profile/ProfileInformation";
 import SortButtons from "../components/profile/SortButtons";
+
 import Cards from "../components/common/Cards";
 import GridCards from "../components/profile/GridCards";
 import Modal from "../components/common/Modal";
-import LayoutSection from "../components/style/PageLayout";
 
 const ProfilePagePostDiv = styled.div`
   height: 34.8rem;
-`;
-
-const ProfileWrapper = styled.div`
-  height: calc(100% - 112.8px);
-  overflow-y: scroll;
-  &::-webkit-scrollbar {
-    display: none;
-  }
 `;
 
 export default function ProfilePage() {
   const [myProfile, setMyProfile] = useState({});
   const [userProfile, setUserProfile] = useState({});
   const [isProfileExist, setIsProfileExist] = useState(false);
-  const [profileModal,isProfileModal] = useState(false);
 
   console.log(myProfile);
 
@@ -68,9 +59,7 @@ export default function ProfilePage() {
       setIsProfileExist(true);
     } catch (e) {
       setIsProfileExist(false);
-      alert(
-        "해당 프로필을 찾을 수 없습니다. 다시 확인 후 조회하여 주십시오. 😥"
-      );
+      alert("해당 프로필을 찾을 수 없습니다. 다시 확인 후 조회하여 주십시오😥");
       navigate(-1);
     }
     return "";
@@ -106,40 +95,34 @@ export default function ProfilePage() {
   return (
     <>
       {isProfileExist ? (
-        <LayoutSection>
+        <div>
           <Header type="profile" />
-          <ProfileWrapper>
-            <ProfileInformation
-              setUserProfile={setUserProfile}
-              followList={myProfile.following}
-              myaccount={myProfile.accountname}
-              profileData={
-                account === myPostData.accountname ? myProfile : userProfile
-              }
-            />
 
-            <SortButtons
-              listClick={listClick}
-              setListClick={setListClick}
-              albumClick={albumClick}
-              setAlbumClick={setAlbumClick}
-            />
-            <ProfilePagePostDiv>
-              {listClick === true && albumClick === false ? (
-                <Cards feed={myPostData.post} />
-              ) : (
-                <GridCards postData={myPostData.post} />
-              )}
-            </ProfilePagePostDiv>
-          </ProfileWrapper>
-          {userProfile ? (
-            <Modal type="otherprofile"  isModal={isProfileModal}/>
-          ) : (
-            <Modal type="myprofile" isModal={isProfileModal}/>
-          )}
+          <ProfileInformation
+            setUserProfile={setUserProfile}
+            followList={myProfile.following}
+            myaccount={myProfile.accountname}
+            profileData={
+              account === myPostData.accountname ? myProfile : userProfile
+            }
+          />
 
+          <SortButtons
+            listClick={listClick}
+            setListClick={setListClick}
+            albumClick={albumClick}
+            setAlbumClick={setAlbumClick}
+          />
+          <ProfilePagePostDiv>
+            {listClick === true && albumClick === false ? (
+              <Cards feed={myPostData.post} />
+            ) : (
+              <GridCards postData={myPostData.post} />
+            )}
+          </ProfilePagePostDiv>
+          <Modal type="myprofile" />
           <NavBar type="프로필" />
-        </LayoutSection>
+        </div>
       ) : null}
     </>
   );

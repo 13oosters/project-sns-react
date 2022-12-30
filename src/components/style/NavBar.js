@@ -11,14 +11,13 @@ import profileImage from "../../assets/image/icon-user.png";
 import profileSelectImage from "../../assets/image/icon-user-fill.png";
 
 const NavBarArticle = styled.article`
-  /* position: fixed; */
-  /* left: 0; */
-  /* bottom: 0; */
-  /* z-index: 1; */
+  position: fixed;
+  left: 0;
+  bottom: 0;
+  z-index: 1;
   width: 100%;
   background-color: #ffffff;
-  height: 6.5rem;
-  /* box-shadow: rgba(100, 100, 111, 0.2) 0px 0px 29px 0px; */
+  height: 6rem;
 `;
 
 const TabMenuUl = styled.ul`
@@ -29,10 +28,6 @@ const TabMenuUl = styled.ul`
   width: 100%;
   border-top: 1px solid ${(props) => props.theme.lightColor};
 `;
-
-const TabMenuLi = styled.li`
-  margin-top: 0.9rem;
-`
 
 const TabMenuLink = styled.a`
   display: flex;
@@ -79,7 +74,7 @@ export default function NavBar({ type }) {
       <h3 className="sr-only">탭 메뉴</h3>
       <nav>
         <TabMenuUl>
-          <TabMenuLi>
+          <li>
             <TabMenuLink
               onClick={() => {
                 navigate("/");
@@ -92,8 +87,8 @@ export default function NavBar({ type }) {
               )}
               {type === "홈" ? <SelectP>홈</SelectP> : <p>홈</p>}
             </TabMenuLink>
-          </TabMenuLi>
-          <TabMenuLi>
+          </li>
+          <li>
             <TabMenuLink
               onClick={() => {
                 navigate("/search");
@@ -106,8 +101,8 @@ export default function NavBar({ type }) {
               )}
               {type === "검색" ? <SelectP>검색</SelectP> : <p>검색</p>}
             </TabMenuLink>
-          </TabMenuLi>
-          <TabMenuLi>
+          </li>
+          <li>
             <TabMenuLink
               onClick={() => {
                 navigate("/upload");
@@ -120,8 +115,8 @@ export default function NavBar({ type }) {
               )}
               <p>게시물 작성</p>
             </TabMenuLink>
-          </TabMenuLi>
-          <TabMenuLi>
+          </li>
+          <li>
             <TabMenuLink
               onClick={() => {
                 navigate(`/${accountname}`);
@@ -134,7 +129,7 @@ export default function NavBar({ type }) {
               )}
               {type === "프로필" ? <SelectP>프로필</SelectP> : <p>프로필</p>}
             </TabMenuLink>
-          </TabMenuLi>
+          </li>
         </TabMenuUl>
       </nav>
     </NavBarArticle>

@@ -19,7 +19,6 @@ const ProfileLabel = styled.label`
 const ImageUploadDiv = styled.div`
   padding: 2rem 1.6rem;
   border-bottom: 1px solid #e4e4e4;
-  height: 33.6rem;
 `;
 
 const Container = styled.div`
@@ -126,24 +125,14 @@ export default function ImageUpload({
     setOriginalImage([...originalImage]);
   };
 
-  const refineImageUrl = (file) => {
-    if (file.includes("https://mandarin.api.weniv.co.kr")) {
-      return file;
-    }
-    return `https://mandarin.api.weniv.co.kr/${file}`;
-  };
-
-
   return (
     <ImageUploadDiv>
       <Container>
-        {type === "edit"
-        ? 
-        <UploadImage src={refineImageUrl(userData.post.author.image)} alt="프로필 사진" style={{ objecFit: "cover" }} />
-        : 
-        <UploadImage src={refineImageUrl(userData.image)} alt="프로필 사진" style={{ objecFit: "cover" }} />
-        }
-        
+        <UploadImage
+          alt="프로필 사진"
+          style={{ objecFit: "cover" }}
+          src={userData.image}
+        />
         <UploadP>사진 첨부하기</UploadP>
         <ProfileLabel htmlFor="image">
           <UploadImage src={uploadImage} alt="파일첨부버튼" />
