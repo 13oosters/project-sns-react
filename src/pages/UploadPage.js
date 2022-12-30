@@ -47,7 +47,7 @@ export default function UploadPage() {
     <>
       <PageLayout paddingValue={0}>
         <h1 className="sr-only">게시글 업로드 페이지</h1>
-        <Header type="profile" />
+        <Header type="post" />
 
         {location.pathname === "/upload" ? (
           <Posting

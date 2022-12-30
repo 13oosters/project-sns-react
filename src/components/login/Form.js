@@ -50,7 +50,9 @@ export default function Form({
         localStorage.setItem("token", res.token);
         localStorage.setItem("accountname", res.accountname);
         setHasToken(true);
-      });
+      }).then(()=> {
+        navigate("/")
+    });
     } else if (title === "이메일로 회원가입") {
       validate(userData, "email", "/user/emailvalid").then((res) => {
         if (res === "이미 가입된 이메일 주소 입니다.") {
@@ -67,12 +69,12 @@ export default function Form({
     }
   };
 
-  const goHome = () => {
-    setTimeout(() => {
-      navigate("/");
-      location.reload();
-    }, 2000);
-  };
+  // const goHome = () => {
+  //   setTimeout(() => {
+  //     navigate("/");
+  //     location.reload();
+  //   }, 2000);
+  // };
 
   return (
     <>
@@ -129,7 +131,7 @@ export default function Form({
           type="submit"
           disabled={isSubmitting}
           isValue={isValue}
-          onClick={goHome}
+          // onClick={goHome}
         >
           {buttonText}
         </LoginButton>
