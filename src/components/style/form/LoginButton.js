@@ -2,7 +2,7 @@ import styled from "styled-components";
 import Button from "../Button";
 
 const LoginButton = styled(Button)`
-  margin-top: 3rem;
+  margin-top: 2rem;
   background-color: ${(props) => {
     if (props.isValue) {
       return props.theme.primaryColor;
