@@ -136,55 +136,46 @@ export default function Modal({
   };
   const ModalUI = {
     myprofile: (
-      <ModalUl>
+      <>
         <ModalLi onClick={logout}>로그아웃</ModalLi>
-      </ModalUl>
+      </>
     ),
     otherprofile: (
-      <ModalUl>
+      <>
         <ModalLi onClick={share}>공유하기</ModalLi>
-      </ModalUl>
+      </>
     ),
     myprofilepost: (
-      <ModalUl>
+      <>
         <ModalLi onClick={deletePost}> 삭제하기</ModalLi>
         <ModalLi onClick={editPost}> 수정하기</ModalLi>
-      </ModalUl>
+      </>
     ),
     myhome: (
-      <ModalUl>
+      <>
         <ModalLi onClick={editPost}>수정</ModalLi>
         <ModalLi onClick={deletePost}>삭제</ModalLi>
-        <ModalLi>취소</ModalLi>
-      </ModalUl>
+      </>
     ),
     mypost: (
-      <ModalUl>
+      <>
         <ModalLi onClick={editPost}>수정</ModalLi>
         <ModalLi onClick={deletePost}>삭제</ModalLi>
-      </ModalUl>
+      </>
     ),
-    mycomment: (
-      <ModalUl>
-        <ModalLi onClick={deleteComment}>삭제</ModalLi>
-      </ModalUl>
-    ),
-    otherpost: (
-      <ModalUl>
-        <ModalLi onClick={postReport}>게시물 신고하기</ModalLi>
-      </ModalUl>
-    ),
-    othercomment: (
-      <ModalUl>
-        <ModalLi onClick={commentReport}>댓글 신고하기</ModalLi>
-      </ModalUl>
-    ),
+    mycomment: <ModalLi onClick={deleteComment}>삭제</ModalLi>,
+    otherpost: <ModalLi onClick={postReport}>게시물 신고하기</ModalLi>,
+    othercomment: <ModalLi onClick={commentReport}>댓글 신고하기</ModalLi>,
   };
 
   return (
     <ModalSection>
       <h2 className="sr-only">모달창</h2>
-      <ModalDiv modal={modal}>{ModalUI[type]}</ModalDiv>
+      <ModalDiv modal={modal}>
+        <ModalUl>
+          {ModalUI[type]} <ModalLi>취소</ModalLi>
+        </ModalUl>
+      </ModalDiv>
     </ModalSection>
   );
 }
