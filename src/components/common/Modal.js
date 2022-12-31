@@ -84,8 +84,6 @@ export default function Modal({
     console.log(e);
     if (type === "myhome") {
       navigate(`${accountname}/post/${postId}/edit`);
-    } else if (type === "mypost") {
-      navigate(`post/${postId}/edit`);
     } else {
       navigate("edit");
     }
@@ -125,18 +123,17 @@ export default function Modal({
     localStorage.removeItem("accountname");
     setHasToken(false);
     navigate("/");
-  }
-  const share = async() => {
+  };
+  const share = async () => {
     const clip = BASE_URL + currentURL.pathname;
 
-    try{
+    try {
       await navigator.clipboard.writeText(clip);
       alert("클립보드에 복사되었습니다");
     } catch (e) {
       alert("복사가 실패되었습니다");
     }
-    
-  }
+  };
   const ModalUI = {
     myprofile: (
       <ModalUl>
