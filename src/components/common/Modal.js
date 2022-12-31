@@ -4,12 +4,12 @@ import { useNavigate, useParams } from "react-router";
 import ModalImage from "../../assets/image/icon-modal.png";
 import postData from "../../utils/postData";
 
-
 const ModalSection = styled.section`
   position: fixed;
   left: 0;
   right: 0;
-  bottom: -30rem;
+  // bottom: -30rem;
+  bottom: -45rem;
 `;
 
 const ModalDiv = styled.div`
@@ -29,16 +29,21 @@ const ModalDiv = styled.div`
 
 const ModalUl = styled.ul`
   width: 50.7rem;
-  height: 13rem;
-  padding: 3rem 2.6rem 3rem 2.6rem;
-`
+  // height: 13rem;
+  height: 20rem;
+  // padding: 3rem 2.6rem 3rem 2.6rem;
+  font-size: ${(props) => props.theme.largeFontSize};
+  font-weight: ${(props) => props.theme.normalFontWeight};
+`;
 
 const ModalLi = styled.li`
   padding: 1rem 1.6rem;
-  font-size: ${(props) => props.theme.baseFontSize};
-  font-weight: ${(props) => props.theme.normalFontWeight};
   text-align: left;
   cursor: pointer;
+  text-align: center;
+  &:nth-child(-n + 2) {
+    border-bottom: 1px solid #dbdbdb;
+  }
 `;
 // url은 useparams로 불러오기
 // postId 추가하였습니다
@@ -63,7 +68,9 @@ export default function Modal({
   const deletePost = (idPost) => {
     postData("deletepost", postId, setPostPageData);
     isModal((prev) => !prev);
-    setFeed([...fullArray].filter((v) => v.id !== postId));
+    if (type === "myhome") {
+      setFeed([...fullArray].filter((v) => v.id !== postId));
+    }
     // 삭제하면 홈으로 이동
     navigate("/");
   };
@@ -73,9 +80,8 @@ export default function Modal({
     if (type === "myhome") {
       navigate(`${accountname}/post/${postId}/edit`);
     } else if (type === "mypost") {
-      navigate(`post/${postId}/edit`)
-    }
-    else {
+      navigate(`post/${postId}/edit`);
+    } else {
       navigate("edit");
     }
 
@@ -129,6 +135,7 @@ export default function Modal({
       <ModalUl>
         <ModalLi onClick={editPost}>수정</ModalLi>
         <ModalLi onClick={deletePost}>삭제</ModalLi>
+        <ModalLi>취소</ModalLi>
       </ModalUl>
     ),
     mypost: (
@@ -157,10 +164,8 @@ export default function Modal({
   return (
     <ModalSection>
       <h2 className="sr-only">모달창</h2>
-      <ModalDiv modal={modal}>
-        <img src={ModalImage} alt="모달창 아이콘" />
-        <>{ModalUI[type]}</>
-      </ModalDiv>
+      <ModalDiv modal={modal}>{ModalUI[type]}</ModalDiv>
     </ModalSection>
   );
 }
+//  <img src={ModalImage} alt="모달창 아이콘" />
