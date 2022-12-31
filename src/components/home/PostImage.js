@@ -5,11 +5,14 @@ const MultiImageWrapper = styled.ul`
   display: flex;
   overflow-x: scroll;
   padding: 0;
+  height: 32rem;
+
 `
 
 const MultiImage = styled.img`
-  width: 39rem;
-  height: 23rem;
+  width: 50rem;
+  height: 30rem;
+  object-fit: cover;
   /* &::after{
     content: "${(props) => props.imageNumber}";
     position: absolute;
@@ -44,7 +47,7 @@ export default function PostImage({image}) {
     return(
       <MultiImageWrapper>
         {image.split(",").map((item,index) => 
-        <li key={index}>
+        <li key={index} style={{width: "100%", height: "30rem"}}>
           <MultiImage src={item} alt="#"/>
         </li>)}
       </MultiImageWrapper>
@@ -52,6 +55,6 @@ export default function PostImage({image}) {
   }
   if(image && !imageResult){
 
-    return <img src={image} alt="#" style={{width: "100%", height: "23rem"}}/>
+    return <img src={image} alt="#" style={{width: "100%", height: "30rem", objectFit: "cover"}}/>
   }
 }
