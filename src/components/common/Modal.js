@@ -3,7 +3,8 @@ import styled from "styled-components";
 import { useLocation, useNavigate, useParams } from "react-router";
 import ModalImage from "../../assets/image/icon-modal.png";
 import postData from "../../utils/postData";
-
+// 모달창 뜰때 색상 변하기
+// 모달창 뜰때 다른 부분 선택해서 내려가게 하기
 const ModalSection = styled.section`
   position: fixed;
   left: 0;
@@ -15,6 +16,7 @@ const ModalSection = styled.section`
 const ModalDiv = styled.div`
   display: block;
   max-width: 50.1rem;
+  height: 19.3rem;
   z-index: 10;
   margin: 0 auto;
   background-color: #ffffff;
@@ -28,16 +30,16 @@ const ModalDiv = styled.div`
 `;
 
 const ModalUl = styled.ul`
-  width: 50.7rem;
+  // width: 50.7rem;
   // height: 13rem;
-  height: 20rem;
-  // padding: 3rem 2.6rem 3rem 2.6rem;
+  //height: 20rem;
+  //padding: 3rem 0;
   font-size: ${(props) => props.theme.largeFontSize};
   font-weight: ${(props) => props.theme.normalFontWeight};
 `;
 
 const ModalLi = styled.li`
-  padding: 1rem 1.6rem;
+  padding: 1.5rem 1.6rem;
   text-align: left;
   cursor: pointer;
   text-align: center;
@@ -69,10 +71,12 @@ export default function Modal({
   console.log(currentURL);
 
   console.log(setFeed);
-
-  const deletePost = (idPost) => {
-    postData("deletepost", postId, setPostPageData);
+  const cancel = () => {
     isModal((prev) => !prev);
+  };
+  const deletePost = (idPost) => {
+    postData("deletepost", postId, setMessage);
+    cancel();
     if (type === "myhome") {
       setFeed([...fullArray].filter((v) => v.id !== postId));
     }
@@ -81,20 +85,18 @@ export default function Modal({
   };
 
   const editPost = (e) => {
-    console.log(e);
+    cancel();
     if (type === "myhome") {
       navigate(`${accountname}/post/${postId}/edit`);
     } else {
       navigate("edit");
     }
-
-    isModal((prev) => !prev);
   };
 
   // type, url, setPostData, comment, id, commentId
   const postReport = () => {
     postData("postReport", postId, setMessage);
-    isModal((prev) => !prev);
+    cancel();
     // const { report } = { ...message };
 
     // alert(` ${report.post} 게시물 신고가 완료 되었습니다.`);
@@ -102,8 +104,7 @@ export default function Modal({
 
   const deleteComment = () => {
     postData("deletComment", postId, setPostPageData, "", commentId);
-
-    isModal((prev) => !prev);
+    cancel();
 
     console.log(message);
     // navigate(0);
@@ -111,14 +112,11 @@ export default function Modal({
 
   const commentReport = () => {
     postData("commentReport", postId, setMessage, "", commentId);
-    const { report } = { ...message };
-
-    isModal((prev) => !prev);
-
-    // alert(`${report.post} 댓글 신고가 완료 되었습니다.`);
+    cancel();
   };
 
   const logout = () => {
+    cancel();
     localStorage.removeItem("token");
     localStorage.removeItem("accountname");
     setHasToken(false);
@@ -173,7 +171,7 @@ export default function Modal({
       <h2 className="sr-only">모달창</h2>
       <ModalDiv modal={modal}>
         <ModalUl>
-          {ModalUI[type]} <ModalLi>취소</ModalLi>
+          {ModalUI[type]} <ModalLi onClick={cancel}>취소</ModalLi>
         </ModalUl>
       </ModalDiv>
     </ModalSection>
