@@ -1,23 +1,29 @@
 import React, { useState } from "react";
 import styled from "styled-components";
-import { useLocation, useNavigate, useParams } from "react-router";
-import ModalImage from "../../assets/image/icon-modal.png";
+import { useLocation, useNavigate } from "react-router";
+
 import postData from "../../utils/postData";
 // 모달창 뜰때 색상 변하기
 // 모달창 뜰때 다른 부분 선택해서 내려가게 하기
 const ModalSection = styled.section`
-  position: fixed;
+  max-width: 50.1rem;
+  margin: 0 auto;
+  position: ${(props) => (!props.modal ? "static" : "absolute")};
+  top: 0;
+  bottom: 0;
   left: 0;
   right: 0;
-  // bottom: -30rem;
-  bottom: -45rem;
 `;
 
 const ModalDiv = styled.div`
   display: block;
+  position: fixed;
+  left: 0;
+  right: 0;
+  bottom: -45rem;
   max-width: 50.1rem;
   height: 19.3rem;
-  z-index: 10;
+  z-index: 1000;
   margin: 0 auto;
   background-color: #ffffff;
   border: 1px solid #dbdbdb;
@@ -30,10 +36,6 @@ const ModalDiv = styled.div`
 `;
 
 const ModalUl = styled.ul`
-  // width: 50.7rem;
-  // height: 13rem;
-  //height: 20rem;
-  //padding: 3rem 0;
   font-size: ${(props) => props.theme.largeFontSize};
   font-weight: ${(props) => props.theme.normalFontWeight};
 `;
@@ -63,14 +65,10 @@ export default function Modal({
   setHasToken,
 }) {
   const [message, setMessage] = useState("");
-  const { id } = useParams();
   const navigate = useNavigate();
   const currentURL = useLocation();
   const BASE_URL = "localhost:3000";
 
-  console.log(currentURL);
-
-  console.log(setFeed);
   const cancel = () => {
     isModal((prev) => !prev);
   };
@@ -114,7 +112,11 @@ export default function Modal({
     postData("commentReport", postId, setMessage, "", commentId);
     cancel();
   };
-
+  const a = () => {
+    if (modal === true) {
+      cancel();
+    }
+  };
   const logout = () => {
     cancel();
     localStorage.removeItem("token");
@@ -166,8 +168,9 @@ export default function Modal({
     othercomment: <ModalLi onClick={commentReport}>댓글 신고하기</ModalLi>,
   };
 
+  console.log(modal);
   return (
-    <ModalSection>
+    <ModalSection modal={modal} onClick={cancel}>
       <h2 className="sr-only">모달창</h2>
       <ModalDiv modal={modal}>
         <ModalUl>
