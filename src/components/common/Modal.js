@@ -174,7 +174,8 @@ export default function Modal({
       <h2 className="sr-only">모달창</h2>
       <ModalDiv modal={modal}>
         <ModalUl>
-          {ModalUI[type]} <ModalLi onClick={cancel}>취소</ModalLi>
+          {ModalUI[type]}
+          <ModalLi>취소</ModalLi>
         </ModalUl>
       </ModalDiv>
     </ModalSection>
