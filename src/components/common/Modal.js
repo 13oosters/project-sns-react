@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 import styled from "styled-components";
-import { useNavigate, useParams } from "react-router";
+import { useLocation, useNavigate, useParams } from "react-router";
 import ModalImage from "../../assets/image/icon-modal.png";
 import postData from "../../utils/postData";
 
@@ -53,10 +53,15 @@ export default function Modal({
   accountname,
   setFeed,
   fullArray,
+  setHasToken,
 }) {
   const [message, setMessage] = useState("");
   const { id } = useParams();
   const navigate = useNavigate();
+  const currentURL = useLocation();
+  const BASE_URL = "localhost:3000";
+
+  console.log(currentURL);
 
   console.log(setFeed);
 
@@ -108,15 +113,33 @@ export default function Modal({
 
     // alert(`${report.post} 댓글 신고가 완료 되었습니다.`);
   };
+
+  const logout = () => {
+    localStorage.removeItem("token");
+    localStorage.removeItem("accountname");
+    setHasToken(false);
+    navigate("/");
+  }
+  const share = async() => {
+    const clip = BASE_URL + currentURL.pathname;
+
+    try{
+      await navigator.clipboard.writeText(clip);
+      alert("클립보드에 복사되었습니다");
+    } catch (e) {
+      alert("복사가 실패되었습니다");
+    }
+    
+  }
   const ModalUI = {
     myprofile: (
       <ModalUl>
-        <ModalLi>로그아웃</ModalLi>
+        <ModalLi onClick={logout}>로그아웃</ModalLi>
       </ModalUl>
     ),
     otherprofile: (
       <ModalUl>
-        <ModalLi>공유하기</ModalLi>
+        <ModalLi onClick={share}>공유하기</ModalLi>
       </ModalUl>
     ),
     myprofilepost: (

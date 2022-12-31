@@ -65,7 +65,8 @@ const HeaderH2 = styled.h2`
   font-size: ${(props) => props.theme.baseFontSize};
 `;
 
-export default function Header({ type, setKeyword, startTransition }) {
+export default function Header({ type, setKeyword, startTransition, setProfileModal, profileModal }) {
+
   const navigate = useNavigate();
   const UI = {
     logo: (
@@ -108,10 +109,9 @@ export default function Header({ type, setKeyword, startTransition }) {
         <button onClick={() => navigate(-1)}>
           <img src={backImage} alt="뒤로 가기" />
         </button>
-        <button type="button">
+        <button onClick={() => setProfileModal((prev) => !prev)}>
           <img src={moreImage} alt="더보기" />
         </button>
-        <Modal/>
       </HeaderUI>
     ),
     post: (

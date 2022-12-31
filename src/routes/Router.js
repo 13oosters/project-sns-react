@@ -68,7 +68,7 @@ function Router() {
       {/*  */}
       <Route path="/search" element={<SearchPage></SearchPage>} />
       <Route path="/upload" element={<UploadPage></UploadPage>} />
-      <Route path="/:account" element={<ProfilePage></ProfilePage>} />
+      <Route path="/:account" element={<ProfilePage setHasToken={setHasToken}></ProfilePage>} />
       <Route path="/:account/followers" element={<FollowersPage />} />
       <Route path="/:account/followings" element={<FollowingsPage />} />
       <Route path="/:account/settings" element={<ProfileEditPage />} />
