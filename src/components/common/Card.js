@@ -196,7 +196,7 @@ export default function Card({ post, setFeed, fullArray }) {
                 onClick={() => {
                   param.id
                     ? <></>
-                    : navigate(`${author.accountname}/post/${id}`);
+                    : navigate(`/${author.accountname}/post/${id}`);
                 }}
               >
                 <CardBodyImage src={commentImage} style={param.id ? {cursor: "default"} : {cursor: "pointer"}} />
