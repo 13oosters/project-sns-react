@@ -1,6 +1,6 @@
 import { lazy, Suspense, useState, useEffect } from "react";
 import { Routes, Route } from "react-router-dom";
-// import LoginPage from "../pages/LoginPage";
+import LoginPage from "../pages/LoginPage";
 import SearchPage from "../pages/SearchPage";
 import ProfilePage from "../pages/ProfilePage";
 import PostPage from "../pages/PostPage";
@@ -13,10 +13,10 @@ import ProfileEditPage from "../pages/ProfileEditPage";
 import API from "../utils/api";
 
 const HomePage = lazy(() => import("../pages/HomePage"));
-const LoginPage = lazy(() => import("../pages/LoginPage"));
 
 function Router() {
   const [hasToken, setHasToken] = useState(false);
+  const [didSplashScreenMount, setDidSplashScreenMount] = useState(false);
 
   const checkHasToken = async () => {
     try {
@@ -30,7 +30,7 @@ function Router() {
 
       setHasToken(isValid);
     } catch (error) {
-      throw new Error(error);
+      const mute = error;
     }
   };
 
@@ -38,20 +38,42 @@ function Router() {
     checkHasToken();
   }, [hasToken]);
 
+  useEffect(() => {
+    const splashTimer = setTimeout(() => {
+      setDidSplashScreenMount(true);
+    }, 2000);
+
+    return () => {
+      clearTimeout(splashTimer);
+    };
+  }, []);
+
+  const handleMainPage = (splashScreenState) => {
+    if (!hasToken) {
+      return <LoginPage />;
+    } else {
+      return (
+        <Suspense
+          fallback={
+            <SplashScreen setDidSplashScreenMount={setDidSplashScreenMount} />
+          }
+        >
+          <HomePage />
+        </Suspense>
+      );
+    }
+  };
+
   return (
     <Routes>
       {/* 로그인 */}
       <Route
         path="/"
         element={
-          !hasToken ? (
-            <>
-              <LoginPage />
-            </>
+          !didSplashScreenMount ? (
+            <SplashScreen setDidSplashScreenMount={setDidSplashScreenMount} />
           ) : (
-            <Suspense fallback={<SplashScreen />}>
-              <HomePage />
-            </Suspense>
+            handleMainPage()
           )
         }
       />
@@ -63,12 +85,11 @@ function Router() {
       {/* LoginPage settings */}
       {/* 홈 */}
       <Route path="/home" element={<HomePage />} />
-
       <Route path="/settings" element={<LoginPage settings />} />
       {/*  */}
       <Route path="/search" element={<SearchPage></SearchPage>} />
       <Route path="/upload" element={<UploadPage></UploadPage>} />
-      <Route path="/:account" element={<ProfilePage></ProfilePage>} />
+      <Route path="/:account" element={<ProfilePage setHasToken={setHasToken}></ProfilePage>} />
       <Route path="/:account/followers" element={<FollowersPage />} />
       <Route path="/:account/followings" element={<FollowingsPage />} />
       <Route path="/:account/settings" element={<ProfileEditPage />} />

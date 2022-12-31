@@ -24,11 +24,11 @@ const ProfileWrapper = styled.div`
   }
 `;
 
-export default function ProfilePage() {
+export default function ProfilePage({ setHasToken }) {
   const [myProfile, setMyProfile] = useState({});
   const [userProfile, setUserProfile] = useState({});
   const [isProfileExist, setIsProfileExist] = useState(false);
-  const [profileModal,isProfileModal] = useState(false);
+  const [profileModal, setProfileModal] = useState(false);
 
   console.log(myProfile);
 
@@ -102,12 +102,13 @@ export default function ProfilePage() {
   useEffect(() => {}, [userProfile]);
 
   // console.log(myPostData.post);
+  // console.log(profileModal);
 
   return (
     <>
       {isProfileExist ? (
         <LayoutSection>
-          <Header type="profile" />
+          <Header type="profile" setProfileModal={setProfileModal} profileModal={profileModal} />
           <ProfileWrapper>
             <ProfileInformation
               setUserProfile={setUserProfile}
@@ -132,10 +133,10 @@ export default function ProfilePage() {
               )}
             </ProfilePagePostDiv>
           </ProfileWrapper>
-          {userProfile ? (
-            <Modal type="otherprofile"  isModal={isProfileModal}/>
+          {userProfile.accountname !== myProfile.accountname ? (
+            <Modal type="otherprofile" modal={profileModal}  isModal={setProfileModal}/>
           ) : (
-            <Modal type="myprofile" isModal={isProfileModal}/>
+            <Modal type="myprofile" modal={profileModal} isModal={setProfileModal} setHasToken={setHasToken}/>
           )}
 
           <NavBar type="프로필" />
