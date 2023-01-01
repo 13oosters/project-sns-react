@@ -7,7 +7,7 @@ import useFetch from "../../hooks/useFetch";
 import loadingImage from "../../assets/image/loading.gif";
 
 const LayoutSection = styled.section`
-  padding: 0rem 1.6rem;
+  padding: 0rem 1.6rem 1rem;
   height: calc(100% - 112.8px);
 `;
 
@@ -23,6 +23,7 @@ const ResultsUl = styled.ul`
   overflow-y: scroll;
   height: 100%;
   margin-top: 1rem;
+
   &::-webkit-scrollbar {
     display: none;
   }
