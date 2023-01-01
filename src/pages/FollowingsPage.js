@@ -1,6 +1,5 @@
 import React, { useState, useEffect } from "react";
 import { useParams } from "react-router-dom";
-import styled from "styled-components";
 
 import API from "../utils/api";
 import Header from "../components/style/Header";
@@ -8,15 +7,13 @@ import FollowingsCards from "../components/follow/FollowingsCards";
 import NavBar from "../components/style/NavBar";
 import LayoutSection from "../components/style/PageLayout";
 
-
-
 export default function FollowingsPage() {
-  const [followingList, setFollowingList] = useState([]);
+  const [followingsList, setFollowingsList] = useState([]);
   const [isUnfollowed, setIsUnfollowed] = useState([]);
   const token = localStorage.getItem("token");
   const { account } = useParams();
 
-  const getFollowingList = async () => {
+  const getFollowingsList = async () => {
     const res = await API.get(`/profile/${account}/following`, {
       headers: {
         Authorization: `Bearer ${token}`,
@@ -24,25 +21,26 @@ export default function FollowingsPage() {
       },
     })
       .then((response) => {
-        setFollowingList(response.data);
+        setFollowingsList(response.data);
       })
       .catch((err) => console.log(err));
   };
 
   useEffect(() => {
-    getFollowingList();
+    getFollowingsList();
   }, []);
   useEffect(() => {
-    setIsUnfollowed(followingList.map((_) => false));
-  }, [followingList]);
+    setIsUnfollowed(followingsList.map((_) => false));
+  }, [followingsList]);
 
   return (
     <LayoutSection>
       <Header type="followings" />
       <FollowingsCards
-        followingList={followingList}
+        followingsList={followingsList}
         isUnfollowed={isUnfollowed}
         setIsUnfollowed={setIsUnfollowed}
+        setFollowingsList={setFollowingsList}
       />
       <NavBar />
     </LayoutSection>

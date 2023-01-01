@@ -1,6 +1,5 @@
 import React, { useState, useEffect } from "react";
 import { useParams } from "react-router-dom";
-import styled from "styled-components";
 
 import API from "../utils/api";
 import Header from "../components/style/Header";
