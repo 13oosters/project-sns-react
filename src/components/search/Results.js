@@ -7,7 +7,7 @@ import useFetch from "../../hooks/useFetch";
 import loadingImage from "../../assets/image/loading.gif";
 
 const LayoutSection = styled.section`
-  padding: 0rem 1.6rem 1rem;
+  padding: 1rem 1.6rem;
   height: calc(100% - 112.8px);
 `;
 
