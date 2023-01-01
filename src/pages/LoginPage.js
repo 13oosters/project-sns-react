@@ -16,7 +16,7 @@ export default function LoginPage({ login, signin, settings, setHasToken }) {
 
   if (login) {
     return (
-      <PageLayout paddingValue={3.4}>
+      <PageLayout>
         <h1 className="sr-only">로그인 페이지</h1>
         <Form
           title="로그인"
@@ -30,7 +30,7 @@ export default function LoginPage({ login, signin, settings, setHasToken }) {
   }
   if (signin) {
     return (
-      <PageLayout paddingValue={3.4}>
+      <PageLayout>
         <h1 className="sr-only">회원가입 페이지</h1>
         <Form
           title="이메일로 회원가입"
@@ -44,7 +44,7 @@ export default function LoginPage({ login, signin, settings, setHasToken }) {
   }
   if (settings) {
     return (
-      <PageLayout paddingValue={3.4}>
+      <PageLayout>
         <ProfileSetting
           title="프로필 설정"
           userData={userData}
@@ -54,7 +54,7 @@ export default function LoginPage({ login, signin, settings, setHasToken }) {
     );
   }
   return (
-    <PageLayout paddingValue={0}>
+    <PageLayout>
       <h1 className="sr-only">로그인 페이지</h1>
       <Welcome />
     </PageLayout>
