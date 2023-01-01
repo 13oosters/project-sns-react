@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React from "react";
 import { useNavigate, useParams } from "react-router-dom";
 import styled from "styled-components";
 
@@ -47,18 +47,13 @@ export default function FollowersCard({
   idx,
   isUnfollowed,
   setIsUnfollowed,
+  setFollowersList,
+  followersList,
 }) {
   const navigate = useNavigate();
-  const { account } = useParams();
 
   const handleFollow = async () => {
-    // 팔로우버튼을 누르면 팔로우를 해야 함
-    // false일 때가 팔로우 되어있는 상태다.
-    // 그러면 false일 때 버튼을 누르면 언팔로우 해야 한다.
-
-    console.log(isUnfollowed[idx]);
-    if (!isUnfollowed[idx]) {
-      // 언팔로우
+    if (isfollow) {
       const res = await API.delete(`/profile/${accountname}/unfollow`, {
         headers: {
           Authorization: `Bearer ${localStorage.getItem("token")}`,
@@ -66,7 +61,8 @@ export default function FollowersCard({
         },
       });
 
-      console.log(res);
+      followersList[idx].isfollow = !isfollow;
+
       const copy = [...isUnfollowed];
 
       copy[idx] = true;
@@ -77,6 +73,8 @@ export default function FollowersCard({
           Authorization: `Bearer ${localStorage.getItem("token")}`,
         },
       });
+
+      followersList[idx].isfollow = !isfollow;
       const copy = [...isUnfollowed];
 
       copy[idx] = false;
@@ -105,7 +103,7 @@ export default function FollowersCard({
         <FollowerIntroduce>{intro}</FollowerIntroduce>
       </FollowerLiDiv>
       <FollowCancelButton onClick={handleFollow}>
-        {isUnfollowed[idx] ? "팔로우" : "취소"}
+        {isfollow ? "취소" : "팔로우"}
       </FollowCancelButton>
     </FollowerListLi>
   );

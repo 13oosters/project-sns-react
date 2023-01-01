@@ -1,21 +1,29 @@
 import React, { useState } from "react";
 import styled from "styled-components";
-import { useLocation, useNavigate, useParams } from "react-router";
-import ModalImage from "../../assets/image/icon-modal.png";
+import { useLocation, useNavigate } from "react-router";
+
 import postData from "../../utils/postData";
-
-
+// 모달창 뜰때 색상 변하기
+// 모달창 뜰때 다른 부분 선택해서 내려가게 하기
 const ModalSection = styled.section`
-  position: fixed;
+  max-width: 50.1rem;
+  margin: 0 auto;
+  position: ${(props) => (!props.modal ? "static" : "absolute")};
+  top: 0;
+  bottom: 0;
   left: 0;
   right: 0;
-  bottom: -30rem;
 `;
 
 const ModalDiv = styled.div`
   display: block;
+  position: fixed;
+  left: 0;
+  right: 0;
+  bottom: -45rem;
   max-width: 50.1rem;
-  z-index: 10;
+  height: 19.3rem;
+  z-index: 1000;
   margin: 0 auto;
   background-color: #ffffff;
   border: 1px solid #dbdbdb;
@@ -28,17 +36,18 @@ const ModalDiv = styled.div`
 `;
 
 const ModalUl = styled.ul`
-  width: 50.7rem;
-  height: 13rem;
-  padding: 3rem 2.6rem 3rem 2.6rem;
-`
+  font-size: ${(props) => props.theme.largeFontSize};
+  font-weight: ${(props) => props.theme.normalFontWeight};
+`;
 
 const ModalLi = styled.li`
-  padding: 1rem 1.6rem;
-  font-size: ${(props) => props.theme.baseFontSize};
-  font-weight: ${(props) => props.theme.normalFontWeight};
+  padding: 1.5rem 1.6rem;
   text-align: left;
   cursor: pointer;
+  text-align: center;
+  &:nth-child(-n + 2) {
+    border-bottom: 1px solid #dbdbdb;
+  }
 `;
 // url은 useparams로 불러오기
 // postId 추가하였습니다
@@ -56,41 +65,36 @@ export default function Modal({
   setHasToken,
 }) {
   const [message, setMessage] = useState("");
-  const { id } = useParams();
   const navigate = useNavigate();
   const currentURL = useLocation();
   const BASE_URL = "localhost:3000";
 
-  console.log(currentURL);
-
-  console.log(setFeed);
-
-  const deletePost = (idPost) => {
-    postData("deletepost", postId, setPostPageData);
+  const cancel = () => {
     isModal((prev) => !prev);
-    setFeed([...fullArray].filter((v) => v.id !== postId));
+  };
+  const deletePost = (idPost) => {
+    postData("deletepost", postId, setMessage);
+    cancel();
+    if (type === "myhome") {
+      setFeed([...fullArray].filter((v) => v.id !== postId));
+    }
     // 삭제하면 홈으로 이동
     navigate("/");
   };
 
   const editPost = (e) => {
-    console.log(e);
+    cancel();
     if (type === "myhome") {
       navigate(`${accountname}/post/${postId}/edit`);
-    } else if (type === "mypost") {
-      navigate(`post/${postId}/edit`)
-    }
-    else {
+    } else {
       navigate("edit");
     }
-
-    isModal((prev) => !prev);
   };
 
   // type, url, setPostData, comment, id, commentId
   const postReport = () => {
     postData("postReport", postId, setMessage);
-    isModal((prev) => !prev);
+    cancel();
     // const { report } = { ...message };
 
     // alert(` ${report.post} 게시물 신고가 완료 되었습니다.`);
@@ -98,8 +102,7 @@ export default function Modal({
 
   const deleteComment = () => {
     postData("deletComment", postId, setPostPageData, "", commentId);
-
-    isModal((prev) => !prev);
+    cancel();
 
     console.log(message);
     // navigate(0);
@@ -107,83 +110,75 @@ export default function Modal({
 
   const commentReport = () => {
     postData("commentReport", postId, setMessage, "", commentId);
-    const { report } = { ...message };
-
-    isModal((prev) => !prev);
-
-    // alert(`${report.post} 댓글 신고가 완료 되었습니다.`);
+    cancel();
   };
-
+  const a = () => {
+    if (modal === true) {
+      cancel();
+    }
+  };
   const logout = () => {
+    cancel();
     localStorage.removeItem("token");
     localStorage.removeItem("accountname");
     setHasToken(false);
     navigate("/");
-  }
-  const share = async() => {
+  };
+  const share = async () => {
     const clip = BASE_URL + currentURL.pathname;
 
-    try{
+    try {
       await navigator.clipboard.writeText(clip);
       alert("클립보드에 복사되었습니다");
     } catch (e) {
       alert("복사가 실패되었습니다");
     }
-    
-  }
+  };
   const ModalUI = {
     myprofile: (
-      <ModalUl>
+      <>
         <ModalLi onClick={logout}>로그아웃</ModalLi>
-      </ModalUl>
+      </>
     ),
     otherprofile: (
-      <ModalUl>
+      <>
         <ModalLi onClick={share}>공유하기</ModalLi>
-      </ModalUl>
+      </>
     ),
     myprofilepost: (
-      <ModalUl>
+      <>
         <ModalLi onClick={deletePost}> 삭제하기</ModalLi>
         <ModalLi onClick={editPost}> 수정하기</ModalLi>
-      </ModalUl>
+      </>
     ),
     myhome: (
-      <ModalUl>
+      <>
         <ModalLi onClick={editPost}>수정</ModalLi>
         <ModalLi onClick={deletePost}>삭제</ModalLi>
-      </ModalUl>
+      </>
     ),
     mypost: (
-      <ModalUl>
+      <>
         <ModalLi onClick={editPost}>수정</ModalLi>
         <ModalLi onClick={deletePost}>삭제</ModalLi>
-      </ModalUl>
+      </>
     ),
-    mycomment: (
-      <ModalUl>
-        <ModalLi onClick={deleteComment}>삭제</ModalLi>
-      </ModalUl>
-    ),
-    otherpost: (
-      <ModalUl>
-        <ModalLi onClick={postReport}>게시물 신고하기</ModalLi>
-      </ModalUl>
-    ),
-    othercomment: (
-      <ModalUl>
-        <ModalLi onClick={commentReport}>댓글 신고하기</ModalLi>
-      </ModalUl>
-    ),
+    mycomment: <ModalLi onClick={deleteComment}>삭제</ModalLi>,
+    otherpost: <ModalLi onClick={postReport}>게시물 신고하기</ModalLi>,
+    othercomment: <ModalLi onClick={commentReport}>댓글 신고하기</ModalLi>,
   };
 
+  console.log(modal);
   return (
-    <ModalSection>
+    <ModalSection modal={modal} onClick={cancel}>
       <h2 className="sr-only">모달창</h2>
       <ModalDiv modal={modal}>
-        <img src={ModalImage} alt="모달창 아이콘" />
-        <>{ModalUI[type]}</>
+        <ModalUl>
+          {ModalUI[type]}
+          <ModalLi>취소</ModalLi>
+        </ModalUl>
       </ModalDiv>
     </ModalSection>
   );
 }
+//  <img src={ModalImage} alt="모달창 아이콘" />
