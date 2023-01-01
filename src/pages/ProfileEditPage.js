@@ -12,8 +12,8 @@ export default function ProfileEditPage() {
   });
 
   return (
-    <PageLayout paddingValue={3.4}>
-      <Header type="settings" />
+    <PageLayout>
+      <Header type="post" />
       <ProfileSetting userData={userData} setUserData={setUserData} />
     </PageLayout>
   );
