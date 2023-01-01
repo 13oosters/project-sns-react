@@ -13,29 +13,32 @@ const FollowListUl = styled.ul`
 const FollowListDiv = styled.div`
   height: calc(100% - 108px);
   overflow-y: scroll;
-  &::-webkit-scrollbar{
+  &::-webkit-scrollbar {
     display: none;
   }
-`
+`;
 
 export default function FollowersCards({
   followersList = [],
   isUnfollowed,
   setIsUnfollowed,
+  setFollowersList,
 }) {
   return (
-      <FollowListDiv>
-        <FollowListUl>
-          {followersList.map((data, i) => (
-            <FollowersCard
-              key={i}
-              {...data}
-              idx={i}
-              isUnfollowed={isUnfollowed}
-              setIsUnfollowed={setIsUnfollowed}
-            />
-          ))}
-        </FollowListUl>
-      </FollowListDiv>
+    <FollowListDiv>
+      <FollowListUl>
+        {followersList.map((data, i) => (
+          <FollowersCard
+            key={i}
+            {...data}
+            idx={i}
+            isUnfollowed={isUnfollowed}
+            setIsUnfollowed={setIsUnfollowed}
+            setFollowersList={setFollowersList}
+            followersList={followersList}
+          />
+        ))}
+      </FollowListUl>
+    </FollowListDiv>
   );
 }
