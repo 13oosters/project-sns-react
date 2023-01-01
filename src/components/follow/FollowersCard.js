@@ -51,13 +51,17 @@ export default function FollowersCard({
   const navigate = useNavigate();
   const { account } = useParams();
 
+  console.log(isUnfollowed);
+  console.log(isfollow);
   const handleFollow = async () => {
     // 팔로우버튼을 누르면 팔로우를 해야 함
     // false일 때가 팔로우 되어있는 상태다.
     // 그러면 false일 때 버튼을 누르면 언팔로우 해야 한다.
 
+    // 현재 상태 : 팔로우를 누르면 버튼이 변하지 않는다.
+
     console.log(isUnfollowed[idx]);
-    if (!isUnfollowed[idx]) {
+    if (isfollow) {
       // 언팔로우
       const res = await API.delete(`/profile/${accountname}/unfollow`, {
         headers: {
@@ -79,6 +83,7 @@ export default function FollowersCard({
       });
       const copy = [...isUnfollowed];
 
+      console.log(res);
       copy[idx] = false;
       setIsUnfollowed([...copy]);
     }
@@ -105,7 +110,7 @@ export default function FollowersCard({
         <FollowerIntroduce>{intro}</FollowerIntroduce>
       </FollowerLiDiv>
       <FollowCancelButton onClick={handleFollow}>
-        {isUnfollowed[idx] ? "팔로우" : "취소"}
+        {isfollow ? "취소" : "팔로우"}
       </FollowCancelButton>
     </FollowerListLi>
   );
