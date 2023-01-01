@@ -22,7 +22,6 @@ const ImageWrapper = styled.div`
 const ResultsUl = styled.ul`
   overflow-y: scroll;
   height: 100%;
-  margin-top: 1rem;
 
   &::-webkit-scrollbar {
     display: none;
