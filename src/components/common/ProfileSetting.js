@@ -3,7 +3,7 @@ import axios from "axios";
 import styled from "styled-components";
 import { useForm } from "react-hook-form";
 import { useNavigate } from "react-router-dom";
-
+import defaultImage from "../../assets/image/basic-profile-img-post.png";
 import validate from "../../utils/validate";
 import TitleH2 from "../style/form/TitleH2";
 import LoginForm from "../style/form/LoginForm";
@@ -11,6 +11,7 @@ import LoginInput from "../style/form/LoginInput";
 import LoginButton from "../style/form/LoginButton";
 import ErrorMessageP from "../style/form/ErrorMessageP";
 import UpLoadImage from "../../../src/assets/image/profile-upload-button.png";
+import API from "../../utils/api";
 
 const ProfileLabel = styled.label`
   display: flex;
@@ -68,6 +69,20 @@ export default function ProfileSetting({ title, userData, setUserData }) {
     setFocus("username");
   }, []);
 
+  const refineImageData = (filename) => {
+    const url = filename.split(",");
+
+    if (!filename) {
+      return defaultImage;
+    }
+
+    if (url[0].includes("https://mandarin.api.weniv.co.kr")) {
+      return url[0];
+    } else {
+      return `https://mandarin.api.weniv.co.kr/${url[0]}`;
+    }
+  };
+
   const checkIsValue = (e) => {
     e.target.value && watch("username") && watch("accountname")
       ? setIsValue(true)
@@ -102,6 +117,18 @@ export default function ProfileSetting({ title, userData, setUserData }) {
       );
     } else {
       /* 프로필 수정 페이지 기능 코드 작성 */
+      validate(userData, "accountname", "/user/accountnamevalid").then(
+        (res) => {
+          if (!errors.username && !errors.accountname) {
+            if (res === "사용 가능한 계정ID 입니다.") {
+              setResponseMeassage(res);
+            }
+            /* if (res === "이미 가입된 계정ID 입니다.") {
+              setResponseMeassage(res);
+            }*/
+          }
+        },
+      );
     }
   };
 
@@ -122,6 +149,35 @@ export default function ProfileSetting({ title, userData, setUserData }) {
     });
   };
 
+  const editProfile = async (e) => {
+    console.log(e.target);
+    console.log(userData.username);
+    const res = await API.put(
+      `/user`,
+      {
+        user: {
+          username: userData.username,
+          accountname: userData.accountname,
+          intro: userData.intro,
+          image: userData.image,
+        },
+      },
+      {
+        headers: {
+          Authorization: "Bearer {token}",
+          "Content-type": "application/json",
+        },
+      },
+    );
+
+    localStorage.setItem("accountname", userData.accountname);
+    const accountname = localStorage.getItem("accountname");
+
+    navigate(`/${accountname}`);
+
+    console.log(res);
+  };
+
   return (
     <>
       {title === "프로필 설정" ? (
@@ -140,7 +196,7 @@ export default function ProfileSetting({ title, userData, setUserData }) {
         />
         <UploadImageDiv>
           <UploadImage
-            src={userData.image}
+            src={refineImageData(userData.image)}
             alt="프로필 사진"
             style={{ objecFit: "cover" }}
           />
@@ -151,13 +207,14 @@ export default function ProfileSetting({ title, userData, setUserData }) {
         <label htmlFor="username">
           사용자 이름
           <LoginInput
+            defaultValue={userData.username}
             type="text"
             name="username"
             id="username"
             required
             placeholder="2~10자 이내 한글만 사용 가능합니다."
             {...register("username", {
-              required: "사용자 이름은 필수 입력입니다.",
+              // required: "사용자 이름은 필수 입력입니다.",
               minLength: {
                 value: 2,
                 message: "2~10자 이내여야 합니다.",
@@ -180,13 +237,14 @@ export default function ProfileSetting({ title, userData, setUserData }) {
         <label htmlFor="accountname" style={{ marginTop: "1.6rem" }}>
           계정 ID
           <LoginInput
+            defaultValue={userData.accountname}
             type="text"
             name="accountname"
             id="accountname"
             required
             placeholder="4~12자 이내 영문, 숫자, 특수문자(.),(_)만 사용 가능합니다."
             {...register("accountname", {
-              required: "계정ID는 필수 입력입니다.",
+              // required: "계정ID는 필수 입력입니다.",
               minLength: {
                 value: 4,
                 message: "4~12자 이내여야 합니다.",
@@ -213,6 +271,7 @@ export default function ProfileSetting({ title, userData, setUserData }) {
         <label htmlFor="intro" style={{ marginTop: "1.6rem" }}>
           소개
           <LoginInput
+            defaultValue={userData.intro}
             type="text"
             name="intro"
             id="intro"
@@ -220,7 +279,12 @@ export default function ProfileSetting({ title, userData, setUserData }) {
             onKeyUp={handleInput}
           />
         </label>
-        <LoginButton type="submit" disabled={isSubmitting} isValue={isValue}>
+        <LoginButton
+          type="submit"
+          disabled={isSubmitting}
+          isValue={isValue}
+          onClick={editProfile}
+        >
           {title === "프로필 설정" ? "멍하냥 시작하기" : "저장"}
         </LoginButton>
       </LoginForm>
