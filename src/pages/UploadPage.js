@@ -42,7 +42,6 @@ export default function UploadPage() {
       postData("editpost", postId, setCardData);
     }
   }, []);
-  // location.pathname === "/upload"
   return (
     <>
       <PageLayout paddingValue={0}>
@@ -72,10 +71,3 @@ export default function UploadPage() {
     </>
   );
 }
-
-// /upload
-//   //   postData("editpost", postId, );
-// http://localhost:3000/iguana13/post/63a94b7b17ae6665811fc672/edit
-
-// const {location.pathnemnmaname} = useParams()
-// console.log(pathname)

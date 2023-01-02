@@ -116,16 +116,12 @@ export default function ProfileSetting({ title, userData, setUserData }) {
         },
       );
     } else {
-      /* 프로필 수정 페이지 기능 코드 작성 */
       validate(userData, "accountname", "/user/accountnamevalid").then(
         (res) => {
           if (!errors.username && !errors.accountname) {
             if (res === "사용 가능한 계정ID 입니다.") {
               setResponseMeassage(res);
             }
-            /* if (res === "이미 가입된 계정ID 입니다.") {
-              setResponseMeassage(res);
-            }*/
           }
         },
       );
@@ -150,8 +146,6 @@ export default function ProfileSetting({ title, userData, setUserData }) {
   };
 
   const editProfile = async (e) => {
-    console.log(e.target);
-    console.log(userData.username);
     const res = await API.put(
       `/user`,
       {
@@ -174,8 +168,6 @@ export default function ProfileSetting({ title, userData, setUserData }) {
     const accountname = localStorage.getItem("accountname");
 
     navigate(`/${accountname}`);
-
-    console.log(res);
   };
 
   return (
@@ -214,7 +206,6 @@ export default function ProfileSetting({ title, userData, setUserData }) {
             required
             placeholder="2~10자 이내 한글만 사용 가능합니다."
             {...register("username", {
-              // required: "사용자 이름은 필수 입력입니다.",
               minLength: {
                 value: 2,
                 message: "2~10자 이내여야 합니다.",
@@ -244,7 +235,6 @@ export default function ProfileSetting({ title, userData, setUserData }) {
             required
             placeholder="4~12자 이내 영문, 숫자, 특수문자(.),(_)만 사용 가능합니다."
             {...register("accountname", {
-              // required: "계정ID는 필수 입력입니다.",
               minLength: {
                 value: 4,
                 message: "4~12자 이내여야 합니다.",
