@@ -1,13 +1,12 @@
 import React, { useEffect, useState } from "react";
-
-import { Link, useNavigate, useParams } from "react-router-dom";
+import { useNavigate, useParams } from "react-router-dom";
 import styled from "styled-components";
+
+import API from "../../utils/api";
 import FollowCountP from "../style/profile/FollowCountP";
 import FollowCountSpan from "../style/profile/FollowCountSpan";
 import defaultImage from "../../assets/image/basic-profile-img.png";
 import Button from "../style/Button";
-
-import API from "../../utils/api";
 
 const UserProfileWrapDiv = styled.div`
   display: flex;
@@ -15,8 +14,8 @@ const UserProfileWrapDiv = styled.div`
   justify-content: center;
   padding: 3rem 1.6rem 2.6rem;
   height: 31.4rem;
-  border-bottom: 0.1rem solid ${(props) => props.theme.lightColor};
   box-sizing: border-box;
+  border-bottom: 0.1rem solid ${(props) => props.theme.lightColor};
 `;
 
 const UserProfileTopDiv = styled.div`
@@ -32,7 +31,6 @@ const UserProfileTextDiv = styled.div`
   flex-direction: column;
   justify-content: center;
   align-items: center;
-  /* gap: 0.7rem; */
 `;
 
 const FollowCountLink = styled.a`
@@ -44,22 +42,21 @@ const ProfileImg = styled.img`
   width: 11rem;
   height: 11rem;
   border-radius: 50%;
-  /* margin-bottom: 1.6rem; */
 `;
 
 const UserNameP = styled.p`
+  margin-bottom: 0.6rem;
   font-size: ${(props) => props.theme.largeFontSize};
   font-weight: 700;
   line-height: 2rem;
-  margin-bottom: 0.6rem;
 `;
 
 const AccountNameP = styled.p`
+  margin-bottom: 1.6rem;
   font-size: ${(props) => props.theme.smallFontSize};
   color: ${(props) => props.theme.darkLightColor};
   font-weight: 400;
   line-height: 1.4rem;
-  margin-bottom: 1.6rem;
 
   &::before {
     content: "@ ";
@@ -100,13 +97,9 @@ export default function ProfileInformation({
   const navigate = useNavigate();
   const { account } = useParams();
 
-  console.log(isFollow);
-
   useEffect(() => {
     if (followList) {
       const check = followList.includes(_id);
-
-      console.log(check);
 
       setIsFollow(check);
       setIsPending(false);
@@ -186,23 +179,3 @@ export default function ProfileInformation({
     </UserProfileWrapDiv>
   );
 }
-
-/** 프로필 수정을 누르면
- * /:account/settings 로 이동 - 완료
- */
-
-/** 팔로우를 누르면
- * 팔로우 API , 언팔로우로 바뀜
- */
-
-/** 언팔로우를 누르면
- * 언팔로우 API, 팔로우로 바뀜
- */
-
-/** followers를 누르면
- * followers 페이지로 갑니다. - 완
- */
-
-/** followings를 누르면
- * followings 페이지로 갑니다 - 완
- */
