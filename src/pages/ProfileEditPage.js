@@ -47,7 +47,6 @@ export default function ProfileEditPage() {
 
   useEffect(() => {
     getMyInfo();
-    console.log(userData);
   }, []);
 
   return (

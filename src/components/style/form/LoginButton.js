@@ -10,6 +10,16 @@ const LoginButton = styled(Button)`
       return props.theme.secondaryColor;
     }
   }};
+
+  &:hover {
+    background-color: ${(props) => {
+      if (!props.title) {
+        return props.theme.primaryColor;
+      } else {
+        return props.theme.secondaryColor;
+      }
+    }};
+  }
 `;
 
 export default LoginButton;
