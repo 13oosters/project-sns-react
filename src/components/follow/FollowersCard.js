@@ -1,9 +1,9 @@
-import React from "react";
+import React, { useState } from "react";
 import { useNavigate, useParams } from "react-router-dom";
 import styled from "styled-components";
 
 import API from "../../utils/api";
-import FollowButton from "../style/follow/FollowButton";
+// import FollowButton from "../style/follow/FollowButton";
 import FollowCancelButton from "../style/follow/FollowCancelButton";
 
 const FollowerListLi = styled.li`
@@ -60,9 +60,12 @@ export default function FollowersCard({
           "Content-type": "application/json",
         },
       });
+      const followers = [...followersList];
 
-      followersList[idx].isfollow = !isfollow;
+      followers[idx].isfollow = !isfollow;
+      setFollowersList([...followers]);
 
+      console.log(res);
       const copy = [...isUnfollowed];
 
       copy[idx] = true;
@@ -73,8 +76,6 @@ export default function FollowersCard({
           Authorization: `Bearer ${localStorage.getItem("token")}`,
         },
       });
-
-      followersList[idx].isfollow = !isfollow;
       const copy = [...isUnfollowed];
 
       copy[idx] = false;

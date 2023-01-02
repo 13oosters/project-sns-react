@@ -3,14 +3,9 @@ import styled from "styled-components";
 import { useLocation, useNavigate } from "react-router";
 
 import postData from "../../utils/postData";
-// 요소가 두개일때 모달 높이 처리 하기
+
 const ModalSection = styled.section`
-  max-width: 50.1rem;
-  margin: 0 auto;
-  position: ${(props) => (!props.modal ? "static" : "absolute")};
-  background: rgb(85 90 89 / 80%);
-  top: 0;
-  bottom: 0rem;
+  position: fixed;
   left: 0;
   right: 0;
 `;
@@ -72,12 +67,10 @@ export default function Modal({
     isModal((prev) => !prev);
   };
   const deletePost = (idPost) => {
-    postData("deletepost", postId, setMessage);
-    cancel();
-    if (type === "myhome") {
-      setFeed([...fullArray].filter((v) => v.id !== postId));
-    }
-
+    postData("deletepost", postId, setPostPageData);
+    isModal((prev) => !prev);
+    setFeed([...fullArray].filter((v) => v.id !== postId));
+    // 삭제하면 홈으로 이동
     navigate("/");
   };
 
@@ -93,7 +86,10 @@ export default function Modal({
   // type, url, setPostData, comment, id, commentId
   const postReport = () => {
     postData("postReport", postId, setMessage);
-    cancel();
+    isModal((prev) => !prev);
+    // const { report } = { ...message };
+
+    // alert(` ${report.post} 게시물 신고가 완료 되었습니다.`);
   };
 
   const deleteComment = () => {
@@ -163,6 +159,7 @@ export default function Modal({
     othercomment: <ModalLi onClick={commentReport}>댓글 신고하기</ModalLi>,
   };
 
+  console.log(modal);
   return (
     <ModalSection modal={modal} onClick={cancel}>
       <h2 className="sr-only">모달창</h2>

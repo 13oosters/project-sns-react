@@ -104,13 +104,21 @@ export default function Result({ image, username, accountname, keyword }) {
     }
   };
 
+  const noImage = (e) => {
+    e.target.src = defaultImage;
+  };
+
   return (
     <SearchLi
       onClick={() => {
         navigate(`/${accountname}`);
       }}
     >
-      <SearchImg src={refineImageData(image)} alt={username} />
+      <SearchImg
+        src={refineImageData(image)}
+        onError={noImage}
+        alt={username}
+      />
       <div>
         <SearchStrong>{username}</SearchStrong>
         <SearchP>{accountname}</SearchP>
