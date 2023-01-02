@@ -32,7 +32,7 @@ const TabMenuUl = styled.ul`
 
 const TabMenuLi = styled.li`
   margin-top: 0.9rem;
-`
+`;
 
 const TabMenuLink = styled.a`
   display: flex;
@@ -47,7 +47,7 @@ const SelectP = styled.p`
   color: ${(props) => props.theme.primaryColor};
 `;
 
-export default function NavBar({ type }) {
+export default function NavBar({ type, isMyProfile }) {
   const [accountname, setAccountname] = useState("");
   const navigate = useNavigate();
 
@@ -127,12 +127,16 @@ export default function NavBar({ type }) {
                 navigate(`/${accountname}`);
               }}
             >
-              {type === "프로필" ? (
+              {type === "프로필" && isMyProfile ? (
                 <img src={profileSelectImage} alt="프로필로 이동" />
               ) : (
                 <img src={profileImage} alt="프로필로 이동" />
               )}
-              {type === "프로필" ? <SelectP>프로필</SelectP> : <p>프로필</p>}
+              {type === "프로필" && isMyProfile ? (
+                <SelectP>프로필</SelectP>
+              ) : (
+                <p>프로필</p>
+              )}
             </TabMenuLink>
           </TabMenuLi>
         </TabMenuUl>

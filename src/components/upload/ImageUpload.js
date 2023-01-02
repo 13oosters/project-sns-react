@@ -1,5 +1,4 @@
-import React, { useState, useRef } from "react";
-import { useLocation } from "react-router-dom";
+import React, { useRef } from "react";
 import styled from "styled-components";
 
 import uploadImage from "../../../src/assets/image/profile-upload-button.png";
@@ -133,17 +132,23 @@ export default function ImageUpload({
     return `https://mandarin.api.weniv.co.kr/${file}`;
   };
 
-
   return (
     <ImageUploadDiv>
       <Container>
-        {type === "edit"
-        ? 
-        <UploadImage src={refineImageUrl(userData.post.author.image)} alt="프로필 사진" style={{ objecFit: "cover" }} />
-        : 
-        <UploadImage src={refineImageUrl(userData.image)} alt="프로필 사진" style={{ objecFit: "cover" }} />
-        }
-        
+        {type === "edit" ? (
+          <UploadImage
+            src={refineImageUrl(userData.post.author.image)}
+            alt="프로필 사진"
+            style={{ objecFit: "cover" }}
+          />
+        ) : (
+          <UploadImage
+            src={refineImageUrl(userData.image)}
+            alt="프로필 사진"
+            style={{ objecFit: "cover" }}
+          />
+        )}
+
         <UploadP>사진 첨부하기</UploadP>
         <ProfileLabel htmlFor="image">
           <UploadImage src={uploadImage} alt="파일첨부버튼" />

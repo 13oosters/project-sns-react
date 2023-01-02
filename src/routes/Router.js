@@ -66,7 +66,6 @@ function Router() {
 
   return (
     <Routes>
-      {/* 로그인 */}
       <Route
         path="/"
         element={
@@ -82,14 +81,15 @@ function Router() {
         element={<LoginPage login setHasToken={setHasToken} />}
       />
       <Route path="/signup" element={<LoginPage signin />} />
-      {/* LoginPage settings */}
-      {/* 홈 */}
       <Route path="/home" element={<HomePage />} />
       <Route path="/settings" element={<LoginPage settings />} />
       {/*  */}
       <Route path="/search" element={<SearchPage></SearchPage>} />
       <Route path="/upload" element={<UploadPage></UploadPage>} />
-      <Route path="/:account" element={<ProfilePage setHasToken={setHasToken}></ProfilePage>} />
+      <Route
+        path="/:account"
+        element={<ProfilePage setHasToken={setHasToken}></ProfilePage>}
+      />
       <Route path="/:account/followers" element={<FollowersPage />} />
       <Route path="/:account/followings" element={<FollowingsPage />} />
       <Route path="/:account/settings" element={<ProfileEditPage />} />
@@ -98,19 +98,9 @@ function Router() {
         path="/:account/post/:id/edit"
         element={<UploadPage>하이</UploadPage>}
       />
-      {/**  <Route path="post" element={<div>하이</div>} />*/}
       <Route path="*" element={<ErrorPage></ErrorPage>} />
     </Routes>
   );
 }
 
 export default Router;
-
-/**
- * 
- *    { <Route path="/account" element={<ProfilePage></ProfilePage>}>
-        <Route path="followers" element={<div>하이</div>} />
-        <Route path="settings" element={<div>하이</div>} />
-        {  <Route path="post" element={<div>하이</div>} />}
-      </Route> }
- */
