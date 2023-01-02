@@ -3,14 +3,14 @@ import styled from "styled-components";
 import { useLocation, useNavigate } from "react-router";
 
 import postData from "../../utils/postData";
-// 모달창 뜰때 색상 변하기
-// 모달창 뜰때 다른 부분 선택해서 내려가게 하기
+// 요소가 두개일때 모달 높이 처리 하기
 const ModalSection = styled.section`
   max-width: 50.1rem;
   margin: 0 auto;
   position: ${(props) => (!props.modal ? "static" : "absolute")};
+  background: rgb(85 90 89 / 80%);
   top: 0;
-  bottom: 0;
+  bottom: 0rem;
   left: 0;
   right: 0;
 `;
@@ -25,6 +25,7 @@ const ModalDiv = styled.div`
   height: 19.3rem;
   z-index: 1000;
   margin: 0 auto;
+  opacity: 1;
   background-color: #ffffff;
   border: 1px solid #dbdbdb;
   border-top-left-radius: 1rem;
@@ -49,8 +50,6 @@ const ModalLi = styled.li`
     border-bottom: 1px solid #dbdbdb;
   }
 `;
-// url은 useparams로 불러오기
-// postId 추가하였습니다
 
 export default function Modal({
   modal,
@@ -78,7 +77,7 @@ export default function Modal({
     if (type === "myhome") {
       setFeed([...fullArray].filter((v) => v.id !== postId));
     }
-    // 삭제하면 홈으로 이동
+
     navigate("/");
   };
 
@@ -95,9 +94,6 @@ export default function Modal({
   const postReport = () => {
     postData("postReport", postId, setMessage);
     cancel();
-    // const { report } = { ...message };
-
-    // alert(` ${report.post} 게시물 신고가 완료 되었습니다.`);
   };
 
   const deleteComment = () => {
@@ -105,7 +101,6 @@ export default function Modal({
     cancel();
 
     console.log(message);
-    // navigate(0);
   };
 
   const commentReport = () => {
@@ -168,7 +163,6 @@ export default function Modal({
     othercomment: <ModalLi onClick={commentReport}>댓글 신고하기</ModalLi>,
   };
 
-  console.log(modal);
   return (
     <ModalSection modal={modal} onClick={cancel}>
       <h2 className="sr-only">모달창</h2>
