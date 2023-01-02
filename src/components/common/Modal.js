@@ -38,23 +38,19 @@ const ModalDiv = styled.div`
 const ModalUl = styled.ul`
   font-size: ${(props) => props.theme.largeFontSize};
   font-weight: ${(props) => props.theme.normalFontWeight};
-  padding: ${(props) =>
-    props.type === "myprofile" ||
-    props.type === "otherfile" ||
-    props.type === "comments" ||
-    props.type === "otherpost" ||
-    props.type === "othercomment"
-      ? "2.3rem 0"
-      : "0"};
 `;
 
 const ModalLi = styled.li`
-  padding: 1.5rem 1.6rem;
+  padding: 1.61rem 0;
   text-align: left;
   cursor: pointer;
   text-align: center;
-  &:nth-child(-n + 2) {
+  &:not(:last-child) {
     border-bottom: 1px solid #dbdbdb;
+  }
+  &:first-child:nth-last-child(2),
+  :first-child:nth-last-child(2) ~ li {
+    padding: 3rem 0;
   }
 `;
 
