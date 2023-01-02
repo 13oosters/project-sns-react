@@ -1,4 +1,4 @@
-import React, { useEffect, useState, lazy } from "react";
+import React, { useEffect, useState } from "react";
 
 import { useNavigate, useParams } from "react-router-dom";
 import styled from "styled-components";
@@ -35,6 +35,7 @@ export default function ProfilePage({ setHasToken }) {
   const [albumClick, setAlbumClick] = useState(true);
 
   const { account } = useParams();
+
   const navigate = useNavigate();
 
   const getMyProfile = async () => {
