@@ -2,7 +2,6 @@ import React, { useState } from "react";
 import { useParams } from "react-router-dom";
 import styled from "styled-components";
 
-import profileImage from "../../assets/image/basic-profile-img-post.png";
 import postData from "../../utils/postData";
 
 const WriteSection = styled.section`
@@ -17,6 +16,7 @@ const WriteSection = styled.section`
 const UserImage = styled.img`
   width: 3.6rem;
   height: 3.6rem;
+  border-radius: 50%;
 `;
 const WritingForm = styled.form`
   display: inherit;
@@ -51,7 +51,7 @@ const UpLoadButton = styled.button`
   }
 `;
 
-export default function Writing({ comments, setPostPageData }) {
+export default function Writing({ comments, setPostPageData, myInfo }) {
   const [inputComment, setInputComment] = useState("");
   const { id } = useParams();
   const getComment = (e) => {
@@ -63,19 +63,16 @@ export default function Writing({ comments, setPostPageData }) {
     setInputComment("");
   };
 
-  // form의 새로고침을 막는 e.preventDefault()
-
   return (
     <WriteSection>
       <h4 className="sr-only">댓글 입력창</h4>
 
-      <UserImage src={profileImage} alt="사용자 프로필 사진" />
+      <UserImage src={myInfo.user.image} alt="사용자 프로필 사진" />
       <WritingForm>
         <WritingTextarea
           value={inputComment}
           required
           placeholder="댓글 입력하기.."
-          // onChange 없어도 됨.
           onChange={getComment}
         />
         <UpLoadButton type="button" onClick={uploadcomment}>

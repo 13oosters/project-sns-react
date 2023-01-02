@@ -26,11 +26,6 @@ const SearchStrong = styled.strong`
   font-weight: ${(props) => props.theme.mediumFontWeight};
   font-size: ${(props) => props.theme.baseFontSize};
 `;
-
-const HighlightSpan = styled.span`
-  color: ${(props) => props.theme.primaryColor};
-`;
-
 const SearchP = styled.p`
   color: #767676;
   font-weight: ${(props) => props.theme.normalFontWeight};

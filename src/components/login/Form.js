@@ -46,13 +46,15 @@ export default function Form({
 
   const handleForm = (e) => {
     if (title === "로그인") {
-      validate(userData, "signin", "/user/login").then((res) => {
-        localStorage.setItem("token", res.token);
-        localStorage.setItem("accountname", res.accountname);
-        setHasToken(true);
-      }).then(()=> {
-        navigate("/")
-    });
+      validate(userData, "signin", "/user/login")
+        .then((res) => {
+          localStorage.setItem("token", res.token);
+          localStorage.setItem("accountname", res.accountname);
+          setHasToken(true);
+        })
+        .then(() => {
+          navigate("/");
+        });
     } else if (title === "이메일로 회원가입") {
       validate(userData, "email", "/user/emailvalid").then((res) => {
         if (res === "이미 가입된 이메일 주소 입니다.") {
@@ -68,13 +70,6 @@ export default function Form({
       });
     }
   };
-
-  // const goHome = () => {
-  //   setTimeout(() => {
-  //     navigate("/");
-  //     location.reload();
-  //   }, 2000);
-  // };
 
   return (
     <>
@@ -127,12 +122,7 @@ export default function Form({
             {errors.password && errors.password.message}
           </ErrorMessageP>
         </label>
-        <LoginButton
-          type="submit"
-          disabled={isSubmitting}
-          isValue={isValue}
-          // onClick={goHome}
-        >
+        <LoginButton type="submit" disabled={isSubmitting} isValue={isValue}>
           {buttonText}
         </LoginButton>
       </LoginForm>

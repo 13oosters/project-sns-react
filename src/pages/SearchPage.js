@@ -9,8 +9,6 @@ export default function SearchPage() {
   const [keyword, setKeyword] = useState(undefined);
   const [isPending, startTransition] = useTransition();
 
-  // useTransition 아니면 useDeferredVallue
-
   return (
     <PageLayout paddingValue={0}>
       <h1 className="sr-only">검색 페이지</h1>

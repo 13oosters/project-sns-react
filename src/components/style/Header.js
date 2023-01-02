@@ -71,7 +71,9 @@ export default function Header({ type, setKeyword, startTransition, setProfileMo
   const UI = {
     logo: (
       <HeaderUI>
-        <img src={topLogoImage} alt="멍하냥" />
+        <button>
+          <img src={topLogoImage} alt="멍하냥" />
+        </button>
       </HeaderUI>
     ),
     search: (

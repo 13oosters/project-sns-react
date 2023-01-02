@@ -6,6 +6,13 @@ const MultiImageWrapper = styled.ul`
   overflow-x: scroll;
   padding: 0;
   height: 32rem;
+  &::-webkit-scrollbar {
+    height: 0.5rem;
+  }
+  &::-webkit-scrollbar-thumb {
+    background-color: #dbdbdb;
+    border-radius: 10px;
+  }
 
 `
 
