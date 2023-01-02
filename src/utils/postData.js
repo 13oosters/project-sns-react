@@ -149,9 +149,9 @@ const getPost = async (type, url, setPostData, comment, commentId) => {
     }
   } catch (e) {
     throw new Error(e);
+  } finally {
+    setPostData(responseData);
   }
-
-  setPostData(responseData);
 };
 
 export default getPost;

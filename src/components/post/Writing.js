@@ -46,6 +46,9 @@ const UpLoadButton = styled.button`
   font-weight: ${(props) => props.theme.mediumFontWeight};
   font-size: ${(props) => props.theme.baseFontSize};
   color: #c4c4c4;
+  &:hover {
+    color: ${(props) => props.theme.primaryColor};
+  }
 `;
 
 export default function Writing({ comments, setPostPageData }) {

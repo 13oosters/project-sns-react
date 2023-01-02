@@ -152,8 +152,6 @@ export default function Card({ post, setFeed, fullArray }) {
     }
   };
 
-
-
   return (
     <>
       {post && myAccountname ? (
@@ -166,8 +164,14 @@ export default function Card({ post, setFeed, fullArray }) {
             />
             <div>
               <div>
-                <CardHeaderStrong onClick={() => navigate(`/${author.accountname}`)}>{author.username}</CardHeaderStrong>
-                <CardHeaderP onClick={() => navigate(`/${author.accountname}`)}>{author.accountname}</CardHeaderP>
+                <CardHeaderStrong
+                  onClick={() => navigate(`/${author.accountname}`)}
+                >
+                  {author.username}
+                </CardHeaderStrong>
+                <CardHeaderP onClick={() => navigate(`/${author.accountname}`)}>
+                  {author.accountname}
+                </CardHeaderP>
               </div>
             </div>
             {/* 자신의 게시글 => 삭제 수정모달 , 다른사람게시글 => 신고하기 */}
@@ -194,13 +198,21 @@ export default function Card({ post, setFeed, fullArray }) {
             <li>
               <button
                 onClick={() => {
-                  param.id
-                    ? <></>
-                    : navigate(`${author.accountname}/post/${id}`);
+                  param.id ? (
+                    <></>
+                  ) : (
+                    navigate(`/${author.accountname}/post/${id}`)
+                  );
                 }}
               >
-                <CardBodyImage src={commentImage} style={param.id ? {cursor: "default"} : {cursor: "pointer"}} />
+                <CardBodyImage
+                  src={commentImage}
+                  style={
+                    param.id ? { cursor: "default" } : { cursor: "pointer" }
+                  }
+                />
               </button>
+
               <CardBodySpan style={{ transform: "translateY(-5%)" }}>
                 {commentCount}
               </CardBodySpan>
@@ -214,36 +226,42 @@ export default function Card({ post, setFeed, fullArray }) {
           </CardBodyTime>
           {myAccountname === author.accountname ? (
             <>
-              <Modal
-                isModal={setIsHomeModal}
-                modal={homeModal}
-                type="myhome"
-                postId={id}
-                accountname={author.accountname}
-                setFeed={setFeed}
-                fullArray={fullArray}
-              />
-              <Modal
-                isModal={setIsPostModal}
-                modal={postModal}
-                type="mypost"
-                postId={id}
-              />
+              {!account ? (
+                <Modal
+                  isModal={setIsHomeModal}
+                  modal={homeModal}
+                  type="myhome"
+                  postId={id}
+                  accountname={author.accountname}
+                  setFeed={setFeed}
+                  fullArray={fullArray}
+                />
+              ) : (
+                <Modal
+                  isModal={setIsPostModal}
+                  modal={postModal}
+                  type="mypost"
+                  postId={id}
+                />
+              )}
             </>
           ) : (
             <>
-              <Modal
-                isModal={setIsHomeModal}
-                modal={homeModal}
-                type="otherpost"
-                postId={id}
-              />
-              <Modal
-                isModal={setIsPostModal}
-                modal={postModal}
-                type="otherpost"
-                postId={id}
-              />
+              {!account ? (
+                <Modal
+                  isModal={setIsHomeModal}
+                  modal={homeModal}
+                  type="otherpost"
+                  postId={id}
+                />
+              ) : (
+                <Modal
+                  isModal={setIsPostModal}
+                  modal={postModal}
+                  type="otherpost"
+                  postId={id}
+                />
+              )}
             </>
           )}
         </li>

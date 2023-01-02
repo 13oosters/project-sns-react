@@ -1,6 +1,5 @@
 import React, { useState, useEffect } from "react";
 import { useParams } from "react-router-dom";
-import styled from "styled-components";
 
 import API from "../utils/api";
 import Header from "../components/style/Header";
@@ -8,14 +7,11 @@ import FollowersCards from "../components/follow/FollowersCards";
 import NavBar from "../components/style/NavBar";
 import LayoutSection from "../components/style/PageLayout";
 
-
 export default function FollowersPage() {
   const [followersList, setFollowersList] = useState([]);
   const [isUnfollowed, setIsUnfollowed] = useState([]);
   const token = localStorage.getItem("token");
   const { account } = useParams();
-
-  console.log(followersList);
 
   const getFollowersList = async () => {
     const res = await API.get(`/profile/${account}/follower`, {
@@ -44,6 +40,7 @@ export default function FollowersPage() {
         followersList={followersList}
         isUnfollowed={isUnfollowed}
         setIsUnfollowed={setIsUnfollowed}
+        setFollowersList={setFollowersList}
       />
       <NavBar />
     </LayoutSection>

@@ -1,9 +1,9 @@
-import React, { useState } from "react";
-import { useNavigate, useParams } from "react-router-dom";
+import React from "react";
+import { useNavigate } from "react-router-dom";
 import styled from "styled-components";
 
 import API from "../../utils/api";
-import FollowButton from "../style/follow/FollowButton";
+// import FollowButton from "../style/follow/FollowButton";
 import FollowCancelButton from "../style/follow/FollowCancelButton";
 
 const FollowerListLi = styled.li`
@@ -47,26 +47,24 @@ export default function FollowersCard({
   idx,
   isUnfollowed,
   setIsUnfollowed,
+  setFollowersList,
+  followersList,
 }) {
   const navigate = useNavigate();
-  const { account } = useParams();
 
   const handleFollow = async () => {
-    // 팔로우버튼을 누르면 팔로우를 해야 함
-    // false일 때가 팔로우 되어있는 상태다.
-    // 그러면 false일 때 버튼을 누르면 언팔로우 해야 한다.
-
-    console.log(isUnfollowed[idx]);
-    if (!isUnfollowed[idx]) {
-      // 언팔로우
+    if (isfollow) {
       const res = await API.delete(`/profile/${accountname}/unfollow`, {
         headers: {
           Authorization: `Bearer ${localStorage.getItem("token")}`,
           "Content-type": "application/json",
         },
       });
+      const followers = [...followersList];
 
-      console.log(res);
+      followers[idx].isfollow = !isfollow;
+      setFollowersList([...followers]);
+
       const copy = [...isUnfollowed];
 
       copy[idx] = true;
@@ -77,6 +75,11 @@ export default function FollowersCard({
           Authorization: `Bearer ${localStorage.getItem("token")}`,
         },
       });
+      const followers = [...followersList];
+
+      followers[idx].isfollow = !isfollow;
+      setFollowersList([...followers]);
+
       const copy = [...isUnfollowed];
 
       copy[idx] = false;
@@ -105,7 +108,7 @@ export default function FollowersCard({
         <FollowerIntroduce>{intro}</FollowerIntroduce>
       </FollowerLiDiv>
       <FollowCancelButton onClick={handleFollow}>
-        {isUnfollowed[idx] ? "팔로우" : "취소"}
+        {isfollow ? "취소" : "팔로우"}
       </FollowCancelButton>
     </FollowerListLi>
   );

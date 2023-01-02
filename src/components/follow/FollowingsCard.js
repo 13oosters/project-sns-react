@@ -1,9 +1,9 @@
 import React, { useState } from "react";
-import { useNavigate, useParams } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 import styled from "styled-components";
 
 import FollowCancelButton from "../style/follow/FollowCancelButton";
-import FollowButton from "../style/follow/FollowButton";
+// import FollowButton from "../style/follow/FollowButton";
 import API from "../../utils/api";
 
 const FollowingListLi = styled.li`
@@ -47,9 +47,10 @@ export default function FollowingsCard({
   idx,
   isUnfollowed,
   setIsUnfollowed,
+  setFollowingsList,
+  followingsList,
 }) {
   const navigate = useNavigate();
-  const { account } = useParams();
 
   //  console.log(isUnfollowed);
   //  console.log(idx);
@@ -60,7 +61,7 @@ export default function FollowingsCard({
     // 그러면 false일 때 버튼을 누르면 언팔로우 해야 한다.
 
     console.log(isUnfollowed[idx]);
-    if (!isUnfollowed[idx]) {
+    if (isfollow) {
       // 언팔로우
       const res = await API.delete(`/profile/${accountname}/unfollow`, {
         headers: {
@@ -68,8 +69,11 @@ export default function FollowingsCard({
           "Content-type": "application/json",
         },
       });
+      const followings = [...followingsList];
 
-      console.log(res);
+      followings[idx].isfollow = !isfollow;
+      setFollowingsList([...followings]);
+
       const copy = [...isUnfollowed];
 
       copy[idx] = true;
@@ -80,6 +84,11 @@ export default function FollowingsCard({
           Authorization: `Bearer ${localStorage.getItem("token")}`,
         },
       });
+      const followings = [...followingsList];
+
+      console.log(followings);
+      followings[idx].isfollow = !isfollow;
+      setFollowingsList([...followings]);
       const copy = [...isUnfollowed];
 
       copy[idx] = false;
@@ -111,7 +120,7 @@ export default function FollowingsCard({
       </FollowingLiDiv>
 
       <FollowCancelButton onClick={handleFollow}>
-        {isUnfollowed[idx] ? "팔로우" : "취소"}
+        {isfollow ? "취소" : "팔로우"}
       </FollowCancelButton>
     </FollowingListLi>
   );
