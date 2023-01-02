@@ -7,7 +7,6 @@ const UploadTextarea = styled.textarea`
   border: 0;
   width: 100%;
   height: 20rem;
-  //  height: calc(100%-210rem);
   &::-webkit-scrollbar {
     height: 0.5rem;
     width: 0.5rem;

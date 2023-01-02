@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import React, { useState } from "react";
 import styled from "styled-components";
 import { useNavigate } from "react-router-dom";
 
@@ -18,7 +18,6 @@ const UploadButton = styled(Button)`
   font-size: ${(props) => props.theme.baseFontSize};
   font-weight: ${(props) => props.theme.mediumFontWeight};
 `;
-// useState에 프롭스값 넣고싶으면 useEffect를 사용하자
 
 export default function Posting({ userData, setUserData, type }) {
   const { post } = type === "edit" ? { ...userData } : [];
@@ -39,7 +38,7 @@ export default function Posting({ userData, setUserData, type }) {
         "/post",
         {
           post: {
-            content: e.target[imageData.length+1].value,
+            content: e.target[imageData.length + 1].value,
             image: imageData.join(", "),
           },
         },
@@ -59,11 +58,8 @@ export default function Posting({ userData, setUserData, type }) {
 
   const editPost = async (e) => {
     e.preventDefault();
-    console.log(e.target[imageData.length+1].value);
     setImageData([...originalImage, ...imageData]);
-    console.log(originalImage, imageData);
     try {
-      console.log(imageData);
       await API.put(
         `/post/${userData.post.id}`,
         {
@@ -78,7 +74,7 @@ export default function Posting({ userData, setUserData, type }) {
             "Content-type": "application/json",
           },
         },
-      ).then((res) => console.log(res));
+      );
     } catch (error) {
       throw new Error(error);
     } finally {

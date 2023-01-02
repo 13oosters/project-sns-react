@@ -3,12 +3,12 @@ import styled from "styled-components";
 import { useLocation, useNavigate } from "react-router";
 
 import postData from "../../utils/postData";
-// 모달창 뜰때 색상 변하기
-// 모달창 뜰때 다른 부분 선택해서 내려가게 하기
+
 const ModalSection = styled.section`
   max-width: 50.1rem;
   margin: 0 auto;
   position: ${(props) => (!props.modal ? "static" : "absolute")};
+  background-color: rgba(0, 0, 0, 0.3);
   top: 0;
   bottom: 0;
   left: 0;
@@ -26,13 +26,13 @@ const ModalDiv = styled.div`
   z-index: 1000;
   margin: 0 auto;
   background-color: #ffffff;
-  border: 1px solid #dbdbdb;
+  box-shadow: rgba(100, 100, 111, 0.2) 0px 7px 29px 0px;
   border-top-left-radius: 1rem;
   border-top-right-radius: 1rem;
   text-align: center;
   transform: ${(props) =>
     !props.modal ? "translateY(130%)" : "translateY(-210%)"};
-  transition: 0.5s;
+  transition: 0.7s;
 `;
 
 const ModalUl = styled.ul`
@@ -41,16 +41,18 @@ const ModalUl = styled.ul`
 `;
 
 const ModalLi = styled.li`
-  padding: 1.5rem 1.6rem;
+  padding: 1.61rem 0;
   text-align: left;
   cursor: pointer;
   text-align: center;
-  &:nth-child(-n + 2) {
+  &:not(:last-child) {
     border-bottom: 1px solid #dbdbdb;
   }
+  &:first-child:nth-last-child(2),
+  :first-child:nth-last-child(2) ~ li {
+    padding: 3rem 0;
+  }
 `;
-// url은 useparams로 불러오기
-// postId 추가하였습니다
 
 export default function Modal({
   modal,
@@ -73,12 +75,9 @@ export default function Modal({
     isModal((prev) => !prev);
   };
   const deletePost = (idPost) => {
-    postData("deletepost", postId, setMessage);
-    cancel();
-    if (type === "myhome") {
-      setFeed([...fullArray].filter((v) => v.id !== postId));
-    }
-    // 삭제하면 홈으로 이동
+    postData("deletepost", postId, setPostPageData);
+    isModal((prev) => !prev);
+    setFeed([...fullArray].filter((v) => v.id !== postId));
     navigate("/");
   };
 
@@ -91,21 +90,14 @@ export default function Modal({
     }
   };
 
-  // type, url, setPostData, comment, id, commentId
   const postReport = () => {
     postData("postReport", postId, setMessage);
-    cancel();
-    // const { report } = { ...message };
-
-    // alert(` ${report.post} 게시물 신고가 완료 되었습니다.`);
+    isModal((prev) => !prev);
   };
 
   const deleteComment = () => {
     postData("deletComment", postId, setPostPageData, "", commentId);
     cancel();
-
-    console.log(message);
-    // navigate(0);
   };
 
   const commentReport = () => {
@@ -168,12 +160,11 @@ export default function Modal({
     othercomment: <ModalLi onClick={commentReport}>댓글 신고하기</ModalLi>,
   };
 
-  console.log(modal);
   return (
     <ModalSection modal={modal} onClick={cancel}>
       <h2 className="sr-only">모달창</h2>
       <ModalDiv modal={modal}>
-        <ModalUl>
+        <ModalUl type={type}>
           {ModalUI[type]}
           <ModalLi>취소</ModalLi>
         </ModalUl>
@@ -181,4 +172,3 @@ export default function Modal({
     </ModalSection>
   );
 }
-//  <img src={ModalImage} alt="모달창 아이콘" />
