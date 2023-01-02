@@ -5,7 +5,12 @@ import { useLocation, useNavigate } from "react-router";
 import postData from "../../utils/postData";
 
 const ModalSection = styled.section`
-  position: fixed;
+  max-width: 50.1rem;
+  margin: 0 auto;
+  position: ${(props) => (!props.modal ? "static" : "absolute")};
+  background-color: rgba(0, 0, 0, 0.3);
+  top: 0;
+  bottom: 0;
   left: 0;
   right: 0;
 `;
@@ -28,7 +33,7 @@ const ModalDiv = styled.div`
   text-align: center;
   transform: ${(props) =>
     !props.modal ? "translateY(130%)" : "translateY(-210%)"};
-  transition: 0.5s;
+  transition: 0.7s;
 `;
 
 const ModalUl = styled.ul`
