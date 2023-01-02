@@ -4,7 +4,7 @@ import { Link, useNavigate, useParams } from "react-router-dom";
 import styled from "styled-components";
 import FollowCountP from "../style/profile/FollowCountP";
 import FollowCountSpan from "../style/profile/FollowCountSpan";
-import BasicProfileImage from "../../assets/image/basic-profile-img.png";
+import defaultImage from "../../assets/image/basic-profile-img.png";
 import Button from "../style/Button";
 
 import API from "../../utils/api";
@@ -146,6 +146,10 @@ export default function ProfileInformation({
     return `https://mandarin.api.weniv.co.kr/${file}`;
   };
 
+  const noImage = (e) => {
+    e.target.src = defaultImage;
+  };
+
   return (
     <UserProfileWrapDiv>
       <UserProfileTopDiv>
@@ -153,7 +157,11 @@ export default function ProfileInformation({
           <FollowCountP type="follows">{followerCount}</FollowCountP>
           <FollowCountSpan>followers</FollowCountSpan>
         </FollowCountLink>
-        <ProfileImg src={refineImageUrl(image)} alt="" />
+        <ProfileImg
+          src={refineImageUrl(image)}
+          onError={noImage}
+          alt={username}
+        />
 
         <FollowCountLink onClick={() => navigate(`/${accountname}/followings`)}>
           <FollowCountP>{followingCount}</FollowCountP>
