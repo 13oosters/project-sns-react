@@ -1,5 +1,5 @@
-import React from "react";
-import { useNavigate } from "react-router-dom";
+import React, { useState } from "react";
+import { useNavigate, useParams } from "react-router-dom";
 import styled from "styled-components";
 
 import API from "../../utils/api";
@@ -65,6 +65,7 @@ export default function FollowersCard({
       followers[idx].isfollow = !isfollow;
       setFollowersList([...followers]);
 
+      console.log(res);
       const copy = [...isUnfollowed];
 
       copy[idx] = true;
@@ -75,11 +76,6 @@ export default function FollowersCard({
           Authorization: `Bearer ${localStorage.getItem("token")}`,
         },
       });
-      const followers = [...followersList];
-
-      followers[idx].isfollow = !isfollow;
-      setFollowersList([...followers]);
-
       const copy = [...isUnfollowed];
 
       copy[idx] = false;
