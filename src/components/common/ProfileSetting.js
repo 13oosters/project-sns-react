@@ -5,7 +5,7 @@ import axios from "axios";
 import styled from "styled-components";
 
 import API from "../../utils/api";
-import defaultImage from "../../assets/image/basic-profile-img-post.png";
+import defaultImage from "../../assets/image/basic-profile-img.png";
 import validate from "../../utils/validate";
 import TitleH2 from "../style/form/TitleH2";
 import LoginForm from "../style/form/LoginForm";
@@ -95,7 +95,7 @@ export default function ProfileSetting({ title, userData, setUserData }) {
     checkIsValue(e);
   };
 
-  const handleForm = (e) => {
+  const handleForm = () => {
     if (title === "프로필 설정") {
       validate(userData, "accountname", "/user/accountnamevalid").then(
         (res) => {
@@ -238,8 +238,9 @@ export default function ProfileSetting({ title, userData, setUserData }) {
             id="accountname"
             required
             placeholder="4~12자 이내 영문, 숫자, 특수문자(.),(_)만 사용 가능합니다."
+            disabled={!title}
             {...register("accountname", {
-              required: "계정ID는 필수 입력입니다.",
+              required: !title ? "" : "계정ID는 필수 입력입니다.",
               minLength: {
                 value: 4,
                 message: "4~12자 이내여야 합니다.",
