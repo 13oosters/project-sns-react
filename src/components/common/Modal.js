@@ -25,9 +25,8 @@ const ModalDiv = styled.div`
   height: 19.3rem;
   z-index: 1000;
   margin: 0 auto;
-  opacity: 1;
   background-color: #ffffff;
-  border: 1px solid #dbdbdb;
+  box-shadow: rgba(100, 100, 111, 0.2) 0px 7px 29px 0px;
   border-top-left-radius: 1rem;
   border-top-right-radius: 1rem;
   text-align: center;
@@ -39,6 +38,14 @@ const ModalDiv = styled.div`
 const ModalUl = styled.ul`
   font-size: ${(props) => props.theme.largeFontSize};
   font-weight: ${(props) => props.theme.normalFontWeight};
+  padding: ${(props) =>
+    props.type === "myprofile" ||
+    props.type === "otherfile" ||
+    props.type === "comments" ||
+    props.type === "otherpost" ||
+    props.type === "othercomment"
+      ? "2.3rem 0"
+      : "0"};
 `;
 
 const ModalLi = styled.li`
@@ -75,7 +82,6 @@ export default function Modal({
     postData("deletepost", postId, setPostPageData);
     isModal((prev) => !prev);
     setFeed([...fullArray].filter((v) => v.id !== postId));
-    // 삭제하면 홈으로 이동
     navigate("/");
   };
 
@@ -88,20 +94,14 @@ export default function Modal({
     }
   };
 
-  // type, url, setPostData, comment, id, commentId
   const postReport = () => {
     postData("postReport", postId, setMessage);
     isModal((prev) => !prev);
-    // const { report } = { ...message };
-
-    // alert(` ${report.post} 게시물 신고가 완료 되었습니다.`);
   };
 
   const deleteComment = () => {
     postData("deletComment", postId, setPostPageData, "", commentId);
     cancel();
-
-    console.log(message);
   };
 
   const commentReport = () => {
@@ -164,12 +164,11 @@ export default function Modal({
     othercomment: <ModalLi onClick={commentReport}>댓글 신고하기</ModalLi>,
   };
 
-  console.log(modal);
   return (
     <ModalSection modal={modal} onClick={cancel}>
       <h2 className="sr-only">모달창</h2>
       <ModalDiv modal={modal}>
-        <ModalUl>
+        <ModalUl type={type}>
           {ModalUI[type]}
           <ModalLi>취소</ModalLi>
         </ModalUl>
@@ -177,4 +176,3 @@ export default function Modal({
     </ModalSection>
   );
 }
-//  <img src={ModalImage} alt="모달창 아이콘" />
