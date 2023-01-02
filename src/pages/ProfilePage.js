@@ -30,8 +30,6 @@ export default function ProfilePage({ setHasToken }) {
   const [isProfileExist, setIsProfileExist] = useState(false);
   const [profileModal, setProfileModal] = useState(false);
 
-  console.log(myProfile);
-
   const [myPostData, setMyPostData] = useState({});
   const [listClick, setListClick] = useState(false);
   const [albumClick, setAlbumClick] = useState(true);
@@ -49,6 +47,7 @@ export default function ProfilePage({ setHasToken }) {
       const user = res.data.user;
 
       setMyProfile(user);
+
       return user;
     } catch (err) {
       throw new Error(err);
@@ -69,7 +68,7 @@ export default function ProfilePage({ setHasToken }) {
     } catch (e) {
       setIsProfileExist(false);
       alert(
-        "해당 프로필을 찾을 수 없습니다. 다시 확인 후 조회하여 주십시오. 😥"
+        "해당 프로필을 찾을 수 없습니다. 다시 확인 후 조회하여 주십시오. 😥",
       );
       navigate(-1);
     }
@@ -97,25 +96,24 @@ export default function ProfilePage({ setHasToken }) {
     getUserProfile();
 
     getPost();
-  }, []);
-
-  useEffect(() => {}, [userProfile]);
-
-  // console.log(myPostData.post);
-  // console.log(profileModal);
+  }, [account]);
 
   return (
     <>
       {isProfileExist ? (
         <LayoutSection>
-          <Header type="profile" setProfileModal={setProfileModal} profileModal={profileModal} />
+          <Header
+            type="profile"
+            setProfileModal={setProfileModal}
+            profileModal={profileModal}
+          />
           <ProfileWrapper>
             <ProfileInformation
               setUserProfile={setUserProfile}
               followList={myProfile.following}
               myaccount={myProfile.accountname}
               profileData={
-                account === myPostData.accountname ? myProfile : userProfile
+                account === myProfile.accountname ? myProfile : userProfile
               }
             />
 
@@ -134,12 +132,24 @@ export default function ProfilePage({ setHasToken }) {
             </ProfilePagePostDiv>
           </ProfileWrapper>
           {userProfile.accountname !== myProfile.accountname ? (
-            <Modal type="otherprofile" modal={profileModal}  isModal={setProfileModal}/>
+            <Modal
+              type="otherprofile"
+              modal={profileModal}
+              isModal={setProfileModal}
+            />
           ) : (
-            <Modal type="myprofile" modal={profileModal} isModal={setProfileModal} setHasToken={setHasToken}/>
+            <Modal
+              type="myprofile"
+              modal={profileModal}
+              isModal={setProfileModal}
+              setHasToken={setHasToken}
+            />
           )}
 
-          <NavBar type="프로필" />
+          <NavBar
+            type="프로필"
+            isMyProfile={account === myProfile.accountname}
+          />
         </LayoutSection>
       ) : null}
     </>
