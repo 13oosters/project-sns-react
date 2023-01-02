@@ -1,4 +1,5 @@
 import React, { useState, useEffect } from "react";
+
 import ProfileSetting from "../components/common/ProfileSetting";
 import PageLayout from "../components/style/PageLayout";
 import Header from "../components/style/Header";
@@ -11,7 +12,6 @@ export default function ProfileEditPage() {
     intro: "",
     image: "userData.image",
   });
-  // /profile/:accountname
   const accountname = localStorage.getItem("accountname");
   const token = localStorage.getItem("token");
   const getMyInfo = async () => {
@@ -25,8 +25,6 @@ export default function ProfileEditPage() {
 
     const { profile } = { ...response };
 
-    console.log(response);
-    console.log(profile);
     setUserData({
       ...userData,
       username: profile.username,
@@ -38,7 +36,6 @@ export default function ProfileEditPage() {
 
   useEffect(() => {
     getMyInfo();
-    console.log(userData);
   }, []);
 
   return (
