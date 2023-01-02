@@ -10,7 +10,7 @@ const SplashArticle = styled.article`
   margin: 0 auto;
   height: 100vh;
   max-width: 500px;
-  background-color: ${(props) => props.theme.secondaryColor};
+  background-color: #ffe7ab;
   box-shadow: rgba(100, 100, 111, 0.2) 0px 7px 29px 0px;
 `;
 
