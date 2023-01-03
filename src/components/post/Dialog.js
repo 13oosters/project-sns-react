@@ -8,7 +8,6 @@ const DialogSection = styled.section`
   height: calc(100% - 406.58px);
 `;
 
-/** 댓글 삭제 할때 필요할 것 같아서 setCommentData 프롭스 추가 사용안하면 지우기*/
 export default function Dialog({ comments, setPostPageData }) {
   const [myInfo, setMyInfo] = useState("");
   const getMyInfo = async () => {

@@ -12,7 +12,6 @@ export default function ProfileEditPage() {
     intro: "",
     image: "userData.image",
   });
-  // /profile/:accountname
   const navigate = useNavigate();
   const accountname = localStorage.getItem("accountname");
   const token = localStorage.getItem("token");
@@ -28,8 +27,6 @@ export default function ProfileEditPage() {
 
       const { profile } = { ...response };
 
-      console.log(response);
-      console.log(profile);
       setUserData({
         ...userData,
         username: profile.username,

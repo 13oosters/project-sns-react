@@ -88,7 +88,7 @@ export default function ProfilePage({ setHasToken }) {
 
       setMyPostData(post);
     } catch (err) {
-      throw new Error(err);
+      const mute = err;
     }
   };
 

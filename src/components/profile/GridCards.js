@@ -1,4 +1,3 @@
-import React, { useEffct, useState } from "react";
 import styled from "styled-components";
 
 import GridCard from "../profile/GridCard";
@@ -14,10 +13,7 @@ const GridCardUl = styled.ul`
   gap: 0.8rem;
 `;
 
-
 export default function GridCards({ postData = [] }) {
-  // console.log(postData);
-
   return (
     <GridCardUl>
       {postData.map((data, i) => (

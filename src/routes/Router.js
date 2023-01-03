@@ -83,9 +83,8 @@ function Router() {
       <Route path="/signup" element={<LoginPage signin />} />
       <Route path="/home" element={<HomePage />} />
       <Route path="/settings" element={<LoginPage settings />} />
-      {/*  */}
-      <Route path="/search" element={<SearchPage></SearchPage>} />
-      <Route path="/upload" element={<UploadPage></UploadPage>} />
+      <Route path="/search" element={<SearchPage />} />
+      <Route path="/upload" element={<UploadPage />} />
       <Route
         path="/:account"
         element={<ProfilePage setHasToken={setHasToken}></ProfilePage>}
@@ -93,12 +92,9 @@ function Router() {
       <Route path="/:account/followers" element={<FollowersPage />} />
       <Route path="/:account/followings" element={<FollowingsPage />} />
       <Route path="/:account/settings" element={<ProfileEditPage />} />
-      <Route path="/:account/post/:id" element={<PostPage>하이</PostPage>} />
-      <Route
-        path="/:account/post/:id/edit"
-        element={<UploadPage>하이</UploadPage>}
-      />
-      <Route path="*" element={<ErrorPage></ErrorPage>} />
+      <Route path="/:account/post/:id" element={<PostPage />} />
+      <Route path="/:account/post/:id/edit" element={<UploadPage />} />
+      <Route path="*" element={<ErrorPage />} />
     </Routes>
   );
 }

@@ -36,8 +36,8 @@ const validate = async (state, type, url) => {
 
       response = user;
     }
-  } catch (e) {
-    throw new Error(e);
+  } catch (err) {
+    const mute = err;
   }
   return response;
 };
