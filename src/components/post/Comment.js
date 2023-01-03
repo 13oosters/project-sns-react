@@ -52,7 +52,6 @@ export default function Comment({ comment, myInfo, setPostPageData }) {
   const [modal, isModal] = useState(false);
   const navigate = useNavigate();
   const { id } = useParams();
-  const { account } = useParams();
   const { user } = { ...myInfo };
 
   let postId = "";

@@ -1,13 +1,11 @@
 import { useEffect, useState } from "react";
 import { useInView } from "react-intersection-observer";
-import styled from "styled-components";
 import API from "../utils/api";
 import Header from "../components/style/Header";
 import NavBar from "../components/style/NavBar";
 import EmptyFeed from "../components/home/EmptyFeed";
 import Feeds from "../components/home/Feeds";
 import LayoutSection from "../components/style/PageLayout";
-
 
 export default function HomePage() {
   const [feed, setFeed] = useState([]);
@@ -17,7 +15,6 @@ export default function HomePage() {
   const [last, setLast] = useState(false);
 
   const getUserFeed = async (a, b) => {
-
     try {
       {
         const response = await API.get(`/post/feed/?limit=10&skip=${a}`, {
@@ -47,7 +44,7 @@ export default function HomePage() {
 
       setLoading(false);
     } catch (error) {
-      console.log(error);
+      const mute = error;
     }
   };
 
@@ -55,10 +52,7 @@ export default function HomePage() {
     getUserFeed();
   }, []);
 
-  // 무한스크롤
   const [ref, inView] = useInView();
-
-  console.log(last);
 
   useEffect(() => {
     if (inView && !last) {

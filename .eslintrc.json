@@ -1,7 +1,7 @@
 {
   "extends": ["react-app", "naver", "prettier"],
   "rules": {
-    "no-console": 1,
+    "no-console": 2,
     "react-hooks/exhaustive-deps": 0,
     "no-unused-expression": 0,
     "no-unused-vars": 1

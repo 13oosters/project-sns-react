@@ -1,4 +1,3 @@
-import React, { useState } from "react";
 import styled from "styled-components";
 import { useNavigate, useParams } from "react-router-dom";
 import ImageLayerIcon from "../../assets/image/icon-img-layers.png";
@@ -62,7 +61,3 @@ export default function GridCard({ data }) {
     </GridCardLi>
   );
 }
-
-//  refineImageData();
-
-//  console.log(thumbnailImageList);

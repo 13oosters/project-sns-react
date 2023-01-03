@@ -11,14 +11,9 @@ import profileImage from "../../assets/image/icon-user.png";
 import profileSelectImage from "../../assets/image/icon-user-fill.png";
 
 const NavBarArticle = styled.article`
-  /* position: fixed; */
-  /* left: 0; */
-  /* bottom: 0; */
-  /* z-index: 1; */
   width: 100%;
   background-color: #ffffff;
   height: 6.5rem;
-  /* box-shadow: rgba(100, 100, 111, 0.2) 0px 0px 29px 0px; */
 `;
 
 const TabMenuUl = styled.ul`

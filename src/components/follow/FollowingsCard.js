@@ -1,9 +1,7 @@
-import React, { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import styled from "styled-components";
 
 import FollowCancelButton from "../style/follow/FollowCancelButton";
-// import FollowButton from "../style/follow/FollowButton";
 import API from "../../utils/api";
 
 const FollowingListLi = styled.li`
@@ -52,17 +50,8 @@ export default function FollowingsCard({
 }) {
   const navigate = useNavigate();
 
-  //  console.log(isUnfollowed);
-  //  console.log(idx);
-
   const handleFollow = async () => {
-    // 팔로우버튼을 누르면 팔로우를 해야 함
-    // false일 때가 팔로우 되어있는 상태다.
-    // 그러면 false일 때 버튼을 누르면 언팔로우 해야 한다.
-
-    console.log(isUnfollowed[idx]);
     if (isfollow) {
-      // 언팔로우
       const res = await API.delete(`/profile/${accountname}/unfollow`, {
         headers: {
           Authorization: `Bearer ${localStorage.getItem("token")}`,
@@ -86,7 +75,6 @@ export default function FollowingsCard({
       });
       const followings = [...followingsList];
 
-      console.log(followings);
       followings[idx].isfollow = !isfollow;
       setFollowingsList([...followings]);
       const copy = [...isUnfollowed];
@@ -107,7 +95,7 @@ export default function FollowingsCard({
           navigateTo(accountname);
         }}
         src={image}
-        alt=""
+        alt={`${accountname}의 프로필 사진`}
       />
       <FollowingLiDiv
         onClick={() => {

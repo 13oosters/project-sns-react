@@ -6,12 +6,11 @@ import Dialog from "../post/Dialog";
 const DeatailSection = styled.section`
   height: calc(100% - 48px);
   overflow-y: scroll;
-  &::-webkit-scrollbar{
+  &::-webkit-scrollbar {
     display: none;
   }
 `;
 
-// setPostStoreData 사용안하면 지우기
 export default function Detail({ setPostPageData, postPageData }) {
   const { post } = { ...postPageData };
 

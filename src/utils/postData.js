@@ -1,25 +1,6 @@
 import API from "./api";
 
-/**
- * url /post_id를 전달받아 get
- * return 데이터
- * setPostData라는 useState객체에 데이터를 저장함
- *
- *
- */
-/**
- *
- * @param {string} type : 어떤 요청인지
- * @param {string} url : path
- * @param {} setPostData : 데이터 useState
- * @param {string} comment : 댓글 내용
- * @param {string} accountname : 사용자이름
- * @param {string} commentId : 댓글 아이디 (삭제,신고)
- */
-
 const getPost = async (type, url, setPostData, comment, commentId) => {
-  //  console.log(url);
-  console.log(setPostData);
   let responseData = null;
   let responseComment = null;
 
@@ -45,8 +26,6 @@ const getPost = async (type, url, setPostData, comment, commentId) => {
       reverseComment.comments.reverse();
       responseData = { ...responseData, ...responseComment };
     }
-
-    /* edit 구현 진행중 */
 
     if (type === "editpost") {
       const responsePost = await API.get(`/post/${url}`, {
@@ -132,7 +111,6 @@ const getPost = async (type, url, setPostData, comment, commentId) => {
 
       const responseComments = await Commentres.data;
 
-      console.log(responseComments);
       const reverseResponse = { ...responseComments };
 
       reverseResponse.comments.reverse();
