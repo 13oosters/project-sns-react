@@ -154,7 +154,6 @@ export default function Card({ post, setFeed, fullArray }) {
       {post && myAccountname ? (
         <li>
           <CardHeaderDiv>
-            {/** 모달 버튼이 작동을 안해서 이미지로 navigate이동했습니다 */}
             <CardHeaderImage
               src={refineImageData(author.image)}
               onClick={() => navigate(`/${author.accountname}`)}
@@ -171,8 +170,6 @@ export default function Card({ post, setFeed, fullArray }) {
                 </CardHeaderP>
               </div>
             </div>
-            {/* 자신의 게시글 => 삭제 수정모달 , 다른사람게시글 => 신고하기 */}
-            {/** 모달창 컴포넌트로 변경했습니다 */}
             <CardHeaderButton
               type="button"
               onClick={() => {
@@ -268,11 +265,3 @@ export default function Card({ post, setFeed, fullArray }) {
     </>
   );
 }
-
-/**
- *     if(myAccountname === author.accountname){
-      setModalType("mypost")
-    } else {
-      setModalType("otherpost")
-    }
- */
