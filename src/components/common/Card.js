@@ -1,9 +1,8 @@
 import { useEffect, useState } from "react";
 import styled, { css } from "styled-components";
-import { Link, useNavigate, useParams } from "react-router-dom";
+import { useNavigate, useParams } from "react-router-dom";
 import defaultImage from "../../assets/image/basic-profile-img-post.png";
 import moreImage from "../../assets/image/icon-more-post.png";
-import homeTestImage from "../../assets/image/home-test.png";
 import heartImage from "../../assets/image/icon-heart.png";
 import heartClickImage from "../../assets/image/icon-heart-fill.png";
 import commentImage from "../../assets/image/icon-comment.png";
@@ -77,8 +76,6 @@ const CardBodyTime = styled.time`
 `;
 
 export default function Card({ post, setFeed, fullArray }) {
-  // console.log(feed);
-
   const {
     author,
     content,
