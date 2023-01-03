@@ -76,7 +76,9 @@ export default function FollowersCard({
         },
       });
       const copy = [...isUnfollowed];
+      const followers = [...followersList];
 
+      followers[idx].isfollow = !isfollow;
       copy[idx] = false;
       setIsUnfollowed([...copy]);
     }
