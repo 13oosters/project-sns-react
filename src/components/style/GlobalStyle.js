@@ -19,19 +19,6 @@ const mainTheme = {
   boldFontWeight: 700,
 };
 
-/**   html{
-  
-   // width:100%;
-   // height:100%;
-   // overflow-y:scroll;
-   // &::-webkit-scrollbar {
-   // width: 0.5rem; }
-   &::-webkit-scrollbar-thumb {
-    background-color: #DBDBDB;
-    border-radius: 10px;
-  };
-  }; */
-
 const GlobalStyles = createGlobalStyle`
   ${reset}
   @import url('//spoqa.github.io/spoqa-han-sans/css/SpoqaHanSans-kr.css');
@@ -40,7 +27,6 @@ const GlobalStyles = createGlobalStyle`
   
   width:100%;
   height:100%;
-//  overflow-y:scroll;
   font-size: 62.5%;
   &::-webkit-scrollbar {
     width: 0.5rem; }
@@ -48,8 +34,6 @@ const GlobalStyles = createGlobalStyle`
 }
   
   body{
- //  height:100vh;
- //   overflow: hidden;
     background-color: #FFFAEC;
     overflow: hidden;
   }

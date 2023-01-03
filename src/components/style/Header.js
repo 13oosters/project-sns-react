@@ -6,22 +6,10 @@ import backImage from "../../assets/image/icon-arrow-left.png";
 import topLogoImage from "../../assets/image/top-logo-txt.png";
 import moreImage from "../../assets/image/icon-more-profile.png";
 import cancelImage from "../../assets/image/icon-cancel-search.png";
-import Modal from "../common/Modal";
-
-/**
- * 최상위 부모요소:
- * display: flex;
- * justify-items: items-between;
- * padding 전부
- */
 
 const HeaderWrap = styled.header`
-  /* position: fixed; */
-  /* top: 0; */
-  /* z-index: 1; */
   width: 100%;
   background-color: #ffffff;
-  /* box-shadow: rgba(100, 100, 111, 0.2) 0px 0px 29px 0px; */
 `;
 
 const HeaderLayout = css`
@@ -65,8 +53,13 @@ const HeaderH2 = styled.h2`
   font-size: ${(props) => props.theme.baseFontSize};
 `;
 
-export default function Header({ type, setKeyword, startTransition, setProfileModal, profileModal }) {
-
+export default function Header({
+  type,
+  setKeyword,
+  startTransition,
+  setProfileModal,
+  profileModal,
+}) {
   const navigate = useNavigate();
   const UI = {
     logo: (
@@ -127,7 +120,7 @@ export default function Header({ type, setKeyword, startTransition, setProfileMo
       <>
         <HeaderUI>
           <button onClick={() => navigate(-1)}>
-            <img src={backImage} style={{display:"block"}} alt="뒤로 가기" />
+            <img src={backImage} style={{ display: "block" }} alt="뒤로 가기" />
           </button>
           <HeaderH2>Followers</HeaderH2>
         </HeaderUI>
@@ -137,7 +130,7 @@ export default function Header({ type, setKeyword, startTransition, setProfileMo
       <>
         <HeaderUI>
           <button onClick={() => navigate(-1)}>
-            <img src={backImage} style={{display:"block"}} alt="뒤로 가기" />
+            <img src={backImage} style={{ display: "block" }} alt="뒤로 가기" />
           </button>
           <HeaderH2>Followings</HeaderH2>
         </HeaderUI>

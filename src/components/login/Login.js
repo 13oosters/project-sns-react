@@ -35,8 +35,6 @@ const LoginUl = styled.ul`
 export default function Login() {
   const navigate = useNavigate();
 
-  console.log("테스트 계정 -> 이메일 test1111@test.com , 비밀번호 test1111");
-
   return (
     <SecondaryColorDiv>
       <LoginUl>
