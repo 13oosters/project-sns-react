@@ -2,7 +2,7 @@ import styled from "styled-components";
 import Button from "../Button";
 
 const FollowCancelButton = styled(Button)`
-  width: 7rem;
+  width: 8rem;
   height: 2.8rem;
   margin: 1.1rem 0;
   font-size: ${(props) => props.theme.smallFontSize};
