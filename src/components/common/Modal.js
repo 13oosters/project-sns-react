@@ -75,9 +75,12 @@ export default function Modal({
     isModal((prev) => !prev);
   };
   const deletePost = (idPost) => {
-    postData("deletepost", postId, setPostPageData);
+    if (type === "myhome") {
+      setFeed([...fullArray].filter((v) => v.id !== postId));
+    }
+    postData("deletepost", postId, setMessage);
     isModal((prev) => !prev);
-    setFeed([...fullArray].filter((v) => v.id !== postId));
+
     navigate("/");
   };
 

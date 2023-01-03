@@ -8,12 +8,18 @@ export default function Cards({ feed, setFeed, ref1, wait }) {
       <h3 className="sr-only">게시글</h3>
       <ol reversed>
         {feed ? (
-            feed.map((post, fullArray) => <Card key={post.id} post={post} fullArray={fullArray} setFeed={setFeed}/>
-          )
+          feed.map((post, index, fullArray) => (
+            <Card
+              key={post.id}
+              post={post}
+              fullArray={fullArray}
+              setFeed={setFeed}
+            />
+          ))
         ) : (
           <></>
         )}
-        <Loading ref1={ref1} wait={wait}/>
+        <Loading ref1={ref1} wait={wait} />
       </ol>
     </section>
   );
