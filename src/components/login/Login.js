@@ -11,10 +11,12 @@ const SecondaryColorDiv = styled.div`
 `;
 
 const LoginButton = styled(Button)`
-  display: block;
+  display: flex;
+  justify-content: center;
+  align-items: center;
   height: 3.5rem;
-  padding: 0;
-  font-size: ${(props) => props.theme.baseFontSize};
+  padding: 2rem 0;
+  font-size: ${(props) => props.theme.xLargeFontSize};
   color: #000000;
   background: ${(props) => `url(${props.image})`} no-repeat 15px center;
   border: 1px solid #c5985e;
@@ -27,7 +29,7 @@ const LoginUl = styled.ul`
   flex-direction: column;
   align-items: center;
   justify-content: center;
-  gap: 1rem;
+  gap: 1.3rem;
 `;
 
 export default function Login() {
@@ -57,6 +59,9 @@ export default function Login() {
           >
             회원가입
           </LoginButton>
+        </li>
+        <li>
+          <p style={{ marginTop: "2rem", fontSize: "1.4rem" }}>13oosters🚀</p>
         </li>
       </LoginUl>
     </SecondaryColorDiv>
