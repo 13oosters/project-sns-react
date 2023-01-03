@@ -5,11 +5,13 @@ import splashImage from "../../assets/image/logo-splash.png";
 
 const boxScale = keyframes`
   0% {
-    transform: scale(0);
+//    transform: scale(0);
+opacity: 1;
   }
 
   100% {
-    transform: scale(1);
+    opacity: 0;
+//    transform: scale(1);
   }`;
 
 const SplashArticle = styled.article`
@@ -21,7 +23,7 @@ const SplashArticle = styled.article`
   max-width: 500px;
   background-color: #ffe7ab;
   box-shadow: rgba(100, 100, 111, 0.2) 0px 7px 29px 0px;
-  animation: ${boxScale} 0.5s linear;
+  animation: ${boxScale} 2s linear;
 `;
 
 export default function SplashScreen({ setDidSplashScreenMount }) {
