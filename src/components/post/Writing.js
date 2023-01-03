@@ -59,7 +59,6 @@ export default function Writing({ comments, setPostPageData, myInfo }) {
   };
   const uploadcomment = () => {
     postData("comment", `${id}`, setPostPageData, inputComment);
-    console.log(comments);
     setInputComment("");
   };
 
