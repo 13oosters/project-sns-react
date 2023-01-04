@@ -16,7 +16,7 @@ const LogoImageDiv = styled.div`
 export default function Logo() {
   return (
     <LogoImageDiv>
-      <LogoImage src={logoImage} alt="멍하냥" />
+      <LogoImage src={logoImage} alt="멍하냥로고이미지" />
     </LogoImageDiv>
   );
 }

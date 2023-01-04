@@ -156,6 +156,7 @@ export default function Card({ post, setFeed, fullArray }) {
           <CardHeaderDiv>
             <CardHeaderImage
               src={refineImageData(author.image)}
+              alt={`프로필이미지`}
               onClick={() => navigate(`/${author.accountname}`)}
             />
             <div>
@@ -178,14 +179,17 @@ export default function Card({ post, setFeed, fullArray }) {
                   : setIsHomeModal((prev) => !prev);
               }}
             >
-              <img src={moreImage} alt="설정" />
+              <img src={moreImage} alt="설정버튼이미지" />
             </CardHeaderButton>
           </CardHeaderDiv>
-          <PostImage image={image} />
+          <PostImage image={image} alt="게시글이미지" />
           <CardBodyUl>
             <li style={{ width: "4rem" }}>
               <button type="button" onClick={heartButtonClick}>
-                <CardBodyImage src={heart ? heartClickImage : heartImage} />
+                <CardBodyImage
+                  src={heart ? heartClickImage : heartImage}
+                  alt={heart ? "좋아요클릭하트이미지" : "좋아요해제하트이미지"}
+                />
               </button>
               <CardBodySpan>{heartCounting}</CardBodySpan>
             </li>
@@ -201,6 +205,7 @@ export default function Card({ post, setFeed, fullArray }) {
               >
                 <CardBodyImage
                   src={commentImage}
+                  alt={`${commentCount}개 댓글`}
                   style={
                     param.id ? { cursor: "default" } : { cursor: "pointer" }
                   }

@@ -42,7 +42,7 @@ export default function PostImage({ image }) {
       <MultiImageWrapper>
         {image.split(",").map((item, index) => (
           <li key={index} style={{ width: "100%", height: "30rem" }}>
-            <MultiImage src={item} alt="#" />
+            <MultiImage src={item} alt="게시글 이미지" />
           </li>
         ))}
       </MultiImageWrapper>
@@ -52,7 +52,7 @@ export default function PostImage({ image }) {
     return (
       <img
         src={image}
-        alt="#"
+        alt="게시글 이미지"
         style={{ width: "100%", height: "30rem", objectFit: "cover" }}
       />
     );

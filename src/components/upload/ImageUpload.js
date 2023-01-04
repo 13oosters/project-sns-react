@@ -138,13 +138,13 @@ export default function ImageUpload({
         {type === "edit" ? (
           <UploadImage
             src={refineImageUrl(userData.post.author.image)}
-            alt="프로필 사진"
+            alt="게시글업로드이미지"
             style={{ objecFit: "cover" }}
           />
         ) : (
           <UploadImage
             src={refineImageUrl(userData.image)}
-            alt="프로필 사진"
+            alt="게시글업로드이미지"
             style={{ objecFit: "cover" }}
           />
         )}
@@ -166,7 +166,7 @@ export default function ImageUpload({
         {type === "edit" ? (
           originalImage.map((image, i) => (
             <ImageLi key={i} data-index={i}>
-              <Image src={image} alt="게시글 사진2" />
+              <Image src={image} alt="게시글 사진" />
               <CancelButton onClick={deleteOriginalImage} type="button">
                 <CancelImage src={cancelImage} alt="취소버튼" />
               </CancelButton>
@@ -186,7 +186,7 @@ export default function ImageUpload({
               }}
             />
             <CancelButton onClick={deleteImage} type="button">
-              <CancelImage src={cancelImage} alt="취소버튼" />
+              <CancelImage src={cancelImage} alt="취소버튼이미지" />
             </CancelButton>
           </ImageLi>
         ))}

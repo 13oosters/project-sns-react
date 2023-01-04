@@ -37,16 +37,16 @@ export default function SortButtons({
       <SortButtonWrapDiv>
         <button onClick={onClickAlbum}>
           {albumClick === false ? (
-            <img src={SortAlbumOffImage} alt="" />
+            <img src={SortAlbumOffImage} alt="앨범클릭이미지" />
           ) : (
-            <img src={SortAlbumActiveImage} alt="" />
+            <img src={SortAlbumActiveImage} alt="리스트클릭이미지" />
           )}
         </button>
         <button onClick={onClickList}>
           {listClick === false ? (
-            <img src={SortListOffImage} alt="" />
+            <img src={SortListOffImage} alt="리스트클릭이미지" />
           ) : (
-            <img src={SortListActiveImage} alt="" />
+            <img src={SortListActiveImage} alt="앨범클릭이미지" />
           )}
         </button>
       </SortButtonWrapDiv>
