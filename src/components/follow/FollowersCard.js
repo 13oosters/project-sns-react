@@ -1,9 +1,8 @@
-import React, { useState } from "react";
-import { useNavigate, useParams } from "react-router-dom";
+import React from "react";
+import { useNavigate } from "react-router-dom";
 import styled from "styled-components";
 
 import API from "../../utils/api";
-// import FollowButton from "../style/follow/FollowButton";
 import FollowCancelButton from "../style/follow/FollowCancelButton";
 
 const FollowerListLi = styled.li`
