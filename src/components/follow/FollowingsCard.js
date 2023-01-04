@@ -101,7 +101,7 @@ export default function FollowingsCard({
         onClick={() => {
           navigateTo(accountname);
         }}
-        style={{ width: "100%", textAlign: "left" }}
+        style={{ width: "70%", textAlign: "left" }}
       >
         <FollowerName>{username}</FollowerName>
         <FollowerIntroduce>{intro}</FollowerIntroduce>
