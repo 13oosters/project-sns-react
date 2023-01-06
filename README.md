@@ -4,7 +4,7 @@
 
 ## 1. 소개 및 개요
 
-- 프로젝트 기간 : 2022.12. ~ 2023.1.4.
+- 프로젝트 기간 : 2022.12.9. ~ 2023.1.4.
 - 배포 URL : [🔗 멍하냥](https://63b3c5460a206154d42f4d3c--frabjous-snickerdoodle-f6b976.netlify.app/)
 
 - Test ID / PW : hobak2@boosters.com / test1111
@@ -25,8 +25,118 @@
 | ![FrontEnd](https://img.shields.io/badge/FrontEnd-3f97fb)</br> ![Team%20Leader](https://img.shields.io/badge/-Team%20leader-yellow) </br> ![Development%20Leader](https://img.shields.io/badge/-Development%20leader-green) | ![FrontEnd](https://img.shields.io/badge/FrontEnd-3f97fb)</br> ![Design%20Leader](https://img.shields.io/badge/-Design%20leader-purple) | ![FrontEnd](https://img.shields.io/badge/FrontEnd-3f97fb)</br> ![WorkManagement](https://img.shields.io/badge/-Work%20Management%20leader-f67280) | ![FrontEnd](https://img.shields.io/badge/FrontEnd-3f97fb)</br> ![Communication%20Leader](https://img.shields.io/badge/-Comunication%20Leader-orange) |
 
 
-### 👤 역할 소개
+## 3. 프로젝트 구조
+```
+📦 project-sns-react🐶😺
+├─ .eslintrc.json
+├─ .github
+│  ├─ ISSUE_TEMPLATE
+│  └─ PULL_REQUEST_TEMPLATE
+├─ .gitignore
+├─ .gitmessage.txt
+├─ .prettierignore
+├─ .prettierrc.json
+├─ README.md
+├─ package-lock.json
+├─ package.json
+├─ public
+└─ src
+   ├─ App.js
+   ├─ assets
+   │  └─ image
+   ├─ src
+   │  ├─ common
+   │  │  ├─ Card.js
+   │  │  ├─ Cards.js
+   │  │  ├─ Logo.js
+   │  │  ├─ Modal.js
+   │  │  ├─ Notice.js
+   │  │  ├─ ProfileSetting.js
+   │  │  └─ SplashScreen.js
+   │  ├─ follow
+   │  │  ├─ FollowersCard.js
+   │  │  ├─ FollowersCards.js
+   │  │  ├─ FollowingsCard.js
+   │  │  └─ FollowingsCards.js
+   │  ├─ home
+   │  │  ├─ EmptyFeed.js
+   │  │  ├─ Feeds.js
+   │  │  ├─ Loading.js
+   │  │  └─ PostImage.js
+   │  ├─ login
+   │  │  ├─ Form.js
+   │  │  ├─ Login.js
+   │  │  └─ Welcome.js
+   │  ├─ post
+   │  │  ├─ Comment.js
+   │  │  ├─ Comments.js
+   │  │  ├─ Detail.js
+   │  │  ├─ Dialog.js
+   │  │  └─ Writing.js
+   │  ├─ profile
+   │  │  ├─ GridCard.js
+   │  │  ├─ GridCards.js
+   │  │  ├─ MyProfileButton.js
+   │  │  ├─ ProfileInformation.js
+   │  │  └─ SortButtons.js
+   │  ├─ search
+   │  │  ├─ Result.js
+   │  │  └─ Results.js
+   │  ├─ style
+   │  │  ├─ Button.js
+   │  │  ├─ GlobalStyle.js
+   │  │  ├─ Header.js
+   │  │  ├─ NavBar.js
+   │  │  ├─ PageLayout.js
+   │  │  ├─ follow
+   │  │  │  ├─ FollowButton.js
+   │  │  │  └─ FollowCancelButton.js
+   │  │  ├─ form
+   │  │  │  ├─ ErrorMessageP.js
+   │  │  │  ├─ LoginButton.js
+   │  │  │  ├─ LoginForm.js
+   │  │  │  ├─ LoginInput.js
+   │  │  │  ├─ SignUpButton.js
+   │  │  │  └─ TitleH2.js
+   │  │  └─ profile
+   │  │     ├─ FollowButton.js
+   │  │     ├─ FollowCountDiv.js
+   │  │     ├─ FollowCountP.js
+   │  │     └─ FollowCountSpan.js
+   │  └─ upload
+   │     ├─ ImageUpload.js
+   │     ├─ Posting.js
+   │     └─ TextUpload.js
+   ├─ hooks
+   │  ├─ useFetch.js
+   │  └─ useInput.js
+   ├─ index.css
+   ├─ index.js
+   ├─ pages
+   │  ├─ ErrorPage.js
+   │  ├─ FollowersPage.js
+   │  ├─ FollowingsPage.js
+   │  ├─ HomePage.js
+   │  ├─ LoginPage.js
+   │  ├─ PostPage.js
+   │  ├─ ProfileEditPage.js
+   │  ├─ ProfilePage.js
+   │  ├─ SearchPage.js
+   │  └─ UploadPage.js
+   ├─ reportWebVitals.js
+   ├─ routes
+   │  └─ Router.js
+   └─ utils
+      ├─ api.js
+      ├─ postData.js
+      └─ validate.js
+```
+
+## 4. 역할 분담
 <img width="800" alt="역할분담" src="https://user-images.githubusercontent.com/101047198/210616151-e84c6bee-16f1-4bbc-8f8c-bebb3cda16dd.png">
+
+🛠 공통 담당
+* 로그인 페이지, 회원가입 페이지
 
 
 ## 3. 개발 환경
@@ -37,9 +147,8 @@
 </div>
 </br>
 
-* Front-end : React, Styled-Components
+* Front-end : React, Styled-Components, React-Router-Dom, ESLint, Axios
 * Back-end : 제공된 API 사용
-
 
 
 ### 👥 개발 문화 
