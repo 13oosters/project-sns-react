@@ -61,7 +61,7 @@
 - Back-end : 제공된 API 사용
 </br>
 
-### 개발 환경 
+### ⚙️ 개발 환경 
 
 <img src="https://img.shields.io/badge/Git-F05032?style=flat-square&logo=Git&logoColor=white"/> <img src="https://img.shields.io/badge/GitHub-181717?style=flat-square&logo=GitHub&logoColor=white"/> 
 <img src="https://img.shields.io/badge/Figma-F24E1E?style=flat-square&logo=Figma&logoColor=white"/>
@@ -94,7 +94,7 @@
   [ 🔗 코드 컨벤션 ](https://github.com/13oosters/project-sns-react/wiki/%E2%9C%85-%EC%BD%94%EB%93%9C-%EC%BB%A8%EB%B2%A4%EC%85%98)
 </br>
 
-## <span id='mainfeat'>3. 개발 기간 및 작업 관리</span>
+## <span id='task'>3. 개발 기간 및 작업 관리</span>
 * ### 프로젝트 기간 : 2022.12.09 ~ 2023. 01. 05
 * ### 작업 관리 : git project, git wiki
 * ### git project 
@@ -104,7 +104,23 @@
 회의와 컨벤션을 기록하고 요점노트를 기록하여 공유하였습니다.
 * ![image](https://user-images.githubusercontent.com/74497080/211241048-4d0e4ce5-4503-41a1-a162-846739d29542.png)
 
-## <span id='smainfeat'>4. 주요 기능</span>
+## <span id='mainfeat'>4. 주요 기능</span>
+### 🔒 로그인
+ * 로그인 / 회원가입
+ * 유효성 검사
+ * 토큰 검증 
+### 📎 피드
+* 게시글 업로드
+* 무한 스크롤
+### 🔍 검색
+* 유저 검색
+### 🖼 게시글
+* 게시글 수정, 삭제
+* 댓글 게시, 삭제
+### 👨🏿‍🤝‍👨🏼 프로필
+* 프로필 수정
+* 팔로우 / 팔로잉
+* 그리드, 리스트형 게시글
 
 ## <span id='structure'>5. 프로젝트 구조 및 포인트</span>
 
@@ -215,6 +231,7 @@
       ├─ postData.js
       └─ validate.js
 ```
+
 ## <span id='role'>6. 역할 분담</span>
 <img width="800" alt="역할분담" src="https://user-images.githubusercontent.com/74497080/211231655-1ecad753-e069-41e9-8f1f-5f2205c7c358.png">
 
