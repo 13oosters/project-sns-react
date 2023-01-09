@@ -347,7 +347,163 @@
 <p align="right"><a href="#top">(⬆️ Top)</a></p>
 
 ## <span id="issue">9. 핵심 기능</span>
+<br/>
 
+### [Axios 모듈화]
 
+axios로 서버와 통신하는 모든 부분에서 서버 주소와 코드가 반복되어 이를 줄이기 위해 custom axios를 사용하였습니다.
 
+```
+const BASE_URL = "url";
 
+const API = axios.create({
+  baseURL: BASE_URL,
+  headers: {
+    "Content-Type": "application/json",
+  },
+});
+
+API.interceptors.request.use(
+  (config) => {
+    const token = localStorage.getItem("token");
+
+    if (token) {
+      config.headers.Authorization = `Bearer ${token}`;
+    }
+    return config;
+  },
+  (error) => {
+    Promise.reject(error);
+  },
+);
+```
+<br/>
+
+### [Header 공통 컴포넌트 오브젝트 자료형 응용]
+
+페이지 마다존재하는 header의 구성이 비슷하여 공통컴포넌트로 만들었고, 각 페이지에 type을 지정하여 각 페이지 별로 header를 구분 하였습니다.
+
+```
+export default function Header({
+  type,
+  setKeyword,
+  startTransition,
+  setProfileModal,
+  profileModal,
+}) {
+  const UI = {
+    logo: (
+     <HeaderUI>
+        <button>
+          <img src={topLogoImage} alt="멍하냥" />
+        </button>
+      </HeaderUI>
+    ),
+    search: (
+    ),
+    profile: (  
+    ),
+    post: (
+    ),
+    followers: (  
+    ),
+    followings: (
+    ),
+  };
+
+  return <HeaderWrap>{UI[type]}</HeaderWrap>;
+} 
+```
+<br/>
+
+### [react-hook-form]
+
+로그인 / 회원가입 페이지에서 유효성 검사를 react-hook-form 라이브러리를 사용 했습니다. 입력 값 존재 여부, 포커스 등의 유틸을 지원 하기 때문에 기능 구현의 리소스를 절약할 수 있었습니다.
+
+```
+ const {
+    register,
+    setFocus,
+    handleSubmit,
+    formState: { isSubmitting, errors },
+    watch,
+  } = useForm({ mode: "onChange" });
+  const checkIsValue = (e) => {
+    e.target.value && watch("email") && watch("password")
+      ? setIsValue(true)
+      : setIsValue(false);
+  };
+
+  const handleInput = (e) => {
+    setUserData({ ...userData, [e.target.name]: e.target.value });
+    checkIsValue(e);
+  };
+...
+
+```
+<br/>
+
+### [검색 페이지 렌더링 성능 최적화]
+
+검색페이지에서는 Blocking rendering을 해결하여 성능을 최적하 하는 것이 중요하다고 생각했습니다.
+이를 위해 useTransition 훅을 사용하였습니다.
+
+📍 useTransition 특징
+*  useTransition은 상태변화의 우선순위를 지정해줍니다.
+*  화면을 업데이트 하눈 중에도 검색 input의 우선순위를 높여 입력이 끊기는 상황을 줄여줍니다. 
+*  isPending의 boolean값을 이용하여 로딩중 ui를 띄어 ux를 향상 시켜줍니다.
+
+```
+export default function SearchPage() {
+  const [keyword, setKeyword] = useState(undefined);
+  const [isPending, startTransition] = useTransition();
+
+  return (
+    <PageLayout paddingValue={0}>
+      <h1 className="sr-only">검색 페이지</h1>
+      <Header
+        setKeyword={setKeyword}
+        startTransition={startTransition}
+        type="search"
+      />
+      <Results keyword={keyword} isPending={isPending} />
+      <NavBar type="검색" />
+    </PageLayout>
+  );
+}
+...
+
+search: (
+      <>
+        <h2 className="sr-only">검색창</h2>
+        <HeaderUI>
+          <button onClick={() => navigate(-1)}>
+            <img src={backImage} alt="뒤로 가기" />
+          </button>
+          <SearchDiv>
+            <HeaderInput
+              onKeyUp={(e) => {
+                startTransition(() => {
+                  setKeyword(e.target.value);
+                });
+              }}
+              placeholder="계정 검색"
+            />
+            <button
+              onClick={(e) => {
+                e.target.closest("div").childNodes[0].value = "";
+                setKeyword("");
+                //
+              }}
+              type="button"
+            >
+              <img src={cancelImage} alt="취소 버튼" />
+            </button>
+          </SearchDiv>
+        </HeaderUI>
+      </>
+    )
+```
+
+<br/>
+<p align="right"><a href="#top">(⬆️ Top)</a></p>
