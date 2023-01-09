@@ -65,113 +65,116 @@
 
 ## 3. 프로젝트 구조
 ```
+
 📦 project-sns-react🐶😺
-├─ .eslintrc.json
-├─ .github
-│  ├─ ISSUE_TEMPLATE
-│  └─ PULL_REQUEST_TEMPLATE
-├─ .gitignore
-├─ .gitmessage.txt
-├─ .prettierignore
-├─ .prettierrc.json
-├─ README.md
-├─ package-lock.json
-├─ package.json
-├─ public
-└─ src
-   ├─ App.js
-   ├─ assets
-   │  └─ image
-   ├─ src
-   │  ├─ common
-   │  │  ├─ Card.js
-   │  │  ├─ Cards.js
-   │  │  ├─ Logo.js
-   │  │  ├─ Modal.js
-   │  │  ├─ Notice.js
-   │  │  ├─ ProfileSetting.js
-   │  │  └─ SplashScreen.js
-   │  ├─ follow
-   │  │  ├─ FollowersCard.js
-   │  │  ├─ FollowersCards.js
-   │  │  ├─ FollowingsCard.js
-   │  │  └─ FollowingsCards.js
-   │  ├─ home
-   │  │  ├─ EmptyFeed.js
-   │  │  ├─ Feeds.js
-   │  │  ├─ Loading.js
-   │  │  └─ PostImage.js
-   │  ├─ login
-   │  │  ├─ Form.js
-   │  │  ├─ Login.js
-   │  │  └─ Welcome.js
-   │  ├─ post
-   │  │  ├─ Comment.js
-   │  │  ├─ Comments.js
-   │  │  ├─ Detail.js
-   │  │  ├─ Dialog.js
-   │  │  └─ Writing.js
-   │  ├─ profile
-   │  │  ├─ GridCard.js
-   │  │  ├─ GridCards.js
-   │  │  ├─ MyProfileButton.js
-   │  │  ├─ ProfileInformation.js
-   │  │  └─ SortButtons.js
-   │  ├─ search
-   │  │  ├─ Result.js
-   │  │  └─ Results.js
-   │  ├─ style
-   │  │  ├─ Button.js
-   │  │  ├─ GlobalStyle.js
-   │  │  ├─ Header.js
-   │  │  ├─ NavBar.js
-   │  │  ├─ PageLayout.js
-   │  │  ├─ follow
-   │  │  │  ├─ FollowButton.js
-   │  │  │  └─ FollowCancelButton.js
-   │  │  ├─ form
-   │  │  │  ├─ ErrorMessageP.js
-   │  │  │  ├─ LoginButton.js
-   │  │  │  ├─ LoginForm.js
-   │  │  │  ├─ LoginInput.js
-   │  │  │  ├─ SignUpButton.js
-   │  │  │  └─ TitleH2.js
-   │  │  └─ profile
-   │  │     ├─ FollowButton.js
-   │  │     ├─ FollowCountDiv.js
-   │  │     ├─ FollowCountP.js
-   │  │     └─ FollowCountSpan.js
-   │  └─ upload
-   │     ├─ ImageUpload.js
-   │     ├─ Posting.js
-   │     └─ TextUpload.js
-   ├─ hooks
-   │  ├─ useFetch.js
-   │  └─ useInput.js
-   ├─ index.css
-   ├─ index.js
-   ├─ pages
-   │  ├─ ErrorPage.js
-   │  ├─ FollowersPage.js
-   │  ├─ FollowingsPage.js
-   │  ├─ HomePage.js
-   │  ├─ LoginPage.js
-   │  ├─ PostPage.js
-   │  ├─ ProfileEditPage.js
-   │  ├─ ProfilePage.js
-   │  ├─ SearchPage.js
-   │  └─ UploadPage.js
-   ├─ reportWebVitals.js
-   ├─ routes
-   │  └─ Router.js
-   └─ utils
-      ├─ api.js
-      ├─ postData.js
-      └─ validate.js
+.eslintrc.json
+.github
+│  ├─ ISSUE_TEMPLATE
+│  └─ PULL_REQUEST_TEMPLATE
+├─ .gitignore
+├─ .gitmessage.txt
+├─ .prettierignore
+├─ .prettierrc.json
+├─ README.md
+├─ package-lock.json
+├─ package.json
+├─ public
+│  └─ index.htm
+└─ src
+   ├─ App.js
+   ├─ assets
+   │  └─ image
+   ├─ components
+   │  ├─ common
+   │  │  ├─ Card.js
+   │  │  ├─ Cards.js
+   │  │  ├─ Logo.js
+   │  │  ├─ Modal.js
+   │  │  ├─ Notice.js
+   │  │  ├─ ProfileSetting.js
+   │  │  └─ SplashScreen.js
+   │  ├─ follow
+   │  │  ├─ FollowersCard.js
+   │  │  ├─ FollowersCards.js
+   │  │  ├─ FollowingsCard.js
+   │  │  └─ FollowingsCards.js
+   │  ├─ home
+   │  │  ├─ EmptyFeed.js
+   │  │  ├─ Feeds.js
+   │  │  ├─ Loading.js
+   │  │  └─ PostImage.js
+   │  ├─ login
+   │  │  ├─ Form.js
+   │  │  ├─ Login.js
+   │  │  └─ Welcome.js
+   │  ├─ post
+   │  │  ├─ Comment.js
+   │  │  ├─ Comments.js
+   │  │  ├─ Detail.js
+   │  │  ├─ Dialog.js
+   │  │  └─ Writing.js
+   │  ├─ profile
+   │  │  ├─ GridCard.js
+   │  │  ├─ GridCards.js
+   │  │  ├─ MyProfileButton.js
+   │  │  ├─ ProfileInformation.js
+   │  │  └─ SortButtons.js
+   │  ├─ search
+   │  │  ├─ Result.js
+   │  │  └─ Results.js
+   │  ├─ style
+   │  │  ├─ Button.js
+   │  │  ├─ GlobalStyle.js
+   │  │  ├─ Header.js
+   │  │  ├─ NavBar.js
+   │  │  ├─ PageLayout.js
+   │  │  ├─ follow
+   │  │  │  ├─ FollowButton.js
+   │  │  │  └─ FollowCancelButton.js
+   │  │  ├─ form
+   │  │  │  ├─ ErrorMessageP.js
+   │  │  │  ├─ LoginButton.js
+   │  │  │  ├─ LoginForm.js
+   │  │  │  ├─ LoginInput.js
+   │  │  │  ├─ SignUpButton.js
+   │  │  │  └─ TitleH2.js
+   │  │  └─ profile
+   │  │     ├─ FollowButton.js
+   │  │     ├─ FollowCountDiv.js
+   │  │     ├─ FollowCountP.js
+   │  │     └─ FollowCountSpan.js
+   │  └─ upload
+   │     ├─ ImageUpload.js
+   │     ├─ Posting.js
+   │     └─ TextUpload.js
+   ├─ hooks
+   │  ├─ useFetch.js
+   │  └─ useInput.js
+   ├─ index.css
+   ├─ index.js
+   ├─ pages
+   │  ├─ ErrorPage.js
+   │  ├─ FollowersPage.js
+   │  ├─ FollowingsPage.js
+   │  ├─ HomePage.js
+   │  ├─ LoginPage.js
+   │  ├─ PostPage.js
+   │  ├─ ProfileEditPage.js
+   │  ├─ ProfilePage.js
+   │  ├─ SearchPage.js
+   │  └─ UploadPage.js
+   ├─ reportWebVitals.js
+   ├─ routes
+   │  └─ Router.js
+   └─ utils
+      ├─ api.js
+      ├─ postData.js
+      └─ validate.js
 ```
 
 ## 4. 역할 분담
-<img width="800" alt="역할분담" src="https://user-images.githubusercontent.com/101047198/210616151-e84c6bee-16f1-4bbc-8f8c-bebb3cda16dd.png">
+<img width="800" alt="역할분담" src="https://user-images.githubusercontent.com/74497080/211231655-1ecad753-e069-41e9-8f1f-5f2205c7c358.png">
+
 
 🛠 공통 담당
 * 로그인 페이지, 회원가입 페이지
@@ -196,7 +199,7 @@
 
 * `GitHub Issue` : 각자 맡은 업무를 이슈 템플릿에 체크리스트 형식으로 공유했습니다. 
 * `Kanban Board`: 전체 현황을 공유하면서 남은 과업을 체크했습니다.
-* `GitHub Wiki` : 회의와 컨벤션을 기록하고 
+* `GitHub Wiki` : 회의와 컨벤션을 기록하고 요점노트를 기록하여 공유하였습니다.
 * `Gather Town` : 원활한 의사소통을 위해 게더타운에서 영상 및 음성 통화를 적극 활용했습니다.
 
 
