@@ -323,7 +323,9 @@
 |:-:|:-:|
 |<img width="390px;" src="https://user-images.githubusercontent.com/74497080/211334737-a8e83dea-814c-4671-a658-b9ca01b2e7bb.gif">|<img width="390px;" src="https://user-images.githubusercontent.com/74497080/211366355-8c46972a-b114-480d-8f80-f9a6d2987ff7.gif">|
 
-## 2) 프로필
+<br/>
+
+### 2) 프로필
 |🔗 [마이 프로필 페이지](https://github.com/13oosters/project-sns-react/wiki/%F0%9F%93%83-%ED%8E%98%EC%9D%B4%EC%A7%80-%EC%83%81%EC%84%B8-%EC%84%A4%EB%AA%85#-%EB%A7%88%EC%9D%B4-%ED%94%84%EB%A1%9C%ED%95%84-%ED%8E%98%EC%9D%B4%EC%A7%80)|🔗 [유저 프로필 페이지](https://github.com/13oosters/project-sns-react/wiki/%F0%9F%93%83-%ED%8E%98%EC%9D%B4%EC%A7%80-%EC%83%81%EC%84%B8-%EC%84%A4%EB%AA%85#-%EC%9C%A0%EC%A0%80-%ED%94%84%EB%A1%9C%ED%95%84-%ED%8E%98%EC%9D%B4%EC%A7%80)|🔗 [팔로워 페이지 & 팔로잉 페이지](https://github.com/13oosters/project-sns-react/wiki/%F0%9F%93%83-%ED%8E%98%EC%9D%B4%EC%A7%80-%EC%83%81%EC%84%B8-%EC%84%A4%EB%AA%85#-%ED%8C%94%EB%A1%9C%EC%9B%8C-%EB%AA%A9%EB%A1%9D-%ED%8E%98%EC%9D%B4%EC%A7%80-%ED%8C%94%EB%A1%9C%EC%9E%89-%EB%AA%A9%EB%A1%9D-%ED%8E%98%EC%9D%B4%EC%A7%80)
 |:-:|:-:|:-:|
 |<img width="390px;" src="https://user-images.githubusercontent.com/74497080/211343502-eec55356-732a-468d-acfe-a5b0fd5dff74.gif">|<img width="390px;" src="https://user-images.githubusercontent.com/74497080/211343671-4ae04603-6ce4-462c-8096-c880d2865976.gif">|<img width="390px;" src="https://user-images.githubusercontent.com/74497080/211344741-9f89e9f7-3c3a-4e69-85b2-146da75ed43e.gif">
@@ -332,7 +334,9 @@
 |:-:|:-:|
 |<img width="390px;" src="https://user-images.githubusercontent.com/74497080/211346281-b07a3eec-b0a6-4fbd-9f42-92bd56caf0f6.gif">|<img width="390px;" src="https://user-images.githubusercontent.com/74497080/211346448-fe791b4c-6e39-4b99-a4d0-224a5e9493b5.gif">|
 
-## 3) 게시글
+<br/>
+
+### 3) 게시글
 |🔗 [게시글 작성 페이지](https://github.com/13oosters/project-sns-react/wiki/%F0%9F%93%83-%ED%8E%98%EC%9D%B4%EC%A7%80-%EC%83%81%EC%84%B8-%EC%84%A4%EB%AA%85#-%EA%B2%8C%EC%8B%9C%EA%B8%80-%EC%9E%91%EC%84%B1-%ED%8E%98%EC%9D%B4%EC%A7%80)|🔗 [게시글 상세 페이지](https://github.com/13oosters/project-sns-react/wiki/%F0%9F%93%83-%ED%8E%98%EC%9D%B4%EC%A7%80-%EC%83%81%EC%84%B8-%EC%84%A4%EB%AA%85#-%EA%B2%8C%EC%8B%9C%EA%B8%80-%EC%83%81%EC%84%B8-%ED%8E%98%EC%9D%B4%EC%A7%80)|🔗 [홈 페이지 모달](https://github.com/13oosters/project-sns-react/wiki/%F0%9F%93%83-%ED%8E%98%EC%9D%B4%EC%A7%80-%EC%83%81%EC%84%B8-%EC%84%A4%EB%AA%85#1-%EA%B2%8C%EC%8B%9C%EA%B8%80-%EB%AA%A8%EB%8B%AC)|
 |:-:|:-:|:-:|
 |<img width="390px;" src="https://user-images.githubusercontent.com/74497080/211337897-d2b2cfa7-f982-4442-bde6-9ccdc411bd7f.gif">|<img width="390px;" src="https://user-images.githubusercontent.com/74497080/211341344-d06b0b15-8176-4b38-b755-be2a09173acd.gif">|<img width="390px;" src="https://user-images.githubusercontent.com/74497080/211337883-41868ab9-833b-4466-af23-742bff7a99f5.gif">|
@@ -347,7 +351,6 @@
 <p align="right"><a href="#top">(⬆️ Top)</a></p>
 
 ## <span id="issue">9. 핵심 기능</span>
-<br/>
 
 ### [Axios 모듈화]
 
