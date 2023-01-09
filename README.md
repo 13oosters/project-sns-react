@@ -15,7 +15,7 @@
 * 사용자들은 자신의 반려동물 사진을 기록하고 자랑할 수 있습니다.
 * 다른 계정을 팔로우해서 팔로우한 사용자들의 게시물을 피드에서 한 번에 볼 수 있고, 댓글과 좋아요를 통해 서로 소통을 할 수 있습니다.
 
-</br>
+<br/>
 
 <details>
 <summary>목차</summary>
@@ -23,7 +23,7 @@
 
 1. [팀 소개](#teamintro)
 2. [기술 및 개발 환경](#stack)
-3. [개발 기간 및 작업 관리](#task)
+3. [개발 기간 및 작업 문화](#task)
 4. [주요 기능](#mainfeat)
 5. [프로젝트 구조 및 포인트](#structure)
 6. [역할분담](#role)
@@ -31,10 +31,9 @@
 8. [페이지 기능](#pageinfo)
 9. [개발하며 겪은 이슈](#issue)
 9. [느낀점](#impression)
-<br/>
-
 </div>
 </details>
+<br/>
 
 ## <span id="teamintro">1. 팀 소개</span>
 ### 🚀 13oosters팀을 소개합니다!
@@ -49,6 +48,7 @@
 |                 **blog**: [jxxunnn](https://velog.io/@jxxunnn) </br> **github**: [Jxxunnn](https://github.com/Jxxunnn)                 |      **github**: [TommyKim97](https://github.com/TommyKim97)       |                  **blog**: [yubmun](https://yubmun.tistory.com/) </br> **github**: [yubmun](https://github.com/yubmun)                  |       **github**: [h12j21-star](https://github.com/h12j21-star)        |
 | ![FrontEnd](https://img.shields.io/badge/FrontEnd-3f97fb)</br> ![Team%20Leader](https://img.shields.io/badge/-Team%20leader-yellow) </br> ![Development%20Leader](https://img.shields.io/badge/-Development%20leader-green) | ![FrontEnd](https://img.shields.io/badge/FrontEnd-3f97fb)</br> ![Design%20Leader](https://img.shields.io/badge/-Design%20leader-purple) | ![FrontEnd](https://img.shields.io/badge/FrontEnd-3f97fb)</br> ![WorkManagement](https://img.shields.io/badge/-Work%20Management%20leader-f67280) | ![FrontEnd](https://img.shields.io/badge/FrontEnd-3f97fb)</br> ![Communication%20Leader](https://img.shields.io/badge/-Comunication%20Leader-orange) |
 
+<br/>
 <p align="right"><a href="#top">(⬆️ Top)</a></p>
 
 ## <span id="stack">2. 기술 및 개발 환경</span>
@@ -59,7 +59,7 @@
 <br/>
 
 ### [개발 환경]
-<img src="https://img.shields.io/badge/Git-F05032?style=flat-square&logo=Git&logoColor=white"/> <img src="https://img.shields.io/badge/GitHub-181717?style=flat-square&logo=GitHub&logoColor=white"/> <img src="https://img.shields.io/badge/Figma-F24E1E?style=flat-square&logo=Figma&logoColor=white"/> <img src="https://img.shields.io/badge/Notion-000000?style=flat-square&logo=Notion&logoColor=white"/> <img src="https://img.shields.io/badge/Discord-5865F2?style=flat-square&logo=Discord&logoColor=white"/> <img src="https://img.shields.io/badge/GatherTown-2145ff?style=flat-square&logo=GatherTown&logoColor=white"/>
+<img src="https://img.shields.io/badge/Git-F05032?style=flat-square&logo=Git&logoColor=white"/> <img src="https://img.shields.io/badge/GitHub-181717?style=flat-square&logo=GitHub&logoColor=white"/> <img src="https://img.shields.io/badge/Figma-F24E1E?style=flat-square&logo=Figma&logoColor=white"/> <img src="https://img.shields.io/badge/Notion-000000?style=flat-square&logo=Notion&logoColor=white"/> <img src="https://img.shields.io/badge/Discord-5865F2?style=flat-square&logo=Discord&logoColor=white"/> <img src="https://img.shields.io/badge/Gather Town-2145ff?style=flat-square&logo=Gather Town&logoColor=white"/>
 - [GitHub Projects](https://github.com/orgs/13oosters/projects/8) : 진행상황을 page별로 나누어 GitHub Issues에서 각자 맡은 업무를 이슈 템플릿에 체크리스트 형식으로 공유했습니다.
 - [GitHub Wiki](https://github.com/13oosters/project-sns-react/wiki) : 회의와 컨벤션을 기록하고 요점노트를 기록하여 공유하였습니다. 
 - [Figma](https://www.figma.com/file/j56NBuCOtyW0wQrlCT2S7L/13oosters?node-id=39%3A1814&t=s4MlC5rOceTiP6e9-1) : 동시 접속하여 함께 UI, 색상 디자인 상의를 진행했습니다.
@@ -69,6 +69,7 @@
  ### [git 흐름 전략]
 페이지 별로 기능을 담당하여 프로젝트를 진행하고자 [🔗 Git Flow 방식 ](https://github.com/13oosters/project-sns-react/wiki/%E2%9C%85-%EA%B9%83-%ED%98%91%EC%97%85-%EB%B0%A9%EC%8B%9D#git-%ED%98%91%EC%97%85-%EA%B4%80%EB%A0%A8-%EC%82%AC)을 사용했습니다.
 페이지 별 브랜치를 만들고 각자 작업 브랜치를 따로 생성하여, 페이지 브랜치로 PR 및 Merge를 진행합니다.
+<br/>
 <br/>
 
  ### [커밋 컨벤션]
@@ -124,19 +125,31 @@
  ### [배포 서비스]
  <img src="https://img.shields.io/badge/Netlify-00C7B7?style=flat-square&logo=Netlify&logoColor=white"/>
  
+ <br/>
  <p align="right"><a href="#top">(⬆️ Top)</a></p>
 
-## <span id='task'>3. 개발 기간 및 작업 관리</span>
+## <span id='task'>3. 개발 기간 및 작업 </span>
 ### [프로젝트 기간] : 2022.12.09 ~ 2023. 01. 05
-</br>
-### [작업 관리]
-* [GitHub Project]
+<br/>
+
+### [작업 문화]
+#### 📍 GitHub Project
 각자 맡은 업무를 이슈 템플릿에 체크리스트 형식으로 공유했습니다. 
 ![image](https://user-images.githubusercontent.com/74497080/211240942-f8e99092-9c62-4a1e-9c38-9ffb2b22a5bf.png)
-* [GitHub Wiki]
-회의와 컨벤션을 기록하고 요점노트를 기록하여 공유하였습니다.
-* ![image](https://user-images.githubusercontent.com/74497080/211241048-4d0e4ce5-4503-41a1-a162-846739d29542.png)
-</br>
+<br/>
+
+#### 📍 GitHub Wiki
+- 팀 노션에 동시 접속하여 [🔗 주간 회의](https://github.com/13oosters/project-sns-react/wiki/%F0%9F%93%9C-%ED%9A%8C%EC%9D%98%EB%A1%9D)를 진행하고, GitHub Wiki에 회의 내용을 정리해 업로드했습니다.
+- 프로젝트에서 사용하는 Styled-Components의 공식문서를 번역하며 [🔗 공부 내용](https://github.com/13oosters/project-sns-react/wiki/%F0%9F%93%96-Styled-components)을 기록하여 공유하였습니다.
+
+![image](https://user-images.githubusercontent.com/74497080/211241048-4d0e4ce5-4503-41a1-a162-846739d29542.png)
+<br/>
+
+#### 📍 Gather Town & VSCode Live Share
+- 게더 타운의 가상 팀 공간을 활용하여 협업을 진행했습니다. 페어 프로그래밍을 진행하거나 전체 상의가 필요한 작업을 할 때, 게더 타운의 화면 공유와 음성 통화 기능과  VSCode의 Live Share 확장 기능을 적극 활용했습니다.
+<img width="600" src="https://user-images.githubusercontent.com/101047198/211275562-6b91d6ba-defe-4192-b8a9-9aa81ed8b557.png">
+<img width="600" src="https://user-images.githubusercontent.com/101047198/211275871-10528df4-ee59-4765-a4df-890e78a139ff.png">
+
 <p align="right"><a href="#top">(⬆️ Top)</a></p>
 
 ## <span id='mainfeat'>4. 주요 기능</span>
@@ -152,7 +165,8 @@
 ### 🖼 게시글
 * 게시글 수정, 삭제
 * 댓글 게시, 삭제
-### 👨🏿‍🤝‍👨🏼 프로필
+* 게시글/댓글 신고 
+### 👨🏿‍🤝‍👨🏼프로필
 * 프로필 수정
 * 팔로우 / 팔로잉
 * 그리드, 리스트형 게시글
