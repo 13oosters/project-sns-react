@@ -62,7 +62,10 @@
 </br>
 
 ### 개발 환경 
-
+<img src="https://img.shields.io/badge/Git-F05032?style=flat-square&logo=Git&logoColor=white"/> <img src="https://img.shields.io/badge/GitHub-181717?style=flat-square&logo=GitHub&logoColor=white"/> <img src="https://img.shields.io/badge/Notion-000000?style=flat-square&logo=Notion&logoColor=white"/> <img src="https://img.shields.io/badge/Figma-F24E1E?style=flat-square&logo=Figma&logoColor=white"/> <img src="https://img.shields.io/badge/Discord-5865F2?style=flat-square&logo=Discord&logoColor=white"/>
+- [GitHub Projects](https://github.com/orgs/TeamGaebaljjang/projects/2) : 진행상황을 page별로 나누어 GitHub Issues관리 
+- [Notion](링크) : 회의록, 정보 공유 
+- [Figma](https://www.figma.com/file/QZ6SyhBxDVNi3nUNgkDAoU/%ED%8F%AC%ED%86%A0%EB%A0%88%EC%8B%9C%ED%94%BC?node-id=0%3A1&t=hboGhZFHnTvuFo3B-0) : UI, 색상 디자인 상의 진행
 ## 3. 프로젝트 구조
 ```
 
