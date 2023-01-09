@@ -62,6 +62,7 @@
 </br>
 
 ### 개발 환경 
+
 <img src="https://img.shields.io/badge/Git-F05032?style=flat-square&logo=Git&logoColor=white"/> <img src="https://img.shields.io/badge/GitHub-181717?style=flat-square&logo=GitHub&logoColor=white"/> 
 <img src="https://img.shields.io/badge/Figma-F24E1E?style=flat-square&logo=Figma&logoColor=white"/>
 <img src="https://img.shields.io/badge/Notion-000000?style=flat-square&logo=Notion&logoColor=white"/>  
@@ -76,8 +77,37 @@
 * `Kanban Board`: 전체 현황을 공유하면서 남은 과업을 체크했습니다.
 * `GitHub Wiki` : 회의와 컨벤션을 기록하고 요점노트를 기록하여 공유하였습니다.
 * `Gather Town` : 원활한 의사소통을 위해 게더타운에서 영상 및 음성 통화를 적극 활용했습니다.
+</br>
 
-## 3. 프로젝트 구조
+ ### 배포 
+ <img src="https://img.shields.io/badge/Netlify-00C7B7?style=flat-square&logo=Netlify&logoColor=white"/>
+ 
+ ### git 협업
+ 
+[ 🔗깃 협업 방식 ](https://github.com/13oosters/project-sns-react/wiki/%E2%9C%85-%EA%B9%83-%ED%98%91%EC%97%85-%EB%B0%A9%EC%8B%9D#git-%ED%98%91%EC%97%85-%EA%B4%80%EB%A0%A8-%EC%82%AC)
+
+ ### 커밋 컨벤션
+ 
+ [ 🔗커밋 컨벤션 ](https://github.com/13oosters/project-sns-react/wiki/%E2%9C%85-%EC%BB%A4%EB%B0%8B-%EC%BB%A8%EB%B2%A4%EC%85%98)
+ 
+ ### 코드 컨벤션
+  [ 🔗 코드 컨벤션 ](https://github.com/13oosters/project-sns-react/wiki/%E2%9C%85-%EC%BD%94%EB%93%9C-%EC%BB%A8%EB%B2%A4%EC%85%98)
+</br>
+
+## <span id='mainfeat'>3. 개발 기간 및 작업 관리</span>
+* ### 프로젝트 기간 : 2022.12.09 ~ 2023. 01. 05
+* ### 작업 관리 : git project, git wiki
+* ### git project 
+각자 맡은 업무를 이슈 템플릿에 체크리스트 형식으로 공유했습니다. 
+![image](https://user-images.githubusercontent.com/74497080/211240942-f8e99092-9c62-4a1e-9c38-9ffb2b22a5bf.png)
+* ### git wiki
+회의와 컨벤션을 기록하고 요점노트를 기록하여 공유하였습니다.
+* ![image](https://user-images.githubusercontent.com/74497080/211241048-4d0e4ce5-4503-41a1-a162-846739d29542.png)
+
+## <span id='smainfeat'>4. 주요 기능</span>
+
+## <span id='structure'>5. 프로젝트 구조 및 포인트</span>
+
 ```
 
 📦 project-sns-react🐶😺
@@ -93,7 +123,7 @@
 ├─ package-lock.json
 ├─ package.json
 ├─ public
-│  └─ index.htm
+│  └─ index.html
 └─ src
    ├─ App.js
    ├─ assets
@@ -185,8 +215,7 @@
       ├─ postData.js
       └─ validate.js
 ```
-
-## 4. 역할 분담
+## <span id='role'>6. 역할 분담</span>
 <img width="800" alt="역할분담" src="https://user-images.githubusercontent.com/74497080/211231655-1ecad753-e069-41e9-8f1f-5f2205c7c358.png">
 
 
