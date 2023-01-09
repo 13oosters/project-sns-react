@@ -95,8 +95,10 @@
 </br>
 
 ## <span id='task'>3. 개발 기간 및 작업 관리</span>
-* ### 프로젝트 기간 : 2022.12.09 ~ 2023. 01. 05
-* ### 작업 관리 : git project, git wiki
+* ### 프로젝트 기간
+2022.12.09 ~ 2023. 01. 05
+* ### 작업 관리
+git project, git wiki
 * ### git project 
 각자 맡은 업무를 이슈 템플릿에 체크리스트 형식으로 공유했습니다. 
 ![image](https://user-images.githubusercontent.com/74497080/211240942-f8e99092-9c62-4a1e-9c38-9ffb2b22a5bf.png)
