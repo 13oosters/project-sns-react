@@ -27,7 +27,7 @@
 4. [주요 기능](#mainfeat)
 5. [프로젝트 구조](#structure)
 6. [역할분담](#role)
-7. [UI](#UI)
+7. [UI](#ui)
 8. [페이지 기능](#pageinfo)
 9. [핵심 기능](#issue)
 10. [느낀점](#impression)
@@ -37,12 +37,12 @@
 
 ## <span id="teamintro">1. 팀 소개</span>
 ### 🚀 13oosters팀을 소개합니다!
-안녕하세요, 저희는 4명의 Front-end 개발자로 구성된 '13oosters'팀입니다. </br>
-13이 영어 B와 비슷한 모양을 활용해 부스터즈라는 팀명을 지었습니다. boost는 신장시키다/북돋우다/격려/촉진 등의 의미를 가지고 있고, booster는 촉진제/추진로켓 등의 의미를 가지고 있습니다. 이번 프로젝트가 저희 성장의 촉진제가 되었으면 하는 마음에서 작명했습니다. 🚀🔥 
+안녕하세요, 저희는 4명의 Front-end 개발자로 구성된 **13oosters**팀입니다. </br>
+13이 영어 알파벳의 'B'와 비슷한 모양을 활용해 '부스터즈'라는 팀명을 지었습니다. boost는 신장시키다/북돋우다/격려/촉진 등의 의미를 가지고 있고, booster는 촉진제/추진로켓 등의 의미를 가지고 있습니다. 이번 프로젝트가 저희 성장의 촉진제가 되었으면 하는 마음에서 작명했습니다. 🚀🔥 
 </br>
 (멋쟁이사자처럼 프론트엔드 스쿨 3기 프로젝트 13팀입니다.)
 
-|                                                                   **👑 이준근**                                                                   |                                                                  **김소영**                                                                   |                                                                    **이준엽**                                                                     |                                                              **최현지**                                                              |
+|                                                                   **👑 이준근**                                                                   |                                                                  **🎨 김소영**                                                                   |                                                                    **💻 이준엽**                                                                     |                                                              **📜 최현지**                                                              |
 | :-----------------------------------------------------------------------------------------------------------------------------------------------: | :----------------------------------------------------------------------------------------------------------------------------------------------: | :--------------------------------------------------------------------------------------------------------------------------------------------------: | :-------------------------------------------------------------------------------------------------------------------------------------: |
 |                               <img src="https://user-images.githubusercontent.com/101047198/210518336-408da4b2-351e-4d67-86f1-91984b8fded8.jpg" height=180 width=180>                               |     <img src="https://user-images.githubusercontent.com/101047198/210600050-8aa5ffaf-9a45-48cb-acb9-f1eadee3e522.jpg" height=180 width=180>      |       <img src="https://user-images.githubusercontent.com/101047198/210518383-86070850-bb83-462b-ad7c-b8b39fec5cab.jpg" height=180 width=180>        | <img src="https://user-images.githubusercontent.com/101047198/210518408-1fca5791-254b-45e3-b4be-bc66a4130c3d.jpg" height=180 width=180> |
 |                 **blog**: [jxxunnn](https://velog.io/@jxxunnn) </br> **github**: [Jxxunnn](https://github.com/Jxxunnn)                 |      **github**: [TommyKim97](https://github.com/TommyKim97)       |                  **blog**: [yubmun](https://yubmun.tistory.com/) </br> **github**: [yubmun](https://github.com/yubmun)                  |       **github**: [h12j21-star](https://github.com/h12j21-star)        |
@@ -129,7 +129,7 @@
  <p align="right"><a href="#top">(⬆️ Top)</a></p>
 
 ## <span id='task'>3. 개발 기간 및 작업 문화 </span>
-### [프로젝트 기간] : 2022.12.09 ~ 2023. 01. 05
+### [프로젝트 기간] : 2022.12.09. ~ 2023.01.04.
 <br/>
 
 ### [작업 문화]
@@ -304,7 +304,7 @@
 <br/>
 <p align="right"><a href="#top">(⬆️ Top)</a></p>
 
-## <span id="UI">7. UI</span>
+## <span id="ui">7. UI</span>
 ![UI](https://user-images.githubusercontent.com/101047198/211323858-a72717b4-d2be-451f-8827-b3216acbad40.jpg)
 
 
@@ -321,23 +321,23 @@
 
 |🔗 [홈 페이지](https://github.com/13oosters/project-sns-react/wiki/%F0%9F%93%83-%ED%8E%98%EC%9D%B4%EC%A7%80-%EC%83%81%EC%84%B8-%EC%84%A4%EB%AA%85#-%ED%99%88-%ED%8E%98%EC%9D%B4%EC%A7%80)|🔗 [검색 페이지](https://github.com/13oosters/project-sns-react/wiki/%F0%9F%93%83-%ED%8E%98%EC%9D%B4%EC%A7%80-%EC%83%81%EC%84%B8-%EC%84%A4%EB%AA%85#-%EA%B2%80%EC%83%89-%ED%8E%98%EC%9D%B4%EC%A7%80)|
 |:-:|:-:|
-|<img width="390px;" src="https://user-images.githubusercontent.com/74497080/211334737-a8e83dea-814c-4671-a658-b9ca01b2e7bb.gif">|<img width="390px;" src="https://user-images.githubusercontent.com/74497080/211335455-8925d675-a7af-4409-ae9e-bb9e316754bf.gif">|
+|<img width="390px;" src="https://user-images.githubusercontent.com/74497080/211334737-a8e83dea-814c-4671-a658-b9ca01b2e7bb.gif">|<img width="390px;" src="https://user-images.githubusercontent.com/74497080/211366355-8c46972a-b114-480d-8f80-f9a6d2987ff7.gif">|
 
 ## 2) 프로필
 |🔗 [마이 프로필 페이지](https://github.com/13oosters/project-sns-react/wiki/%F0%9F%93%83-%ED%8E%98%EC%9D%B4%EC%A7%80-%EC%83%81%EC%84%B8-%EC%84%A4%EB%AA%85#-%EB%A7%88%EC%9D%B4-%ED%94%84%EB%A1%9C%ED%95%84-%ED%8E%98%EC%9D%B4%EC%A7%80)|🔗 [유저 프로필 페이지](https://github.com/13oosters/project-sns-react/wiki/%F0%9F%93%83-%ED%8E%98%EC%9D%B4%EC%A7%80-%EC%83%81%EC%84%B8-%EC%84%A4%EB%AA%85#-%EC%9C%A0%EC%A0%80-%ED%94%84%EB%A1%9C%ED%95%84-%ED%8E%98%EC%9D%B4%EC%A7%80)|🔗 [팔로워 페이지 & 팔로잉 페이지](https://github.com/13oosters/project-sns-react/wiki/%F0%9F%93%83-%ED%8E%98%EC%9D%B4%EC%A7%80-%EC%83%81%EC%84%B8-%EC%84%A4%EB%AA%85#-%ED%8C%94%EB%A1%9C%EC%9B%8C-%EB%AA%A9%EB%A1%9D-%ED%8E%98%EC%9D%B4%EC%A7%80-%ED%8C%94%EB%A1%9C%EC%9E%89-%EB%AA%A9%EB%A1%9D-%ED%8E%98%EC%9D%B4%EC%A7%80)
 |:-:|:-:|:-:|
 |<img width="390px;" src="https://user-images.githubusercontent.com/74497080/211343502-eec55356-732a-468d-acfe-a5b0fd5dff74.gif">|<img width="390px;" src="https://user-images.githubusercontent.com/74497080/211343671-4ae04603-6ce4-462c-8096-c880d2865976.gif">|<img width="390px;" src="https://user-images.githubusercontent.com/74497080/211344741-9f89e9f7-3c3a-4e69-85b2-146da75ed43e.gif">
 
-|🔗 [프로필 수정 페이지](https://github.com/13oosters/project-sns-react/wiki/%F0%9F%93%83-%ED%8E%98%EC%9D%B4%EC%A7%80-%EC%83%81%EC%84%B8-%EC%84%A4%EB%AA%85#-%ED%94%84%EB%A1%9C%ED%95%84-%EC%88%98%EC%A0%95-%ED%8E%98%EC%9D%B4%EC%A7%80)|🔗 [로그아웃 페이지](https://github.com/13oosters/project-sns-react/wiki/%F0%9F%93%83-%ED%8E%98%EC%9D%B4%EC%A7%80-%EC%83%81%EC%84%B8-%EC%84%A4%EB%AA%85#-%EB%A7%88%EC%9D%B4-%ED%94%84%EB%A1%9C%ED%95%84-%ED%8E%98%EC%9D%B4%EC%A7%80)
+|🔗 [프로필 수정 페이지](https://github.com/13oosters/project-sns-react/wiki/%F0%9F%93%83-%ED%8E%98%EC%9D%B4%EC%A7%80-%EC%83%81%EC%84%B8-%EC%84%A4%EB%AA%85#-%ED%94%84%EB%A1%9C%ED%95%84-%EC%88%98%EC%A0%95-%ED%8E%98%EC%9D%B4%EC%A7%80)|🔗 [로그아웃 모달](https://github.com/13oosters/project-sns-react/wiki/%F0%9F%93%83-%ED%8E%98%EC%9D%B4%EC%A7%80-%EC%83%81%EC%84%B8-%EC%84%A4%EB%AA%85#-%EB%A7%88%EC%9D%B4-%ED%94%84%EB%A1%9C%ED%95%84-%ED%8E%98%EC%9D%B4%EC%A7%80)
 |:-:|:-:|
 |<img width="390px;" src="https://user-images.githubusercontent.com/74497080/211346281-b07a3eec-b0a6-4fbd-9f42-92bd56caf0f6.gif">|<img width="390px;" src="https://user-images.githubusercontent.com/74497080/211346448-fe791b4c-6e39-4b99-a4d0-224a5e9493b5.gif">|
 
 ## 3) 게시글
-|🔗 [게시글 작성 페이지](https://github.com/13oosters/project-sns-react/wiki/%F0%9F%93%83-%ED%8E%98%EC%9D%B4%EC%A7%80-%EC%83%81%EC%84%B8-%EC%84%A4%EB%AA%85#-%EA%B2%8C%EC%8B%9C%EA%B8%80-%EC%9E%91%EC%84%B1-%ED%8E%98%EC%9D%B4%EC%A7%80)|🔗 [게시물 상세 페이지](https://github.com/13oosters/project-sns-react/wiki/%F0%9F%93%83-%ED%8E%98%EC%9D%B4%EC%A7%80-%EC%83%81%EC%84%B8-%EC%84%A4%EB%AA%85#-%EA%B2%8C%EC%8B%9C%EA%B8%80-%EC%83%81%EC%84%B8-%ED%8E%98%EC%9D%B4%EC%A7%80)|🔗 [홈 페이지 모달](https://github.com/13oosters/project-sns-react/wiki/%F0%9F%93%83-%ED%8E%98%EC%9D%B4%EC%A7%80-%EC%83%81%EC%84%B8-%EC%84%A4%EB%AA%85#1-%EA%B2%8C%EC%8B%9C%EA%B8%80-%EB%AA%A8%EB%8B%AC)|
+|🔗 [게시글 작성 페이지](https://github.com/13oosters/project-sns-react/wiki/%F0%9F%93%83-%ED%8E%98%EC%9D%B4%EC%A7%80-%EC%83%81%EC%84%B8-%EC%84%A4%EB%AA%85#-%EA%B2%8C%EC%8B%9C%EA%B8%80-%EC%9E%91%EC%84%B1-%ED%8E%98%EC%9D%B4%EC%A7%80)|🔗 [게시글 상세 페이지](https://github.com/13oosters/project-sns-react/wiki/%F0%9F%93%83-%ED%8E%98%EC%9D%B4%EC%A7%80-%EC%83%81%EC%84%B8-%EC%84%A4%EB%AA%85#-%EA%B2%8C%EC%8B%9C%EA%B8%80-%EC%83%81%EC%84%B8-%ED%8E%98%EC%9D%B4%EC%A7%80)|🔗 [홈 페이지 모달](https://github.com/13oosters/project-sns-react/wiki/%F0%9F%93%83-%ED%8E%98%EC%9D%B4%EC%A7%80-%EC%83%81%EC%84%B8-%EC%84%A4%EB%AA%85#1-%EA%B2%8C%EC%8B%9C%EA%B8%80-%EB%AA%A8%EB%8B%AC)|
 |:-:|:-:|:-:|
 |<img width="390px;" src="https://user-images.githubusercontent.com/74497080/211337897-d2b2cfa7-f982-4442-bde6-9ccdc411bd7f.gif">|<img width="390px;" src="https://user-images.githubusercontent.com/74497080/211341344-d06b0b15-8176-4b38-b755-be2a09173acd.gif">|<img width="390px;" src="https://user-images.githubusercontent.com/74497080/211337883-41868ab9-833b-4466-af23-742bff7a99f5.gif">|
 
-|🔗 [게시글 수정 or 신고 페이지](https://github.com/13oosters/project-sns-react/wiki/%F0%9F%93%83-%ED%8E%98%EC%9D%B4%EC%A7%80-%EC%83%81%EC%84%B8-%EC%84%A4%EB%AA%85#1-%EA%B2%8C%EC%8B%9C%EA%B8%80-%EB%AA%A8%EB%8B%AC)|🔗 [댓글 삭제 or 신고 페이지](https://github.com/13oosters/project-sns-react/wiki/%F0%9F%93%83-%ED%8E%98%EC%9D%B4%EC%A7%80-%EC%83%81%EC%84%B8-%EC%84%A4%EB%AA%85#2-%EB%8C%93%EA%B8%80-%EB%AA%A8%EB%8B%AC)|
+|🔗 [게시글 수정 / 신고 모달](https://github.com/13oosters/project-sns-react/wiki/%F0%9F%93%83-%ED%8E%98%EC%9D%B4%EC%A7%80-%EC%83%81%EC%84%B8-%EC%84%A4%EB%AA%85#1-%EA%B2%8C%EC%8B%9C%EA%B8%80-%EB%AA%A8%EB%8B%AC)|🔗 [댓글 삭제 / 신고 모달](https://github.com/13oosters/project-sns-react/wiki/%F0%9F%93%83-%ED%8E%98%EC%9D%B4%EC%A7%80-%EC%83%81%EC%84%B8-%EC%84%A4%EB%AA%85#2-%EB%8C%93%EA%B8%80-%EB%AA%A8%EB%8B%AC)|
 |:-:|:-:|
 |<img width="390px;" src="https://user-images.githubusercontent.com/74497080/211342015-3ef4d22b-5ebd-433c-a17b-540c1a74cc27.gif">|<img width="390px;" src="https://user-images.githubusercontent.com/74497080/211342483-ee82500c-1ed5-4b2b-9868-f7e6c9b67eb8.gif">|
 
@@ -418,7 +418,7 @@ export default function Header({
 
 ### [react-hook-form]
 
-로그인 페이지 / 회원가입 페이지에서 유효성 검사를 `react-hook-form` 라이브러리를 사용 했습니다. 입력 값 존재 여부, 포커스 등의 유틸을 지원 하기 때문에 기능 구현의 리소스를 절약할 수 있었습니다.
+로그인 페이지 / 회원가입 페이지에서 유효성 검사를 `react-hook-form` 라이브러리를 사용했습니다. 입력 값 존재 여부, 포커스 등의 유틸을 지원하기 때문에 기능 구현의 리소스를 절약할 수 있었습니다.
 
 ```
  const {
@@ -446,8 +446,8 @@ export default function Header({
 
 ### [검색 페이지 렌더링 성능 최적화]
 
-검색페이지에서는 Blocking rendering을 해결하여 성능을 최적화 하는 것이 중요하다고 생각했습니다.
-이를 위해 useTransition 훅을 사용하였습니다.
+검색 페이지에서는 Blocking rendering을 해결하여 성능을 최적화하는 것이 중요하다고 생각했습니다.
+이를 위해 `useTransition` 훅을 사용하였습니다.
 
 #### 📍 useTransition 특징
 *  useTransition은 상태변화의 우선순위를 지정해줍니다.
@@ -511,11 +511,20 @@ search: (
 
 
 ## <span id="impression">10. 느낀 점</span>
-🐱 **준근** : "이번 프로젝트를 통해 학습하고 성장하자는 공동의 목표로 의미있는 과정을 남긴 것 같아 뿌듯합니다. 개발하는 재미를 다시금 느끼게 해준 팀원들 감사합니다."
-🐶 **소영** : "정말 멋지고 좋은 팀원 분들을 만나서 많은 것들을 배울 수 있었던 감사한 시간이었습니다. 함께 프로젝트 하게 되어 영광이었고, 같이 즐거웠던 일화들도 소중한 기억으로 남을 것 같습니다. 🚀💗" 
-🐰 **현지** : "이번 프로젝트를 통해 자신감을 많이 얻었고 협업과정과 커뮤니케이션을 배울 수 있었습니다. 다들 정말 감사하고 수고하셨습니다~!💜"
-🐹 **준엽** : "여러모로 부족한 상태로 프로젝트를 시작했지만, 팀원분들의 유쾌한 응원과 기술 구현에 대한 지식공유를 해주셔서 여러 경험들을 할 수 있는 행복한 시간이었습니다. 정말 고생많으셨습니다~!"
 
+### 🐱 준근 
+- 이번 프로젝트를 통해 학습하고 성장하자는 공동의 목표로 의미있는 과정을 남긴 것 같아 뿌듯합니다. 개발하는 재미를 다시금 느끼게 해준 팀원들 감사합니다.
+
+### 🐶 소영 
+- 정말 멋지고 좋은 팀원 분들을 만나서 많은 것들을 배울 수 있었던 감사한 시간이었습니다. 함께 프로젝트 하게 되어 영광이었고, 같이 즐거웠던 일화들도 소중한 기억으로 남을 것 같습니다. 🚀💗
+
+### 🐹 준엽 
+- 여러모로 부족한 상태로 프로젝트를 시작했지만, 팀원분들의 유쾌한 응원과 기술 구현에 대한 지식공유를 해주셔서 여러 경험들을 할 수 있는 행복한 시간이었습니다. 정말 고생많으셨습니다~!
+### 🐰 현지 
+- 이번 프로젝트를 통해 자신감을 많이 얻었고 협업과정과 커뮤니케이션을 배울 수 있었습니다. 다들 정말 감사하고 수고하셨습니다~!💜
+
+
+<br/>
 
 <br/>
 <p align="right"><a href="#top">(⬆️ Top)</a></p>
