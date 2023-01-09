@@ -351,7 +351,7 @@
 
 ### [Axios 모듈화]
 
-axios로 서버와 통신하는 모든 부분에서 서버 주소와 코드가 반복되어 이를 줄이기 위해 custom axios를 사용하였습니다.
+axios로 서버와 통신하는 모든 부분에서 서버 주소와 코드가 반복되어 이를 줄이기 위해 `custom axios`를 사용하였습니다.
 
 ```
 const BASE_URL = "url";
@@ -381,7 +381,7 @@ API.interceptors.request.use(
 
 ### [Header 공통 컴포넌트 오브젝트 자료형 응용]
 
-페이지 마다존재하는 header의 구성이 비슷하여 공통컴포넌트로 만들었고, 각 페이지에 type을 지정하여 각 페이지 별로 header를 구분 하였습니다.
+페이지 마다 존재하는 header의 구성이 비슷하여 `공통 컴포넌트`로 만들었고, 각 페이지에 type을 지정하여 각 페이지 별로 header를 구분하였습니다.
 
 ```
 export default function Header({
@@ -418,7 +418,7 @@ export default function Header({
 
 ### [react-hook-form]
 
-로그인 / 회원가입 페이지에서 유효성 검사를 react-hook-form 라이브러리를 사용 했습니다. 입력 값 존재 여부, 포커스 등의 유틸을 지원 하기 때문에 기능 구현의 리소스를 절약할 수 있었습니다.
+로그인 페이지 / 회원가입 페이지에서 유효성 검사를 `react-hook-form` 라이브러리를 사용 했습니다. 입력 값 존재 여부, 포커스 등의 유틸을 지원 하기 때문에 기능 구현의 리소스를 절약할 수 있었습니다.
 
 ```
  const {
@@ -428,6 +428,7 @@ export default function Header({
     formState: { isSubmitting, errors },
     watch,
   } = useForm({ mode: "onChange" });
+  
   const checkIsValue = (e) => {
     e.target.value && watch("email") && watch("password")
       ? setIsValue(true)
@@ -445,12 +446,12 @@ export default function Header({
 
 ### [검색 페이지 렌더링 성능 최적화]
 
-검색페이지에서는 Blocking rendering을 해결하여 성능을 최적하 하는 것이 중요하다고 생각했습니다.
+검색페이지에서는 Blocking rendering을 해결하여 성능을 최적화 하는 것이 중요하다고 생각했습니다.
 이를 위해 useTransition 훅을 사용하였습니다.
 
-📍 useTransition 특징
+#### 📍 useTransition 특징
 *  useTransition은 상태변화의 우선순위를 지정해줍니다.
-*  화면을 업데이트 하눈 중에도 검색 input의 우선순위를 높여 입력이 끊기는 상황을 줄여줍니다. 
+*  화면을 업데이트 하는 중에도 검색 input의 우선순위를 높여 입력이 끊기는 상황을 줄여줍니다. 
 *  isPending의 boolean값을 이용하여 로딩중 ui를 띄어 ux를 향상 시켜줍니다.
 
 ```
@@ -507,3 +508,15 @@ search: (
 
 <br/>
 <p align="right"><a href="#top">(⬆️ Top)</a></p>
+
+
+## <span id="impression">10. 느낀 점</span>
+🐱 **준근** : "이번 프로젝트를 통해 학습하고 성장하자는 공동의 목표로 의미있는 과정을 남긴 것 같아 뿌듯합니다. 개발하는 재미를 다시금 느끼게 해준 팀원들 감사합니다."
+🐶 **소영** : "정말 멋지고 좋은 팀원 분들을 만나서 많은 것들을 배울 수 있었던 감사한 시간이었습니다. 함께 프로젝트 하게 되어 영광이었고, 같이 즐거웠던 일화들도 소중한 기억으로 남을 것 같습니다. 🚀💗" 
+🐰 **현지** : "이번 프로젝트를 통해 자신감을 많이 얻었고 협업과정과 커뮤니케이션을 배울 수 있었습니다. 다들 정말 감사하고 수고하셨습니다~!💜"
+🐹 **준엽** : "여러모로 부족한 상태로 프로젝트를 시작했지만, 팀원분들의 유쾌한 응원과 기술 구현에 대한 지식공유를 해주셔서 여러 경험들을 할 수 있는 행복한 시간이었습니다. 정말 고생많으셨습니다~!"
+
+
+<br/>
+<p align="right"><a href="#top">(⬆️ Top)</a></p>
+
