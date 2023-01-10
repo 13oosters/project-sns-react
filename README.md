@@ -5,7 +5,7 @@
 ## 소개 및 개요
 
 - 프로젝트 기간 : 2022.12.9. ~ 2023.1.4.
-- 배포 URL : [🔗 멍하냥](https://63b3c5460a206154d42f4d3c--frabjous-snickerdoodle-f6b976.netlify.app/)
+- 배포 URL : [🔗 멍하냥](https://13oosters.netlify.app)
 
 - Test ID / PW : hobak2@boosters.com / test1111
 
