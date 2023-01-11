@@ -71,6 +71,18 @@ export default function Form({
     }
   };
 
+  const showTestAccount = () => {
+    const testId = title === "로그인" ? "hobak2@boosters.com" : null;
+
+    return testId;
+  };
+
+  const showTestPassword = () => {
+    const testPw = title === "로그인" ? "test111" : null;
+
+    return testPw;
+  };
+
   return (
     <>
       <TitleH2>{title}</TitleH2>
@@ -78,6 +90,7 @@ export default function Form({
         <label htmlFor="email">
           이메일
           <LoginInput
+            defaultValue={showTestAccount()}
             id="email"
             type="email"
             name="email"
@@ -103,6 +116,7 @@ export default function Form({
         <label htmlFor="password" style={{ marginTop: "1.6rem" }}>
           비밀번호
           <LoginInput
+            defaultValue={showTestPassword()}
             id="password"
             type="password"
             name="password"
