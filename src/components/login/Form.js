@@ -20,7 +20,6 @@ export default function Form({
   const [isValue, setIsValue] = useState(false);
   const [responseMessage, setResponseMeassage] = useState("");
   const navigate = useNavigate();
-
   const {
     register,
     setFocus,
@@ -46,15 +45,19 @@ export default function Form({
 
   const handleForm = (e) => {
     if (title === "로그인") {
-      validate(userData, "signin", "/user/login")
-        .then((res) => {
+      validate(userData, "signin", "/user/login").then((res) => {
+        if (res.token) {
           localStorage.setItem("token", res.token);
           localStorage.setItem("accountname", res.accountname);
           setHasToken(true);
-        })
-        .then(() => {
-          navigate("/");
-        });
+          setTimeout(() => {
+            navigate("/");
+          }, 1000);
+          setResponseMeassage("");
+        } else {
+          setResponseMeassage(res);
+        }
+      });
     } else if (title === "이메일로 회원가입") {
       validate(userData, "email", "/user/emailvalid").then((res) => {
         if (res === "이미 가입된 이메일 주소 입니다.") {
@@ -127,7 +130,14 @@ export default function Form({
         </LoginButton>
       </LoginForm>
       {title === "로그인" ? (
-        <SignUpButton type="button" onClick={() => navigate("/signup")} cancel>
+        <SignUpButton
+          type="button"
+          onClick={() => {
+            navigate("/signup");
+            setResponseMeassage("");
+          }}
+          cancel
+        >
           이메일로 회원가입
         </SignUpButton>
       ) : null}
