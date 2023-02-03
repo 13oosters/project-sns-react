@@ -80,7 +80,7 @@ export default function Modal({
     }
     postData("deletepost", postId, setMessage);
     isModal((prev) => !prev);
-
+    cancel();
     navigate("/");
   };
 
@@ -91,6 +91,7 @@ export default function Modal({
     } else {
       navigate("edit");
     }
+    isModal((prev) => !prev);
   };
 
   const postReport = () => {
@@ -101,19 +102,18 @@ export default function Modal({
   const deleteComment = () => {
     postData("deletComment", postId, setPostPageData, "", commentId);
     cancel();
+    isModal((prev) => !prev);
   };
 
   const commentReport = () => {
     postData("commentReport", postId, setMessage, "", commentId);
     cancel();
+    isModal((prev) => !prev);
   };
-  const a = () => {
-    if (modal === true) {
-      cancel();
-    }
-  };
+
   const logout = () => {
     cancel();
+    isModal((prev) => !prev);
     localStorage.removeItem("token");
     localStorage.removeItem("accountname");
     setHasToken(false);
