@@ -4,16 +4,16 @@ import Card from "../common/Card";
 import Dialog from "../post/Dialog";
 
 const DeatailSection = styled.section`
-  height: calc(100% - 48px);
+  position: relative;
+  height: calc(100% - 120px);
   overflow-y: scroll;
   &::-webkit-scrollbar {
     display: none;
   }
 `;
 
-export default function Detail({ setPostPageData, postPageData }) {
+export default function Detail({ setPostPageData, postPageData, myInfo }) {
   const { post } = { ...postPageData };
-
   const { comments } = { ...postPageData };
 
   return (
@@ -27,6 +27,7 @@ export default function Detail({ setPostPageData, postPageData }) {
             post={post}
             setPostPageData={setPostPageData}
             comments={comments}
+            myInfo={myInfo}
           />
         </DeatailSection>
       ) : (
