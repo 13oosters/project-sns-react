@@ -33,8 +33,9 @@ const validate = async (state, type, url) => {
         user: { email: state.email, password: state.password },
       });
       const { user } = await res.data;
+      const { message } = await res.data;
 
-      response = user;
+      response = user || message;
     }
   } catch (err) {
     const mute = err;
