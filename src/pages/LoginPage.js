@@ -11,7 +11,7 @@ export default function LoginPage({ login, signin, settings, setHasToken }) {
     password: "",
     accountname: "",
     intro: "",
-    image: "https://mandarin.api.weniv.co.kr/Ellipse.png",
+    image: "https://api.mandarin.weniv.co.kr/Ellipse.png",
   });
 
   if (login) {

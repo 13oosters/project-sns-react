@@ -14,7 +14,7 @@ export default function UploadPage() {
     password: "",
     accountname: "",
     intro: "",
-    image: "https://mandarin.api.weniv.co.kr/Ellipse.png",
+    image: "https://api.mandarin.weniv.co.kr/Ellipse.png",
   });
   const [cardData, setCardData] = useState("");
   const getUserData = async () => {

@@ -54,19 +54,19 @@ export default function Result({ image, username, accountname, keyword }) {
     } else if (url[0].includes("http://146.56.183.55:5050")) {
       return url[0].replace(
         "http://146.56.183.55:5050",
-        "https://mandarin.api.weniv.co.kr",
+        "https://api.mandarin.weniv.co.kr",
       );
     } else if (url[0].includes("undefined")) {
       return defaultImage;
     } else if (base === "market-52.herokuapp.com") {
       return defaultImage;
-    } else if (url[0].includes("https://mandarin.api.weniv.co.kr/")) {
+    } else if (url[0].includes("https://api.mandarin.weniv.co.kr/")) {
       if (isNaN(url[0][33])) {
         return defaultImage;
       }
       return filename;
     } else if (isNaN(url[0][0])) {
-      return `https://mandarin.api.weniv.co.kr/${url[0]}`;
+      return `https://api.mandarin.weniv.co.kr/${url[0]}`;
     } else {
       return defaultImage;
     }

@@ -77,10 +77,10 @@ export default function ProfileSetting({ title, userData, setUserData }) {
       return defaultImage;
     }
 
-    if (url[0].includes("https://mandarin.api.weniv.co.kr")) {
+    if (url[0].includes("https://api.mandarin.weniv.co.kr")) {
       return url[0];
     } else {
-      return `https://mandarin.api.weniv.co.kr/${url[0]}`;
+      return `https://api.mandarin.weniv.co.kr/${url[0]}`;
     }
   };
 
@@ -136,7 +136,7 @@ export default function ProfileSetting({ title, userData, setUserData }) {
 
     form.append("image", e.target.files[0]);
     const response = await axios.post(
-      "https://mandarin.api.weniv.co.kr/image/uploadfile",
+      "https://api.mandarin.weniv.co.kr/image/uploadfile",
       form,
     );
 
@@ -144,7 +144,7 @@ export default function ProfileSetting({ title, userData, setUserData }) {
 
     setUserData({
       ...userData,
-      [e.target.name]: `https://mandarin.api.weniv.co.kr/${data.filename}`,
+      [e.target.name]: `https://api.mandarin.weniv.co.kr/${data.filename}`,
     });
   };
 

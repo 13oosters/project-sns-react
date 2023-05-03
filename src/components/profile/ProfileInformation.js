@@ -133,10 +133,10 @@ export default function ProfileInformation({
   };
 
   const refineImageUrl = (file) => {
-    if (file.includes("https://mandarin.api.weniv.co.kr")) {
+    if (file.includes("https://api.mandarin.weniv.co.kr")) {
       return file;
     }
-    return `https://mandarin.api.weniv.co.kr/${file}`;
+    return `https://api.mandarin.weniv.co.kr/${file}`;
   };
 
   const noImage = (e) => {

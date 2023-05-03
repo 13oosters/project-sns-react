@@ -34,10 +34,10 @@ export default function GridCard({ data }) {
       return defaultImage;
     }
 
-    if (url[0].includes("https://mandarin.api.weniv.co.kr")) {
+    if (url[0].includes("https://api.mandarin.weniv.co.kr")) {
       return url[0];
     } else {
-      return `https://mandarin.api.weniv.co.kr/${url[0]}`;
+      return `https://api.mandarin.weniv.co.kr/${url[0]}`;
     }
   };
 

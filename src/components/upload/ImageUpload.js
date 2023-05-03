@@ -105,7 +105,7 @@ export default function ImageUpload({
 
     setImageData([
       ...imageData,
-      `https://mandarin.api.weniv.co.kr/${data.filename}`,
+      `https://api.mandarin.weniv.co.kr/${data.filename}`,
     ]);
   };
 
@@ -126,10 +126,10 @@ export default function ImageUpload({
   };
 
   const refineImageUrl = (file) => {
-    if (file.includes("https://mandarin.api.weniv.co.kr")) {
+    if (file.includes("https://api.mandarin.weniv.co.kr")) {
       return file;
     }
-    return `https://mandarin.api.weniv.co.kr/${file}`;
+    return `https://api.mandarin.weniv.co.kr/${file}`;
   };
 
   return (
